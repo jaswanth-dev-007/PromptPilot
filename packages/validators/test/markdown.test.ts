@@ -8,7 +8,10 @@ describe('validateMarkdown', () => {
   })
 
   it('passes valid markdown', () => {
-    const report = validateMarkdown('test.md', '# Hello\n\n```\ncode\n```\n\n| a | b |\n|---|---|\n| 1 | 2 |')
+    const report = validateMarkdown(
+      'test.md',
+      '# Hello\n\n```\ncode\n```\n\n| a | b |\n|---|---|\n| 1 | 2 |',
+    )
     expect(report).toHaveLength(0)
   })
 
