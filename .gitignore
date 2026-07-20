@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+coverage/
+.vscode/settings.json
+.npmrc

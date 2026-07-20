@@ -1,0 +1,24 @@
+{
+  "name": "@promptpilot/adapters",
+  "version": "0.1.0",
+  "description": "Pluggable LLM provider adapters for PromptPilot",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "clean": "rimraf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@promptpilot/shared": "*",
+    "@promptpilot/config": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^2.0.0"
+  }
+}

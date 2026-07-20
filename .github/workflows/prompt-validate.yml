@@ -1,0 +1,30 @@
+name: Prompt Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday at 06:00 UTC
+
+jobs:
+  validate-prompts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test -- --testPathPattern='packages/validators/test/'
+      - name: Snapshot check
+        run: npx vitest run --update=false

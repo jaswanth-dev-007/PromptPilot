@@ -1,0 +1,32 @@
+{
+  "name": "@promptpilot/cli",
+  "version": "0.1.0",
+  "description": "PromptPilot CLI — AI-powered software planning pipeline",
+  "license": "MIT",
+  "main": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
+  "bin": {
+    "promptpilot": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "clean": "rimraf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.0.0",
+    "@promptpilot/adapters": "*",
+    "@promptpilot/config": "*",
+    "@promptpilot/core": "*",
+    "@promptpilot/fs": "*",
+    "@promptpilot/shared": "*",
+    "@promptpilot/validators": "*",
+    "chalk": "^5.0.0",
+    "commander": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.0.0"
+  }
+}

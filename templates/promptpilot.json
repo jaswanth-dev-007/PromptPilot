@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "pipeline": [
+    {
+      "id": "master-context",
+      "name": "Master Context",
+      "prompt": "docs/00_Master_Context.md",
+      "output": "docs-output/MasterContext.md",
+      "dependencies": [],
+      "parallelSafe": false,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "prd",
+      "name": "Product Requirements Document",
+      "prompt": "docs/01_PRD_Prompt.md",
+      "output": "docs-output/PRD.md",
+      "dependencies": ["master-context"],
+      "parallelSafe": false,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "srs",
+      "name": "Software Requirements Specification",
+      "prompt": "docs/02_SRS_Prompt.md",
+      "output": "docs-output/SRS.md",
+      "dependencies": ["prd"],
+      "parallelSafe": false,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "architecture",
+      "name": "System Architecture",
+      "prompt": "docs/03_System_Architecture_Prompt.md",
+      "output": "docs-output/Architecture.md",
+      "dependencies": ["srs"],
+      "parallelSafe": false,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "database",
+      "name": "Database Schema",
+      "prompt": "docs/04_Database_Schema_Prompt.md",
+      "output": "docs-output/Database.md",
+      "dependencies": ["architecture"],
+      "parallelSafe": true,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "api-spec",
+      "name": "API Specification",
+      "prompt": "docs/05_API_Specification_Prompt.md",
+      "output": "docs-output/API.md",
+      "dependencies": ["architecture"],
+      "parallelSafe": true,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "user-flows",
+      "name": "User Flows",
+      "prompt": "docs/06_User_Flow_Prompt.md",
+      "output": "docs-output/UserFlow.md",
+      "dependencies": ["prd"],
+      "parallelSafe": true,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "wireframes",
+      "name": "UI Wireframes",
+      "prompt": "docs/07_UI_Wireframes_Prompt.md",
+      "output": "docs-output/Wireframes.md",
+      "dependencies": ["user-flows"],
+      "parallelSafe": false,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    },
+    {
+      "id": "roadmap",
+      "name": "Feature Roadmap",
+      "prompt": "docs/08_Feature_Roadmap_Prompt.md",
+      "output": "docs-output/Roadmap.md",
+      "dependencies": ["prd", "architecture"],
+      "parallelSafe": false,
+      "recommendedModels": ["claude-3-5-sonnet-20241022", "gpt-4o"]
+    }
+  ]
+}
