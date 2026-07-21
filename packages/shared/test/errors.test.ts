@@ -17,14 +17,19 @@ describe('PromptPilotError', () => {
   })
 
   it('formats user message with suggestion', () => {
-    const err = new PromptPilotError('config invalid', 'CFG_ERR', 'Run promptpilot config init')
-    expect(err.toUserMessage()).toContain('[ERROR]')
+    const err = new PromptPilotError(
+      'config invalid',
+      'CFG_ERR',
+      500,
+      'Run promptpilot config init',
+    )
+    expect(err.toUserMessage()).toContain('[CFG_ERR]')
     expect(err.toUserMessage()).toContain('Run promptpilot config init')
   })
 
   it('formats user message with cause', () => {
     const cause = new Error('underlying')
-    const err = new PromptPilotError('failed', 'ERR', undefined, cause)
+    const err = new PromptPilotError('failed', 'ERR', 500, undefined, cause)
     expect(err.toUserMessage()).toContain('underlying')
   })
 })
@@ -49,7 +54,7 @@ describe('AdapterError', () => {
   it('includes provider and status code', () => {
     const err = new AdapterError('api error', 'openai', 429)
     expect(err.provider).toBe('openai')
-    expect(err.statusCode).toBe(429)
+    expect(err.httpStatus).toBe(429)
   })
 })
 

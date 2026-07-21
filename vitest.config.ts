@@ -5,16 +5,17 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['packages/*/test/**/*.test.ts'],
+    include: ['packages/*/test/**/*.test.ts', 'apps/api/test/**/*.test.ts'],
     coverage: {
       provider: 'v8',
       include: ['packages/*/src/**/*.ts'],
       thresholds: {
-        lines: 0,
-        branches: 0,
-        functions: 0,
-        statements: 0,
+        lines: 50,
+        branches: 30,
+        functions: 40,
+        statements: 50,
       },
+      exclude: ['packages/*/src/index.ts', 'packages/*/src/**/index.ts'],
     },
     testTimeout: 30000,
   },
@@ -26,6 +27,8 @@ export default defineConfig({
       '@promptpilot/adapters': resolve(__dirname, 'packages/adapters/src'),
       '@promptpilot/validators': resolve(__dirname, 'packages/validators/src'),
       '@promptpilot/core': resolve(__dirname, 'packages/core/src'),
+      '@promptpilot/db': resolve(__dirname, 'packages/db/src'),
+      '@promptpilot/auth': resolve(__dirname, 'packages/auth/src'),
     },
   },
 })

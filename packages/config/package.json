@@ -14,8 +14,8 @@
     "clean": "rimraf dist *.tsbuildinfo"
   },
   "dependencies": {
-    "@promptpilot/shared": "*",
-    "@promptpilot/fs": "*",
+    "@promptpilot/shared": "workspace:*",
+    "@promptpilot/fs": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {

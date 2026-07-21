@@ -1,80 +1,77 @@
 # PromptPilot
 
-AI-assisted software planning pipeline. A sequence of curated prompts that generate a complete product specification from a single context document.
+AI-powered SaaS platform that transforms product ideas into complete specification suites — PRD, SRS, architecture, database schema, API spec, user flows, wireframes, and roadmap — in minutes.
 
-## Structure
+## Quick Start
 
-```
-PromptPilot/
-├── docs/                          # Prompt templates (your input)
-│   ├── 00_Master_Context.md       # Define product vision & constraints
-│   ├── 01_PRD_Prompt.md           # Generate Product Requirements Document
-│   ├── 02_SRS_Prompt.md           # Generate Software Requirements Specification
-│   ├── 03_System_Architecture_Prompt.md  # Design system architecture
-│   ├── 04_Database_Schema_Prompt.md      # Design database schema
-│   ├── 05_API_Specification_Prompt.md    # Design API specification
-│   ├── 06_User_Flow_Prompt.md            # Map user flows
-│   ├── 07_UI_Wireframes_Prompt.md        # Design UI wireframes
-│   └── 08_Feature_Roadmap_Prompt.md      # Create feature roadmap
-│
-├── docs-output/                   # Generated artifacts (your output)
-│   ├── PRD.md
-│   ├── SRS.md
-│   ├── Architecture.md
-│   ├── Database.md
-│   ├── API.md
-│   ├── UserFlow.md
-│   ├── Wireframes.md
-│   └── Roadmap.md
-│
-└── README.md
+```bash
+git clone https://github.com/promptpilot/promptpilot.git
+cd promptpilot
+
+# Install dependencies and setup environment
+pnpm install
+cp .env.example .env
+
+# Build and run
+pnpm run build
+pnpm dev
 ```
 
-## Workflow
+- Frontend → http://localhost:3000
+- Backend health → http://localhost:3001/health
+- Full setup guide → [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)
 
-Run these prompts sequentially with your AI assistant. Each prompt references the outputs of previous steps.
+## Architecture
 
-### Step 0: Master Context
+```
+apps/
+├── frontend/    Next.js 15 (App Router) + React 19 + TypeScript
+├── api/         Express REST API
+└── backend/     Express API server
 
-1. Open `docs/00_Master_Context.md`
-2. Replace `{PRODUCT_NAME}`, `{ONE_LINE_DESCRIPTION}`, `{TARGET_AUDIENCE}`, `{PLATFORM}`, and `{INDUSTRY_DOMAIN}` with your project details
-3. Feed the prompt to your AI assistant
-4. Save the output as a reference — it's the foundation for everything that follows
+packages/
+├── shared/      Error classes, logger, token counting
+├── config/      Zod schema, env validation, feature flags
+├── auth/        JWT + bcrypt authentication
+├── db/          Mongoose connection + models
+├── ui/          Shared React components
+├── types/       Shared TypeScript types
+├── validation/  Zod schemas + validators
+├── core/        Pipeline orchestration engine
+├── adapters/    LLM provider adapters (OpenAI, Anthropic)
+├── cli/         Commander CLI
+├── ai/          AI provider layer
+├── database/    Prisma layer
+└── editor/      Collaborative editor
+```
 
-### Step 1: PRD
+## Commands
 
-- Feed `docs/01_PRD_Prompt.md` + your Master Context output → save to `docs-output/PRD.md`
+| Command             | Description               |
+| ------------------- | ------------------------- |
+| `pnpm dev`          | Start all services        |
+| `pnpm dev:frontend` | Frontend only (port 3000) |
+| `pnpm dev:backend`  | Backend only (port 3001)  |
+| `pnpm build`        | Build all packages        |
+| `pnpm test`         | Run all tests             |
+| `pnpm lint`         | Lint all packages         |
+| `pnpm format`       | Prettier check            |
+| `pnpm typecheck`    | TypeScript check          |
+| `pnpm ci`           | Full CI pipeline          |
 
-### Step 2: SRS
+## Tech Stack
 
-- Feed `docs/02_SRS_Prompt.md` + PRD + Master Context → save to `docs-output/SRS.md`
+**Frontend:** Next.js 15 • React 19 • TypeScript • Tailwind CSS
+**Backend:** Express • TypeScript • Mongoose • Prisma • Zod
+**Infrastructure:** pnpm workspaces • TurboRepo • Docker • GitHub Actions
+**Auth:** JWT (access + refresh tokens) • bcrypt (12 rounds)
 
-### Step 3: Architecture
+## Documentation
 
-- Feed `docs/03_System_Architecture_Prompt.md` + SRS + PRD + Master Context → save to `docs-output/Architecture.md`
+- [Development Guide](docs/DEVELOPMENT.md) — setup, project structure, troubleshooting
+- [Product Requirements](docs/PRD.md) — feature overview, technical requirements
+- [Observations](docs/Observations.md) — architecture notes, known limitations
 
-### Step 4: Database Schema
+## License
 
-- Feed `docs/04_Database_Schema_Prompt.md` + SRS + PRD + Architecture → save to `docs-output/Database.md`
-
-### Step 5: API Specification
-
-- Feed `docs/05_API_Specification_Prompt.md` + SRS + PRD + Architecture → save to `docs-output/API.md`
-
-### Step 6: User Flows
-
-- Feed `docs/06_User_Flow_Prompt.md` + PRD + SRS + Master Context → save to `docs-output/UserFlow.md`
-
-### Step 7: UI Wireframes
-
-- Feed `docs/07_UI_Wireframes_Prompt.md` + PRD + UserFlow + Master Context → save to `docs-output/Wireframes.md`
-
-### Step 8: Feature Roadmap
-
-- Feed `docs/08_Feature_Roadmap_Prompt.md` + PRD + SRS + Architecture → save to `docs-output/Roadmap.md`
-
-## Tips
-
-- Each prompt is self-contained and includes explicit instructions for the AI
-- Later prompts reference earlier outputs — follow the order for best traceability
-- The `{placeholder}` variables in `docs/00_Master_Context.md` are the only inputs you need to provide
+MIT © PromptPilot

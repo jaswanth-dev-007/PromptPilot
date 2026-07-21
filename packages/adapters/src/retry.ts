@@ -3,7 +3,7 @@ import { logger } from '@promptpilot/shared'
 
 export function isRetryable(error: unknown): boolean {
   if (error instanceof AdapterError) {
-    if (error.statusCode === 429 || (error.statusCode && error.statusCode >= 500)) return true
+    if (error.httpStatus === 429 || (error.httpStatus && error.httpStatus >= 500)) return true
   }
   if (error instanceof TypeError && error.message.includes('fetch')) return true
   return false

@@ -14,7 +14,7 @@
     "clean": "rimraf dist *.tsbuildinfo"
   },
   "dependencies": {
-    "@promptpilot/shared": "*"
+    "@promptpilot/shared": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.7.0",

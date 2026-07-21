@@ -63,6 +63,32 @@ function mergeEnvVars(config: PromptPilotConfig): PromptPilotConfig {
   if (process.env.OLLAMA_BASE_URL) {
     env.providers.ollama = { ...env.providers.ollama, baseUrl: process.env.OLLAMA_BASE_URL }
   }
+
+  if (process.env.MONGODB_URI) {
+    env.database = { ...env.database, uri: process.env.MONGODB_URI }
+  }
+  if (process.env.JWT_SECRET) {
+    env.auth = { ...env.auth, jwtSecret: process.env.JWT_SECRET }
+  }
+  if (process.env.JWT_EXPIRES_IN) {
+    env.auth = { ...env.auth, jwtExpiresIn: process.env.JWT_EXPIRES_IN }
+  }
+  if (process.env.JWT_REFRESH_EXPIRES_IN) {
+    env.auth = { ...env.auth, jwtRefreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN }
+  }
+  if (process.env.BCRYPT_SALT_ROUNDS) {
+    env.auth = { ...env.auth, bcryptSaltRounds: Number(process.env.BCRYPT_SALT_ROUNDS) }
+  }
+  if (process.env.PORT) {
+    env.server = { ...env.server, port: Number(process.env.PORT) }
+  }
+  if (process.env.CORS_ORIGIN) {
+    env.server = { ...env.server, corsOrigin: process.env.CORS_ORIGIN }
+  }
+  if (process.env.NODE_ENV === 'production') {
+    env.server = { ...env.server, trustProxy: true }
+  }
+
   return env
 }
 

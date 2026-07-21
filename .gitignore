@@ -11,5 +11,7 @@ dist/
 .DS_Store
 Thumbs.db
 coverage/
-.vscode/settings.json
 .npmrc
+docker/data/
+.turbo/
+.next/

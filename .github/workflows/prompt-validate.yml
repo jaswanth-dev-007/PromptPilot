@@ -11,20 +11,25 @@ on:
       - 'docs/**'
       - 'templates/**'
   schedule:
-    - cron: '0 6 * * 1'  # Weekly on Monday at 06:00 UTC
+    - cron: '0 6 * * 1'
 
 jobs:
   validate-prompts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm test -- --testPathPattern='packages/validators/test/'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm test -- --testPathPattern='packages/validators/test/'
       - name: Snapshot check
         run: npx vitest run --update=false

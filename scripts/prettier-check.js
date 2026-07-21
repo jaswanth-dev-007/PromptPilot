@@ -4,7 +4,7 @@ const path = require('path');
 
 function listFiles() {
   try {
-    const out = execSync('git ls-files -- "*.ts" "*.json" "*.md"', { encoding: 'utf8' });
+    const out = execSync('git ls-files -- "*.ts" "*.tsx" "*.json" "*.md" "*.yml" "*.yaml" "*.css"', { encoding: 'utf8' });
     return out.split(/\r?\n/).filter(Boolean);
   } catch (err) {
     return [];

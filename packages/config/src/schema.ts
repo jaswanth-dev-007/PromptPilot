@@ -6,6 +6,25 @@ const ProviderConfigSchema = z.object({
   defaultModel: z.string().optional(),
 })
 
+const DatabaseConfigSchema = z.object({
+  uri: z.string().default('mongodb://localhost:27017/promptpilot'),
+  name: z.string().default('promptpilot'),
+})
+
+const AuthConfigSchema = z.object({
+  jwtSecret: z.string().min(32),
+  jwtExpiresIn: z.string().default('7d'),
+  jwtRefreshExpiresIn: z.string().default('30d'),
+  bcryptSaltRounds: z.number().int().min(10).max(16).default(12),
+})
+
+const ServerConfigSchema = z.object({
+  port: z.number().int().default(3000),
+  host: z.string().default('0.0.0.0'),
+  corsOrigin: z.string().default('http://localhost:5173'),
+  trustProxy: z.boolean().default(false),
+})
+
 export const PromptPilotConfigSchema = z.object({
   version: z.string().optional(),
   provider: z.enum(['openai', 'anthropic', 'google', 'ollama']).default('openai'),
@@ -30,7 +49,15 @@ export const PromptPilotConfigSchema = z.object({
       postGenerate: z.string().optional(),
     })
     .optional(),
+  database: DatabaseConfigSchema.default({}),
+  auth: AuthConfigSchema.default({
+    jwtSecret: 'placeholder-change-me-in-production-32chars',
+  }),
+  server: ServerConfigSchema.default({}),
 })
 
 export type PromptPilotConfig = z.infer<typeof PromptPilotConfigSchema>
 export type ProviderConfig = z.infer<typeof ProviderConfigSchema>
+export type DatabaseConfig = z.infer<typeof DatabaseConfigSchema>
+export type AuthConfig = z.infer<typeof AuthConfigSchema>
+export type ServerConfig = z.infer<typeof ServerConfigSchema>

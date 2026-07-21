@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^7.0.0",
-    "@promptpilot/adapters": "*",
-    "@promptpilot/config": "*",
-    "@promptpilot/core": "*",
-    "@promptpilot/fs": "*",
-    "@promptpilot/shared": "*",
-    "@promptpilot/validators": "*",
+    "@promptpilot/adapters": "workspace:*",
+    "@promptpilot/config": "workspace:*",
+    "@promptpilot/core": "workspace:*",
+    "@promptpilot/fs": "workspace:*",
+    "@promptpilot/shared": "workspace:*",
+    "@promptpilot/validators": "workspace:*",
     "chalk": "^5.0.0",
     "commander": "^13.0.0"
   },
