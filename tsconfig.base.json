@@ -9,6 +9,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@promptpilot/*": ["packages/*/src"]
+    },
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
