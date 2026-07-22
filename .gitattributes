@@ -1,0 +1,45 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# JavaScript / TypeScript
+*.js    text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.jsx   text eol=lf
+*.json  text eol=lf
+*.cjs   text eol=lf
+*.mjs   text eol=lf
+
+# Styles
+*.css   text eol=lf
+*.scss  text eol=lf
+
+# Config files
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.md    text eol=lf
+*.toml  text eol=lf
+*.env*  text eol=lf
+
+# Scripts (must be LF for Unix)
+*.sh    text eol=lf
+
+# Prisma
+*.prisma text eol=lf
+
+# Shell script files must be executable
+*.sh    text eol=lf
+
+# Lock file
+pnpm-lock.yaml text eol=lf
+
+# Images / binaries
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.svg   text
+*.woff  binary
+*.woff2 binary

@@ -1,0 +1,5 @@
+export { PromptEngine } from './engine/promptEngine'
+export type { PromptTemplate, PromptContext, CompiledPrompt } from './engine/promptEngine'
+export { GenerationService } from './engine/generationService'
+export { PipelineRunner } from './engine/pipelineRunner'
+export const PACKAGE_NAME = '@promptpilot/ai'

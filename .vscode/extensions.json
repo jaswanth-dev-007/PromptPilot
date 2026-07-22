@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "prisma.prisma",
+    "mongodb.mongodb-vscode",
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "ms-vscode-remote.remote-containers",
+    "github.vscode-github-actions",
+    "eamodio.gitlens",
+    "github.copilot",
+    "github.copilot-chat"
+  ]
+}

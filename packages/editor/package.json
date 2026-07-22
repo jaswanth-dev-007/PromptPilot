@@ -1,0 +1,25 @@
+{
+  "name": "@promptpilot/editor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Collaborative editor components",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "lint": "eslint src/**/*.ts --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@promptpilot/shared": "workspace:*",
+    "@promptpilot/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.0",
+    "typescript": "^5.7.0"
+  }
+}

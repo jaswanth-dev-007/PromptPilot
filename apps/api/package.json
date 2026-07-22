@@ -1,0 +1,38 @@
+{
+  "name": "@promptpilot/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PromptPilot REST API server",
+  "license": "MIT",
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "clean": "rimraf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@promptpilot/shared": "workspace:*",
+    "@promptpilot/config": "workspace:*",
+    "@promptpilot/db": "workspace:*",
+    "@promptpilot/auth": "workspace:*",
+    "@promptpilot/validation": "workspace:*",
+    "express": "^4.21.0",
+    "cors": "^2.8.0",
+    "helmet": "^8.0.0",
+    "express-rate-limit": "^7.4.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/cors": "^2.8.0",
+    "@types/supertest": "^6.0.0",
+    "mongodb-memory-server": "^10.4.0",
+    "mongoose": "^8.8.0",
+    "supertest": "^7.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  }
+}

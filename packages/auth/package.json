@@ -1,0 +1,33 @@
+{
+  "name": "@promptpilot/auth",
+  "version": "0.1.0",
+  "description": "JWT authentication for PromptPilot",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "clean": "rimraf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@promptpilot/shared": "workspace:*",
+    "@promptpilot/db": "workspace:*",
+    "@promptpilot/config": "workspace:*",
+    "jsonwebtoken": "^9.0.0",
+    "bcrypt": "^5.1.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.0",
+    "mongodb-memory-server": "^10.4.0",
+    "mongoose": "^8.8.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  }
+}

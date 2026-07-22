@@ -1,0 +1,46 @@
+{
+  "name": "@promptpilot/backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PromptPilot backend API server",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*.ts --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "clean": "rimraf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@promptpilot/shared": "workspace:*",
+    "@promptpilot/config": "workspace:*",
+    "@promptpilot/db": "workspace:*",
+    "@promptpilot/auth": "workspace:*",
+    "@prisma/client": "^6.0.0",
+    "express": "^4.21.0",
+    "cors": "^2.8.0",
+    "helmet": "^8.0.0",
+    "express-rate-limit": "^7.4.0",
+    "dotenv": "^16.4.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/cors": "^2.8.0",
+    "@types/node": "^22.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.64.0",
+    "@typescript-eslint/parser": "^8.64.0",
+    "eslint": "^8.57.1",
+    "prisma": "^6.0.0",
+    "rimraf": "^6.0.0",
+    "tsx": "^4.23.0",
+    "typescript": "^5.7.0"
+  }
+}

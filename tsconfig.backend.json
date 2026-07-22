@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@promptpilot/shared": ["../../packages/shared/src"],
+      "@promptpilot/config": ["../../packages/config/src"],
+      "@promptpilot/db": ["../../packages/db/src"],
+      "@promptpilot/auth": ["../../packages/auth/src"],
+      "@promptpilot/core": ["../../packages/core/src"],
+      "@promptpilot/fs": ["../../packages/fs/src"],
+      "@promptpilot/validators": ["../../packages/validators/src"],
+      "@promptpilot/types": ["../../packages/types/src"],
+      "@promptpilot/validation": ["../../packages/validation/src"]
+    }
+  }
+}

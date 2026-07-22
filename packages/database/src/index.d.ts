@@ -1,0 +1,6 @@
+export { prisma, disconnect, healthCheck } from './client';
+export * from './repositories';
+export { transaction, getClient } from './utils/transaction';
+export { paginateParams, paginatedResult } from './utils/pagination';
+export type { PaginationParams, PaginatedResult, FindAllOptions } from './utils/pagination';
+//# sourceMappingURL=index.d.ts.map
