@@ -17,5 +17,12 @@
     "@typescript-eslint/consistent-type-imports": ["warn", { "prefer": "type-imports" }],
     "no-console": ["warn", { "allow": ["error", "warn"] }]
   },
-  "ignorePatterns": ["dist/", "node_modules/", "coverage/", ".next/", "playwright-report/"]
+  "ignorePatterns": [
+    "dist/",
+    "node_modules/",
+    "coverage/",
+    ".next/",
+    "playwright-report/",
+    "**/*.d.ts"
+  ]
 }
