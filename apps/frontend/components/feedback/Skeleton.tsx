@@ -8,17 +8,14 @@ export interface SkeletonProps {
   style?: React.CSSProperties
 }
 
-export function Skeleton({
-  variant = 'text',
-  width,
-  height,
-  count = 1,
-  style,
-}: SkeletonProps) {
+export function Skeleton({ variant = 'text', width, height, count = 1, style }: SkeletonProps) {
   const defaultDims: Record<string, { width: string; height: string }> = {
     text: { width: width ? String(width) : '100%', height: height ? String(height) : '16px' },
     circular: { width: width ? String(width) : '40px', height: height ? String(height) : '40px' },
-    rectangular: { width: width ? String(width) : '100%', height: height ? String(height) : '100px' },
+    rectangular: {
+      width: width ? String(width) : '100%',
+      height: height ? String(height) : '100px',
+    },
   }
 
   const dims = defaultDims[variant]
@@ -48,7 +45,14 @@ export function Skeleton({
 
 export function CardSkeleton({ lines = 3 }: { lines?: number }) {
   return (
-    <div style={{ padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', fontFamily: 'inherit' }}>
+    <div
+      style={{
+        padding: '24px',
+        borderRadius: '12px',
+        border: '1px solid #E2E8F0',
+        fontFamily: 'inherit',
+      }}
+    >
       <Skeleton variant="text" width="60%" height="22px" />
       <Skeleton variant="text" width="40%" height="14px" />
       <div style={{ marginTop: '16px' }}>

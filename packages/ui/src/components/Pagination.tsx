@@ -17,17 +17,24 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
   }
 
   return (
-    <nav aria-label="Pagination" style={{ display: 'flex', alignItems: 'center', gap: '4px', justifyContent: 'center', fontFamily: 'inherit' }}>
-      <button
-        onClick={() => onPageChange(page - 1)}
-        disabled={page <= 1}
-        style={btnStyle}
-      >
+    <nav
+      aria-label="Pagination"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '4px',
+        justifyContent: 'center',
+        fontFamily: 'inherit',
+      }}
+    >
+      <button onClick={() => onPageChange(page - 1)} disabled={page <= 1} style={btnStyle}>
         ‹ Prev
       </button>
       {pages.map((p, i) =>
         p === '...' ? (
-          <span key={`dots-${i}`} style={{ padding: '6px 10px', color: '#9CA3AF' }}>…</span>
+          <span key={`dots-${i}`} style={{ padding: '6px 10px', color: '#9CA3AF' }}>
+            …
+          </span>
         ) : (
           <button
             key={p}
@@ -43,11 +50,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
           </button>
         ),
       )}
-      <button
-        onClick={() => onPageChange(page + 1)}
-        disabled={page >= totalPages}
-        style={btnStyle}
-      >
+      <button onClick={() => onPageChange(page + 1)} disabled={page >= totalPages} style={btnStyle}>
         Next ›
       </button>
     </nav>

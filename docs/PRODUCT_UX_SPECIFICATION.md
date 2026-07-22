@@ -1,6 +1,7 @@
 # PromptPilot — Product UX Specification
 
 ## Complete End-to-End User Journey
+
 ### Version 1.0 — GA Launch Spec
 
 ---
@@ -34,6 +35,7 @@ All visual specifications below reference the PromptPilot Design System (`docs/D
 ### 1.2 User Journey
 
 **Entry Points:**
+
 - Direct URL (`promptpilot.dev`)
 - Organic search (Google: "AI PRD generator", "software specification tool")
 - Social media links (Twitter/X, LinkedIn, Reddit, Hacker News)
@@ -43,6 +45,7 @@ All visual specifications below reference the PromptPilot Design System (`docs/D
 **Previous Page:** None (entry point)
 
 **Next Pages:**
+
 - `/register` — Primary CTA "Start Free"
 - `/login` — "Sign In" for returning users
 - `/pricing` — "View Pricing" link
@@ -51,6 +54,7 @@ All visual specifications below reference the PromptPilot Design System (`docs/D
 - `/privacy` — Legal link in footer
 
 **User Actions:**
+
 1. Scroll through hero, value proposition, and social proof
 2. View "How It Works" animated pipeline visualization
 3. Browse artifact examples (PRD, SRS, Architecture samples)
@@ -62,6 +66,7 @@ All visual specifications below reference the PromptPilot Design System (`docs/D
 9. Click "See how it works" → smooth scroll to HowItWorks section
 
 **Exit Points:**
+
 - Browser back button
 - External links (documentation, GitHub)
 - Footer legal links
@@ -172,58 +177,60 @@ All visual specifications below reference the PromptPilot Design System (`docs/D
 **Sticky Elements:** Navbar (top-0, z-50 with backdrop blur)
 
 **Responsive Behavior:**
+
 - **Desktop (≥1024px):** Full hero with radial gradient, 3-column grids, horizontal step flow
 - **Tablet (768-1023px):** Stacked hero, 2-column grids, vertical step flow
 - **Mobile (<768px):** Full-width cards, hamburger menu in nav, single-column layout, reduced hero typography
 
 ### 1.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `Nav` | Organism | Sticky top navigation with logo, links, auth buttons |
-| `HeroSection` | Organism | Full-viewport hero with headline, subtitle, CTAs, trust bar |
-| `Badge` | Atom | "Now powered by GPT-4o and Claude 3.5 Sonnet" status badge |
-| `Button` (primary) | Atom | "Start Free" — indigo-600 bg, white text, lg size |
-| `Button` (secondary) | Atom | "See how it works" — white bg, border, lg size |
-| `Button` (ghost) | Atom | "Sign In" — transparent, neutral-600 text |
-| `HowItWorks` | Organism | 3-step process visualization with numbered cards |
-| `PipelineShowcase` | Organism | Interactive 9-step pipeline visualization |
-| `ArtifactGrid` | Organism | 3-column grid of artifact preview cards |
-| `ComparisonTable` | Organism | Feature comparison table with ✓/✗ indicators |
-| `PricingSection` | Organism | 3-column pricing card grid |
-| `PricingCard` | Molecule | Individual pricing tier card with features list |
-| `FAQ` | Organism | Accordion-style FAQ with expandable answers |
-| `FAQItem` | Molecule | Individual FAQ question/answer pair |
-| `Footer` | Organism | Multi-column footer with links and copyright |
+| Component            | Type     | Description                                                 |
+| -------------------- | -------- | ----------------------------------------------------------- |
+| `Nav`                | Organism | Sticky top navigation with logo, links, auth buttons        |
+| `HeroSection`        | Organism | Full-viewport hero with headline, subtitle, CTAs, trust bar |
+| `Badge`              | Atom     | "Now powered by GPT-4o and Claude 3.5 Sonnet" status badge  |
+| `Button` (primary)   | Atom     | "Start Free" — indigo-600 bg, white text, lg size           |
+| `Button` (secondary) | Atom     | "See how it works" — white bg, border, lg size              |
+| `Button` (ghost)     | Atom     | "Sign In" — transparent, neutral-600 text                   |
+| `HowItWorks`         | Organism | 3-step process visualization with numbered cards            |
+| `PipelineShowcase`   | Organism | Interactive 9-step pipeline visualization                   |
+| `ArtifactGrid`       | Organism | 3-column grid of artifact preview cards                     |
+| `ComparisonTable`    | Organism | Feature comparison table with ✓/✗ indicators                |
+| `PricingSection`     | Organism | 3-column pricing card grid                                  |
+| `PricingCard`        | Molecule | Individual pricing tier card with features list             |
+| `FAQ`                | Organism | Accordion-style FAQ with expandable answers                 |
+| `FAQItem`            | Molecule | Individual FAQ question/answer pair                         |
+| `Footer`             | Organism | Multi-column footer with links and copyright                |
 
 ### 1.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Navigate to section | Click nav link | Smooth scroll to section |
-| Start Free | Click "Start Free" | Navigate to `/register` |
-| Sign In | Click "Sign In" | Navigate to `/login` |
-| View Pricing | Click "Pricing" | Navigate to `/pricing` or scroll |
-| Expand FAQ | Click FAQ item | Animate height expansion, collapse others |
-| Preview artifact | Hover pipeline step | Show tooltip with artifact sample |
-| Toggle mobile menu | Click hamburger | Slide-in mobile navigation overlay |
-| Scroll animation | Scroll into view | Fade-in + slide-up sections via IntersectionObserver |
+| Action              | Trigger             | Behavior                                             |
+| ------------------- | ------------------- | ---------------------------------------------------- |
+| Navigate to section | Click nav link      | Smooth scroll to section                             |
+| Start Free          | Click "Start Free"  | Navigate to `/register`                              |
+| Sign In             | Click "Sign In"     | Navigate to `/login`                                 |
+| View Pricing        | Click "Pricing"     | Navigate to `/pricing` or scroll                     |
+| Expand FAQ          | Click FAQ item      | Animate height expansion, collapse others            |
+| Preview artifact    | Hover pipeline step | Show tooltip with artifact sample                    |
+| Toggle mobile menu  | Click hamburger     | Slide-in mobile navigation overlay                   |
+| Scroll animation    | Scroll into view    | Fade-in + slide-up sections via IntersectionObserver |
 
 ### 1.6 AI Features
 
 None directly on the landing page. The page showcases AI capabilities through:
+
 - Pipeline step previews (demonstrating AI generation)
 - Artifact grid samples (showing AI output quality)
 - "Powered by GPT-4o and Claude 3.5 Sonnet" badge
 
 ### 1.7 State Management
 
-| State | Visual |
-|-------|--------|
-| Loading | Navbar visible immediately; sections skeleton-load below fold |
-| Normal | Full page rendered |
-| Mobile menu open | Overlay with backdrop blur, slide-in navigation |
-| FAQ expanded | Single accordion item open, smooth height animation |
+| State            | Visual                                                        |
+| ---------------- | ------------------------------------------------------------- |
+| Loading          | Navbar visible immediately; sections skeleton-load below fold |
+| Normal           | Full page rendered                                            |
+| Mobile menu open | Overlay with backdrop blur, slide-in navigation               |
+| FAQ expanded     | Single accordion item open, smooth height animation           |
 
 ### 1.8 Permissions
 
@@ -239,38 +246,40 @@ None. Static content. Pricing data from config/constants file.
 
 ### 1.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| JavaScript disabled | All content visible via server-rendered HTML |
-| Slow connection | Static generation, minimal JS, optimized images |
-| First visit | No cookies, no state — clean landing |
-| Returning visitor | "Sign In" visible in nav for quick access |
-| Mobile viewport | Responsive, touch-friendly targets (≥44px) |
-| Dark mode preference | Honors `prefers-color-scheme` for dark landing |
+| Case                 | Handling                                        |
+| -------------------- | ----------------------------------------------- |
+| JavaScript disabled  | All content visible via server-rendered HTML    |
+| Slow connection      | Static generation, minimal JS, optimized images |
+| First visit          | No cookies, no state — clean landing            |
+| Returning visitor    | "Sign In" visible in nav for quick access       |
+| Mobile viewport      | Responsive, touch-friendly targets (≥44px)      |
+| Dark mode preference | Honors `prefers-color-scheme` for dark landing  |
 
 ### 1.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Navbar scroll | bg-white/80 backdrop-blur appears | 150ms | ease |
-| Section entrance | Fade in + slide up 8px (IntersectionObserver) | 400ms | [0.4, 0, 0.2, 1] |
-| Hero badge dot | Pulse animation (scale 1→1.15→1) | 2s infinite | ease-in-out |
-| Button hover | Shadow increase + bg darken | 150ms | ease |
-| FAQ expand | Height auto animation | 250ms | [0.4, 0, 0.2, 1] |
-| Pipeline step hover | Scale 1.02 + shadow-lg | 150ms | ease |
-| Pricing card hover | Scale 1.02 + shadow-lg | 150ms | ease |
-| Nav link hover | Color transition | 150ms | ease |
-| Hamburger → X | Rotate 90deg | 250ms | spring |
+| Element             | Animation                                     | Duration    | Easing           |
+| ------------------- | --------------------------------------------- | ----------- | ---------------- |
+| Navbar scroll       | bg-white/80 backdrop-blur appears             | 150ms       | ease             |
+| Section entrance    | Fade in + slide up 8px (IntersectionObserver) | 400ms       | [0.4, 0, 0.2, 1] |
+| Hero badge dot      | Pulse animation (scale 1→1.15→1)              | 2s infinite | ease-in-out      |
+| Button hover        | Shadow increase + bg darken                   | 150ms       | ease             |
+| FAQ expand          | Height auto animation                         | 250ms       | [0.4, 0, 0.2, 1] |
+| Pipeline step hover | Scale 1.02 + shadow-lg                        | 150ms       | ease             |
+| Pricing card hover  | Scale 1.02 + shadow-lg                        | 150ms       | ease             |
+| Nav link hover      | Color transition                              | 150ms       | ease             |
+| Hamburger → X       | Rotate 90deg                                  | 250ms       | spring           |
 
 ### 1.13 Mobile Experience
 
 **Breakpoints:**
+
 - **<640px:** Full-width single column. Hero heading scales down (clamp 2rem-4.5rem). Stacked CTAs. Hamburger menu.
 - **640-768px:** Tablet layout. 2-column artifact grid. Stacked pricing cards.
 - **768-1024px:** Full hero visible. 2-column grids. Horizontal nav.
 - **≥1024px:** Desktop layout. 3-column grids. Full experience.
 
 **Touch Gestures:**
+
 - Swipe down to dismiss mobile menu
 - Tap outside mobile menu to close
 - Pull-to-refresh disabled (static page)
@@ -279,44 +288,44 @@ None. Static content. Pricing data from config/constants file.
 
 ### 1.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Skip to main content | Hidden link as first focusable element |
-| Focus ring | `focus-visible:ring-2 ring-primary-500 ring-offset-2` |
-| Semantic HTML | `<nav>`, `<main>`, `<section>`, `<h1>`-`<h3>`, `<footer>` |
-| Alt text | All images have descriptive `alt` attributes |
-| Color contrast | All text ≥4.5:1 ratio against background |
-| Reduced motion | `prefers-reduced-motion: reduce` disables all animations |
-| Keyboard nav | All interactive elements in natural tab order |
-| ARIA labels | `aria-expanded` on FAQ items, `aria-label` on icon buttons |
-| Screen reader | Section landmarks announced, FAQ content accessible |
+| Requirement          | Implementation                                             |
+| -------------------- | ---------------------------------------------------------- |
+| Skip to main content | Hidden link as first focusable element                     |
+| Focus ring           | `focus-visible:ring-2 ring-primary-500 ring-offset-2`      |
+| Semantic HTML        | `<nav>`, `<main>`, `<section>`, `<h1>`-`<h3>`, `<footer>`  |
+| Alt text             | All images have descriptive `alt` attributes               |
+| Color contrast       | All text ≥4.5:1 ratio against background                   |
+| Reduced motion       | `prefers-reduced-motion: reduce` disables all animations   |
+| Keyboard nav         | All interactive elements in natural tab order              |
+| ARIA labels          | `aria-expanded` on FAQ items, `aria-label` on icon buttons |
+| Screen reader        | Section landmarks announced, FAQ content accessible        |
 
 ### 1.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| Static Generation | Next.js `generateStaticParams` + ISR |
+| Technique          | Implementation                                    |
+| ------------------ | ------------------------------------------------- |
+| Static Generation  | Next.js `generateStaticParams` + ISR              |
 | Image optimization | `next/image` with WebP/AVIF formats, lazy loading |
-| Code splitting | Dynamic imports for below-fold sections |
-| Font loading | `next/font` with `display: swap` and subsetting |
-| Critical CSS | Inlined in `<head>` |
-| Prefetch | `<Link prefetch>` for `/register` and `/login` |
-| Skeleton loading | Minimal — content rendered server-side |
-| Caching | CDN cache (Vercel Edge), ISR revalidation 60s |
+| Code splitting     | Dynamic imports for below-fold sections           |
+| Font loading       | `next/font` with `display: swap` and subsetting   |
+| Critical CSS       | Inlined in `<head>`                               |
+| Prefetch           | `<Link prefetch>` for `/register` and `/login`    |
+| Skeleton loading   | Minimal — content rendered server-side            |
+| Caching            | CDN cache (Vercel Edge), ISR revalidation 60s     |
 
 ### 1.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Interactive demo | Embed live PromptPilot sandbox on landing page |
-| Customer logos | Add "Trusted by" logo carousel from enterprise clients |
-| Video walkthrough | Replace static HowItWorks with product demo video |
-| A/B testing | Feature flag system for CTA copy, pricing display |
-| Localization | i18n routing for multi-language landing pages |
-| Analytics | Add PostHog/Plausible for conversion funnel tracking |
-| Waitlist | Replace "Start Free" with waitlist during beta |
-| Case studies | Add customer success section with metrics |
-| ROI calculator | Interactive tool estimating time/money saved |
+| Feature           | Integration Path                                       |
+| ----------------- | ------------------------------------------------------ |
+| Interactive demo  | Embed live PromptPilot sandbox on landing page         |
+| Customer logos    | Add "Trusted by" logo carousel from enterprise clients |
+| Video walkthrough | Replace static HowItWorks with product demo video      |
+| A/B testing       | Feature flag system for CTA copy, pricing display      |
+| Localization      | i18n routing for multi-language landing pages          |
+| Analytics         | Add PostHog/Plausible for conversion funnel tracking   |
+| Waitlist          | Replace "Start Free" with waitlist during beta         |
+| Case studies      | Add customer success section with metrics              |
+| ROI calculator    | Interactive tool estimating time/money saved           |
 
 ---
 
@@ -333,22 +342,26 @@ None. Static content. Pricing data from config/constants file.
 ### 2.2 User Journey
 
 **Entry Points:**
+
 - Landing page "Start Free" CTA → `/register`
 - Landing page "Sign In" → `/login`
 - Direct URL access to protected routes (redirected via middleware to `/login`)
 - Invitation email link → `/register?invite=TOKEN` (future Phase 4.0)
 
 **Previous Page:**
+
 - Landing page `/`
 - Any protected page (middleware redirect)
 
 **Next Pages:**
+
 - `/dashboard` — On successful login/register (default post-auth destination)
 - `/register` — From login page "Create one" link
 - `/login` — From register page "Sign in" link
 - Original protected URL — If redirected by middleware, return to intended destination
 
 **User Actions:**
+
 1. **Register:** Enter name, email, password → Submit → Auto-login → Redirect to dashboard
 2. **Login:** Enter email, password → Submit → Redirect to dashboard
 3. **Password validation:** Real-time client-side validation
@@ -357,6 +370,7 @@ None. Static content. Pricing data from config/constants file.
 6. **Session refresh:** Automatic token refresh via `/auth/refresh` on 401
 
 **Exit Points:**
+
 - Landing page (back navigation, logo click)
 
 ### 2.3 Complete Layout
@@ -430,35 +444,37 @@ None. Static content. Pricing data from config/constants file.
 **Sticky Elements:** None
 
 **Responsive Behavior:**
+
 - All viewports: Centered card, max-width 400px
 - Mobile (<480px): Card fills width with 16px horizontal padding, no border-radius (full-bleed feel)
 
 ### 2.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `Input` | Atom | Text input with label, placeholder, error state |
-| `PasswordField` | Molecule | Password input with show/hide toggle (eye icon) |
-| `Button` (primary) | Atom | Submit button, full-width, loading spinner state |
-| `ErrorBanner` | Molecule | Red-tinted error message container |
-| `FormField` | Molecule | Label + input + error message group |
+| Component          | Type     | Description                                      |
+| ------------------ | -------- | ------------------------------------------------ |
+| `Input`            | Atom     | Text input with label, placeholder, error state  |
+| `PasswordField`    | Molecule | Password input with show/hide toggle (eye icon)  |
+| `Button` (primary) | Atom     | Submit button, full-width, loading spinner state |
+| `ErrorBanner`      | Molecule | Red-tinted error message container               |
+| `FormField`        | Molecule | Label + input + error message group              |
 
 ### 2.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Register | Submit form | POST `/auth/register`, auto-login, redirect to dashboard, create default workspace |
-| Login | Submit form | POST `/auth/login`, set auth cookies, redirect to dashboard |
-| Validate email | Blur/Typing | Client-side regex validation: `^[^\s@]+@[^\s@]+\.[^\s@]+$` |
-| Validate password | Blur/Typing | Min 8 chars, real-time feedback |
-| Validate name | Blur/Typing | Required, min 2 chars (register only) |
-| Toggle password | Click eye icon | Switch input type between `password` and `text` |
-| Auto-focus | Page load | Focus first input field |
-| Keyboard submit | Enter key | Submit form |
-| Session refresh | 401 response | Silent POST `/auth/refresh`, retry original request |
-| Logout | Anywhere in app | POST `/auth/logout`, clear cookies, redirect to `/login` |
+| Action            | Trigger         | Behavior                                                                           |
+| ----------------- | --------------- | ---------------------------------------------------------------------------------- |
+| Register          | Submit form     | POST `/auth/register`, auto-login, redirect to dashboard, create default workspace |
+| Login             | Submit form     | POST `/auth/login`, set auth cookies, redirect to dashboard                        |
+| Validate email    | Blur/Typing     | Client-side regex validation: `^[^\s@]+@[^\s@]+\.[^\s@]+$`                         |
+| Validate password | Blur/Typing     | Min 8 chars, real-time feedback                                                    |
+| Validate name     | Blur/Typing     | Required, min 2 chars (register only)                                              |
+| Toggle password   | Click eye icon  | Switch input type between `password` and `text`                                    |
+| Auto-focus        | Page load       | Focus first input field                                                            |
+| Keyboard submit   | Enter key       | Submit form                                                                        |
+| Session refresh   | 401 response    | Silent POST `/auth/refresh`, retry original request                                |
+| Logout            | Anywhere in app | POST `/auth/logout`, clear cookies, redirect to `/login`                           |
 
 **Keyboard Shortcuts:**
+
 - `Enter` — Submit form (when any input focused)
 - `Tab` — Navigate between fields
 - `Escape` — Clear error banners
@@ -469,24 +485,24 @@ None. Authentication is purely functional.
 
 ### 2.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Idle | Clean form, empty fields | Default state |
-| Validating | None (client-side only, instant) | Real-time validation on blur/type |
-| Submitting | Button shows spinner, disabled | `setLoading(true)`, disable all inputs |
-| Success (Login) | Brief flash, then redirect | Set cookies, AuthProvider update, router.push |
-| Success (Register) | Brief flash, then redirect | Create workspace in background, router.push |
-| Error (401) | Red error banner "Invalid email or password" | Show error, re-enable form |
-| Error (409) | Red error banner "Email already registered" | Show error on register form |
-| Error (Network) | Red banner "Network error. Is the backend running?" | Show error, re-enable form |
-| Error (Validation) | Red text below invalid field | Highlight field border red |
+| State              | Visual                                              | Handling                                      |
+| ------------------ | --------------------------------------------------- | --------------------------------------------- |
+| Idle               | Clean form, empty fields                            | Default state                                 |
+| Validating         | None (client-side only, instant)                    | Real-time validation on blur/type             |
+| Submitting         | Button shows spinner, disabled                      | `setLoading(true)`, disable all inputs        |
+| Success (Login)    | Brief flash, then redirect                          | Set cookies, AuthProvider update, router.push |
+| Success (Register) | Brief flash, then redirect                          | Create workspace in background, router.push   |
+| Error (401)        | Red error banner "Invalid email or password"        | Show error, re-enable form                    |
+| Error (409)        | Red error banner "Email already registered"         | Show error on register form                   |
+| Error (Network)    | Red banner "Network error. Is the backend running?" | Show error, re-enable form                    |
+| Error (Validation) | Red text below invalid field                        | Highlight field border red                    |
 
 ### 2.8 Permissions
 
-| Role | Access |
-|------|--------|
-| Unauthenticated | Full access to login/register pages |
-| Authenticated | Redirected away from auth pages to dashboard |
+| Role            | Access                                       |
+| --------------- | -------------------------------------------- |
+| Unauthenticated | Full access to login/register pages          |
+| Authenticated   | Redirected away from auth pages to dashboard |
 
 ### 2.9 API Integration
 
@@ -571,14 +587,15 @@ Response 200:
 // Clears cookies: accessToken, refreshToken
 ```
 
-| Intervention | When | Behavior |
-|------|------|----------|
+| Intervention | When                | Behavior                                                         |
+| ------------ | ------------------- | ---------------------------------------------------------------- |
 | Auto-refresh | 401 on any API call | Interceptor calls `/auth/refresh`, retries original request once |
-| Force logout | Refresh fails | Clear auth state, redirect to `/login` |
+| Force logout | Refresh fails       | Clear auth state, redirect to `/login`                           |
 
 ### 2.10 Database Mapping
 
 **User model (Prisma):**
+
 - `id` — UUID primary key
 - `email` — unique, indexed
 - `passwordHash` — bcrypt 12 rounds
@@ -596,33 +613,33 @@ Response 200:
 
 ### 2.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| No internet | Show "Network error. Is the backend running?" banner |
-| Expired token | Auto-refresh via interceptor. If refresh fails, redirect to login |
-| Duplicate email | 409 response, "Email already registered" error |
-| Weak password | Client-side validation: min 8 chars. Future: zxcvbn strength meter |
-| Brute force | Backend rate limiting on `/auth/login` (5 attempts/min per IP) |
-| Session hijack | Refresh token rotation — old refresh token invalidated on rotation |
-| XSS | Cookies set with `httpOnly`, `secure`, `sameSite: 'lax'` |
-| CSRF | SameSite cookies + token in Authorization header |
-| First-time user | Register → auto-create workspace → dashboard with onboarding hints |
-| Returning user | Login → dashboard with existing data |
-| Concurrent sessions | Multiple refresh tokens supported per user |
-| Password manager | `autocomplete="email"`, `autocomplete="current-password"` attributes |
+| Case                | Handling                                                             |
+| ------------------- | -------------------------------------------------------------------- |
+| No internet         | Show "Network error. Is the backend running?" banner                 |
+| Expired token       | Auto-refresh via interceptor. If refresh fails, redirect to login    |
+| Duplicate email     | 409 response, "Email already registered" error                       |
+| Weak password       | Client-side validation: min 8 chars. Future: zxcvbn strength meter   |
+| Brute force         | Backend rate limiting on `/auth/login` (5 attempts/min per IP)       |
+| Session hijack      | Refresh token rotation — old refresh token invalidated on rotation   |
+| XSS                 | Cookies set with `httpOnly`, `secure`, `sameSite: 'lax'`             |
+| CSRF                | SameSite cookies + token in Authorization header                     |
+| First-time user     | Register → auto-create workspace → dashboard with onboarding hints   |
+| Returning user      | Login → dashboard with existing data                                 |
+| Concurrent sessions | Multiple refresh tokens supported per user                           |
+| Password manager    | `autocomplete="email"`, `autocomplete="current-password"` attributes |
 
 ### 2.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Card entrance | Fade in + slide up 12px | 400ms | [0.4, 0, 0.2, 1] |
-| Error banner | Slide down + fade in | 250ms | [0.4, 0, 0.2, 1] |
-| Error dismiss | Fade out + slide up | 150ms | ease-in |
-| Button loading | Spinner fade in | 150ms | ease |
-| Password toggle | Icon swap (eye ↔ eye-off) | 150ms | ease |
-| Field focus | Border color transition indigo | 150ms | ease |
-| Field error | Border color transition red + shake (subtle) | 300ms | spring |
-| Page transition | Fade out → navigate → fade in | 400ms | ease |
+| Element         | Animation                                    | Duration | Easing           |
+| --------------- | -------------------------------------------- | -------- | ---------------- |
+| Card entrance   | Fade in + slide up 12px                      | 400ms    | [0.4, 0, 0.2, 1] |
+| Error banner    | Slide down + fade in                         | 250ms    | [0.4, 0, 0.2, 1] |
+| Error dismiss   | Fade out + slide up                          | 150ms    | ease-in          |
+| Button loading  | Spinner fade in                              | 150ms    | ease             |
+| Password toggle | Icon swap (eye ↔ eye-off)                    | 150ms    | ease             |
+| Field focus     | Border color transition indigo               | 150ms    | ease             |
+| Field error     | Border color transition red + shake (subtle) | 300ms    | spring           |
+| Page transition | Fade out → navigate → fade in                | 400ms    | ease             |
 
 ### 2.13 Mobile Experience
 
@@ -634,41 +651,41 @@ Response 200:
 
 ### 2.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic HTML | `<form>`, `<label>`, `<input>` with proper associations |
-| Error announcement | `aria-describedby` linking error to field, `role="alert"` on error banner |
-| Focus management | Auto-focus first input on mount. Focus trap not needed (simple form). |
-| Screen reader | All labels read. Errors announced. Loading state announced via `aria-busy`. |
-| Contrast | All text ≥4.5:1. Error text #B91C1C on #FEF2F2 = 7:1. |
-| Keyboard | Tab through fields, Enter to submit, Escape to clear errors |
-| Reduced motion | All animations disabled |
-| Disabled state | `aria-disabled="true"` on submit button during loading |
+| Requirement        | Implementation                                                              |
+| ------------------ | --------------------------------------------------------------------------- |
+| Semantic HTML      | `<form>`, `<label>`, `<input>` with proper associations                     |
+| Error announcement | `aria-describedby` linking error to field, `role="alert"` on error banner   |
+| Focus management   | Auto-focus first input on mount. Focus trap not needed (simple form).       |
+| Screen reader      | All labels read. Errors announced. Loading state announced via `aria-busy`. |
+| Contrast           | All text ≥4.5:1. Error text #B91C1C on #FEF2F2 = 7:1.                       |
+| Keyboard           | Tab through fields, Enter to submit, Escape to clear errors                 |
+| Reduced motion     | All animations disabled                                                     |
+| Disabled state     | `aria-disabled="true"` on submit button during loading                      |
 
 ### 2.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| Lazy load | Auth page is client component, but lightweight |
-| No unnecessary deps | Only `@promptpilot/ui` components loaded |
-| Form state | Local `useState` — no global store needed |
-| API calls | Single fetch per auth action |
-| Font optimization | Inherits from root layout Inter font |
+| Technique           | Implementation                                 |
+| ------------------- | ---------------------------------------------- |
+| Lazy load           | Auth page is client component, but lightweight |
+| No unnecessary deps | Only `@promptpilot/ui` components loaded       |
+| Form state          | Local `useState` — no global store needed      |
+| API calls           | Single fetch per auth action                   |
+| Font optimization   | Inherits from root layout Inter font           |
 
 ### 2.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Google OAuth | Add "Continue with Google" button, OAuth 2.0 flow |
-| GitHub OAuth | Add "Continue with GitHub" button for developer audience |
-| Enterprise SSO | SAML/OIDC integration with Okta, Azure AD |
-| MFA/2FA | TOTP-based two-factor authentication flow |
-| Password reset | "Forgot password?" → email reset link flow |
+| Feature            | Integration Path                                               |
+| ------------------ | -------------------------------------------------------------- |
+| Google OAuth       | Add "Continue with Google" button, OAuth 2.0 flow              |
+| GitHub OAuth       | Add "Continue with GitHub" button for developer audience       |
+| Enterprise SSO     | SAML/OIDC integration with Okta, Azure AD                      |
+| MFA/2FA            | TOTP-based two-factor authentication flow                      |
+| Password reset     | "Forgot password?" → email reset link flow                     |
 | Email verification | Send verification email on register, verify before full access |
-| Magic link | Passwordless login via email magic link |
-| Passkeys | WebAuthn/FIDO2 biometric authentication |
-| Rate limiting UI | Show countdown timer when rate limited |
-| Session management | "Devices" page showing active sessions with remote logout |
+| Magic link         | Passwordless login via email magic link                        |
+| Passkeys           | WebAuthn/FIDO2 biometric authentication                        |
+| Rate limiting UI   | Show countdown timer when rate limited                         |
+| Session management | "Devices" page showing active sessions with remote logout      |
 
 ---
 
@@ -685,6 +702,7 @@ Response 200:
 ### 3.2 User Journey
 
 **Entry Points:**
+
 - Post-login redirect
 - Post-registration redirect (with onboarding state)
 - Clicking "Dashboard" in sidebar navigation
@@ -692,10 +710,12 @@ Response 200:
 - `⌘K` → "Go to Dashboard"
 
 **Previous Page:**
+
 - `/login` or `/register` (on authentication)
 - Any internal page (via sidebar navigation)
 
 **Next Pages:**
+
 - `/workspaces` — "Open Workspace" button, sidebar link
 - `/projects` — "New Project" button, sidebar link
 - `/workspace/[slug]` — Click workspace in summary
@@ -705,6 +725,7 @@ Response 200:
 - `/activity` — "View all" in AI activity section
 
 **User Actions:**
+
 1. View welcome message with personalized greeting
 2. Start new project via Quick Actions grid
 3. View and navigate to recent projects
@@ -716,6 +737,7 @@ Response 200:
 9. Mark notifications as read
 
 **Exit Points:**
+
 - Logout (sidebar bottom)
 - Any navigation target listed above
 
@@ -792,53 +814,55 @@ Response 200:
 **Sticky Elements:** Sidebar (left, full height, scrollable internally), Navbar (top, full width)
 
 **Responsive Behavior:**
+
 - **Desktop (≥1024px):** Full sidebar (240px), 2-column grid for content, all sections visible
 - **Tablet (768-1023px):** Collapsed sidebar (icons only, 56px), stacked content sections
 - **Mobile (<768px):** No sidebar (hamburger menu overlay), single column, all sections stacked vertically, hero simplified
 
 ### 3.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `Sidebar` | Organism | Left navigation with app sections, user info, upgrade CTA. Built. |
-| `Navbar` | Organism | Top bar with breadcrumbs + command palette trigger. Built. |
-| `Breadcrumbs` | Molecule | Current page path: Home > Dashboard. Built. |
-| `CommandPalette` | Organism | `⌘K` global search/navigation overlay. Built. |
-| `WelcomeHero` | Organism | Gradient banner with greeting, context, and primary CTAs |
-| `Button` (primary) | Atom | "New Project" CTA |
-| `Button` (secondary) | Atom | "Open Workspace" |
-| `QuickActionCard` | Molecule | Icon + label grid item for pipeline step shortcuts |
-| `Card` | Organism | Content container with header/content/footer. Built. |
-| `CardHeader` | Molecule | Card title + optional action link. Built. |
-| `CardTitle` | Atom | Card section heading. Built. |
-| `CardContent` | Molecule | Card body content. Built. |
-| `StatBox` | Molecule | Large number + label for dashboard metrics |
-| `EmptyState` | Organism | "No data yet" illustration + message + CTA. Built. |
-| `Badge` | Atom | Status indicator (Draft, Generating, Complete). Built. |
-| `Spinner` | Atom | Loading indicator. Built. |
-| `Skeleton` | Atom | Loading placeholder. Built. |
-| `Input` | Atom | Task input field. Built. |
-| `Checkbox` | Atom | Task completion toggle. Built. |
-| `ProjectCard` | Molecule | Project preview: name, status badge, last modified, workspace |
+| Component            | Type     | Description                                                       |
+| -------------------- | -------- | ----------------------------------------------------------------- |
+| `Sidebar`            | Organism | Left navigation with app sections, user info, upgrade CTA. Built. |
+| `Navbar`             | Organism | Top bar with breadcrumbs + command palette trigger. Built.        |
+| `Breadcrumbs`        | Molecule | Current page path: Home > Dashboard. Built.                       |
+| `CommandPalette`     | Organism | `⌘K` global search/navigation overlay. Built.                     |
+| `WelcomeHero`        | Organism | Gradient banner with greeting, context, and primary CTAs          |
+| `Button` (primary)   | Atom     | "New Project" CTA                                                 |
+| `Button` (secondary) | Atom     | "Open Workspace"                                                  |
+| `QuickActionCard`    | Molecule | Icon + label grid item for pipeline step shortcuts                |
+| `Card`               | Organism | Content container with header/content/footer. Built.              |
+| `CardHeader`         | Molecule | Card title + optional action link. Built.                         |
+| `CardTitle`          | Atom     | Card section heading. Built.                                      |
+| `CardContent`        | Molecule | Card body content. Built.                                         |
+| `StatBox`            | Molecule | Large number + label for dashboard metrics                        |
+| `EmptyState`         | Organism | "No data yet" illustration + message + CTA. Built.                |
+| `Badge`              | Atom     | Status indicator (Draft, Generating, Complete). Built.            |
+| `Spinner`            | Atom     | Loading indicator. Built.                                         |
+| `Skeleton`           | Atom     | Loading placeholder. Built.                                       |
+| `Input`              | Atom     | Task input field. Built.                                          |
+| `Checkbox`           | Atom     | Task completion toggle. Built.                                    |
+| `ProjectCard`        | Molecule | Project preview: name, status badge, last modified, workspace     |
 
 ### 3.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Create project | Click "New Project" | Navigate to `/projects` or open create dialog |
-| Open workspace | Click "Open Workspace" | Navigate to `/workspaces` |
-| Quick generate | Click Quick Action card | Navigate to project page with step pre-selected |
-| View recent project | Click project card | Navigate to `/project/[slug]` |
-| View all projects | Click "View all" | Navigate to `/projects` |
-| Add task | Type + Enter/click Add | Create task item in local state |
-| Toggle task | Click checkbox | Strike through text, mark complete |
-| Delete task | Click delete button | Remove from list with instant feedback |
-| Open command palette | `⌘K` or click trigger | Open search overlay |
-| Star/favorite | Click star icon on card | Toggle favorite status, update favorites list |
-| Mark notification | Click bell icon (navbar) | Toggle notification dropdown, mark as read |
-| Collapse sidebar | Click toggle (tablet/mobile) | Animate sidebar width |
+| Action               | Trigger                      | Behavior                                        |
+| -------------------- | ---------------------------- | ----------------------------------------------- |
+| Create project       | Click "New Project"          | Navigate to `/projects` or open create dialog   |
+| Open workspace       | Click "Open Workspace"       | Navigate to `/workspaces`                       |
+| Quick generate       | Click Quick Action card      | Navigate to project page with step pre-selected |
+| View recent project  | Click project card           | Navigate to `/project/[slug]`                   |
+| View all projects    | Click "View all"             | Navigate to `/projects`                         |
+| Add task             | Type + Enter/click Add       | Create task item in local state                 |
+| Toggle task          | Click checkbox               | Strike through text, mark complete              |
+| Delete task          | Click delete button          | Remove from list with instant feedback          |
+| Open command palette | `⌘K` or click trigger        | Open search overlay                             |
+| Star/favorite        | Click star icon on card      | Toggle favorite status, update favorites list   |
+| Mark notification    | Click bell icon (navbar)     | Toggle notification dropdown, mark as read      |
+| Collapse sidebar     | Click toggle (tablet/mobile) | Animate sidebar width                           |
 
 **Keyboard Shortcuts:**
+
 - `⌘K` — Open command palette
 - `G D` — Go to Dashboard
 - `G W` — Go to Workspaces
@@ -850,39 +874,39 @@ Response 200:
 
 ### 3.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| AI Activity Feed | Timeline of recent AI generations with status (completed/failed/in-progress), token usage, and cost |
-| Streaming Indicator | Pulsing dot + "Generating..." badge when pipeline steps are actively running |
-| Smart Suggestions | Based on recent activity, suggest next pipeline step: "Continue where you left off — PRD for Project X is ready for review" |
-| Generation Resume | Click a running/failed generation to jump to project page at that step |
-| Status Badges | AI-generated documents show status: DRAFT, GENERATED, REVIEWED, STALE |
+| Feature             | Description                                                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| AI Activity Feed    | Timeline of recent AI generations with status (completed/failed/in-progress), token usage, and cost                         |
+| Streaming Indicator | Pulsing dot + "Generating..." badge when pipeline steps are actively running                                                |
+| Smart Suggestions   | Based on recent activity, suggest next pipeline step: "Continue where you left off — PRD for Project X is ready for review" |
+| Generation Resume   | Click a running/failed generation to jump to project page at that step                                                      |
+| Status Badges       | AI-generated documents show status: DRAFT, GENERATED, REVIEWED, STALE                                                       |
 
 ### 3.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| First-time user (no data) | Welcome hero simplified + empty states with CTAs in all cards | Show onboarding hints |
-| Normal (data populated) | Full dashboard with projects, stats, activity | All sections populated |
-| Loading (initial) | Skeleton cards for projects, stats, activity | `GET /dashboard/stats` pending |
-| Loading (partial) | Individual card skeletons while async data fetches | Stale-while-revalidate pattern |
-| AI Streaming | Pulsing badge "Generating PRD for Project X..." in activity feed | SSE connection status |
-| Error (stats fail) | Card shows error state with retry button | "Couldn't load stats. [Retry]" |
-| Error (projects fail) | Empty state with error message | "Couldn't load projects. [Retry]" |
-| Offline | Banner at top: "You're offline. Some data may be stale." | SWR with cached data fallback |
-| No projects | "No projects yet" empty state with "Create your first project" CTA |
-| No favorites | "No favorites" with "Star projects to access them quickly" hint |
-| No tasks | "No tasks" with "Add tasks to track your progress" hint |
+| State                     | Visual                                                             | Handling                          |
+| ------------------------- | ------------------------------------------------------------------ | --------------------------------- |
+| First-time user (no data) | Welcome hero simplified + empty states with CTAs in all cards      | Show onboarding hints             |
+| Normal (data populated)   | Full dashboard with projects, stats, activity                      | All sections populated            |
+| Loading (initial)         | Skeleton cards for projects, stats, activity                       | `GET /dashboard/stats` pending    |
+| Loading (partial)         | Individual card skeletons while async data fetches                 | Stale-while-revalidate pattern    |
+| AI Streaming              | Pulsing badge "Generating PRD for Project X..." in activity feed   | SSE connection status             |
+| Error (stats fail)        | Card shows error state with retry button                           | "Couldn't load stats. [Retry]"    |
+| Error (projects fail)     | Empty state with error message                                     | "Couldn't load projects. [Retry]" |
+| Offline                   | Banner at top: "You're offline. Some data may be stale."           | SWR with cached data fallback     |
+| No projects               | "No projects yet" empty state with "Create your first project" CTA |
+| No favorites              | "No favorites" with "Star projects to access them quickly" hint    |
+| No tasks                  | "No tasks" with "Add tasks to track your progress" hint            |
 
 ### 3.8 Permissions
 
-| Role | Dashboard Access |
-|------|-----------------|
-| Owner | Full access to own dashboard with all personal data |
-| Admin | Full personal dashboard + team stats (future) |
+| Role   | Dashboard Access                                                |
+| ------ | --------------------------------------------------------------- |
+| Owner  | Full access to own dashboard with all personal data             |
+| Admin  | Full personal dashboard + team stats (future)                   |
 | Editor | Personal dashboard with own projects and shared workspace stats |
-| Viewer | Personal dashboard, read-only stats |
-| Guest | Not applicable (guests can't authenticate) |
+| Viewer | Personal dashboard, read-only stats                             |
+| Guest  | Not applicable (guests can't authenticate)                      |
 
 All roles see their own personalized dashboard. Workspace-level data shown is scoped to workspaces the user belongs to.
 
@@ -944,6 +968,7 @@ Response 200:
 ### 3.10 Database Mapping
 
 **Dashboard Stats aggregation (Prisma):**
+
 - `workspaceCount` → `prisma.workspace.count({ where: { ownerId, deletedAt: null } })`
 - `projectCount` → `prisma.project.count({ where: { ownerId, deletedAt: null } })`
 - `documentCount` → `prisma.document.count({ where: { project: { ownerId }, deletedAt: null } })`
@@ -958,50 +983,53 @@ Response 200:
 
 ### 3.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| First-time user | All cards show empty states with CTAs. Welcome hero shows "Let's get started" instead of "Welcome back" |
-| No internet | SWR returns cached data. Offline banner displayed. |
-| Expired token | Auto-refresh via interceptor. If fails, redirect to login. |
-| Empty workspace | Stats show zeros. Quick actions still functional (create new). |
-| Very large number of projects | Recent projects limited to 5. "View all" link for full list. |
-| AI generation in progress | Streaming indicator in activity feed. Polling every 3s for status updates. |
-| Deleted project referenced | Filtered server-side (`deletedAt: null`). |
-| Very long project names | Truncated with ellipsis at 40 chars, full name in tooltip |
-| Concurrent generation | Multiple streaming indicators stack vertically in activity feed |
-| Browser tab hidden | Reduce polling frequency when `document.hidden` |
+| Case                          | Handling                                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| First-time user               | All cards show empty states with CTAs. Welcome hero shows "Let's get started" instead of "Welcome back" |
+| No internet                   | SWR returns cached data. Offline banner displayed.                                                      |
+| Expired token                 | Auto-refresh via interceptor. If fails, redirect to login.                                              |
+| Empty workspace               | Stats show zeros. Quick actions still functional (create new).                                          |
+| Very large number of projects | Recent projects limited to 5. "View all" link for full list.                                            |
+| AI generation in progress     | Streaming indicator in activity feed. Polling every 3s for status updates.                              |
+| Deleted project referenced    | Filtered server-side (`deletedAt: null`).                                                               |
+| Very long project names       | Truncated with ellipsis at 40 chars, full name in tooltip                                               |
+| Concurrent generation         | Multiple streaming indicators stack vertically in activity feed                                         |
+| Browser tab hidden            | Reduce polling frequency when `document.hidden`                                                         |
 
 ### 3.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Dashboard load | Content fade in + slide up 4px | 300ms | [0.4, 0, 0.2, 1] |
-| Welcome hero | Gradient shift on hover | 150ms | ease |
-| StatBox load | Staggered fade in (50ms delay each) | 250ms each | [0.4, 0, 0.2, 1] |
-| Project card hover | Scale 1.01 + shadow increase | 150ms | ease |
-| Task add | Slide down + fade in | 200ms | spring |
-| Task complete | Strikethrough + opacity + slide | 200ms | ease |
-| Task delete | Fade out + collapse height | 200ms | ease |
-| Quick action hover | Scale 1.02 + bg lighten | 150ms | ease |
-| Streaming indicator | Pulse animation (scale + opacity) | 2s infinite | ease-in-out |
-| Skeleton loading | Shimmer animation | 1.5s infinite | ease |
-| Command palette | Scale 0.98→1 + fade in | 200ms | spring |
-| Empty state | Fade in with delay (appears after cards) | 400ms | [0.4, 0, 0.2, 1] |
+| Element             | Animation                                | Duration      | Easing           |
+| ------------------- | ---------------------------------------- | ------------- | ---------------- |
+| Dashboard load      | Content fade in + slide up 4px           | 300ms         | [0.4, 0, 0.2, 1] |
+| Welcome hero        | Gradient shift on hover                  | 150ms         | ease             |
+| StatBox load        | Staggered fade in (50ms delay each)      | 250ms each    | [0.4, 0, 0.2, 1] |
+| Project card hover  | Scale 1.01 + shadow increase             | 150ms         | ease             |
+| Task add            | Slide down + fade in                     | 200ms         | spring           |
+| Task complete       | Strikethrough + opacity + slide          | 200ms         | ease             |
+| Task delete         | Fade out + collapse height               | 200ms         | ease             |
+| Quick action hover  | Scale 1.02 + bg lighten                  | 150ms         | ease             |
+| Streaming indicator | Pulse animation (scale + opacity)        | 2s infinite   | ease-in-out      |
+| Skeleton loading    | Shimmer animation                        | 1.5s infinite | ease             |
+| Command palette     | Scale 0.98→1 + fade in                   | 200ms         | spring           |
+| Empty state         | Fade in with delay (appears after cards) | 400ms         | [0.4, 0, 0.2, 1] |
 
 ### 3.13 Mobile Experience
 
 **Breakpoints:**
+
 - **<768px:** Single column. Sidebar replaced by hamburger menu overlay. Navbar simplified (logo + hamburger + ⌘K). Welcome hero stacked vertically. Quick actions 2-column grid. Stats 2-column grid. All cards full-width. Tasks section full-width.
 - **768-1023px:** Collapsed sidebar (56px icons only). Content 2-column. Quick actions 4-column.
 - **≥1024px:** Full sidebar (240px). Content max-width 1200px centered. 2/3 + 1/3 card grid.
 
 **Touch Gestures:**
+
 - Swipe right on mobile to reveal sidebar
 - Swipe left to close sidebar
 - Pull-to-refresh to reload dashboard data
 - Long press project card for context menu (future)
 
 **Bottom Navigation (mobile only):**
+
 ```
 ┌──────────┬──────────┬──────────┬──────────┐
 │ 🏠 Home  │ 📁 Worksp│ 🤖 AI    │ 👤 Profile│
@@ -1010,46 +1038,46 @@ Response 200:
 
 ### 3.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic HTML | `<main>`, `<section>`, `<nav>`, `<article>` for cards |
-| Focus order | Sidebar → Navbar → Content (logical tab order) |
-| Skip link | "Skip to dashboard content" bypasses sidebar |
-| ARIA live | AI activity feed uses `aria-live="polite"` for new items |
-| ARIA labels | All icon-only buttons have `aria-label` |
-| Color contrast | All stat numbers ≥4.5:1. Status badges verified. |
-| Screen reader | Card titles as headings. Empty states announced. Task list as `<ul>`. |
-| Keyboard | Tab through all interactive cards. Enter to navigate. Space to toggle tasks. |
-| Reduced motion | All animations disabled. Streaming indicator becomes static text. |
+| Requirement    | Implementation                                                               |
+| -------------- | ---------------------------------------------------------------------------- |
+| Semantic HTML  | `<main>`, `<section>`, `<nav>`, `<article>` for cards                        |
+| Focus order    | Sidebar → Navbar → Content (logical tab order)                               |
+| Skip link      | "Skip to dashboard content" bypasses sidebar                                 |
+| ARIA live      | AI activity feed uses `aria-live="polite"` for new items                     |
+| ARIA labels    | All icon-only buttons have `aria-label`                                      |
+| Color contrast | All stat numbers ≥4.5:1. Status badges verified.                             |
+| Screen reader  | Card titles as headings. Empty states announced. Task list as `<ul>`.        |
+| Keyboard       | Tab through all interactive cards. Enter to navigate. Space to toggle tasks. |
+| Reduced motion | All animations disabled. Streaming indicator becomes static text.            |
 
 ### 3.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| SWR | Stale-while-revalidate for dashboard stats, cached 30s |
-| Code splitting | Dashboard sections lazy-loaded below fold |
-| Skeleton loading | Immediate skeleton render, data fills in |
-| Memoization | `React.memo` on StatBox, ProjectCard, QuickActionCard |
-| Optimistic UI | Task add/toggle/delete updated optimistically |
-| Virtual scrolling | Not needed (dashboard has bounded content) |
-| Prefetch | `<Link prefetch>` on "View all" and sidebar links |
-| Image optimization | Next.js Image for any dashboard illustrations |
-| Suspense | Wrap data-dependent sections in `<Suspense>` with skeleton fallback |
+| Technique          | Implementation                                                      |
+| ------------------ | ------------------------------------------------------------------- |
+| SWR                | Stale-while-revalidate for dashboard stats, cached 30s              |
+| Code splitting     | Dashboard sections lazy-loaded below fold                           |
+| Skeleton loading   | Immediate skeleton render, data fills in                            |
+| Memoization        | `React.memo` on StatBox, ProjectCard, QuickActionCard               |
+| Optimistic UI      | Task add/toggle/delete updated optimistically                       |
+| Virtual scrolling  | Not needed (dashboard has bounded content)                          |
+| Prefetch           | `<Link prefetch>` on "View all" and sidebar links                   |
+| Image optimization | Next.js Image for any dashboard illustrations                       |
+| Suspense           | Wrap data-dependent sections in `<Suspense>` with skeleton fallback |
 
 ### 3.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Real-time activity | WebSocket/SSE push for live AI activity updates |
-| Team dashboard | Workspace-level dashboard showing team activity, shared stats |
-| Organization overview | Organization-level dashboard aggregating all workspaces |
-| Widget system | Drag-and-drop customizable dashboard widgets |
-| Analytics charts | Token usage charts, cost trends, generation velocity graphs |
-| Notification center | Dropdown panel with grouped notifications, mark-all-read |
-| Onboarding wizard | Progressive onboarding overlay for first-time users |
-| Quick capture | Global ⌘N shortcut to create from anywhere |
-| Multi-workspace stats | Dropdown to switch workspace context on dashboard |
-| Billing widget | Current plan usage meter, upgrade prompt for approaching limits |
+| Feature               | Integration Path                                                |
+| --------------------- | --------------------------------------------------------------- |
+| Real-time activity    | WebSocket/SSE push for live AI activity updates                 |
+| Team dashboard        | Workspace-level dashboard showing team activity, shared stats   |
+| Organization overview | Organization-level dashboard aggregating all workspaces         |
+| Widget system         | Drag-and-drop customizable dashboard widgets                    |
+| Analytics charts      | Token usage charts, cost trends, generation velocity graphs     |
+| Notification center   | Dropdown panel with grouped notifications, mark-all-read        |
+| Onboarding wizard     | Progressive onboarding overlay for first-time users             |
+| Quick capture         | Global ⌘N shortcut to create from anywhere                      |
+| Multi-workspace stats | Dropdown to switch workspace context on dashboard               |
+| Billing widget        | Current plan usage meter, upgrade prompt for approaching limits |
 
 ---
 
@@ -1066,6 +1094,7 @@ Response 200:
 ### 4.2 User Journey
 
 **Entry Points:**
+
 - Sidebar "Workspaces" link → `/workspaces` (list view)
 - Sidebar workspace item → `/workspace/[slug]` (single workspace)
 - Dashboard "Open Workspace" button
@@ -1074,16 +1103,19 @@ Response 200:
 - `⌘K` → "Go to Workspace..."
 
 **Previous Page:**
+
 - Dashboard
 - Any page with workspace breadcrumb
 
 **Next Pages:**
+
 - `/project/[slug]` — Click project card within workspace
 - `/workspace/[slug]/members` — Members tab
 - `/workspace/[slug]/settings` — Settings tab
 - `/project/new?workspace=[id]` — New project within workspace
 
 **User Actions:**
+
 1. **List view:** Browse all workspaces, create new, search, filter
 2. **Detail view:** See workspace overview, projects list, members, activity
 3. **Create workspace:** Name, slug, type (personal/team)
@@ -1095,6 +1127,7 @@ Response 200:
 9. **Filter projects:** By status (Draft, Active, Completed, Archived)
 
 **Exit Points:**
+
 - Project page (primary exit)
 - Dashboard (sidebar link)
 - Settings (sidebar link)
@@ -1213,53 +1246,54 @@ Response 200:
 
 ### 4.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `PageHeader` | Organism | Title, description, primary action button |
-| `Button` (primary) | Atom | "New Workspace", "New Project", "Invite Member" |
-| `Button` (secondary) | Atom | "Open" workspace/project |
-| `Button` (danger) | Atom | "Archive Workspace" |
-| `Button` (ghost) | Atom | Context menu trigger (•••) |
-| `SearchBar` | Molecule | Filter workspaces/projects by name with debounce |
-| `Tabs` | Molecule | Projects, Members, Settings, Activity tabs |
-| `WorkspaceCard` | Molecule | Workspace preview: icon, name, stats, actions |
-| `Badge` | Atom | Workspace type (Personal, Team), project status |
-| `Table` / `DataTable` | Organism | Projects list and members list with sortable columns |
-| `DropdownMenu` | Molecule | Context menu per item (•••) with Edit, Archive, etc. |
-| `Dialog` | Molecule | Create/Edit workspace modal, Invite member modal, Archive confirmation |
-| `Input` | Atom | Form fields for workspace name, slug, member email |
-| `Select` | Atom | Role dropdown (Admin, Editor, Viewer) |
-| `Pagination` | Molecule | Page navigation for lists |
-| `EmptyState` | Organism | No workspaces, no projects, no members |
-| `Skeleton` | Atom | Loading rows for table |
-| `Avatar` | Atom | Member profile images |
-| `Toast` | Molecule | Success/error notifications for actions |
-| `Tooltip` | Atom | Hover details on truncated names |
+| Component             | Type     | Description                                                            |
+| --------------------- | -------- | ---------------------------------------------------------------------- |
+| `PageHeader`          | Organism | Title, description, primary action button                              |
+| `Button` (primary)    | Atom     | "New Workspace", "New Project", "Invite Member"                        |
+| `Button` (secondary)  | Atom     | "Open" workspace/project                                               |
+| `Button` (danger)     | Atom     | "Archive Workspace"                                                    |
+| `Button` (ghost)      | Atom     | Context menu trigger (•••)                                             |
+| `SearchBar`           | Molecule | Filter workspaces/projects by name with debounce                       |
+| `Tabs`                | Molecule | Projects, Members, Settings, Activity tabs                             |
+| `WorkspaceCard`       | Molecule | Workspace preview: icon, name, stats, actions                          |
+| `Badge`               | Atom     | Workspace type (Personal, Team), project status                        |
+| `Table` / `DataTable` | Organism | Projects list and members list with sortable columns                   |
+| `DropdownMenu`        | Molecule | Context menu per item (•••) with Edit, Archive, etc.                   |
+| `Dialog`              | Molecule | Create/Edit workspace modal, Invite member modal, Archive confirmation |
+| `Input`               | Atom     | Form fields for workspace name, slug, member email                     |
+| `Select`              | Atom     | Role dropdown (Admin, Editor, Viewer)                                  |
+| `Pagination`          | Molecule | Page navigation for lists                                              |
+| `EmptyState`          | Organism | No workspaces, no projects, no members                                 |
+| `Skeleton`            | Atom     | Loading rows for table                                                 |
+| `Avatar`              | Atom     | Member profile images                                                  |
+| `Toast`               | Molecule | Success/error notifications for actions                                |
+| `Tooltip`             | Atom     | Hover details on truncated names                                       |
 
 ### 4.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Create workspace | Click "New Workspace" | Open dialog with name, slug (auto-generated), type fields |
-| Edit workspace | ••• → Edit / Settings tab | Open dialog or edit inline, save on confirm |
-| Archive workspace | ••• → Archive / Danger zone | Confirmation dialog, soft delete (recoverable 30 days) |
-| Restore workspace | From archived filter | API call to remove `deletedAt` |
-| Delete workspace | Permanent delete option | Confirmation dialog with name typing, hard delete |
-| Search workspaces | Type in search bar | Debounced (300ms) filter of workspace list |
-| Filter workspaces | Click filter tabs | Show All / Personal / Team / Archived |
-| Create project | Click "New Project" | Open dialog or navigate to new project page with workspace context |
-| Navigate to project | Click project row | Navigate to `/project/[slug]` |
-| Invite member | Click "Invite Member" | Dialog: email input + role select → POST invitation |
-| Resend invitation | Click "Resend" | POST re-send invite email |
-| Revoke invitation | Click ✕ | DELETE invitation |
-| Change member role | Role dropdown | PATCH member role with confirmation |
-| Remove member | ••• → Remove | Confirmation dialog |
-| Leave workspace | ••• → Leave | Confirmation dialog (non-owners only) |
-| Copy invite link | ••• → Copy link | Copy token URL to clipboard, toast confirmation |
-| Rename workspace | Settings tab → edit name | PATCH workspace, optimistic update |
-| Change slug | Settings tab → edit slug | PATCH workspace, validate uniqueness client + server |
+| Action              | Trigger                     | Behavior                                                           |
+| ------------------- | --------------------------- | ------------------------------------------------------------------ |
+| Create workspace    | Click "New Workspace"       | Open dialog with name, slug (auto-generated), type fields          |
+| Edit workspace      | ••• → Edit / Settings tab   | Open dialog or edit inline, save on confirm                        |
+| Archive workspace   | ••• → Archive / Danger zone | Confirmation dialog, soft delete (recoverable 30 days)             |
+| Restore workspace   | From archived filter        | API call to remove `deletedAt`                                     |
+| Delete workspace    | Permanent delete option     | Confirmation dialog with name typing, hard delete                  |
+| Search workspaces   | Type in search bar          | Debounced (300ms) filter of workspace list                         |
+| Filter workspaces   | Click filter tabs           | Show All / Personal / Team / Archived                              |
+| Create project      | Click "New Project"         | Open dialog or navigate to new project page with workspace context |
+| Navigate to project | Click project row           | Navigate to `/project/[slug]`                                      |
+| Invite member       | Click "Invite Member"       | Dialog: email input + role select → POST invitation                |
+| Resend invitation   | Click "Resend"              | POST re-send invite email                                          |
+| Revoke invitation   | Click ✕                     | DELETE invitation                                                  |
+| Change member role  | Role dropdown               | PATCH member role with confirmation                                |
+| Remove member       | ••• → Remove                | Confirmation dialog                                                |
+| Leave workspace     | ••• → Leave                 | Confirmation dialog (non-owners only)                              |
+| Copy invite link    | ••• → Copy link             | Copy token URL to clipboard, toast confirmation                    |
+| Rename workspace    | Settings tab → edit name    | PATCH workspace, optimistic update                                 |
+| Change slug         | Settings tab → edit slug    | PATCH workspace, validate uniqueness client + server               |
 
 **Keyboard Shortcuts:**
+
 - `N` — New Project (within workspace context)
 - `I` — Invite Member
 - `/` — Focus search bar
@@ -1268,44 +1302,44 @@ Response 200:
 
 ### 4.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| Workspace Activity Summary | AI-generated summary of recent activity across all projects |
-| Project Health Score | AI analysis of documentation completeness and staleness |
-| Smart Project Grouping | Auto-suggest group projects by domain, tech stack, or status |
-| Staleness Detection | AI flags documents that may be out of date based on upstream changes |
+| Feature                    | Description                                                          |
+| -------------------------- | -------------------------------------------------------------------- |
+| Workspace Activity Summary | AI-generated summary of recent activity across all projects          |
+| Project Health Score       | AI analysis of documentation completeness and staleness              |
+| Smart Project Grouping     | Auto-suggest group projects by domain, tech stack, or status         |
+| Staleness Detection        | AI flags documents that may be out of date based on upstream changes |
 
 ### 4.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Loading (list) | Skeleton cards (3-6) with shimmer | Fetch workspaces list |
-| Loading (detail) | Page skeleton with tab placeholders | Fetch workspace + projects |
-| Empty (no workspaces) | Empty state illustration with create CTA | First-time user |
-| Empty (no projects) | Empty state with "Create your first project" | New workspace |
-| Empty (no members) | Only owner shown. "Invite your team" hint. | Single-user workspace |
-| Error (fetch) | Error state with retry button | Network or server error |
-| Error (create) | Validation errors on form fields | Duplicate slug, invalid name |
-| Error (permission) | "You don't have access to this workspace" | Viewer trying admin action |
-| Saving | Button shows spinner, form fields disabled | Optimistic update with rollback |
-| Archiving | Loading state on archive dialog confirm | Soft delete API call |
-| Read-only | Edit buttons hidden/greyed, no drag handles | Viewer role |
+| State                 | Visual                                       | Handling                        |
+| --------------------- | -------------------------------------------- | ------------------------------- |
+| Loading (list)        | Skeleton cards (3-6) with shimmer            | Fetch workspaces list           |
+| Loading (detail)      | Page skeleton with tab placeholders          | Fetch workspace + projects      |
+| Empty (no workspaces) | Empty state illustration with create CTA     | First-time user                 |
+| Empty (no projects)   | Empty state with "Create your first project" | New workspace                   |
+| Empty (no members)    | Only owner shown. "Invite your team" hint.   | Single-user workspace           |
+| Error (fetch)         | Error state with retry button                | Network or server error         |
+| Error (create)        | Validation errors on form fields             | Duplicate slug, invalid name    |
+| Error (permission)    | "You don't have access to this workspace"    | Viewer trying admin action      |
+| Saving                | Button shows spinner, form fields disabled   | Optimistic update with rollback |
+| Archiving             | Loading state on archive dialog confirm      | Soft delete API call            |
+| Read-only             | Edit buttons hidden/greyed, no drag handles  | Viewer role                     |
 
 ### 4.8 Permissions
 
-| Action | Owner | Admin | Editor | Viewer |
-|--------|-------|-------|--------|--------|
-| View workspace | ✅ | ✅ | ✅ | ✅ |
-| Edit workspace settings | ✅ | ✅ | ❌ | ❌ |
-| Archive workspace | ✅ | ❌ | ❌ | ❌ |
-| Create project | ✅ | ✅ | ✅ | ❌ |
-| View projects | ✅ | ✅ | ✅ | ✅ |
-| Edit any project | ✅ | ✅ | ✅ (own) | ❌ |
-| Archive any project | ✅ | ✅ | ❌ | ❌ |
-| Invite members | ✅ | ✅ | ❌ | ❌ |
-| Remove members | ✅ | ✅ | ❌ | ❌ |
-| Change member roles | ✅ | ✅ | ❌ | ❌ |
-| Leave workspace | ✅ | ✅ | ✅ | ✅ |
+| Action                  | Owner | Admin | Editor   | Viewer |
+| ----------------------- | ----- | ----- | -------- | ------ |
+| View workspace          | ✅    | ✅    | ✅       | ✅     |
+| Edit workspace settings | ✅    | ✅    | ❌       | ❌     |
+| Archive workspace       | ✅    | ❌    | ❌       | ❌     |
+| Create project          | ✅    | ✅    | ✅       | ❌     |
+| View projects           | ✅    | ✅    | ✅       | ✅     |
+| Edit any project        | ✅    | ✅    | ✅ (own) | ❌     |
+| Archive any project     | ✅    | ✅    | ❌       | ❌     |
+| Invite members          | ✅    | ✅    | ❌       | ❌     |
+| Remove members          | ✅    | ✅    | ❌       | ❌     |
+| Change member roles     | ✅    | ✅    | ❌       | ❌     |
+| Leave workspace         | ✅    | ✅    | ✅       | ✅     |
 
 ### 4.9 API Integration
 
@@ -1398,10 +1432,12 @@ DELETE /api/v1/workspaces/:id/members/:userId
 ### 4.10 Database Mapping
 
 **Workspace model:**
+
 - `id`, `name`, `slug`, `ownerId`, `type` (PERSONAL/TEAM), `status` (ACTIVE/ARCHIVED), `settings` (JSON), `deletedAt`
 - Relations: `owner` (User), `members` (WorkspaceMember[]), `projects` (Project[]), `apiKeys` (APIKey[])
 
 **WorkspaceMember model:**
+
 - `id`, `workspaceId`, `userId`, `role` (ADMIN/EDITOR/VIEWER), `joinedAt`
 - Unique: `[workspaceId, userId]`
 
@@ -1411,33 +1447,33 @@ DELETE /api/v1/workspaces/:id/members/:userId
 
 ### 4.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| No internet | SWR returns cached workspace data. Actions queued for retry. |
-| Expired token | Auto-refresh. Redirect to login if fails. |
-| Duplicate slug | 409 error, show "This slug is already taken" inline error |
-| Deleted workspace access | 404 redirect with toast "Workspace not found or has been archived" |
-| Empty workspace | Default personal workspace created on registration |
-| Last member leaves | Prevent removal: "Workspace must have at least one member" |
-| Owner leaves | Prevent: "Transfer ownership before leaving" |
-| Very large workspace | Pagination (20 per page). Search instead of scroll for 50+ projects. |
-| Concurrent edits | Last-write-wins for settings. Optimistic with version check. |
-| Archival race condition | Check `deletedAt` before operations, return 404 if archived |
+| Case                     | Handling                                                             |
+| ------------------------ | -------------------------------------------------------------------- |
+| No internet              | SWR returns cached workspace data. Actions queued for retry.         |
+| Expired token            | Auto-refresh. Redirect to login if fails.                            |
+| Duplicate slug           | 409 error, show "This slug is already taken" inline error            |
+| Deleted workspace access | 404 redirect with toast "Workspace not found or has been archived"   |
+| Empty workspace          | Default personal workspace created on registration                   |
+| Last member leaves       | Prevent removal: "Workspace must have at least one member"           |
+| Owner leaves             | Prevent: "Transfer ownership before leaving"                         |
+| Very large workspace     | Pagination (20 per page). Search instead of scroll for 50+ projects. |
+| Concurrent edits         | Last-write-wins for settings. Optimistic with version check.         |
+| Archival race condition  | Check `deletedAt` before operations, return 404 if archived          |
 
 ### 4.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Page load | Content fade in + slide up 4px | 300ms | [0.4, 0, 0.2, 1] |
-| Tab switch | Content crossfade | 200ms | ease |
-| Create dialog | Scale 0.95→1 + fade in | 250ms | spring |
-| Project row hover | bg-color transition | 150ms | ease |
-| Member add | Row slide down + fade in | 250ms | [0.4, 0, 0.2, 1] |
-| Member remove | Row fade out + collapse | 200ms | ease-in |
-| Invitation send | Button sparkle → spinner → check | 600ms | — |
-| Archive confirm | Dialog shake if type name mismatches | 400ms | spring |
-| Empty state | Delayed fade in with icon bounce | 500ms | spring |
-| Search filter | Results stagger fade in (30ms each) | 200ms | ease |
+| Element           | Animation                            | Duration | Easing           |
+| ----------------- | ------------------------------------ | -------- | ---------------- |
+| Page load         | Content fade in + slide up 4px       | 300ms    | [0.4, 0, 0.2, 1] |
+| Tab switch        | Content crossfade                    | 200ms    | ease             |
+| Create dialog     | Scale 0.95→1 + fade in               | 250ms    | spring           |
+| Project row hover | bg-color transition                  | 150ms    | ease             |
+| Member add        | Row slide down + fade in             | 250ms    | [0.4, 0, 0.2, 1] |
+| Member remove     | Row fade out + collapse              | 200ms    | ease-in          |
+| Invitation send   | Button sparkle → spinner → check     | 600ms    | —                |
+| Archive confirm   | Dialog shake if type name mismatches | 400ms    | spring           |
+| Empty state       | Delayed fade in with icon bounce     | 500ms    | spring           |
+| Search filter     | Results stagger fade in (30ms each)  | 200ms    | ease             |
 
 ### 4.13 Mobile Experience
 
@@ -1450,42 +1486,42 @@ DELETE /api/v1/workspaces/:id/members/:userId
 
 ### 4.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic HTML | `<table>` for data tables with `<thead>`, `<tbody>`, proper `<th scope>` |
-| Focus management | Focus trapped in create/edit dialogs. Focus returns to trigger on close. |
-| ARIA labels | `aria-label` on icon-only buttons. `aria-expanded` on dropdowns. |
-| Screen reader | Table rows announced with row count. Role badges read. Actions described. |
-| Keyboard | Tab through list items, Enter to open, Space for checkboxes, Arrow keys between tabs |
-| Contrast | All status badges meet 4.5:1 text contrast or 3:1 large text |
-| Error announcement | Validation errors announced via `aria-describedby` + `role="alert"` |
+| Requirement        | Implementation                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| Semantic HTML      | `<table>` for data tables with `<thead>`, `<tbody>`, proper `<th scope>`             |
+| Focus management   | Focus trapped in create/edit dialogs. Focus returns to trigger on close.             |
+| ARIA labels        | `aria-label` on icon-only buttons. `aria-expanded` on dropdowns.                     |
+| Screen reader      | Table rows announced with row count. Role badges read. Actions described.            |
+| Keyboard           | Tab through list items, Enter to open, Space for checkboxes, Arrow keys between tabs |
+| Contrast           | All status badges meet 4.5:1 text contrast or 3:1 large text                         |
+| Error announcement | Validation errors announced via `aria-describedby` + `role="alert"`                  |
 
 ### 4.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| SWR | Workspace list + projects cached with 30s revalidation |
-| Pagination | Server-side pagination, 20 items per page |
-| Search debounce | 300ms debounce on workspace/project search |
-| Lazy tabs | Members and Activity tabs load data on first selection |
-| Memoization | `React.memo` on workspace cards, project rows |
-| Optimistic UI | Workspace rename, project archive, member role change |
-| Suspense | Tab content wrapped in `<Suspense>` with skeleton fallback |
+| Technique       | Implementation                                             |
+| --------------- | ---------------------------------------------------------- |
+| SWR             | Workspace list + projects cached with 30s revalidation     |
+| Pagination      | Server-side pagination, 20 items per page                  |
+| Search debounce | 300ms debounce on workspace/project search                 |
+| Lazy tabs       | Members and Activity tabs load data on first selection     |
+| Memoization     | `React.memo` on workspace cards, project rows              |
+| Optimistic UI   | Workspace rename, project archive, member role change      |
+| Suspense        | Tab content wrapped in `<Suspense>` with skeleton fallback |
 
 ### 4.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Real-time collaboration | WebSocket presence indicators showing who's viewing workspace |
-| Team visibility | Organization hierarchy — multiple workspaces under one org |
-| Workspace templates | Pre-configured workspace with sample projects and pipeline steps |
-| Custom roles | RBAC with custom permission sets beyond Admin/Editor/Viewer |
-| Audit log | Full activity feed per workspace: who did what, when |
-| Billing per workspace | Workspace-level subscription with usage quotas |
-| Workspace transfer | Transfer ownership to another user or organization |
-| API keys management | Per-workspace API key generation, scoping, and rotation |
-| Webhook integration | Workspace-level webhook subscriptions for events |
-| Cross-workspace search | Global search across all workspaces with permission scoping |
+| Feature                 | Integration Path                                                 |
+| ----------------------- | ---------------------------------------------------------------- |
+| Real-time collaboration | WebSocket presence indicators showing who's viewing workspace    |
+| Team visibility         | Organization hierarchy — multiple workspaces under one org       |
+| Workspace templates     | Pre-configured workspace with sample projects and pipeline steps |
+| Custom roles            | RBAC with custom permission sets beyond Admin/Editor/Viewer      |
+| Audit log               | Full activity feed per workspace: who did what, when             |
+| Billing per workspace   | Workspace-level subscription with usage quotas                   |
+| Workspace transfer      | Transfer ownership to another user or organization               |
+| API keys management     | Per-workspace API key generation, scoping, and rotation          |
+| Webhook integration     | Workspace-level webhook subscriptions for events                 |
+| Cross-workspace search  | Global search across all workspaces with permission scoping      |
 
 ---
 
@@ -1502,6 +1538,7 @@ DELETE /api/v1/workspaces/:id/members/:userId
 ### 5.2 User Journey
 
 **Entry Points:**
+
 - Workspace project list → Click project
 - Dashboard recent projects → Click project
 - Sidebar project list (future)
@@ -1510,11 +1547,13 @@ DELETE /api/v1/workspaces/:id/members/:userId
 - Post-project-creation redirect
 
 **Previous Page:**
+
 - Workspace detail
 - Dashboard
 - New Project dialog/form
 
 **Next Pages:**
+
 - `/project/[slug]/chat` — AI Chat for this project
 - `/project/[slug]/prd` — View/edit specific document (PRD, SRS, etc.)
 - `/project/[slug]/editor` — Full document editor
@@ -1523,6 +1562,7 @@ DELETE /api/v1/workspaces/:id/members/:userId
 - `/project/[slug]/conversations` — AI conversation history
 
 **User Actions:**
+
 1. View project overview: name, description, status, workspace context
 2. Run full pipeline — generate all 9 documents at once
 3. Generate individual document — trigger generation for one step
@@ -1535,6 +1575,7 @@ DELETE /api/v1/workspaces/:id/members/:userId
 10. Duplicate project — copy with all documents
 
 **Exit Points:**
+
 - Document page (edit/view)
 - AI Chat
 - Export page
@@ -1610,53 +1651,55 @@ DELETE /api/v1/workspaces/:id/members/:userId
 **Sticky Elements:** Project header (sticky top). Pipeline progress bar (sticky below header). Streaming panel (fixed right side, collapsible).
 
 **Responsive Behavior:**
+
 - **Desktop (≥1280px):** 3-column document grid + optional streaming sidebar
 - **Tablet (768-1279px):** 2-column grid, streaming panel as bottom drawer
 - **Mobile (<768px):** Single column document cards, streaming as full-width bottom panel
 
 ### 5.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `PageHeader` | Organism | Project name, description, status badge, action buttons |
-| `Button` (primary) | Atom | "Run Full Pipeline", "Generate", "View" |
-| `Button` (secondary) | Atom | "AI Chat", "Export", "Edit" |
-| `Button` (ghost) | Atom | Context menu trigger (•••) per document |
-| `Button` (danger) | Atom | "Cancel Generation", "Archive Project" |
-| `Breadcrumbs` | Molecule | Full path: Home > Workspaces > [Workspace] > [Project] |
-| `Badge` | Atom | Document status: Draft, Generated, Reviewed, Stale, Generating |
-| `ProgressBar` | Molecule | Pipeline completion progress (4/9) with step indicators |
-| `PipelineProgress` | Organism | Visual 9-step pipeline with status indicators per step |
-| `DocumentCard` | Molecule | Per-document preview: type icon, title, status, stats, actions |
-| `StreamingPanel` | Organism | Live AI generation output with cancel button |
-| `DropdownMenu` | Molecule | Context menu: View, Edit, Regenerate, Versions, Export, Duplicate |
-| `Dialog` | Molecule | Regenerate confirmation, Archive confirmation, Run Full Pipeline confirm |
-| `Skeleton` | Atom | Document card loading placeholders |
-| `Spinner` | Atom | Generation in progress indicator |
-| `Tooltip` | Atom | Pipeline step descriptions on hover |
-| `Toast` | Molecule | Pipeline completion, generation failure notifications |
+| Component            | Type     | Description                                                              |
+| -------------------- | -------- | ------------------------------------------------------------------------ |
+| `PageHeader`         | Organism | Project name, description, status badge, action buttons                  |
+| `Button` (primary)   | Atom     | "Run Full Pipeline", "Generate", "View"                                  |
+| `Button` (secondary) | Atom     | "AI Chat", "Export", "Edit"                                              |
+| `Button` (ghost)     | Atom     | Context menu trigger (•••) per document                                  |
+| `Button` (danger)    | Atom     | "Cancel Generation", "Archive Project"                                   |
+| `Breadcrumbs`        | Molecule | Full path: Home > Workspaces > [Workspace] > [Project]                   |
+| `Badge`              | Atom     | Document status: Draft, Generated, Reviewed, Stale, Generating           |
+| `ProgressBar`        | Molecule | Pipeline completion progress (4/9) with step indicators                  |
+| `PipelineProgress`   | Organism | Visual 9-step pipeline with status indicators per step                   |
+| `DocumentCard`       | Molecule | Per-document preview: type icon, title, status, stats, actions           |
+| `StreamingPanel`     | Organism | Live AI generation output with cancel button                             |
+| `DropdownMenu`       | Molecule | Context menu: View, Edit, Regenerate, Versions, Export, Duplicate        |
+| `Dialog`             | Molecule | Regenerate confirmation, Archive confirmation, Run Full Pipeline confirm |
+| `Skeleton`           | Atom     | Document card loading placeholders                                       |
+| `Spinner`            | Atom     | Generation in progress indicator                                         |
+| `Tooltip`            | Atom     | Pipeline step descriptions on hover                                      |
+| `Toast`              | Molecule | Pipeline completion, generation failure notifications                    |
 
 ### 5.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| View project | Navigate to project | Load project data + all documents |
-| Run full pipeline | Click "Run Full Pipeline" | Confirmation dialog → sequential step generation, progress tracking |
-| Generate document | Click "Generate" on card | POST `/pipeline/generate` with projectId + stepId, open streaming panel |
-| Regenerate document | ••• → Regenerate / "Regen" btn | Confirmation: "This will create a new version. Continue?" → POST generate |
-| Cancel generation | Click "Cancel" | POST cancel endpoint, mark conversation CANCELLED, preserve partial output |
-| View document | Click "View" | Navigate to document viewer page |
-| Edit document | Click "Edit" | Navigate to full editor |
-| View versions | ••• → Versions | Navigate to version history page |
-| Open AI Chat | Click "AI Chat" | Navigate to project chat page |
-| Export project | Click "Export" | Navigate to export page with project pre-selected |
-| Rename project | ••• → Rename | Inline edit or dialog with name/slug fields |
-| Archive project | ••• → Archive | Confirmation dialog → soft delete |
-| Duplicate project | ••• → Duplicate | Dialog: enter new name → POST create with copied settings |
-| Favorite project | Click star icon | Toggle favorite status |
-| Search documents | Search bar (future) | Filter document cards by name/type |
+| Action              | Trigger                        | Behavior                                                                   |
+| ------------------- | ------------------------------ | -------------------------------------------------------------------------- |
+| View project        | Navigate to project            | Load project data + all documents                                          |
+| Run full pipeline   | Click "Run Full Pipeline"      | Confirmation dialog → sequential step generation, progress tracking        |
+| Generate document   | Click "Generate" on card       | POST `/pipeline/generate` with projectId + stepId, open streaming panel    |
+| Regenerate document | ••• → Regenerate / "Regen" btn | Confirmation: "This will create a new version. Continue?" → POST generate  |
+| Cancel generation   | Click "Cancel"                 | POST cancel endpoint, mark conversation CANCELLED, preserve partial output |
+| View document       | Click "View"                   | Navigate to document viewer page                                           |
+| Edit document       | Click "Edit"                   | Navigate to full editor                                                    |
+| View versions       | ••• → Versions                 | Navigate to version history page                                           |
+| Open AI Chat        | Click "AI Chat"                | Navigate to project chat page                                              |
+| Export project      | Click "Export"                 | Navigate to export page with project pre-selected                          |
+| Rename project      | ••• → Rename                   | Inline edit or dialog with name/slug fields                                |
+| Archive project     | ••• → Archive                  | Confirmation dialog → soft delete                                          |
+| Duplicate project   | ••• → Duplicate                | Dialog: enter new name → POST create with copied settings                  |
+| Favorite project    | Click star icon                | Toggle favorite status                                                     |
+| Search documents    | Search bar (future)            | Filter document cards by name/type                                         |
 
 **Keyboard Shortcuts:**
+
 - `G` — Generate selected document
 - `R` — Regenerate selected document
 - `E` — Edit selected document
@@ -1668,49 +1711,49 @@ DELETE /api/v1/workspaces/:id/members/:userId
 
 ### 5.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| Pipeline Orchestration | AI runs 9-step pipeline in dependency order (Master Context → PRD → SRS → Architecture → DB Schema → API Spec → User Flows → Wireframes → Roadmap) |
-| Streaming Generation | Real-time SSE streaming showing AI composing documents token-by-token |
-| Context Injection | Each step receives master context + upstream artifacts as AI context |
-| Dependency Awareness | Pipeline respects step dependencies (e.g., Architecture must complete before DB Schema) |
-| Parallel Generation | Independent steps (DB Schema + User Flows) can run concurrently |
-| Token + Cost Tracking | Per-generation token count, cost estimation, and total project cost display |
-| Auto-regeneration (stale) | When upstream document changes, downstream documents marked STALE with option to auto-regenerate |
-| Smart Suggestions | "Architecture changed — DB Schema and API Spec may need updates" |
+| Feature                   | Description                                                                                                                                        |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pipeline Orchestration    | AI runs 9-step pipeline in dependency order (Master Context → PRD → SRS → Architecture → DB Schema → API Spec → User Flows → Wireframes → Roadmap) |
+| Streaming Generation      | Real-time SSE streaming showing AI composing documents token-by-token                                                                              |
+| Context Injection         | Each step receives master context + upstream artifacts as AI context                                                                               |
+| Dependency Awareness      | Pipeline respects step dependencies (e.g., Architecture must complete before DB Schema)                                                            |
+| Parallel Generation       | Independent steps (DB Schema + User Flows) can run concurrently                                                                                    |
+| Token + Cost Tracking     | Per-generation token count, cost estimation, and total project cost display                                                                        |
+| Auto-regeneration (stale) | When upstream document changes, downstream documents marked STALE with option to auto-regenerate                                                   |
+| Smart Suggestions         | "Architecture changed — DB Schema and API Spec may need updates"                                                                                   |
 
 ### 5.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Loading | Skeleton cards for 9 documents, progress bar shimmer | Fetch project + documents |
-| Empty (no docs) | All 9 cards show "Not started" with Generate button | Fresh project |
-| Partial generation | Mix of Generated, Generating, Not Started cards | Mid-pipeline |
-| Full generation | All 9 cards show "Generated" with version numbers | Complete project |
-| Streaming | Right panel shows live AI output, stop button, token counter | SSE connection active |
-| Streaming error | Panel shows error: "Generation failed. [Retry] [View Partial]" | AI timeout or error |
-| Stale documents | Yellow STALE badge with "Regenerate suggested" tooltip | Upstream changed |
-| Archiving | Dialog with spinner, all cards greyed out during transition | Soft delete API call |
-| Read-only | Generate/Edit buttons hidden, View only | Viewer role |
-| Permission denied | Toast: "You don't have permission to generate documents" | Unauthorized action |
-| Rate limited | Toast: "Rate limit reached. Try again in 30s." | API rate limit |
-| Offline | Cached project view. "You're offline" banner. Actions disabled. | Network loss |
+| State              | Visual                                                          | Handling                  |
+| ------------------ | --------------------------------------------------------------- | ------------------------- |
+| Loading            | Skeleton cards for 9 documents, progress bar shimmer            | Fetch project + documents |
+| Empty (no docs)    | All 9 cards show "Not started" with Generate button             | Fresh project             |
+| Partial generation | Mix of Generated, Generating, Not Started cards                 | Mid-pipeline              |
+| Full generation    | All 9 cards show "Generated" with version numbers               | Complete project          |
+| Streaming          | Right panel shows live AI output, stop button, token counter    | SSE connection active     |
+| Streaming error    | Panel shows error: "Generation failed. [Retry] [View Partial]"  | AI timeout or error       |
+| Stale documents    | Yellow STALE badge with "Regenerate suggested" tooltip          | Upstream changed          |
+| Archiving          | Dialog with spinner, all cards greyed out during transition     | Soft delete API call      |
+| Read-only          | Generate/Edit buttons hidden, View only                         | Viewer role               |
+| Permission denied  | Toast: "You don't have permission to generate documents"        | Unauthorized action       |
+| Rate limited       | Toast: "Rate limit reached. Try again in 30s."                  | API rate limit            |
+| Offline            | Cached project view. "You're offline" banner. Actions disabled. | Network loss              |
 
 ### 5.8 Permissions
 
-| Action | Owner | Editor | Viewer |
-|--------|-------|--------|--------|
-| View project + documents | ✅ | ✅ | ✅ |
-| Run full pipeline | ✅ | ✅ | ❌ |
-| Generate individual doc | ✅ | ✅ | ❌ |
-| Regenerate document | ✅ | ✅ | ❌ |
-| Cancel generation | ✅ | ✅ | ❌ |
-| Edit project settings | ✅ | ✅ (own) | ❌ |
-| Archive project | ✅ | ❌ | ❌ |
-| Duplicate project | ✅ | ✅ | ❌ |
-| Export | ✅ | ✅ | ✅ |
-| Favorite project | ✅ | ✅ | ✅ |
-| Add comments | ✅ | ✅ | ✅ (future) |
+| Action                   | Owner | Editor   | Viewer      |
+| ------------------------ | ----- | -------- | ----------- |
+| View project + documents | ✅    | ✅       | ✅          |
+| Run full pipeline        | ✅    | ✅       | ❌          |
+| Generate individual doc  | ✅    | ✅       | ❌          |
+| Regenerate document      | ✅    | ✅       | ❌          |
+| Cancel generation        | ✅    | ✅       | ❌          |
+| Edit project settings    | ✅    | ✅ (own) | ❌          |
+| Archive project          | ✅    | ❌       | ❌          |
+| Duplicate project        | ✅    | ✅       | ❌          |
+| Export                   | ✅    | ✅       | ✅          |
+| Favorite project         | ✅    | ✅       | ✅          |
+| Add comments             | ✅    | ✅       | ✅ (future) |
 
 ### 5.9 API Integration
 
@@ -1815,10 +1858,12 @@ Response 200:
 ### 5.10 Database Mapping
 
 **Project model:**
+
 - `id`, `name`, `slug`, `description`, `workspaceId`, `ownerId`, `status` (DRAFT/ACTIVE/COMPLETED/ARCHIVED), `settings` (JSON), `deletedAt`
 - Relations: `workspace`, `owner`, `documents`, `aiConversations`, `exports`
 
 **Document model:**
+
 - `id`, `projectId`, `stepId`, `title`, `type` (MASTER_CONTEXT through ROADMAP), `content` (Text), `status` (DRAFT/GENERATED/REVIEWED/STALE), `version`, `conversationId`, `tokensUsed`, `modelUsed`, `stale`, `staleReason`
 - Unique: `[projectId, stepId]`
 
@@ -1828,37 +1873,37 @@ Response 200:
 
 ### 5.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| No internet | Cached project view. Generation actions disabled with offline warning. |
-| Expired token | Auto-refresh. If fails, save project context to return after re-login. |
-| Deleted project | 404 page: "This project has been archived or deleted" with back navigation |
-| Empty project | All 9 document cards show "Not started". "Run Full Pipeline" prominent CTA. |
-| AI timeout | Generation fails after 120s. Error state with partial content preserved. Retry button. |
-| Concurrent generation | Only one generation per document at a time. "A generation is already running" toast. |
-| Upstream dependency change | Downstream docs marked STALE. "Regenerate suggested" prompt. |
-| Very large document | Content truncated in preview cards (first 200 chars). Full content in editor. |
-| Generation cost warning | For projects exceeding cost threshold, show: "Estimated cost: $0.50. Continue?" |
-| Failed pipeline step | Non-blocking — remaining steps continue. Failed step shows error + retry. |
-| Streaming disconnection | Auto-reconnect with backoff. Preserve received content. Show "Reconnecting..." indicator. |
-| Slug conflicts on rename | 409 error, show inline validation: "This name is already taken" |
+| Case                       | Handling                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| No internet                | Cached project view. Generation actions disabled with offline warning.                    |
+| Expired token              | Auto-refresh. If fails, save project context to return after re-login.                    |
+| Deleted project            | 404 page: "This project has been archived or deleted" with back navigation                |
+| Empty project              | All 9 document cards show "Not started". "Run Full Pipeline" prominent CTA.               |
+| AI timeout                 | Generation fails after 120s. Error state with partial content preserved. Retry button.    |
+| Concurrent generation      | Only one generation per document at a time. "A generation is already running" toast.      |
+| Upstream dependency change | Downstream docs marked STALE. "Regenerate suggested" prompt.                              |
+| Very large document        | Content truncated in preview cards (first 200 chars). Full content in editor.             |
+| Generation cost warning    | For projects exceeding cost threshold, show: "Estimated cost: $0.50. Continue?"           |
+| Failed pipeline step       | Non-blocking — remaining steps continue. Failed step shows error + retry.                 |
+| Streaming disconnection    | Auto-reconnect with backoff. Preserve received content. Show "Reconnecting..." indicator. |
+| Slug conflicts on rename   | 409 error, show inline validation: "This name is already taken"                           |
 
 ### 5.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Page load | Document cards stagger fade in + slide up | 50ms delay each | [0.4, 0, 0.2, 1] |
-| Generation start | Card border pulse indigo → spinner | 300ms | ease |
-| Streaming content | Typewriter effect with cursor blink | 50ms per chunk | linear |
-| Generation complete | Card border flash green → solid. Badge update. | 400ms | ease |
-| Generation fail | Card border flash red. Shake animation. | 400ms | spring |
-| Pipeline progress | Progress bar fill animation | 600ms | [0.4, 0, 0.2, 1] |
-| Document card hover | Scale 1.01 + shadow-lg + bg shift | 150ms | ease |
-| Streaming panel open | Slide in from right + fade | 250ms | [0.4, 0, 0.2, 1] |
-| Cancel generation | Panel slide out right | 200ms | ease-in |
-| Regenerate confirm | Dialog scale 0.95→1 | 200ms | spring |
-| Stale badge appear | Badge fade in + subtle pulse | 300ms | ease |
-| Archive success | Cards collapse + navigate away | 400ms | [0.4, 0, 1, 1] |
+| Element              | Animation                                      | Duration        | Easing           |
+| -------------------- | ---------------------------------------------- | --------------- | ---------------- |
+| Page load            | Document cards stagger fade in + slide up      | 50ms delay each | [0.4, 0, 0.2, 1] |
+| Generation start     | Card border pulse indigo → spinner             | 300ms           | ease             |
+| Streaming content    | Typewriter effect with cursor blink            | 50ms per chunk  | linear           |
+| Generation complete  | Card border flash green → solid. Badge update. | 400ms           | ease             |
+| Generation fail      | Card border flash red. Shake animation.        | 400ms           | spring           |
+| Pipeline progress    | Progress bar fill animation                    | 600ms           | [0.4, 0, 0.2, 1] |
+| Document card hover  | Scale 1.01 + shadow-lg + bg shift              | 150ms           | ease             |
+| Streaming panel open | Slide in from right + fade                     | 250ms           | [0.4, 0, 0.2, 1] |
+| Cancel generation    | Panel slide out right                          | 200ms           | ease-in          |
+| Regenerate confirm   | Dialog scale 0.95→1                            | 200ms           | spring           |
+| Stale badge appear   | Badge fade in + subtle pulse                   | 300ms           | ease             |
+| Archive success      | Cards collapse + navigate away                 | 400ms           | [0.4, 0, 1, 1]   |
 
 ### 5.13 Mobile Experience
 
@@ -1871,42 +1916,42 @@ Response 200:
 
 ### 5.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic HTML | Document cards as `<article>`, pipeline progress as `<progress>` element |
-| Focus order | Project header → pipeline progress → document cards (left→right, top→bottom) |
-| Live regions | `aria-live="polite"` on streaming panel for screen reader announcements |
+| Requirement          | Implementation                                                                   |
+| -------------------- | -------------------------------------------------------------------------------- |
+| Semantic HTML        | Document cards as `<article>`, pipeline progress as `<progress>` element         |
+| Focus order          | Project header → pipeline progress → document cards (left→right, top→bottom)     |
+| Live regions         | `aria-live="polite"` on streaming panel for screen reader announcements          |
 | Status announcements | "Generating Architecture...", "Architecture generation complete" via live region |
-| Keyboard | Tab through document cards. Enter to view. G key for generate. |
-| Color | Status not only indicated by color — text badges + icons as well |
-| Reduced motion | Stream typewriter replaced with instant text. Stagger removed. |
+| Keyboard             | Tab through document cards. Enter to view. G key for generate.                   |
+| Color                | Status not only indicated by color — text badges + icons as well                 |
+| Reduced motion       | Stream typewriter replaced with instant text. Stagger removed.                   |
 
 ### 5.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| Document card virtualization | Not needed (max 9). All rendered. |
-| Streaming via SSE | EventSource with reconnect. Incremental DOM updates (append-only). |
-| Optimistic UI | Favorite toggle, archive, rename all optimistic with rollback |
-| SWR caching | Project data cached 30s. Auto-refresh on window focus. |
-| Memoized cards | `React.memo` on DocumentCard with shallow prop comparison |
-| Suspense boundaries | Each section wrapped in Suspense with skeleton fallback |
-| Generation polling | Fallback polling every 3s if SSE connection drops |
+| Technique                    | Implementation                                                     |
+| ---------------------------- | ------------------------------------------------------------------ |
+| Document card virtualization | Not needed (max 9). All rendered.                                  |
+| Streaming via SSE            | EventSource with reconnect. Incremental DOM updates (append-only). |
+| Optimistic UI                | Favorite toggle, archive, rename all optimistic with rollback      |
+| SWR caching                  | Project data cached 30s. Auto-refresh on window focus.             |
+| Memoized cards               | `React.memo` on DocumentCard with shallow prop comparison          |
+| Suspense boundaries          | Each section wrapped in Suspense with skeleton fallback            |
+| Generation polling           | Fallback polling every 3s if SSE connection drops                  |
 
 ### 5.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
+| Feature                 | Integration Path                                                               |
+| ----------------------- | ------------------------------------------------------------------------------ |
 | Real-time collaboration | Multiple users viewing same project with presence indicators on document cards |
-| Custom pipeline steps | User-defined pipeline beyond the 9 standard steps |
-| Document comparison | Side-by-side diff viewer for version comparison |
-| Batch actions | Select multiple documents for batch regenerate/export/delete |
-| Drag-and-drop reorder | Reorder pipeline steps (where dependency allows) |
-| Kanban view | Alternative project view as Kanban board by status |
-| Timeline view | Gantt-style project timeline with generation history |
-| Templates | Project templates with pre-configured pipeline and settings |
-| Marketplace integration | Install community pipeline steps and document templates |
-| Analytics dashboard | Per-project analytics: tokens, cost, time spent, completion rate |
+| Custom pipeline steps   | User-defined pipeline beyond the 9 standard steps                              |
+| Document comparison     | Side-by-side diff viewer for version comparison                                |
+| Batch actions           | Select multiple documents for batch regenerate/export/delete                   |
+| Drag-and-drop reorder   | Reorder pipeline steps (where dependency allows)                               |
+| Kanban view             | Alternative project view as Kanban board by status                             |
+| Timeline view           | Gantt-style project timeline with generation history                           |
+| Templates               | Project templates with pre-configured pipeline and settings                    |
+| Marketplace integration | Install community pipeline steps and document templates                        |
+| Analytics dashboard     | Per-project analytics: tokens, cost, time spent, completion rate               |
 
 ---
 
@@ -1923,6 +1968,7 @@ Response 200:
 ### 6.2 User Journey
 
 **Entry Points:**
+
 - Project page "AI Chat" button
 - Sidebar "Conversations" link
 - Document page "Ask AI about this document" button
@@ -1930,15 +1976,18 @@ Response 200:
 - Direct URL: `/project/[slug]/chat`
 
 **Previous Page:**
+
 - Project page (primary)
 - Document page (contextual entry)
 
 **Next Pages:**
+
 - Back to project page
 - Document page (if AI suggests specific document edits)
 - Generate from chat: "Apply this to the PRD" → navigate to document
 
 **User Actions:**
+
 1. Send free-form messages to discuss the project
 2. Reference generated documents in conversation
 3. Ask AI to explain, expand, summarize, or critique documents
@@ -1951,6 +2000,7 @@ Response 200:
 10. Switch between conversation threads
 
 **Exit Points:**
+
 - Project page
 - Document page (via "Apply to Document")
 - Back to conversation list
@@ -2018,53 +2068,55 @@ Response 200:
 **Sticky Elements:** Chat header (top of chat area). Chat input (bottom of chat area). Conversation list sidebar (left, independently scrollable).
 
 **Responsive Behavior:**
+
 - **Desktop (≥1024px):** Conversation list sidebar (260px) + chat area side by side
 - **Tablet (768-1023px):** Collapsible conversation list (toggle button). Chat area full width when collapsed.
 - **Mobile (<768px):** Full-screen chat view. Conversation list as back-navigation or bottom sheet.
 
 ### 6.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `ConversationList` | Organism | Sidebar list of past conversations with preview and timestamps |
-| `ConversationItem` | Molecule | Single conversation: title, preview text, timestamp, active indicator |
-| `ChatHeader` | Organism | Current conversation title, model info, context settings, actions |
-| `ChatMessage` | Molecule | Single message bubble with role (user/assistant), content, timestamp |
-| `MessageContent` | Molecule | Rendered Markdown with syntax highlighting, code blocks |
-| `MessageActions` | Molecule | Copy, thumbs up/down, regenerate, apply-to-document buttons |
-| `ChatInput` | Organism | Multi-line input with send button, context indicator, token counter |
-| `Button` (primary/icon) | Atom | Send message button (➤). New conversation (+). |
-| `Button` (ghost) | Atom | Message action buttons: Copy, Like, Dislike, Regenerate |
-| `DropdownMenu` | Molecule | Conversation context menu: Rename, Delete, Export, Clear |
-| `Dialog` | Molecule | Delete conversation confirmation |
-| `Badge` | Atom | Model name badge (GPT-4o, Claude 3.5) |
-| `Spinner` | Atom | AI thinking/streaming indicator |
-| `Skeleton` | Atom | Message loading placeholder |
-| `Tabs` | Molecule | Context selection: "Full Project" / "Architecture Only" / "Custom" |
-| `Toast` | Molecule | "Copied to clipboard", "Applied to document" |
-| `Tooltip` | Atom | Token count breakdown, model info |
+| Component               | Type     | Description                                                           |
+| ----------------------- | -------- | --------------------------------------------------------------------- |
+| `ConversationList`      | Organism | Sidebar list of past conversations with preview and timestamps        |
+| `ConversationItem`      | Molecule | Single conversation: title, preview text, timestamp, active indicator |
+| `ChatHeader`            | Organism | Current conversation title, model info, context settings, actions     |
+| `ChatMessage`           | Molecule | Single message bubble with role (user/assistant), content, timestamp  |
+| `MessageContent`        | Molecule | Rendered Markdown with syntax highlighting, code blocks               |
+| `MessageActions`        | Molecule | Copy, thumbs up/down, regenerate, apply-to-document buttons           |
+| `ChatInput`             | Organism | Multi-line input with send button, context indicator, token counter   |
+| `Button` (primary/icon) | Atom     | Send message button (➤). New conversation (+).                        |
+| `Button` (ghost)        | Atom     | Message action buttons: Copy, Like, Dislike, Regenerate               |
+| `DropdownMenu`          | Molecule | Conversation context menu: Rename, Delete, Export, Clear              |
+| `Dialog`                | Molecule | Delete conversation confirmation                                      |
+| `Badge`                 | Atom     | Model name badge (GPT-4o, Claude 3.5)                                 |
+| `Spinner`               | Atom     | AI thinking/streaming indicator                                       |
+| `Skeleton`              | Atom     | Message loading placeholder                                           |
+| `Tabs`                  | Molecule | Context selection: "Full Project" / "Architecture Only" / "Custom"    |
+| `Toast`                 | Molecule | "Copied to clipboard", "Applied to document"                          |
+| `Tooltip`               | Atom     | Token count breakdown, model info                                     |
 
 ### 6.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Send message | Type + Enter/click Send | POST message, stream AI response |
-| New conversation | Click "+ New" | Create fresh conversation, auto-title from first message |
-| Select conversation | Click conversation item | Load conversation history with messages |
-| Rename conversation | Double-click title / ••• → Rename | Inline edit or dialog |
-| Delete conversation | ••• → Delete | Confirmation dialog → DELETE API call |
-| Copy message | Click copy icon | Copy to clipboard, toast confirmation |
-| Regenerate response | Click regenerate | Re-run last message with same context, replace AI response |
-| Rate response | Click 👍/👎 | Record feedback for model improvement |
-| Apply to document | Click "Apply to Document" | Open document picker → insert AI content into document |
-| Edit message | Click edit icon on user message | Inline edit → resubmit with new text |
-| Clear conversation | ••• → Clear | Remove all messages, keep conversation shell |
-| Scroll to bottom | Auto-scroll on new message/AI response | Smooth scroll, stop if user scrolled up manually |
-| Stop generation | Click stop button (during streaming) | Cancel SSE stream, preserve partial response |
-| Change context | Select context scope | Update system prompt to include specific documents only |
-| Attach document | Click 📎 (future) | Reference specific document section in message |
+| Action              | Trigger                                | Behavior                                                   |
+| ------------------- | -------------------------------------- | ---------------------------------------------------------- |
+| Send message        | Type + Enter/click Send                | POST message, stream AI response                           |
+| New conversation    | Click "+ New"                          | Create fresh conversation, auto-title from first message   |
+| Select conversation | Click conversation item                | Load conversation history with messages                    |
+| Rename conversation | Double-click title / ••• → Rename      | Inline edit or dialog                                      |
+| Delete conversation | ••• → Delete                           | Confirmation dialog → DELETE API call                      |
+| Copy message        | Click copy icon                        | Copy to clipboard, toast confirmation                      |
+| Regenerate response | Click regenerate                       | Re-run last message with same context, replace AI response |
+| Rate response       | Click 👍/👎                            | Record feedback for model improvement                      |
+| Apply to document   | Click "Apply to Document"              | Open document picker → insert AI content into document     |
+| Edit message        | Click edit icon on user message        | Inline edit → resubmit with new text                       |
+| Clear conversation  | ••• → Clear                            | Remove all messages, keep conversation shell               |
+| Scroll to bottom    | Auto-scroll on new message/AI response | Smooth scroll, stop if user scrolled up manually           |
+| Stop generation     | Click stop button (during streaming)   | Cancel SSE stream, preserve partial response               |
+| Change context      | Select context scope                   | Update system prompt to include specific documents only    |
+| Attach document     | Click 📎 (future)                      | Reference specific document section in message             |
 
 **Keyboard Shortcuts:**
+
 - `Enter` — Send message (Shift+Enter for newline)
 - `Esc` — Stop generation / close conversation
 - `⌘K` — Focus chat input
@@ -2073,51 +2125,51 @@ Response 200:
 
 ### 6.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| Multi-turn conversations | Full conversation history sent as context, maintaining coherence across messages |
-| Project context awareness | AI has access to all generated documents and project metadata |
-| Context scoping | User can narrow context to specific documents (e.g., "Only Architecture") |
-| Streaming responses | Token-by-token streaming display with typing indicator |
-| Markdown rendering | AI responses rendered with code blocks, tables, lists, headings |
-| Document referencing | AI can reference specific documents and sections by name |
-| Suggestion application | AI suggestions can be applied directly to documents via dedicated action |
-| Follow-up clarification | AI asks clarifying questions when ambiguous |
-| Technical reasoning | AI explains trade-offs, alternatives, and rationale |
-| Code generation | AI generates example code snippets (for Architecture, API Spec docs) |
-| Diagram descriptions | AI generates text descriptions that can be rendered as diagrams (Mermaid) |
-| Memory across conversations | AI retains awareness of project context across conversation threads |
+| Feature                     | Description                                                                      |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| Multi-turn conversations    | Full conversation history sent as context, maintaining coherence across messages |
+| Project context awareness   | AI has access to all generated documents and project metadata                    |
+| Context scoping             | User can narrow context to specific documents (e.g., "Only Architecture")        |
+| Streaming responses         | Token-by-token streaming display with typing indicator                           |
+| Markdown rendering          | AI responses rendered with code blocks, tables, lists, headings                  |
+| Document referencing        | AI can reference specific documents and sections by name                         |
+| Suggestion application      | AI suggestions can be applied directly to documents via dedicated action         |
+| Follow-up clarification     | AI asks clarifying questions when ambiguous                                      |
+| Technical reasoning         | AI explains trade-offs, alternatives, and rationale                              |
+| Code generation             | AI generates example code snippets (for Architecture, API Spec docs)             |
+| Diagram descriptions        | AI generates text descriptions that can be rendered as diagrams (Mermaid)        |
+| Memory across conversations | AI retains awareness of project context across conversation threads              |
 
 ### 6.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Loading conversations | Skeleton list items with shimmer | Fetch conversation list |
-| Loading messages | Skeleton message bubbles | Fetch conversation messages |
-| Empty (no conversations) | "No conversations yet. Start chatting about your project!" with input | First-time chat |
-| Empty (no messages) | "Ask me anything about your project" prompt suggestions | New conversation |
-| Typing (user) | Input text updates, token counter increments | Client-side |
-| Streaming (AI) | Typing indicator (3 bouncing dots) → streaming text with cursor | SSE stream active |
-| Streaming complete | Full message rendered, actions visible | SSE [DONE] event |
-| Error (send) | "Failed to send message. [Retry]" toast | API error |
-| Error (stream) | Partial content preserved. "Response interrupted. [Retry]" | SSE error |
-| Error (rate limit) | Toast with countdown: "Rate limit. Try again in 25s." | 429 response |
-| Context switching | Brief loading on message area | Re-fetch with new context scope |
-| Offline | "You're offline. Chat is unavailable." banner | Network check |
-| Generation stopped | Partial response shown, "Generation stopped" indicator | User cancelled |
+| State                    | Visual                                                                | Handling                        |
+| ------------------------ | --------------------------------------------------------------------- | ------------------------------- |
+| Loading conversations    | Skeleton list items with shimmer                                      | Fetch conversation list         |
+| Loading messages         | Skeleton message bubbles                                              | Fetch conversation messages     |
+| Empty (no conversations) | "No conversations yet. Start chatting about your project!" with input | First-time chat                 |
+| Empty (no messages)      | "Ask me anything about your project" prompt suggestions               | New conversation                |
+| Typing (user)            | Input text updates, token counter increments                          | Client-side                     |
+| Streaming (AI)           | Typing indicator (3 bouncing dots) → streaming text with cursor       | SSE stream active               |
+| Streaming complete       | Full message rendered, actions visible                                | SSE [DONE] event                |
+| Error (send)             | "Failed to send message. [Retry]" toast                               | API error                       |
+| Error (stream)           | Partial content preserved. "Response interrupted. [Retry]"            | SSE error                       |
+| Error (rate limit)       | Toast with countdown: "Rate limit. Try again in 25s."                 | 429 response                    |
+| Context switching        | Brief loading on message area                                         | Re-fetch with new context scope |
+| Offline                  | "You're offline. Chat is unavailable." banner                         | Network check                   |
+| Generation stopped       | Partial response shown, "Generation stopped" indicator                | User cancelled                  |
 
 ### 6.8 Permissions
 
-| Action | Owner | Editor | Viewer |
-|--------|-------|--------|--------|
-| Create conversations | ✅ | ✅ | ✅ |
-| Send messages | ✅ | ✅ | ✅ |
-| View conversations | ✅ | ✅ | ✅ |
-| Delete own conversations | ✅ | ✅ | ✅ |
-| Delete any conversation | ✅ | ✅ | ❌ |
-| Regenerate responses | ✅ | ✅ | ❌ |
-| Apply AI to documents | ✅ | ✅ | ❌ |
-| Rate responses | ✅ | ✅ | ✅ |
+| Action                   | Owner | Editor | Viewer |
+| ------------------------ | ----- | ------ | ------ |
+| Create conversations     | ✅    | ✅     | ✅     |
+| Send messages            | ✅    | ✅     | ✅     |
+| View conversations       | ✅    | ✅     | ✅     |
+| Delete own conversations | ✅    | ✅     | ✅     |
+| Delete any conversation  | ✅    | ✅     | ❌     |
+| Regenerate responses     | ✅    | ✅     | ❌     |
+| Apply AI to documents    | ✅    | ✅     | ❌     |
+| Rate responses           | ✅    | ✅     | ✅     |
 
 ### 6.9 API Integration
 
@@ -2192,14 +2244,17 @@ Response 200:
 ### 6.10 Database Mapping
 
 **AIConversation model:**
+
 - `id`, `projectId`, `stepId`, `status` (ACTIVE/COMPLETED/FAILED/CANCELLED), `model`, `temperature`, `maxTokens`, `totalInputTokens`, `totalOutputTokens`, `totalCost`, `startedAt`, `completedAt`
 - Relations: `project`, `messages` (Message[]), `generations` (Generation[]), `documents` (Document[])
 
 **Message model:**
+
 - `id`, `conversationId`, `role` (SYSTEM/USER/ASSISTANT), `content` (Text), `tokens`, `sequence`
 - Unique: `[conversationId, sequence]`
 
 **Generation model:**
+
 - `id`, `conversationId`, `model`, `provider` (OPENAI/ANTHROPIC/GOOGLE/OLLAMA), `promptTokens`, `completionTokens`, `totalTokens`, `cost`, `durationMs`, `status` (SUCCESS/FAILED/RETRIED), `errorMessage`
 
 **Indexes:** `projectId + stepId`, `projectId + status` on AIConversation. `conversationId + sequence` on Message.
@@ -2208,33 +2263,33 @@ Response 200:
 
 ### 6.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| No internet | Chat disabled. Cached conversations viewable. "Reconnect to send messages." |
-| AI timeout (120s) | Partial response shown. Error state: "Response took too long. [Retry]" |
+| Case                               | Handling                                                                                              |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| No internet                        | Chat disabled. Cached conversations viewable. "Reconnect to send messages."                           |
+| AI timeout (120s)                  | Partial response shown. Error state: "Response took too long. [Retry]"                                |
 | Very long conversation (100+ msgs) | Summarize older context. Warning: "Context window almost full. Consider starting a new conversation." |
-| Token limit exceeded | Truncate oldest messages. Banner: "Earlier messages summarized to fit context window." |
-| Concurrent sends | Disable send button while AI responding. Queue if needed. |
-| Empty message | Client validation: "Message cannot be empty." Button disabled. |
-| Deleted project | Conversation inaccessible. "This project has been archived." |
-| Streaming disconnect | Auto-reconnect if within 10s. Otherwise show partial + retry. |
-| Model switch mid-conversation | Confirmation: "Switching model may change response style. Continue?" |
-| Harmful content | AI refusal message. Content filtered server-side. |
-| Markdown injection | Sanitized rendering. No HTML execution. |
+| Token limit exceeded               | Truncate oldest messages. Banner: "Earlier messages summarized to fit context window."                |
+| Concurrent sends                   | Disable send button while AI responding. Queue if needed.                                             |
+| Empty message                      | Client validation: "Message cannot be empty." Button disabled.                                        |
+| Deleted project                    | Conversation inaccessible. "This project has been archived."                                          |
+| Streaming disconnect               | Auto-reconnect if within 10s. Otherwise show partial + retry.                                         |
+| Model switch mid-conversation      | Confirmation: "Switching model may change response style. Continue?"                                  |
+| Harmful content                    | AI refusal message. Content filtered server-side.                                                     |
+| Markdown injection                 | Sanitized rendering. No HTML execution.                                                               |
 
 ### 6.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Messages load | Fade in + slide up 4px (staggered 50ms) | 200ms each | [0.4, 0, 0.2, 1] |
-| User message send | Scale 0.95→1 + slide up from input | 200ms | spring |
-| AI thinking | 3 dots bouncing (staggered opacity) | 1.4s cycle | ease-in-out |
-| AI streaming | Cursor blink (alternating opacity) | 1s cycle | steps(2) |
-| Streaming text | Characters appear (typewriter via requestAnimationFrame) | — | linear |
-| Copy feedback | Copy icon → checkmark (150ms) → copy icon (2s) | 150ms/2s | ease |
-| Message actions | Fade in on hover | 150ms | ease |
-| Conversation switch | Crossfade messages | 200ms | ease |
-| Delete conversation | Item slide left + fade out | 200ms | ease-in |
+| Element             | Animation                                                | Duration   | Easing           |
+| ------------------- | -------------------------------------------------------- | ---------- | ---------------- |
+| Messages load       | Fade in + slide up 4px (staggered 50ms)                  | 200ms each | [0.4, 0, 0.2, 1] |
+| User message send   | Scale 0.95→1 + slide up from input                       | 200ms      | spring           |
+| AI thinking         | 3 dots bouncing (staggered opacity)                      | 1.4s cycle | ease-in-out      |
+| AI streaming        | Cursor blink (alternating opacity)                       | 1s cycle   | steps(2)         |
+| Streaming text      | Characters appear (typewriter via requestAnimationFrame) | —          | linear           |
+| Copy feedback       | Copy icon → checkmark (150ms) → copy icon (2s)           | 150ms/2s   | ease             |
+| Message actions     | Fade in on hover                                         | 150ms      | ease             |
+| Conversation switch | Crossfade messages                                       | 200ms      | ease             |
+| Delete conversation | Item slide left + fade out                               | 200ms      | ease-in          |
 
 ### 6.13 Mobile Experience
 
@@ -2247,42 +2302,42 @@ Response 200:
 
 ### 6.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic HTML | Messages as `<article>`, input as `<textarea>` with `<label>`, conversation list as `<nav>` |
-| Live region | `aria-live="polite"` on message area for streaming responses |
-| Focus management | Auto-focus input on conversation load. Focus returns to input after send. |
-| Screen reader | Message role announced ("You said:", "AI responded:"). Streaming announced at intervals. |
-| Keyboard | Tab to input, Enter to send, Shift+Enter for newline, Esc to stop. Arrow keys for conversation nav. |
-| Color contrast | All text in message bubbles meets 4.5:1. Action icons meet 3:1 (large). |
-| Reduced motion | Streaming appears as blocks instead of typewriter. Animations disabled. |
+| Requirement      | Implementation                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| Semantic HTML    | Messages as `<article>`, input as `<textarea>` with `<label>`, conversation list as `<nav>`         |
+| Live region      | `aria-live="polite"` on message area for streaming responses                                        |
+| Focus management | Auto-focus input on conversation load. Focus returns to input after send.                           |
+| Screen reader    | Message role announced ("You said:", "AI responded:"). Streaming announced at intervals.            |
+| Keyboard         | Tab to input, Enter to send, Shift+Enter for newline, Esc to stop. Arrow keys for conversation nav. |
+| Color contrast   | All text in message bubbles meets 4.5:1. Action icons meet 3:1 (large).                             |
+| Reduced motion   | Streaming appears as blocks instead of typewriter. Animations disabled.                             |
 
 ### 6.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
+| Technique              | Implementation                                                                     |
+| ---------------------- | ---------------------------------------------------------------------------------- |
 | Message virtualization | Required for conversations 100+ messages. `react-virtuoso` or `@tanstack/virtual`. |
-| Streaming via SSE | EventSource with chunked rendering at 60fps via requestAnimationFrame |
-| Memoization | `React.memo` on ChatMessage, MessageContent with content hash comparison |
-| Lazy conversation list | Load 20 conversations, "Load more" button or infinite scroll |
-| Optimistic UI | User messages appear instantly. AI response streams. |
-| Markdown rendering | Lazy-loaded `react-markdown` with `react-syntax-highlighter` |
-| Scroll management | `useRef` + `scrollIntoView` for auto-scroll. Detect manual scroll up. |
+| Streaming via SSE      | EventSource with chunked rendering at 60fps via requestAnimationFrame              |
+| Memoization            | `React.memo` on ChatMessage, MessageContent with content hash comparison           |
+| Lazy conversation list | Load 20 conversations, "Load more" button or infinite scroll                       |
+| Optimistic UI          | User messages appear instantly. AI response streams.                               |
+| Markdown rendering     | Lazy-loaded `react-markdown` with `react-syntax-highlighter`                       |
+| Scroll management      | `useRef` + `scrollIntoView` for auto-scroll. Detect manual scroll up.              |
 
 ### 6.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Shared conversations | Share conversation link with team members (read-only/view-only) |
-| Conversation forks | Branch conversation at any message to explore alternatives |
-| Prompt templates | Save conversation structure as reusable template |
-| Multi-model compare | Run same prompt on 2+ models side by side |
-| Diagram rendering | Render Mermaid/PlantUML inline in messages |
-| File attachments | Upload images, PDFs, code files for context |
-| Voice input | Speech-to-text for mobile/web input |
-| Agent actions | AI can trigger document generation, export creation |
-| Conversation export | Export as Markdown, PDF, or shareable link |
-| Semantic search | Search across all conversations for topics, decisions, and insights |
+| Feature              | Integration Path                                                    |
+| -------------------- | ------------------------------------------------------------------- |
+| Shared conversations | Share conversation link with team members (read-only/view-only)     |
+| Conversation forks   | Branch conversation at any message to explore alternatives          |
+| Prompt templates     | Save conversation structure as reusable template                    |
+| Multi-model compare  | Run same prompt on 2+ models side by side                           |
+| Diagram rendering    | Render Mermaid/PlantUML inline in messages                          |
+| File attachments     | Upload images, PDFs, code files for context                         |
+| Voice input          | Speech-to-text for mobile/web input                                 |
+| Agent actions        | AI can trigger document generation, export creation                 |
+| Conversation export  | Export as Markdown, PDF, or shareable link                          |
+| Semantic search      | Search across all conversations for topics, decisions, and insights |
 
 ---
 
@@ -2299,6 +2354,7 @@ Response 200:
 ### 7.2 User Journey
 
 **Entry Points:**
+
 - Project page → Click "Generate" on PRD document card
 - Dashboard → Quick Action "Generate PRD"
 - Project page → "Run Full Pipeline" (PRD is step 2)
@@ -2306,16 +2362,19 @@ Response 200:
 - AI Chat → "Generate a PRD from this discussion"
 
 **Previous Page:**
+
 - Project page
 - Dashboard
 - AI Chat
 
 **Next Pages:**
+
 - PRD Editor (post-generation) — `/project/[slug]/documents/prd/edit`
 - Project page (back/after generation)
 - Next pipeline step (SRS) — prompted after PRD completion
 
 **User Actions:**
+
 1. Fill structured input form with project details
 2. Use AI to expand brief descriptions into detailed sections
 3. Select PRD template/style
@@ -2432,48 +2491,49 @@ Response 200:
 
 ### 7.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `PageHeader` | Organism | Step title, description, project context |
-| `Input` | Atom | Text fields for product name, audience, platform, etc. |
-| `Textarea` | Atom | Multi-line fields for elevator pitch, problem statement |
-| `DynamicList` | Molecule | Key features list with add/remove/reorder |
-| `Button` (primary) | Atom | "Generate PRD", "Edit PRD", "Continue to SRS" |
-| `Button` (secondary) | Atom | "Save Draft & Exit", "Refine with AI" |
-| `Button` (ghost) | Atom | "Add Feature", remove feature |
-| `Select` | Atom | Template, model, length, tone dropdowns |
-| `Checkbox` | Atom | Section include/exclude toggles |
-| `AIExpandPanel` | Molecule | Free-text input + "✨ Expand" button with AI form-filling |
-| `StreamingPanel` | Organism | Left: generation steps progress + "thinking" indicators. Right: live preview. |
-| `GenerationProgress` | Molecule | Step-by-step progress list with checkmarks and spinners |
-| `MarkdownPreview` | Molecule | Rendered PRD content with syntax highlighting |
-| `CompletionBanner` | Molecule | Success state with action buttons |
-| `Skeleton` | Atom | Form field and preview loading placeholders |
-| `Spinner` | Atom | Generation in progress |
-| `Tooltip` | Atom | Field hints and template descriptions |
-| `Toast` | Molecule | Generation complete, save confirmation |
+| Component            | Type     | Description                                                                   |
+| -------------------- | -------- | ----------------------------------------------------------------------------- |
+| `PageHeader`         | Organism | Step title, description, project context                                      |
+| `Input`              | Atom     | Text fields for product name, audience, platform, etc.                        |
+| `Textarea`           | Atom     | Multi-line fields for elevator pitch, problem statement                       |
+| `DynamicList`        | Molecule | Key features list with add/remove/reorder                                     |
+| `Button` (primary)   | Atom     | "Generate PRD", "Edit PRD", "Continue to SRS"                                 |
+| `Button` (secondary) | Atom     | "Save Draft & Exit", "Refine with AI"                                         |
+| `Button` (ghost)     | Atom     | "Add Feature", remove feature                                                 |
+| `Select`             | Atom     | Template, model, length, tone dropdowns                                       |
+| `Checkbox`           | Atom     | Section include/exclude toggles                                               |
+| `AIExpandPanel`      | Molecule | Free-text input + "✨ Expand" button with AI form-filling                     |
+| `StreamingPanel`     | Organism | Left: generation steps progress + "thinking" indicators. Right: live preview. |
+| `GenerationProgress` | Molecule | Step-by-step progress list with checkmarks and spinners                       |
+| `MarkdownPreview`    | Molecule | Rendered PRD content with syntax highlighting                                 |
+| `CompletionBanner`   | Molecule | Success state with action buttons                                             |
+| `Skeleton`           | Atom     | Form field and preview loading placeholders                                   |
+| `Spinner`            | Atom     | Generation in progress                                                        |
+| `Tooltip`            | Atom     | Field hints and template descriptions                                         |
+| `Toast`              | Molecule | Generation complete, save confirmation                                        |
 
 ### 7.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Fill form | User types in fields | Auto-save draft to localStorage on blur (every 3s) |
-| AI Expand form | Type rough idea + click "✨ Expand" | Send to AI, parse response, fill form fields |
-| Add feature | Click "+ Add Feature" | Append new input row, focus it |
-| Remove feature | Click ✕ on feature row | Remove with collapse animation |
-| Reorder features | Drag handle (future) | Reorder list |
-| Select template | Dropdown change | Update preview of template structure |
-| Toggle section | Checkbox toggle | Add/remove section from PRD outline |
-| Generate PRD | Click "Generate PRD" | Validate form → POST generation → show streaming phase |
-| Cancel generation | Click "Cancel" | Stop generation, preserve form, show confirmation |
-| Save draft | Click "Save Draft & Exit" | POST draft document, navigate back to project |
-| Review streaming | Phase 2 auto-scrolls | Real-time Markdown rendering as tokens arrive |
-| Accept PRD | Implicit on completion | Document auto-saved as v1 with GENERATED status |
-| Edit PRD | Click "Edit PRD" | Navigate to full editor with PRD loaded |
-| Refine with AI | Click "Refine" | Open chat panel with PRD context for iterative feedback |
-| Continue to SRS | Click "Continue to SRS" | Navigate to SRS generator with project context |
+| Action            | Trigger                             | Behavior                                                |
+| ----------------- | ----------------------------------- | ------------------------------------------------------- |
+| Fill form         | User types in fields                | Auto-save draft to localStorage on blur (every 3s)      |
+| AI Expand form    | Type rough idea + click "✨ Expand" | Send to AI, parse response, fill form fields            |
+| Add feature       | Click "+ Add Feature"               | Append new input row, focus it                          |
+| Remove feature    | Click ✕ on feature row              | Remove with collapse animation                          |
+| Reorder features  | Drag handle (future)                | Reorder list                                            |
+| Select template   | Dropdown change                     | Update preview of template structure                    |
+| Toggle section    | Checkbox toggle                     | Add/remove section from PRD outline                     |
+| Generate PRD      | Click "Generate PRD"                | Validate form → POST generation → show streaming phase  |
+| Cancel generation | Click "Cancel"                      | Stop generation, preserve form, show confirmation       |
+| Save draft        | Click "Save Draft & Exit"           | POST draft document, navigate back to project           |
+| Review streaming  | Phase 2 auto-scrolls                | Real-time Markdown rendering as tokens arrive           |
+| Accept PRD        | Implicit on completion              | Document auto-saved as v1 with GENERATED status         |
+| Edit PRD          | Click "Edit PRD"                    | Navigate to full editor with PRD loaded                 |
+| Refine with AI    | Click "Refine"                      | Open chat panel with PRD context for iterative feedback |
+| Continue to SRS   | Click "Continue to SRS"             | Navigate to SRS generator with project context          |
 
 **Keyboard Shortcuts:**
+
 - `⌘Enter` — Generate PRD (from form)
 - `⌘S` — Save draft
 - `Tab` / `Shift+Tab` — Navigate between form fields
@@ -2482,46 +2542,46 @@ Response 200:
 
 ### 7.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| AI Form Expansion | User provides brief unstructured description → AI fills structured form fields |
-| PRD Generation | Structured form data + template → comprehensive PRD via LLM |
+| Feature                   | Description                                                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| AI Form Expansion         | User provides brief unstructured description → AI fills structured form fields                    |
+| PRD Generation            | Structured form data + template → comprehensive PRD via LLM                                       |
 | Template-aware generation | Different PRD templates (Standard, Agile/User Story, IEEE 830, Lean) produce different structures |
-| Section customization | User selects which sections to include, AI generates accordingly |
-| Context injection | Master Context document + project settings injected into generation prompt |
-| Tone/style adaptation | Professional, Collaborative, Executive, Technical — prompt adjusted accordingly |
-| Length control | Concise (2-3 pages), Standard (5-7 pages), Comprehensive (10-15 pages) |
-| Streaming generation | Token-by-token live preview with phase indicators |
-| Smart defaults | AI infers reasonable defaults for unfilled optional fields |
-| Validation suggestions | AI checks for inconsistencies or missing critical sections before generation |
+| Section customization     | User selects which sections to include, AI generates accordingly                                  |
+| Context injection         | Master Context document + project settings injected into generation prompt                        |
+| Tone/style adaptation     | Professional, Collaborative, Executive, Technical — prompt adjusted accordingly                   |
+| Length control            | Concise (2-3 pages), Standard (5-7 pages), Comprehensive (10-15 pages)                            |
+| Streaming generation      | Token-by-token live preview with phase indicators                                                 |
+| Smart defaults            | AI infers reasonable defaults for unfilled optional fields                                        |
+| Validation suggestions    | AI checks for inconsistencies or missing critical sections before generation                      |
 
 ### 7.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Form empty | Clean form with placeholder text and hints | Initial state |
-| Form partially filled | Values in fields, draft indicator "Draft saved 30s ago" | localStorage auto-save |
-| Form validating | Field borders highlight errors, submit disabled | On "Generate" click |
-| AI Expanding form | AI Expand section shows spinner, form fields fill one by one | Streaming AI response |
-| Generating (Phase 2) | Left panel: progress. Right panel: live preview streaming. | SSE streaming |
-| Generation complete | Completion banner with actions. Preview shows full PRD. | SSE [DONE] |
-| Generation failed | Error overlay: "Generation failed. [Retry] [Save Partial] [Back]" | AI timeout/error |
-| Saving | Button spinner, fields disabled | API POST document |
-| Saved | Green toast "Draft saved" or "PRD generated successfully" | Document upserted |
-| Offline | Form editable. "Offline — changes saved locally." Banner. | No API calls possible |
-| Prerequisite missing | Warning: "Master Context not generated. PRD may lack project context." | Detect missing upstream |
+| State                 | Visual                                                                 | Handling                |
+| --------------------- | ---------------------------------------------------------------------- | ----------------------- |
+| Form empty            | Clean form with placeholder text and hints                             | Initial state           |
+| Form partially filled | Values in fields, draft indicator "Draft saved 30s ago"                | localStorage auto-save  |
+| Form validating       | Field borders highlight errors, submit disabled                        | On "Generate" click     |
+| AI Expanding form     | AI Expand section shows spinner, form fields fill one by one           | Streaming AI response   |
+| Generating (Phase 2)  | Left panel: progress. Right panel: live preview streaming.             | SSE streaming           |
+| Generation complete   | Completion banner with actions. Preview shows full PRD.                | SSE [DONE]              |
+| Generation failed     | Error overlay: "Generation failed. [Retry] [Save Partial] [Back]"      | AI timeout/error        |
+| Saving                | Button spinner, fields disabled                                        | API POST document       |
+| Saved                 | Green toast "Draft saved" or "PRD generated successfully"              | Document upserted       |
+| Offline               | Form editable. "Offline — changes saved locally." Banner.              | No API calls possible   |
+| Prerequisite missing  | Warning: "Master Context not generated. PRD may lack project context." | Detect missing upstream |
 
 ### 7.8 Permissions
 
-| Action | Owner | Editor | Viewer |
-|--------|-------|--------|--------|
-| Generate PRD | ✅ | ✅ | ❌ |
-| AI Expand form | ✅ | ✅ | ❌ |
-| Save draft | ✅ | ✅ | ❌ |
-| Refine with AI | ✅ | ✅ | ❌ |
-| Edit generated PRD | ✅ | ✅ | ❌ |
-| View PRD | ✅ | ✅ | ✅ |
-| Export PRD | ✅ | ✅ | ✅ |
+| Action             | Owner | Editor | Viewer |
+| ------------------ | ----- | ------ | ------ |
+| Generate PRD       | ✅    | ✅     | ❌     |
+| AI Expand form     | ✅    | ✅     | ❌     |
+| Save draft         | ✅    | ✅     | ❌     |
+| Refine with AI     | ✅    | ✅     | ❌     |
+| Edit generated PRD | ✅    | ✅     | ❌     |
+| View PRD           | ✅    | ✅     | ✅     |
+| Export PRD         | ✅    | ✅     | ✅     |
 
 ### 7.9 API Integration
 
@@ -2583,6 +2643,7 @@ POST /api/v1/pipeline/generate
 ### 7.10 Database Mapping
 
 **Document model (for PRD):**
+
 - `stepId`: `"prd"`
 - `type`: `PRD`
 - `content`: Generated PRD in Markdown
@@ -2597,33 +2658,33 @@ POST /api/v1/pipeline/generate
 
 ### 7.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| Form validation failure | Highlight invalid fields in red with error messages. "Please fill in required fields marked with *" |
-| Empty form submission | Don't allow. Required fields marked. Button remains disabled. |
-| AI Expand returns incomplete | Show warning: "AI filled 6 of 8 fields. Please review and complete manually." |
-| Generation timeout (120s+) | Partial output preserved. Error state with retry. |
-| Generated content too short | Warning: "Generated PRD is shorter than expected. Consider refining your inputs or regenerating." |
-| Duplicate generation | Confirm: "A PRD already exists. Regenerating will create a new version. Continue?" |
-| Very long user input | Truncate with warning: "Input exceeds context limit. Consider being more concise." |
-| Missing Master Context | Warning banner with suggestion to generate Master Context first |
-| Browser tab close during generation | `beforeunload` warning: "Generation in progress. Leaving will cancel." |
-| Form draft recovery | On page load, check localStorage. Offer to restore: "You have an unsaved draft. Restore?" |
+| Case                                | Handling                                                                                            |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Form validation failure             | Highlight invalid fields in red with error messages. "Please fill in required fields marked with *" |
+| Empty form submission               | Don't allow. Required fields marked. Button remains disabled.                                       |
+| AI Expand returns incomplete        | Show warning: "AI filled 6 of 8 fields. Please review and complete manually."                       |
+| Generation timeout (120s+)          | Partial output preserved. Error state with retry.                                                   |
+| Generated content too short         | Warning: "Generated PRD is shorter than expected. Consider refining your inputs or regenerating."   |
+| Duplicate generation                | Confirm: "A PRD already exists. Regenerating will create a new version. Continue?"                  |
+| Very long user input                | Truncate with warning: "Input exceeds context limit. Consider being more concise."                  |
+| Missing Master Context              | Warning banner with suggestion to generate Master Context first                                     |
+| Browser tab close during generation | `beforeunload` warning: "Generation in progress. Leaving will cancel."                              |
+| Form draft recovery                 | On page load, check localStorage. Offer to restore: "You have an unsaved draft. Restore?"           |
 
 ### 7.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Form field focus | Border color transition + subtle scale | 150ms | ease |
-| AI Expand result | Fields fill in sequence with fade (100ms stagger) | 200ms each | ease |
-| Feature add | New row slide down + fade in | 200ms | [0.4, 0, 0.2, 1] |
-| Feature remove | Row collapse + fade out | 200ms | ease-in |
-| Generate button | Scale pulse on hover | 150ms | ease |
-| Phase transition | Form fade out → split panel fade in | 400ms | [0.4, 0, 0.2, 1] |
-| Generation progress | Step items checkmark + color transition | 300ms each | ease |
-| Live preview | Typewriter text rendering | Per-token | linear |
-| Completion banner | Slide down + fade in + icon bounce | 500ms | spring |
-| Error state | Red border pulse + content shake | 400ms | spring |
+| Element             | Animation                                         | Duration   | Easing           |
+| ------------------- | ------------------------------------------------- | ---------- | ---------------- |
+| Form field focus    | Border color transition + subtle scale            | 150ms      | ease             |
+| AI Expand result    | Fields fill in sequence with fade (100ms stagger) | 200ms each | ease             |
+| Feature add         | New row slide down + fade in                      | 200ms      | [0.4, 0, 0.2, 1] |
+| Feature remove      | Row collapse + fade out                           | 200ms      | ease-in          |
+| Generate button     | Scale pulse on hover                              | 150ms      | ease             |
+| Phase transition    | Form fade out → split panel fade in               | 400ms      | [0.4, 0, 0.2, 1] |
+| Generation progress | Step items checkmark + color transition           | 300ms each | ease             |
+| Live preview        | Typewriter text rendering                         | Per-token  | linear           |
+| Completion banner   | Slide down + fade in + icon bounce                | 500ms      | spring           |
+| Error state         | Red border pulse + content shake                  | 400ms      | spring           |
 
 ### 7.13 Mobile Experience
 
@@ -2636,41 +2697,41 @@ POST /api/v1/pipeline/generate
 
 ### 7.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic form | Proper `<form>`, `<label>` associations, `<fieldset>` for grouped fields |
-| Required indicators | Asterisk + `aria-required="true"` on required fields |
-| Error announcements | `aria-describedby` on invalid fields. `role="alert"` on form-level errors. |
-| Streaming content | `aria-live="polite"` region for generated content announcements |
-| Keyboard | Full keyboard navigation through all form fields. Tab between features list items. |
-| Screen reader | Form structure announced. Dynamic list count announced. Generation progress read. |
-| Color | Error states use both color (red border) and icon + text for identification |
+| Requirement         | Implementation                                                                     |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| Semantic form       | Proper `<form>`, `<label>` associations, `<fieldset>` for grouped fields           |
+| Required indicators | Asterisk + `aria-required="true"` on required fields                               |
+| Error announcements | `aria-describedby` on invalid fields. `role="alert"` on form-level errors.         |
+| Streaming content   | `aria-live="polite"` region for generated content announcements                    |
+| Keyboard            | Full keyboard navigation through all form fields. Tab between features list items. |
+| Screen reader       | Form structure announced. Dynamic list count announced. Generation progress read.  |
+| Color               | Error states use both color (red border) and icon + text for identification        |
 
 ### 7.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| Form draft auto-save | Debounced (3s) localStorage writes. JSON serialized form state. |
-| AI Expand | Single API call, non-streaming (structured output). Loading spinner. |
-| PRD Generation | SSE streaming for live preview. Incremental DOM via requestAnimationFrame. |
-| Markdown rendering | Lazy-loaded `react-markdown`. Partial rendering during stream. |
-| Template options | Static data, no API call needed. |
-| Code splitting | Phase 2 components lazy-loaded, only mounted when generation starts. |
+| Technique            | Implementation                                                             |
+| -------------------- | -------------------------------------------------------------------------- |
+| Form draft auto-save | Debounced (3s) localStorage writes. JSON serialized form state.            |
+| AI Expand            | Single API call, non-streaming (structured output). Loading spinner.       |
+| PRD Generation       | SSE streaming for live preview. Incremental DOM via requestAnimationFrame. |
+| Markdown rendering   | Lazy-loaded `react-markdown`. Partial rendering during stream.             |
+| Template options     | Static data, no API call needed.                                           |
+| Code splitting       | Phase 2 components lazy-loaded, only mounted when generation starts.       |
 
 ### 7.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Custom templates | User-created and saved PRD templates |
-| Template marketplace | Community-shared PRD templates |
-| Multi-language generation | Generate PRD in languages other than English |
-| Comparative analysis | Generate PRD for competitor products for comparison |
-| AI review | Pre-generation review of form inputs with suggestions |
+| Feature                       | Integration Path                                                     |
+| ----------------------------- | -------------------------------------------------------------------- |
+| Custom templates              | User-created and saved PRD templates                                 |
+| Template marketplace          | Community-shared PRD templates                                       |
+| Multi-language generation     | Generate PRD in languages other than English                         |
+| Comparative analysis          | Generate PRD for competitor products for comparison                  |
+| AI review                     | Pre-generation review of form inputs with suggestions                |
 | Section-by-section generation | Generate and approve each section individually before final assembly |
-| Product canvas mode | Visual canvas for brainstorming before structured input |
-| Voice-to-form | Dictate product description, AI fills structured form |
-| Team collaboration | Multiple users can contribute to form simultaneously |
-| Historical PRD library | Browse past PRDs as reference for new projects |
+| Product canvas mode           | Visual canvas for brainstorming before structured input              |
+| Voice-to-form                 | Dictate product description, AI fills structured form                |
+| Team collaboration            | Multiple users can contribute to form simultaneously                 |
+| Historical PRD library        | Browse past PRDs as reference for new projects                       |
 
 ---
 
@@ -2687,6 +2748,7 @@ POST /api/v1/pipeline/generate
 ### 8.2 User Journey
 
 **Entry Points:**
+
 - Project page → Click "Edit" on document card
 - PRD Generator → "Edit PRD" button
 - Version History → "Restore this version in editor"
@@ -2694,18 +2756,21 @@ POST /api/v1/pipeline/generate
 - AI Chat → "Apply to Document" action
 
 **Previous Page:**
+
 - Project page
 - PRD Generator
 - Version History
 - AI Chat
 
 **Next Pages:**
+
 - Version History (from editor toolbar)
 - Export page
 - Project page (back)
 - Next pipeline step document
 
 **User Actions:**
+
 1. View rendered Markdown document
 2. Toggle between Preview, Edit (source), and Split view modes
 3. Edit Markdown source directly
@@ -2797,53 +2862,54 @@ POST /api/v1/pipeline/generate
 
 ### 8.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `DocumentNav` | Organism | Left sidebar: project documents list + document outline (headings) |
-| `DocumentItem` | Molecule | Single document in nav with type icon, name, status, current indicator |
-| `OutlineItem` | Molecule | Clickable heading from document for quick navigation |
-| `EditorToolbar` | Organism | View mode toggle, save status, document info, action menu |
-| `Button` (segmented) | Molecule | Preview / Edit / Split view mode selector |
-| `Button` (icon) | Atom | Back, undo, redo, AI assist toggle |
-| `MarkdownEditor` | Organism | Textarea/CodeMirror for raw Markdown editing |
-| `MarkdownPreview` | Organism | Rendered Markdown view with syntax highlighting |
-| `SplitPane` | Organism | Resizable split view (editor | preview) |
-| `AIEditingBar` | Organism | Contextual bar appearing on text selection with AI actions |
-| `AIAssistantPanel` | Organism | Right sidebar for AI editing: text input, preset buttons, suggestion preview |
-| `AISuggestionCard` | Molecule | AI-generated text suggestion with Apply/Dismiss/Retry buttons |
-| `StatusBar` | Molecule | Bottom bar: version, word count, save status, read time |
-| `DropdownMenu` | Molecule | Toolbar ••• menu: Versions, Export, Document settings, Delete |
-| `Skeleton` | Atom | Document content loading placeholder |
-| `Spinner` | Atom | AI suggestion loading |
-| `Tooltip` | Atom | Button descriptions, keyboard shortcuts |
-| `Toast` | Molecule | "Changes saved", "AI suggestion applied" |
+| Component            | Type     | Description                                                                  |
+| -------------------- | -------- | ---------------------------------------------------------------------------- |
+| `DocumentNav`        | Organism | Left sidebar: project documents list + document outline (headings)           |
+| `DocumentItem`       | Molecule | Single document in nav with type icon, name, status, current indicator       |
+| `OutlineItem`        | Molecule | Clickable heading from document for quick navigation                         |
+| `EditorToolbar`      | Organism | View mode toggle, save status, document info, action menu                    |
+| `Button` (segmented) | Molecule | Preview / Edit / Split view mode selector                                    |
+| `Button` (icon)      | Atom     | Back, undo, redo, AI assist toggle                                           |
+| `MarkdownEditor`     | Organism | Textarea/CodeMirror for raw Markdown editing                                 |
+| `MarkdownPreview`    | Organism | Rendered Markdown view with syntax highlighting                              |
+| `SplitPane`          | Organism | Resizable split view (editor                                                 | preview) |
+| `AIEditingBar`       | Organism | Contextual bar appearing on text selection with AI actions                   |
+| `AIAssistantPanel`   | Organism | Right sidebar for AI editing: text input, preset buttons, suggestion preview |
+| `AISuggestionCard`   | Molecule | AI-generated text suggestion with Apply/Dismiss/Retry buttons                |
+| `StatusBar`          | Molecule | Bottom bar: version, word count, save status, read time                      |
+| `DropdownMenu`       | Molecule | Toolbar ••• menu: Versions, Export, Document settings, Delete                |
+| `Skeleton`           | Atom     | Document content loading placeholder                                         |
+| `Spinner`            | Atom     | AI suggestion loading                                                        |
+| `Tooltip`            | Atom     | Button descriptions, keyboard shortcuts                                      |
+| `Toast`              | Molecule | "Changes saved", "AI suggestion applied"                                     |
 
 ### 8.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Switch view mode | Click Preview/Edit/Split | Animate transition between modes |
-| Edit Markdown | Type in editor | Real-time preview update (debounced 100ms) |
-| Select text | Mouse drag / Shift+Arrow | Show AI Editing Bar with contextual actions |
-| AI Improve selected | Click "✨ Improve" | Send selection to AI, show suggestion in panel |
-| AI Rewrite | Click "📝 Rewrite" | Regenerate selected text with same meaning |
-| AI Expand | Click "📏 Expand" | Add more detail and depth to selected section |
-| AI Summarize | Click "📋 Summarize" | Condense selection to key points |
-| AI Explain | Click "💡 Explain" | Generate plain-language explanation |
-| Apply suggestion | Click "✓ Apply" | Replace selection with AI text, add to undo history |
-| Dismiss suggestion | Click "✕ Dismiss" | Hide suggestion, retain original text |
-| Try again | Click "🔄 Try Again" | Re-run AI with same prompt for different output |
-| Custom AI prompt | Type instruction + Enter | Free-form AI editing instruction |
-| Full doc AI action | Toolbar ••• → AI actions | Improve clarity, Fix grammar, Adjust tone for entire doc |
-| Undo | `⌘Z` / toolbar button | Revert last edit |
-| Redo | `⌘⇧Z` / toolbar button | Re-apply undone edit |
-| Save | `⌘S` / auto-save | POST updated document content, increment version if significant |
-| Navigate to heading | Click outline item | Scroll to heading in preview |
-| Navigate to document | Click doc in nav sidebar | Load different document in editor |
-| Resize split pane | Drag divider | Adjust editor/preview ratio, persist preference |
-| Insert section | Click "+" between sections | AI-assisted: "What section would you like to add?" |
+| Action               | Trigger                    | Behavior                                                        |
+| -------------------- | -------------------------- | --------------------------------------------------------------- |
+| Switch view mode     | Click Preview/Edit/Split   | Animate transition between modes                                |
+| Edit Markdown        | Type in editor             | Real-time preview update (debounced 100ms)                      |
+| Select text          | Mouse drag / Shift+Arrow   | Show AI Editing Bar with contextual actions                     |
+| AI Improve selected  | Click "✨ Improve"         | Send selection to AI, show suggestion in panel                  |
+| AI Rewrite           | Click "📝 Rewrite"         | Regenerate selected text with same meaning                      |
+| AI Expand            | Click "📏 Expand"          | Add more detail and depth to selected section                   |
+| AI Summarize         | Click "📋 Summarize"       | Condense selection to key points                                |
+| AI Explain           | Click "💡 Explain"         | Generate plain-language explanation                             |
+| Apply suggestion     | Click "✓ Apply"            | Replace selection with AI text, add to undo history             |
+| Dismiss suggestion   | Click "✕ Dismiss"          | Hide suggestion, retain original text                           |
+| Try again            | Click "🔄 Try Again"       | Re-run AI with same prompt for different output                 |
+| Custom AI prompt     | Type instruction + Enter   | Free-form AI editing instruction                                |
+| Full doc AI action   | Toolbar ••• → AI actions   | Improve clarity, Fix grammar, Adjust tone for entire doc        |
+| Undo                 | `⌘Z` / toolbar button      | Revert last edit                                                |
+| Redo                 | `⌘⇧Z` / toolbar button     | Re-apply undone edit                                            |
+| Save                 | `⌘S` / auto-save           | POST updated document content, increment version if significant |
+| Navigate to heading  | Click outline item         | Scroll to heading in preview                                    |
+| Navigate to document | Click doc in nav sidebar   | Load different document in editor                               |
+| Resize split pane    | Drag divider               | Adjust editor/preview ratio, persist preference                 |
+| Insert section       | Click "+" between sections | AI-assisted: "What section would you like to add?"              |
 
 **Keyboard Shortcuts:**
+
 - `⌘S` — Save
 - `⌘Z` — Undo
 - `⌘⇧Z` — Redo
@@ -2858,51 +2924,51 @@ POST /api/v1/pipeline/generate
 
 ### 8.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| Text improvement | AI rewrites selected text for clarity, conciseness, or professionalism |
-| Tone adjustment | Change tone: Professional, Casual, Technical, Executive, Enthusiastic |
-| Grammar fix | AI corrects grammar, spelling, and punctuation |
-| Content expansion | AI adds depth, examples, and elaboration to selected text |
-| Content summarization | AI condenses verbose sections to key points |
-| Plain-language explanation | AI explains technical content in simpler terms |
-| Section generation | AI writes entirely new sections based on user instruction |
-| Context-aware editing | AI considers full document context when editing a selection |
-| Consistency check | AI reviews document for internal consistency and contradictions |
-| Style guide enforcement | AI adjusts document to match selected style guide (future) |
-| Multi-turn refinement | Iterative editing with conversation-like back-and-forth |
-| Version-aware suggestions | AI respects document version history, avoids repeating removed content |
+| Feature                    | Description                                                            |
+| -------------------------- | ---------------------------------------------------------------------- |
+| Text improvement           | AI rewrites selected text for clarity, conciseness, or professionalism |
+| Tone adjustment            | Change tone: Professional, Casual, Technical, Executive, Enthusiastic  |
+| Grammar fix                | AI corrects grammar, spelling, and punctuation                         |
+| Content expansion          | AI adds depth, examples, and elaboration to selected text              |
+| Content summarization      | AI condenses verbose sections to key points                            |
+| Plain-language explanation | AI explains technical content in simpler terms                         |
+| Section generation         | AI writes entirely new sections based on user instruction              |
+| Context-aware editing      | AI considers full document context when editing a selection            |
+| Consistency check          | AI reviews document for internal consistency and contradictions        |
+| Style guide enforcement    | AI adjusts document to match selected style guide (future)             |
+| Multi-turn refinement      | Iterative editing with conversation-like back-and-forth                |
+| Version-aware suggestions  | AI respects document version history, avoids repeating removed content |
 
 ### 8.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Loading document | Skeleton content with document outline skeleton | Fetch document data |
-| Edit mode | Raw Markdown in editor, cursor visible | Editable textarea |
-| Preview mode | Rendered Markdown, no cursor, read-only appearance | Read-only view |
-| Split mode | Side-by-side, synchronized scroll | Two panels with linked scroll |
-| Text selected | AI Editing Bar appears with animation | Selected text tracked |
-| AI processing | AI Assistant panel shows spinner, suggestion card pulsing | API call in progress |
-| AI suggestion ready | Suggestion card with Apply/Dismiss/Retry | Response received |
-| Suggestion applied | Text replaced with highlight animation, then fades to normal | Optimistic update |
-| Unsaved changes | Status bar shows "● Unsaved changes", `⌘S` prompt | Dirty state tracker |
-| Auto-saving | Status bar: "Saving..." spinner | Debounced save, 2s after last edit |
-| Saved | Status bar: "✓ Saved" (fades after 3s) | Save confirmed |
-| Save error | Status bar: "⚠ Save failed. [Retry]" red text | API error |
-| Read-only (viewer) | Edit mode disabled, AI bar hidden, "View only" badge | Permission check |
-| Document not found | 404: "This document has been deleted" | API 404 response |
-| Conflict | "This document was modified by another user. [Reload] [Overwrite]" | Version check |
+| State               | Visual                                                             | Handling                           |
+| ------------------- | ------------------------------------------------------------------ | ---------------------------------- |
+| Loading document    | Skeleton content with document outline skeleton                    | Fetch document data                |
+| Edit mode           | Raw Markdown in editor, cursor visible                             | Editable textarea                  |
+| Preview mode        | Rendered Markdown, no cursor, read-only appearance                 | Read-only view                     |
+| Split mode          | Side-by-side, synchronized scroll                                  | Two panels with linked scroll      |
+| Text selected       | AI Editing Bar appears with animation                              | Selected text tracked              |
+| AI processing       | AI Assistant panel shows spinner, suggestion card pulsing          | API call in progress               |
+| AI suggestion ready | Suggestion card with Apply/Dismiss/Retry                           | Response received                  |
+| Suggestion applied  | Text replaced with highlight animation, then fades to normal       | Optimistic update                  |
+| Unsaved changes     | Status bar shows "● Unsaved changes", `⌘S` prompt                  | Dirty state tracker                |
+| Auto-saving         | Status bar: "Saving..." spinner                                    | Debounced save, 2s after last edit |
+| Saved               | Status bar: "✓ Saved" (fades after 3s)                             | Save confirmed                     |
+| Save error          | Status bar: "⚠ Save failed. [Retry]" red text                      | API error                          |
+| Read-only (viewer)  | Edit mode disabled, AI bar hidden, "View only" badge               | Permission check                   |
+| Document not found  | 404: "This document has been deleted"                              | API 404 response                   |
+| Conflict            | "This document was modified by another user. [Reload] [Overwrite]" | Version check                      |
 
 ### 8.8 Permissions
 
-| Action | Owner | Editor | Viewer |
-|--------|-------|--------|--------|
-| View document | ✅ | ✅ | ✅ |
-| Edit document | ✅ | ✅ | ❌ |
-| Use AI editing | ✅ | ✅ | ❌ |
-| Save changes | ✅ | ✅ | ❌ |
-| Undo/redo | ✅ | ✅ | ❌ |
-| View version history | ✅ | ✅ | ✅ |
+| Action               | Owner | Editor | Viewer |
+| -------------------- | ----- | ------ | ------ |
+| View document        | ✅    | ✅     | ✅     |
+| Edit document        | ✅    | ✅     | ❌     |
+| Use AI editing       | ✅    | ✅     | ❌     |
+| Save changes         | ✅    | ✅     | ❌     |
+| Undo/redo            | ✅    | ✅     | ❌     |
+| View version history | ✅    | ✅     | ✅     |
 
 ### 8.9 API Integration
 
@@ -2970,6 +3036,7 @@ Response 200:
 ### 8.10 Database Mapping
 
 **Document model:**
+
 - `content` — Full Markdown text (Text field)
 - `version` — Auto-incremented on significant saves (>50 char changes)
 - `status` — Updated to REVIEWED when manually edited after generation
@@ -2977,6 +3044,7 @@ Response 200:
 - `stale` — Set to true if not manually reviewed within 7 days
 
 **DocumentVersion model:**
+
 - Created on every significant save
 - `versionNumber`, `content` (immutable snapshot), `modelUsed`, `tokensUsed`
 
@@ -2984,33 +3052,33 @@ Response 200:
 
 ### 8.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| Very large document (50K+ words) | Virtualize editor. Warn: "Large documents may have slower editing performance." |
-| AI timeout on edit | "AI edit took too long. [Retry with shorter selection] [Cancel]" |
-| Empty document | "This document is empty. [Generate content] [Write manually]" |
-| Concurrent edits by another user | Version conflict dialog: "This document was modified. [Reload] [Overwrite]" |
-| Lost internet during edit | Queue changes locally. "Offline — 3 changes queued. Will sync when reconnected." |
-| Browser crash recovery | Auto-save to localStorage every 30s. Offer recovery on next load. |
-| Paste with formatting | Strip rich text. Paste as plain text. Warn if pasting >10K chars. |
-| Undo stack overflow | Limit undo history to 100 actions. "Undo history limit reached." |
-| Selection across sections | AI bar adapts: "Selection spans 3 sections. Apply action to entire selection?" |
-| Empty AI suggestion | Show "AI returned empty result. Try a different prompt." with retry button. |
+| Case                             | Handling                                                                         |
+| -------------------------------- | -------------------------------------------------------------------------------- |
+| Very large document (50K+ words) | Virtualize editor. Warn: "Large documents may have slower editing performance."  |
+| AI timeout on edit               | "AI edit took too long. [Retry with shorter selection] [Cancel]"                 |
+| Empty document                   | "This document is empty. [Generate content] [Write manually]"                    |
+| Concurrent edits by another user | Version conflict dialog: "This document was modified. [Reload] [Overwrite]"      |
+| Lost internet during edit        | Queue changes locally. "Offline — 3 changes queued. Will sync when reconnected." |
+| Browser crash recovery           | Auto-save to localStorage every 30s. Offer recovery on next load.                |
+| Paste with formatting            | Strip rich text. Paste as plain text. Warn if pasting >10K chars.                |
+| Undo stack overflow              | Limit undo history to 100 actions. "Undo history limit reached."                 |
+| Selection across sections        | AI bar adapts: "Selection spans 3 sections. Apply action to entire selection?"   |
+| Empty AI suggestion              | Show "AI returned empty result. Try a different prompt." with retry button.      |
 
 ### 8.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| View mode switch | Editor/preview crossfade or split animation | 250ms | [0.4, 0, 0.2, 1] |
-| AI bar appear | Slide up + fade in from selection bottom | 200ms | spring |
-| AI bar dismiss | Fade out + slide down | 150ms | ease-in |
-| Suggestion card | Scale 0.98→1 + fade in | 250ms | spring |
-| Text replace | Highlight flash yellow → fade to normal | 600ms | ease |
-| Outline scroll | Smooth scroll to heading (native `scroll-behavior: smooth`) | — | — |
-| Split resize | Real-time drag, no animation | — | — |
-| Save indicator | "✓ Saved" fade in, hold 2s, fade out | 500ms/2s/500ms | ease |
-| Unsaved dot | Pulsing red dot (opacity 1→0.5→1) | 2s cycle | ease |
-| Document switch | Content fade out → skeleton → new content fade in | 300ms | [0.4, 0, 0.2, 1] |
+| Element          | Animation                                                   | Duration       | Easing           |
+| ---------------- | ----------------------------------------------------------- | -------------- | ---------------- |
+| View mode switch | Editor/preview crossfade or split animation                 | 250ms          | [0.4, 0, 0.2, 1] |
+| AI bar appear    | Slide up + fade in from selection bottom                    | 200ms          | spring           |
+| AI bar dismiss   | Fade out + slide down                                       | 150ms          | ease-in          |
+| Suggestion card  | Scale 0.98→1 + fade in                                      | 250ms          | spring           |
+| Text replace     | Highlight flash yellow → fade to normal                     | 600ms          | ease             |
+| Outline scroll   | Smooth scroll to heading (native `scroll-behavior: smooth`) | —              | —                |
+| Split resize     | Real-time drag, no animation                                | —              | —                |
+| Save indicator   | "✓ Saved" fade in, hold 2s, fade out                        | 500ms/2s/500ms | ease             |
+| Unsaved dot      | Pulsing red dot (opacity 1→0.5→1)                           | 2s cycle       | ease             |
+| Document switch  | Content fade out → skeleton → new content fade in           | 300ms          | [0.4, 0, 0.2, 1] |
 
 ### 8.13 Mobile Experience
 
@@ -3024,42 +3092,42 @@ Response 200:
 
 ### 8.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic HTML | `<article>` for document. `<textarea>` with label for editor. Proper heading hierarchy. |
-| Keyboard editing | Full keyboard navigation. Tab enters/exits editor. All AI actions keyboard-accessible. |
+| Requirement      | Implementation                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Semantic HTML    | `<article>` for document. `<textarea>` with label for editor. Proper heading hierarchy.   |
+| Keyboard editing | Full keyboard navigation. Tab enters/exits editor. All AI actions keyboard-accessible.    |
 | Focus management | Focus returns to editor after AI suggestion applied. Focus trapped in AI panel when open. |
-| ARIA live | AI suggestions announced via `aria-live="polite"`. Save status announced. |
-| Screen reader | Document structure (headings, lists, tables) accessible. AI bar actions described. |
-| Color contrast | Editor text ≥4.5:1. AI bar meets contrast requirements. |
-| Reduced motion | Highlight flash replaced with static change. Transitions disabled. |
+| ARIA live        | AI suggestions announced via `aria-live="polite"`. Save status announced.                 |
+| Screen reader    | Document structure (headings, lists, tables) accessible. AI bar actions described.        |
+| Color contrast   | Editor text ≥4.5:1. AI bar meets contrast requirements.                                   |
+| Reduced motion   | Highlight flash replaced with static change. Transitions disabled.                        |
 
 ### 8.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
+| Technique               | Implementation                                                            |
+| ----------------------- | ------------------------------------------------------------------------- |
 | Document virtualization | CodeMirror 6 for large documents (>10K lines). Virtual scroll in preview. |
-| Debounced preview | 100ms debounce on Markdown re-render during editing |
-| AI edit debounce | Minimum 500ms between AI edit requests |
-| Memoization | `React.memo` on preview with content hash comparison. Outline memoized. |
-| Auto-save debounce | 2s after last keystroke. Batch multiple rapid changes. |
-| Lazy loading | CodeMirror/editor core lazy-loaded. AI panel lazy-loaded on first open. |
-| localStorage backup | Periodic (30s) backup to localStorage for crash recovery |
+| Debounced preview       | 100ms debounce on Markdown re-render during editing                       |
+| AI edit debounce        | Minimum 500ms between AI edit requests                                    |
+| Memoization             | `React.memo` on preview with content hash comparison. Outline memoized.   |
+| Auto-save debounce      | 2s after last keystroke. Batch multiple rapid changes.                    |
+| Lazy loading            | CodeMirror/editor core lazy-loaded. AI panel lazy-loaded on first open.   |
+| localStorage backup     | Periodic (30s) backup to localStorage for crash recovery                  |
 
 ### 8.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Real-time collaboration | CRDT-based (Yjs) collaborative editing with presence cursors |
-| Comments & suggestions | Comment threads anchored to text ranges. Suggestion mode (track changes). |
-| Rich text mode | WYSIWYG editor as alternative to Markdown (TipTap/ProseMirror) |
-| Diagram editor | Embedded Mermaid/Excalidraw editor for visual diagrams |
-| Custom keybindings | User-configurable keyboard shortcuts |
-| Vim mode | Vim keybindings option for power users |
-| Spell check | Browser-native + custom technical dictionary |
-| Multi-document tabs | Open multiple documents as editor tabs |
-| Side-by-side diff | Compare any two versions within the editor |
-| Plugin system | Editor extensions: word count goals, reading time estimates, complexity analysis |
+| Feature                 | Integration Path                                                                 |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| Real-time collaboration | CRDT-based (Yjs) collaborative editing with presence cursors                     |
+| Comments & suggestions  | Comment threads anchored to text ranges. Suggestion mode (track changes).        |
+| Rich text mode          | WYSIWYG editor as alternative to Markdown (TipTap/ProseMirror)                   |
+| Diagram editor          | Embedded Mermaid/Excalidraw editor for visual diagrams                           |
+| Custom keybindings      | User-configurable keyboard shortcuts                                             |
+| Vim mode                | Vim keybindings option for power users                                           |
+| Spell check             | Browser-native + custom technical dictionary                                     |
+| Multi-document tabs     | Open multiple documents as editor tabs                                           |
+| Side-by-side diff       | Compare any two versions within the editor                                       |
+| Plugin system           | Editor extensions: word count goals, reading time estimates, complexity analysis |
 
 ---
 
@@ -3076,6 +3144,7 @@ Response 200:
 ### 9.2 User Journey
 
 **Entry Points:**
+
 - Project page → Document card ••• → "Versions"
 - Editor toolbar → "Version History" button / ••• menu
 - Editor status bar → Version badge click
@@ -3083,16 +3152,19 @@ Response 200:
 - Direct URL: `/project/[slug]/documents/prd/versions`
 
 **Previous Page:**
+
 - Project page
 - Editor
 - Dashboard (AI Activity)
 
 **Next Pages:**
+
 - Editor (restore version)
 - Project page (back)
 - Export page (export specific version)
 
 **User Actions:**
+
 1. Browse version timeline — chronological list of all versions
 2. View version details — metadata (date, author, tokens, model, change description)
 3. Preview version — read-only render of version content
@@ -3170,49 +3242,51 @@ Response 200:
 **Sticky Elements:** Header with document context. Version timeline independently scrollable.
 
 **Responsive Behavior:**
+
 - **Desktop (≥1024px):** Split panel — timeline left (360px), detail right
 - **Tablet (768-1023px):** Timeline full width, detail as expandable panel or navigate-to
 - **Mobile (<768px):** Single column. Timeline as list. Tap to view version detail on new screen or bottom sheet.
 
 ### 9.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `PageHeader` | Organism | Document title, version count, back navigation |
-| `VersionTimeline` | Organism | Vertical timeline with version nodes, connected by lines |
-| `VersionNode` | Molecule | Single version: dot/indicator, metadata, actions, active state |
-| `Badge` | Atom | Version type: "Current", "AI Generated", "Manual Edit", "Restored" |
-| `Button` (primary) | Atom | "Restore this version", "Open in Editor" |
-| `Button` (secondary) | Atom | "Preview", "Compare" |
-| `Button` (ghost) | Atom | Tag version, delete version |
-| `DiffView` | Organism | Side-by-side or unified diff view with syntax highlighting |
-| `MonacoDiffEditor` / `react-diff-viewer` | Molecule | Line-by-line diff with additions (green), deletions (red), unchanged (neutral) |
-| `AIChangeSummary` | Molecule | AI-generated natural language summary of what changed between versions |
-| `MarkdownPreview` | Molecule | Read-only rendered Markdown for version preview |
-| `VersionMetadata` | Molecule | Date, author, model, tokens, cost, change description |
-| `Dialog` | Molecule | Restore confirmation: "Restoring v3 will replace the current version. This creates a new version (v5)." |
-| `Skeleton` | Atom | Timeline loading, diff loading |
-| `Spinner` | Atom | Diff computation loading |
-| `Tooltip` | Atom | Token/cost breakdown on hover |
-| `Toast` | Molecule | "Version v3 restored as v5", "Comparison loaded" |
+| Component                                | Type     | Description                                                                                             |
+| ---------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `PageHeader`                             | Organism | Document title, version count, back navigation                                                          |
+| `VersionTimeline`                        | Organism | Vertical timeline with version nodes, connected by lines                                                |
+| `VersionNode`                            | Molecule | Single version: dot/indicator, metadata, actions, active state                                          |
+| `Badge`                                  | Atom     | Version type: "Current", "AI Generated", "Manual Edit", "Restored"                                      |
+| `Button` (primary)                       | Atom     | "Restore this version", "Open in Editor"                                                                |
+| `Button` (secondary)                     | Atom     | "Preview", "Compare"                                                                                    |
+| `Button` (ghost)                         | Atom     | Tag version, delete version                                                                             |
+| `DiffView`                               | Organism | Side-by-side or unified diff view with syntax highlighting                                              |
+| `MonacoDiffEditor` / `react-diff-viewer` | Molecule | Line-by-line diff with additions (green), deletions (red), unchanged (neutral)                          |
+| `AIChangeSummary`                        | Molecule | AI-generated natural language summary of what changed between versions                                  |
+| `MarkdownPreview`                        | Molecule | Read-only rendered Markdown for version preview                                                         |
+| `VersionMetadata`                        | Molecule | Date, author, model, tokens, cost, change description                                                   |
+| `Dialog`                                 | Molecule | Restore confirmation: "Restoring v3 will replace the current version. This creates a new version (v5)." |
+| `Skeleton`                               | Atom     | Timeline loading, diff loading                                                                          |
+| `Spinner`                                | Atom     | Diff computation loading                                                                                |
+| `Tooltip`                                | Atom     | Token/cost breakdown on hover                                                                           |
+| `Toast`                                  | Molecule | "Version v3 restored as v5", "Comparison loaded"                                                        |
 
 ### 9.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| View version list | Navigate to page | Fetch all versions for document, render timeline |
-| Select version | Click version node | Highlight node, load version content in detail panel |
-| Preview version | Click "Preview" | Render Markdown in read-only mode in detail panel |
-| Compare versions | Select two nodes (checkboxes) + "Compare" | Fetch both versions, render diff view |
-| AI change summary | Auto-on compare | Generate natural language summary of changes |
-| Restore version | Click "Restore" → Confirm dialog | Create new version with old content, mark as current |
-| Tag version | Click "Add tag" | Inline input for custom label (e.g., "v1.0", "Client Approved") |
-| Open in editor | Click "Open in Editor" | Navigate to editor with selected version content (read-only then prompt to edit) |
-| Name version | ••• → "Name this version" | Add human-readable name to version metadata |
-| Delete version | ••• → "Delete" (admin only) | Soft delete version (preserves audit trail) |
-| Export version | ••• → "Export this version" | Open export dialog with version pre-selected |
+| Action            | Trigger                                   | Behavior                                                                         |
+| ----------------- | ----------------------------------------- | -------------------------------------------------------------------------------- |
+| View version list | Navigate to page                          | Fetch all versions for document, render timeline                                 |
+| Select version    | Click version node                        | Highlight node, load version content in detail panel                             |
+| Preview version   | Click "Preview"                           | Render Markdown in read-only mode in detail panel                                |
+| Compare versions  | Select two nodes (checkboxes) + "Compare" | Fetch both versions, render diff view                                            |
+| AI change summary | Auto-on compare                           | Generate natural language summary of changes                                     |
+| Restore version   | Click "Restore" → Confirm dialog          | Create new version with old content, mark as current                             |
+| Tag version       | Click "Add tag"                           | Inline input for custom label (e.g., "v1.0", "Client Approved")                  |
+| Open in editor    | Click "Open in Editor"                    | Navigate to editor with selected version content (read-only then prompt to edit) |
+| Name version      | ••• → "Name this version"                 | Add human-readable name to version metadata                                      |
+| Delete version    | ••• → "Delete" (admin only)               | Soft delete version (preserves audit trail)                                      |
+| Export version    | ••• → "Export this version"               | Open export dialog with version pre-selected                                     |
 
 **Keyboard Shortcuts:**
+
 - `J` / `K` — Navigate up/down version list
 - `Enter` — Preview selected version
 - `C` — Compare selected versions
@@ -3222,41 +3296,41 @@ Response 200:
 
 ### 9.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| AI change summary | Natural language description of what changed between any two versions |
-| Diff annotation | AI highlights significant vs cosmetic changes |
-| Version insights | AI identifies patterns: "Most changes focus on the security requirements section" |
-| Restoration recommendations | AI suggests: "v2 of the Architecture document aligns better with your current PRD" |
-| Change categorization | AI categorizes changes: Content addition, Clarification, Correction, Restructuring |
-| Impact analysis | "Restoring v3 will reintroduce the monolithic architecture recommendation removed in v4" |
+| Feature                     | Description                                                                              |
+| --------------------------- | ---------------------------------------------------------------------------------------- |
+| AI change summary           | Natural language description of what changed between any two versions                    |
+| Diff annotation             | AI highlights significant vs cosmetic changes                                            |
+| Version insights            | AI identifies patterns: "Most changes focus on the security requirements section"        |
+| Restoration recommendations | AI suggests: "v2 of the Architecture document aligns better with your current PRD"       |
+| Change categorization       | AI categorizes changes: Content addition, Clarification, Correction, Restructuring       |
+| Impact analysis             | "Restoring v3 will reintroduce the monolithic architecture recommendation removed in v4" |
 
 ### 9.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Loading versions | Skeleton timeline with 4-5 placeholder nodes | Fetch document + versions |
-| Empty (single version) | Single v1 node. "This is the first and only version." | No history to show |
-| Version selected | Node highlighted. Detail panel shows preview. | Selected state on node |
-| Comparing | Two nodes highlighted. Diff view loading. | Dual selection |
-| Diff loading | Skeleton in detail panel. "Computing differences..." | Fetch both versions |
-| Diff ready | Color-coded diff with summary | Side-by-side or unified |
-| Restoring | Dialog open. "Restoring..." spinner on confirm. | POST new version |
-| Restored | Timeline updates: new v5 (Current). Previous "current" badge moves. Toast. | Version created |
-| Error (fetch) | "Failed to load version history. [Retry]" | API error |
-| Error (diff) | "Could not compute diff. [Retry]" | Diff computation error |
+| State                  | Visual                                                                     | Handling                  |
+| ---------------------- | -------------------------------------------------------------------------- | ------------------------- |
+| Loading versions       | Skeleton timeline with 4-5 placeholder nodes                               | Fetch document + versions |
+| Empty (single version) | Single v1 node. "This is the first and only version."                      | No history to show        |
+| Version selected       | Node highlighted. Detail panel shows preview.                              | Selected state on node    |
+| Comparing              | Two nodes highlighted. Diff view loading.                                  | Dual selection            |
+| Diff loading           | Skeleton in detail panel. "Computing differences..."                       | Fetch both versions       |
+| Diff ready             | Color-coded diff with summary                                              | Side-by-side or unified   |
+| Restoring              | Dialog open. "Restoring..." spinner on confirm.                            | POST new version          |
+| Restored               | Timeline updates: new v5 (Current). Previous "current" badge moves. Toast. | Version created           |
+| Error (fetch)          | "Failed to load version history. [Retry]"                                  | API error                 |
+| Error (diff)           | "Could not compute diff. [Retry]"                                          | Diff computation error    |
 
 ### 9.8 Permissions
 
-| Action | Owner | Editor | Viewer |
-|--------|-------|--------|--------|
-| View version history | ✅ | ✅ | ✅ |
-| Preview versions | ✅ | ✅ | ✅ |
-| Compare versions | ✅ | ✅ | ✅ |
-| Restore version | ✅ | ✅ | ❌ |
-| Tag/name versions | ✅ | ✅ | ❌ |
-| Delete versions | ✅ | ❌ | ❌ |
-| Export versions | ✅ | ✅ | ✅ |
+| Action               | Owner | Editor | Viewer |
+| -------------------- | ----- | ------ | ------ |
+| View version history | ✅    | ✅     | ✅     |
+| Preview versions     | ✅    | ✅     | ✅     |
+| Compare versions     | ✅    | ✅     | ✅     |
+| Restore version      | ✅    | ✅     | ❌     |
+| Tag/name versions    | ✅    | ✅     | ❌     |
+| Delete versions      | ✅    | ❌     | ❌     |
+| Export versions      | ✅    | ✅     | ✅     |
 
 ### 9.9 API Integration
 
@@ -3341,11 +3415,13 @@ Response 200:
 ### 9.10 Database Mapping
 
 **DocumentVersion model:**
+
 - `id`, `documentId`, `versionNumber`, `content` (Text — immutable snapshot), `modelUsed`, `tokensUsed`, `createdAt`
 - Unique: `[documentId, versionNumber]`
 - Index: `documentId`
 
 **Document model (current version):**
+
 - `version` — Current version number (matches latest DocumentVersion)
 - `content` — Current content (synced with latest version)
 
@@ -3353,30 +3429,30 @@ Response 200:
 
 ### 9.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| Single version only | Timeline shows one node. "This is the initial version. No history to compare." |
-| Very large diff (50K+ words) | Paginate diff. "Showing first 500 changes. [Load more]" |
-| Many versions (100+) | Virtualize timeline. Group by month/year. "Show all 127 versions" toggle. |
-| Deleted document | Versions still accessible (soft delete). "Document archived. Versions preserved." |
-| Restore creates identical content | Detect no-change: "Selected version is identical to current. No restore needed." |
-| AI summary failure | Fallback: show raw diff statistics (lines added/removed) |
-| Concurrent restore | Lock document during restore. "Another operation is in progress." |
-| Compare identical versions | Show "These versions are identical" message |
-| Version from deleted user | Show "Unknown user" for author. Content preserved. |
+| Case                              | Handling                                                                          |
+| --------------------------------- | --------------------------------------------------------------------------------- |
+| Single version only               | Timeline shows one node. "This is the initial version. No history to compare."    |
+| Very large diff (50K+ words)      | Paginate diff. "Showing first 500 changes. [Load more]"                           |
+| Many versions (100+)              | Virtualize timeline. Group by month/year. "Show all 127 versions" toggle.         |
+| Deleted document                  | Versions still accessible (soft delete). "Document archived. Versions preserved." |
+| Restore creates identical content | Detect no-change: "Selected version is identical to current. No restore needed."  |
+| AI summary failure                | Fallback: show raw diff statistics (lines added/removed)                          |
+| Concurrent restore                | Lock document during restore. "Another operation is in progress."                 |
+| Compare identical versions        | Show "These versions are identical" message                                       |
+| Version from deleted user         | Show "Unknown user" for author. Content preserved.                                |
 
 ### 9.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Timeline load | Nodes stagger fade in from left (50ms each) | 300ms total | [0.4, 0, 0.2, 1] |
-| Version select | Node scale 1→1.02 + highlight border | 150ms | ease |
-| Diff view | Slide in + fade in detail panel | 300ms | [0.4, 0, 0.2, 1] |
-| Restore confirm | Dialog scale 0.95→1 | 200ms | spring |
-| Restore success | Timeline animation: new node drops from top | 400ms | spring |
-| Current badge move | Badge slides from old to new node | 300ms | [0.4, 0, 0.2, 1] |
-| Compare mode | Two nodes connect with animated line | 400ms | ease |
-| AI summary | Text fades in line by line (100ms stagger) | 300ms total | ease |
+| Element            | Animation                                   | Duration    | Easing           |
+| ------------------ | ------------------------------------------- | ----------- | ---------------- |
+| Timeline load      | Nodes stagger fade in from left (50ms each) | 300ms total | [0.4, 0, 0.2, 1] |
+| Version select     | Node scale 1→1.02 + highlight border        | 150ms       | ease             |
+| Diff view          | Slide in + fade in detail panel             | 300ms       | [0.4, 0, 0.2, 1] |
+| Restore confirm    | Dialog scale 0.95→1                         | 200ms       | spring           |
+| Restore success    | Timeline animation: new node drops from top | 400ms       | spring           |
+| Current badge move | Badge slides from old to new node           | 300ms       | [0.4, 0, 0.2, 1] |
+| Compare mode       | Two nodes connect with animated line        | 400ms       | ease             |
+| AI summary         | Text fades in line by line (100ms stagger)  | 300ms total | ease             |
 
 ### 9.13 Mobile Experience
 
@@ -3389,40 +3465,40 @@ Response 200:
 
 ### 9.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic structure | Timeline as `<ol>` with `<li>` nodes. Detail as `<article>`. Diff with proper markup. |
-| Focus management | Arrow keys navigate timeline. Focus moves to detail panel on selection. |
-| ARIA | `aria-selected` on active version node. `aria-label` on diff additions/deletions. |
-| Screen reader | Version metadata announced. Diff changes announced with line numbers. AI summary as live region. |
-| Color | Diff colors (green/red) also indicated with +/- prefixes. Confirmed 4.5:1 for text. |
-| Keyboard | Full keyboard navigation between nodes, actions, and diff view. |
+| Requirement        | Implementation                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------ |
+| Semantic structure | Timeline as `<ol>` with `<li>` nodes. Detail as `<article>`. Diff with proper markup.            |
+| Focus management   | Arrow keys navigate timeline. Focus moves to detail panel on selection.                          |
+| ARIA               | `aria-selected` on active version node. `aria-label` on diff additions/deletions.                |
+| Screen reader      | Version metadata announced. Diff changes announced with line numbers. AI summary as live region. |
+| Color              | Diff colors (green/red) also indicated with +/- prefixes. Confirmed 4.5:1 for text.              |
+| Keyboard           | Full keyboard navigation between nodes, actions, and diff view.                                  |
 
 ### 9.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| Timeline virtualization | Required for 100+ versions. `@tanstack/virtual` or custom. |
-| Diff lazy loading | Fetch and compute diff only when comparing. Not on initial load. |
+| Technique               | Implementation                                                    |
+| ----------------------- | ----------------------------------------------------------------- |
+| Timeline virtualization | Required for 100+ versions. `@tanstack/virtual` or custom.        |
+| Diff lazy loading       | Fetch and compute diff only when comparing. Not on initial load.  |
 | Version content caching | Cache version contents client-side for toggling between previews. |
-| AI summary caching | Cache summaries per version pair. Reuse on revisit. |
-| Memoization | `React.memo` on VersionNode, DiffView. |
-| Pagination | Load last 20 versions initially. "Load older versions" button. |
+| AI summary caching      | Cache summaries per version pair. Reuse on revisit.               |
+| Memoization             | `React.memo` on VersionNode, DiffView.                            |
+| Pagination              | Load last 20 versions initially. "Load older versions" button.    |
 
 ### 9.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Branching | Create named branches from versions for parallel exploration |
-| Merge tool | Merge changes from different branches with conflict resolution |
-| Blame view | Line-by-line attribution showing which version/author introduced each line |
-| Visual diff | Side-by-side rendered Markdown diff (not just source) |
-| Version policies | Auto-delete versions older than X days (retention policy) |
-| Signed versions | Digital signatures for compliance (e.g., "Approved for production") |
-| Export diff | Export comparison as PDF with change highlights |
-| Activity feed integration | Version events appear in project/workspace activity feeds |
-| Webhook triggers | Version events trigger webhooks for CI/CD integration |
-| Batch operations | Delete/purge/export multiple versions at once |
+| Feature                   | Integration Path                                                           |
+| ------------------------- | -------------------------------------------------------------------------- |
+| Branching                 | Create named branches from versions for parallel exploration               |
+| Merge tool                | Merge changes from different branches with conflict resolution             |
+| Blame view                | Line-by-line attribution showing which version/author introduced each line |
+| Visual diff               | Side-by-side rendered Markdown diff (not just source)                      |
+| Version policies          | Auto-delete versions older than X days (retention policy)                  |
+| Signed versions           | Digital signatures for compliance (e.g., "Approved for production")        |
+| Export diff               | Export comparison as PDF with change highlights                            |
+| Activity feed integration | Version events appear in project/workspace activity feeds                  |
+| Webhook triggers          | Version events trigger webhooks for CI/CD integration                      |
+| Batch operations          | Delete/purge/export multiple versions at once                              |
 
 ---
 
@@ -3439,6 +3515,7 @@ Response 200:
 ### 10.2 User Journey
 
 **Entry Points:**
+
 - Project page → "Export" button
 - Document card → ••• → "Export"
 - Editor → ••• → "Export"
@@ -3447,16 +3524,19 @@ Response 200:
 - Direct URL: `/project/[slug]/export`
 
 **Previous Page:**
+
 - Project page
 - Editor
 - Version History
 - Any document page
 
 **Next Pages:**
+
 - Download success → Back to project page
 - External: downloaded file opens in user's system
 
 **User Actions:**
+
 1. Select which documents to export (single, multiple, all)
 2. Choose export format (PDF, Markdown, HTML, DOCX)
 3. Configure export options (page size, include TOC, include metadata, branding)
@@ -3532,6 +3612,7 @@ Response 200:
 └──────────────────────────────────────────────────────────────────┘
 
 ```
+
 #### 10.3b Export Processing View
 
 ```
@@ -3579,87 +3660,88 @@ Response 200:
 
 ### 10.4 UI Components
 
-| Component | Type | Description |
-|-----------|------|-------------|
-| `PageHeader` | Organism | Title, project context, back navigation |
-| `DocumentSelector` | Organism | Checklist of project documents with status indicators |
-| `Checkbox` | Atom | Per-document selection toggle |
-| `RadioGroup` | Molecule | Format selection (PDF, Markdown, HTML, DOCX) |
-| `Select` | Atom | Page size dropdown (A4, Letter, Legal) |
-| `Switch` / `Checkbox` | Atom | Option toggles (TOC, metadata, branding, etc.) |
-| `Button` (primary) | Atom | "Export Suite", "Download" |
-| `Button` (secondary) | Atom | "Copy Link", "Export Another", "Back to Project" |
-| `ProgressBar` | Molecule | Export generation progress with percentage |
-| `ExportProgress` | Organism | Step-by-step processing indicators |
-| `PreviewCard` | Molecule | Document preview with estimated page count |
-| `ExportHistory` | Organism | List of past exports with format, date, size, download |
-| `ExportHistoryItem` | Molecule | Single past export entry |
-| `Skeleton` | Atom | History loading, preview loading |
-| `Spinner` | Atom | Processing indicator |
-| `Badge` | Atom | Format type, export status |
-| `Tooltip` | Atom | Option descriptions, "Why PDF?" explainer |
-| `Toast` | Molecule | "Export started", "Export ready", "Export failed" |
-| `Dialog` | Molecule | Large export warning (>50 pages), branding upsell (Pro feature) |
+| Component             | Type     | Description                                                     |
+| --------------------- | -------- | --------------------------------------------------------------- |
+| `PageHeader`          | Organism | Title, project context, back navigation                         |
+| `DocumentSelector`    | Organism | Checklist of project documents with status indicators           |
+| `Checkbox`            | Atom     | Per-document selection toggle                                   |
+| `RadioGroup`          | Molecule | Format selection (PDF, Markdown, HTML, DOCX)                    |
+| `Select`              | Atom     | Page size dropdown (A4, Letter, Legal)                          |
+| `Switch` / `Checkbox` | Atom     | Option toggles (TOC, metadata, branding, etc.)                  |
+| `Button` (primary)    | Atom     | "Export Suite", "Download"                                      |
+| `Button` (secondary)  | Atom     | "Copy Link", "Export Another", "Back to Project"                |
+| `ProgressBar`         | Molecule | Export generation progress with percentage                      |
+| `ExportProgress`      | Organism | Step-by-step processing indicators                              |
+| `PreviewCard`         | Molecule | Document preview with estimated page count                      |
+| `ExportHistory`       | Organism | List of past exports with format, date, size, download          |
+| `ExportHistoryItem`   | Molecule | Single past export entry                                        |
+| `Skeleton`            | Atom     | History loading, preview loading                                |
+| `Spinner`             | Atom     | Processing indicator                                            |
+| `Badge`               | Atom     | Format type, export status                                      |
+| `Tooltip`             | Atom     | Option descriptions, "Why PDF?" explainer                       |
+| `Toast`               | Molecule | "Export started", "Export ready", "Export failed"               |
+| `Dialog`              | Molecule | Large export warning (>50 pages), branding upsell (Pro feature) |
 
 ### 10.5 Functional Requirements
 
-| Action | Trigger | Behavior |
-|--------|---------|----------|
-| Select documents | Toggle checkboxes | Update preview card with estimated page count and file size |
-| Select all | Click "Select All" | Toggle all documents on/off |
-| Choose format | Click radio button | Update options panel (format-specific options appear) |
-| Configure options | Toggle switches/dropdowns | Update preview |
-| Export suite | Click "Export Suite" | Validate selections, start export processing |
-| Track progress | Auto-update during processing | Progress bar + step indicators animate |
-| Cancel export | Click "Cancel" during processing | Abort export, discard partial file |
-| Download | Click "Download" on complete | Trigger file download from URL |
-| Copy link | Click "Copy Link" | Copy shareable download URL to clipboard |
-| Re-download | Click "DL" in history | Download previously generated export |
-| Delete export | ••• on history item | Remove export record and file (30-day retention) |
-| Change page size | Select new size | Update preview with page estimate recalculation |
+| Action            | Trigger                          | Behavior                                                    |
+| ----------------- | -------------------------------- | ----------------------------------------------------------- |
+| Select documents  | Toggle checkboxes                | Update preview card with estimated page count and file size |
+| Select all        | Click "Select All"               | Toggle all documents on/off                                 |
+| Choose format     | Click radio button               | Update options panel (format-specific options appear)       |
+| Configure options | Toggle switches/dropdowns        | Update preview                                              |
+| Export suite      | Click "Export Suite"             | Validate selections, start export processing                |
+| Track progress    | Auto-update during processing    | Progress bar + step indicators animate                      |
+| Cancel export     | Click "Cancel" during processing | Abort export, discard partial file                          |
+| Download          | Click "Download" on complete     | Trigger file download from URL                              |
+| Copy link         | Click "Copy Link"                | Copy shareable download URL to clipboard                    |
+| Re-download       | Click "DL" in history            | Download previously generated export                        |
+| Delete export     | ••• on history item              | Remove export record and file (30-day retention)            |
+| Change page size  | Select new size                  | Update preview with page estimate recalculation             |
 
 **Keyboard Shortcuts:**
+
 - `⌘Enter` — Start export
 - `Esc` — Cancel export / back to project
 
 ### 10.6 AI Features
 
-| Feature | Description |
-|---------|-------------|
-| Smart document ordering | AI determines optimal document order (PRD → SRS → Architecture...) for the export |
-| Auto-generated TOC | AI creates a formatted Table of Contents with proper nesting |
-| Document summaries as preface | AI generates a 1-page executive summary of the entire suite |
-| Cross-reference linking | AI adds internal links between related sections across documents |
-| Format optimization | AI adjusts content formatting based on chosen output (PDF layout, Markdown clean, HTML responsive) |
-| Metadata generation | AI generates document metadata: title, author, date, version, keywords |
+| Feature                       | Description                                                                                        |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| Smart document ordering       | AI determines optimal document order (PRD → SRS → Architecture...) for the export                  |
+| Auto-generated TOC            | AI creates a formatted Table of Contents with proper nesting                                       |
+| Document summaries as preface | AI generates a 1-page executive summary of the entire suite                                        |
+| Cross-reference linking       | AI adds internal links between related sections across documents                                   |
+| Format optimization           | AI adjusts content formatting based on chosen output (PDF layout, Markdown clean, HTML responsive) |
+| Metadata generation           | AI generates document metadata: title, author, date, version, keywords                             |
 
 ### 10.7 State Management
 
-| State | Visual | Handling |
-|-------|--------|----------|
-| Idle | Configuration form with preview | Default state |
-| No documents selected | "Select at least one document to export." Warning. Export disabled. | Validation |
-| Processing | Progress view with progress bar + step list | POST export generation |
-| Processing step | Steps animate checkmark as completed | Server-sent progress (polling) |
-| Complete | Download card with file info + actions | Export status = COMPLETED |
-| Failed | "Export failed. [Retry] [Try different format]" error state | Export status = FAILED |
-| Downloading | Button spinner + system download dialog | File transfer |
-| Loading history | Skeleton list items | Fetch export history |
-| Empty history | "No previous exports. Generate your first export above." | No export records |
-| Free tier limit | "Free tier: includes PromptPilot branding. [Upgrade to Pro]" | Tier check |
-| Large export | "This export is 156 pages. Generation may take 10-20 seconds." (not a warning, info) | Page count threshold |
+| State                 | Visual                                                                               | Handling                       |
+| --------------------- | ------------------------------------------------------------------------------------ | ------------------------------ |
+| Idle                  | Configuration form with preview                                                      | Default state                  |
+| No documents selected | "Select at least one document to export." Warning. Export disabled.                  | Validation                     |
+| Processing            | Progress view with progress bar + step list                                          | POST export generation         |
+| Processing step       | Steps animate checkmark as completed                                                 | Server-sent progress (polling) |
+| Complete              | Download card with file info + actions                                               | Export status = COMPLETED      |
+| Failed                | "Export failed. [Retry] [Try different format]" error state                          | Export status = FAILED         |
+| Downloading           | Button spinner + system download dialog                                              | File transfer                  |
+| Loading history       | Skeleton list items                                                                  | Fetch export history           |
+| Empty history         | "No previous exports. Generate your first export above."                             | No export records              |
+| Free tier limit       | "Free tier: includes PromptPilot branding. [Upgrade to Pro]"                         | Tier check                     |
+| Large export          | "This export is 156 pages. Generation may take 10-20 seconds." (not a warning, info) | Page count threshold           |
 
 ### 10.8 Permissions
 
-| Action | Owner | Editor | Viewer |
-|--------|-------|--------|--------|
-| Export documents | ✅ | ✅ | ✅ |
-| Download exports | ✅ | ✅ | ✅ |
-| Copy share link | ✅ | ✅ | ✅ |
-| View export history | ✅ | ✅ | ✅ |
-| Delete exports | ✅ | ✅ | ❌ |
-| Custom branding (Pro) | ✅ | ✅ (own) | ❌ |
-| Remove PromptPilot branding | ✅ (Pro) | ❌ | ❌ |
+| Action                      | Owner    | Editor   | Viewer |
+| --------------------------- | -------- | -------- | ------ |
+| Export documents            | ✅       | ✅       | ✅     |
+| Download exports            | ✅       | ✅       | ✅     |
+| Copy share link             | ✅       | ✅       | ✅     |
+| View export history         | ✅       | ✅       | ✅     |
+| Delete exports              | ✅       | ✅       | ❌     |
+| Custom branding (Pro)       | ✅       | ✅ (own) | ❌     |
+| Remove PromptPilot branding | ✅ (Pro) | ❌       | ❌     |
 
 ### 10.9 API Integration
 
@@ -3757,6 +3839,7 @@ Response 200:
 ### 10.10 Database Mapping
 
 **Export model:**
+
 - `id`, `projectId`, `format` (PDF/MARKDOWN/HTML/DOCX), `status` (PENDING/PROCESSING/COMPLETED/FAILED), `fileUrl`, `fileSize`, `documentIds` (JSON array), `createdAt`, `expiresAt`
 - Relations: `project` (Project)
 - Indexes: `projectId`, `status`
@@ -3767,34 +3850,34 @@ Response 200:
 
 ### 10.11 Edge Cases
 
-| Case | Handling |
-|------|----------|
-| No documents selected | "Select at least one document to export." Button disabled. |
-| All documents empty | "Selected documents are empty. Generate content first." |
-| Very large export (50+ MB) | Show progress bar with time estimate. Stream download to avoid memory issues. |
-| Export timeout | "Export is taking longer than expected. We'll notify you when ready." Async fallback with notification. |
-| Download interrupted | Resume support via Range headers. Re-download from history. |
-| Expired download link | "This download link has expired (7 days). Generate a new export." |
-| Concurrent exports | Queue system. "Another export is processing. Your request has been queued." |
-| Browser blocks download | "If download doesn't start, [click here]." Fallback button. |
-| Free tier branding upsell | Pro feature (custom branding) shown with "Pro" badge. Click opens pricing dialog. |
-| Deleted project | Export history still accessible via direct link for 30 days after project deletion. |
-| Format unsupported on device | DOCX warning on mobile: "DOCX requires a compatible app. Consider PDF instead." |
+| Case                         | Handling                                                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------- |
+| No documents selected        | "Select at least one document to export." Button disabled.                                              |
+| All documents empty          | "Selected documents are empty. Generate content first."                                                 |
+| Very large export (50+ MB)   | Show progress bar with time estimate. Stream download to avoid memory issues.                           |
+| Export timeout               | "Export is taking longer than expected. We'll notify you when ready." Async fallback with notification. |
+| Download interrupted         | Resume support via Range headers. Re-download from history.                                             |
+| Expired download link        | "This download link has expired (7 days). Generate a new export."                                       |
+| Concurrent exports           | Queue system. "Another export is processing. Your request has been queued."                             |
+| Browser blocks download      | "If download doesn't start, [click here]." Fallback button.                                             |
+| Free tier branding upsell    | Pro feature (custom branding) shown with "Pro" badge. Click opens pricing dialog.                       |
+| Deleted project              | Export history still accessible via direct link for 30 days after project deletion.                     |
+| Format unsupported on device | DOCX warning on mobile: "DOCX requires a compatible app. Consider PDF instead."                         |
 
 ### 10.12 Animations
 
-| Element | Animation | Duration | Easing |
-|---------|-----------|----------|--------|
-| Document select | Checkbox fill + row highlight | 150ms | ease |
-| Format switch | Radio fill animation (scale) | 200ms | spring |
-| Export start | Form slide left → progress slide right | 400ms | [0.4, 0, 0.2, 1] |
-| Progress bar fill | Width transition | 500ms per step | ease |
-| Step complete | Checkmark bounce + text fade | 300ms | spring |
-| Export complete | Card slide up + scale 0.98→1 + checkmark bounce | 500ms | spring |
-| Download button | Pulse on complete (subtle) | 1.5s | ease |
-| History item load | Staggered fade in (50ms each) | 200ms total | [0.4, 0, 0.2, 1] |
-| Delete history | Item slide left + fade out | 200ms | ease-in |
-| Processing indicator | Spinner + step text typing | varies | — |
+| Element              | Animation                                       | Duration       | Easing           |
+| -------------------- | ----------------------------------------------- | -------------- | ---------------- |
+| Document select      | Checkbox fill + row highlight                   | 150ms          | ease             |
+| Format switch        | Radio fill animation (scale)                    | 200ms          | spring           |
+| Export start         | Form slide left → progress slide right          | 400ms          | [0.4, 0, 0.2, 1] |
+| Progress bar fill    | Width transition                                | 500ms per step | ease             |
+| Step complete        | Checkmark bounce + text fade                    | 300ms          | spring           |
+| Export complete      | Card slide up + scale 0.98→1 + checkmark bounce | 500ms          | spring           |
+| Download button      | Pulse on complete (subtle)                      | 1.5s           | ease             |
+| History item load    | Staggered fade in (50ms each)                   | 200ms total    | [0.4, 0, 0.2, 1] |
+| Delete history       | Item slide left + fade out                      | 200ms          | ease-in          |
+| Processing indicator | Spinner + step text typing                      | varies         | —                |
 
 ### 10.13 Mobile Experience
 
@@ -3808,42 +3891,42 @@ Response 200:
 
 ### 10.14 Accessibility
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Semantic form | `<fieldset>` for document selection, format selection, options. `<legend>` labels. |
+| Requirement           | Implementation                                                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| Semantic form         | `<fieldset>` for document selection, format selection, options. `<legend>` labels.                 |
 | Progress announcement | `aria-live="polite"` announcements during processing: "65% complete, generating table of contents" |
-| Keyboard | Full tab navigation through all controls. Space to toggle. Enter to submit. |
-| Focus management | Focus moves to download button on completion. Focus trapped during processing. |
-| Screen reader | Document count announced. Format options described. Progress steps read. Download ready announced. |
-| Color | Progress bar uses both color and text percentage. No color-only status indicators. |
+| Keyboard              | Full tab navigation through all controls. Space to toggle. Enter to submit.                        |
+| Focus management      | Focus moves to download button on completion. Focus trapped during processing.                     |
+| Screen reader         | Document count announced. Format options described. Progress steps read. Download ready announced. |
+| Color                 | Progress bar uses both color and text percentage. No color-only status indicators.                 |
 
 ### 10.15 Performance
 
-| Technique | Implementation |
-|-----------|---------------|
-| Async processing | Export generated server-side. Client polls every 2s (not blocking). |
-| File streaming | Large files streamed with Content-Disposition header. Progress via Content-Length. |
-| Progress polling | Exponential backoff if long-running: 2s → 5s → 10s (max). Stop after 5 minutes. |
-| Preview estimates | Client-side page count estimation based on content length and format. |
-| History caching | Export history cached with SWR. Revalidates on export complete. |
-| Lazy options | Format-specific options loaded only when format selected. |
+| Technique         | Implementation                                                                     |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| Async processing  | Export generated server-side. Client polls every 2s (not blocking).                |
+| File streaming    | Large files streamed with Content-Disposition header. Progress via Content-Length. |
+| Progress polling  | Exponential backoff if long-running: 2s → 5s → 10s (max). Stop after 5 minutes.    |
+| Preview estimates | Client-side page count estimation based on content length and format.              |
+| History caching   | Export history cached with SWR. Revalidates on export complete.                    |
+| Lazy options      | Format-specific options loaded only when format selected.                          |
 
 ### 10.16 Future Scalability
 
-| Feature | Integration Path |
-|---------|-----------------|
-| Scheduled exports | Auto-export on schedule (daily/weekly) with email delivery |
-| Custom branding | Upload company logo, color scheme for branded exports |
-| Export profiles | Save export configuration as named profile for reuse |
-| Multi-format bundle | Export all formats at once as ZIP archive |
-| Cloud storage integration | Direct export to Google Drive, Dropbox, Notion, GitHub |
-| API-driven export | Public API endpoint for CI/CD pipeline integration |
-| Watermark system | Custom watermark text, image, or "CONFIDENTIAL" stamp |
-| Digital signatures | Cryptographically sign PDF exports for compliance |
-| Export notifications | Email/Slack notification when large export completes |
-| Collaborative review export | Export with comments and annotations included |
-| ePub format | Export as eBook format for e-reader distribution |
-| Presentation format | Export as slide deck (PPTX/Google Slides) for stakeholder presentations |
+| Feature                     | Integration Path                                                        |
+| --------------------------- | ----------------------------------------------------------------------- |
+| Scheduled exports           | Auto-export on schedule (daily/weekly) with email delivery              |
+| Custom branding             | Upload company logo, color scheme for branded exports                   |
+| Export profiles             | Save export configuration as named profile for reuse                    |
+| Multi-format bundle         | Export all formats at once as ZIP archive                               |
+| Cloud storage integration   | Direct export to Google Drive, Dropbox, Notion, GitHub                  |
+| API-driven export           | Public API endpoint for CI/CD pipeline integration                      |
+| Watermark system            | Custom watermark text, image, or "CONFIDENTIAL" stamp                   |
+| Digital signatures          | Cryptographically sign PDF exports for compliance                       |
+| Export notifications        | Email/Slack notification when large export completes                    |
+| Collaborative review export | Export with comments and annotations included                           |
+| ePub format                 | Export as eBook format for e-reader distribution                        |
+| Presentation format         | Export as slide deck (PPTX/Google Slides) for stakeholder presentations |
 
 ---
 
@@ -3851,22 +3934,23 @@ Response 200:
 
 ### A.1 Global Keyboard Shortcuts
 
-| Shortcut | Context | Action |
-|----------|---------|--------|
-| `⌘K` | Global | Open command palette |
-| `⌘?`  | Global | Show keyboard shortcuts help overlay |
-| `G D` | Global | Go to Dashboard |
-| `G W` | Global | Go to Workspaces |
-| `G P` | Global | Go to Projects |
-| `G S` | Global | Go to Settings |
-| `N`   | Global | New Project (opens dialog) |
-| `⌘N`  | Global | New item (context-dependent) |
-| `Esc` | Global | Close modal/panel/palette. Cancel operation. |
-| `/`   | List pages | Focus search/filter input |
+| Shortcut | Context    | Action                                       |
+| -------- | ---------- | -------------------------------------------- |
+| `⌘K`     | Global     | Open command palette                         |
+| `⌘?`     | Global     | Show keyboard shortcuts help overlay         |
+| `G D`    | Global     | Go to Dashboard                              |
+| `G W`    | Global     | Go to Workspaces                             |
+| `G P`    | Global     | Go to Projects                               |
+| `G S`    | Global     | Go to Settings                               |
+| `N`      | Global     | New Project (opens dialog)                   |
+| `⌘N`     | Global     | New item (context-dependent)                 |
+| `Esc`    | Global     | Close modal/panel/palette. Cancel operation. |
+| `/`      | List pages | Focus search/filter input                    |
 
 ### A.2 Global State — Offline Mode
 
 All pages implement an offline-first approach where possible:
+
 - Dashboard, Workspace, Project pages cache data via SWR
 - Editor auto-saves to localStorage as backup
 - AI features disabled when offline
@@ -3906,57 +3990,57 @@ All pages implement an offline-first approach where possible:
 
 ## Appendix B: Implementation Priority Matrix
 
-| Priority | Screen | Status | Effort |
-|----------|--------|--------|--------|
-| P0 | Landing Page | ✅ Built (needs Tailwind migration) | Medium |
-| P0 | Authentication | ✅ Built (login + register) | Done |
-| P0 | Dashboard | ✅ Built (needs API data wiring) | Medium |
-| P0 | Project | 🔜 Scaffold exists | Large |
-| P0 | Editor | 🔜 Placeholder exists | Large |
-| P1 | Workspace | 🔜 Scaffold exists | Medium |
-| P1 | PRD Generator | ❌ Not started | Large |
-| P1 | Export | ❌ Not started | Medium |
-| P1 | Version History | ❌ Not started | Medium |
-| P1 | AI Chat | 🔜 Scaffold exists | Large |
+| Priority | Screen          | Status                              | Effort |
+| -------- | --------------- | ----------------------------------- | ------ |
+| P0       | Landing Page    | ✅ Built (needs Tailwind migration) | Medium |
+| P0       | Authentication  | ✅ Built (login + register)         | Done   |
+| P0       | Dashboard       | ✅ Built (needs API data wiring)    | Medium |
+| P0       | Project         | 🔜 Scaffold exists                  | Large  |
+| P0       | Editor          | 🔜 Placeholder exists               | Large  |
+| P1       | Workspace       | 🔜 Scaffold exists                  | Medium |
+| P1       | PRD Generator   | ❌ Not started                      | Large  |
+| P1       | Export          | ❌ Not started                      | Medium |
+| P1       | Version History | ❌ Not started                      | Medium |
+| P1       | AI Chat         | 🔜 Scaffold exists                  | Large  |
 
 ---
 
 ## Appendix C: API Endpoint Reference
 
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/health` | Health check |
-| `POST` | `/auth/register` | Create account |
-| `POST` | `/auth/login` | Sign in |
-| `POST` | `/auth/refresh` | Refresh tokens |
-| `POST` | `/auth/logout` | Sign out |
-| `GET` | `/auth/me` | Current user |
-| `GET` | `/dashboard/stats` | Dashboard statistics |
-| `GET` | `/workspaces` | List workspaces |
-| `GET` | `/workspaces/:id` | Get workspace |
-| `POST` | `/workspaces` | Create workspace |
-| `PATCH` | `/workspaces/:id` | Update workspace |
-| `DELETE` | `/workspaces/:id` | Archive workspace |
-| `GET` | `/projects` | List projects |
-| `GET` | `/projects/:id` | Get project |
-| `POST` | `/projects` | Create project |
-| `PATCH` | `/projects/:id` | Update project |
-| `DELETE` | `/projects/:id` | Archive project |
-| `GET` | `/projects/:id/documents` | List project documents |
-| `POST` | `/pipeline/generate` | Generate document (non-streaming) |
-| `POST` | `/pipeline/generate/stream` | Generate document (SSE streaming) |
-| `POST` | `/pipeline/run` | Run full pipeline |
-| `GET` | `/conversations` | List AI conversations |
-| `GET` | `/conversations/:id` | Get conversation with messages |
-| `POST` | `/conversations/:id/messages` | Send message in conversation |
-| `DELETE` | `/conversations/:id` | Archive conversation |
-| `POST` | `/exports` | Start export generation |
-| `GET` | `/exports/:id` | Get export status/metadata |
-| `GET` | `/exports` | List export history |
-| `DELETE` | `/exports/:id` | Delete export |
+| Method   | Endpoint                      | Purpose                           |
+| -------- | ----------------------------- | --------------------------------- |
+| `GET`    | `/health`                     | Health check                      |
+| `POST`   | `/auth/register`              | Create account                    |
+| `POST`   | `/auth/login`                 | Sign in                           |
+| `POST`   | `/auth/refresh`               | Refresh tokens                    |
+| `POST`   | `/auth/logout`                | Sign out                          |
+| `GET`    | `/auth/me`                    | Current user                      |
+| `GET`    | `/dashboard/stats`            | Dashboard statistics              |
+| `GET`    | `/workspaces`                 | List workspaces                   |
+| `GET`    | `/workspaces/:id`             | Get workspace                     |
+| `POST`   | `/workspaces`                 | Create workspace                  |
+| `PATCH`  | `/workspaces/:id`             | Update workspace                  |
+| `DELETE` | `/workspaces/:id`             | Archive workspace                 |
+| `GET`    | `/projects`                   | List projects                     |
+| `GET`    | `/projects/:id`               | Get project                       |
+| `POST`   | `/projects`                   | Create project                    |
+| `PATCH`  | `/projects/:id`               | Update project                    |
+| `DELETE` | `/projects/:id`               | Archive project                   |
+| `GET`    | `/projects/:id/documents`     | List project documents            |
+| `POST`   | `/pipeline/generate`          | Generate document (non-streaming) |
+| `POST`   | `/pipeline/generate/stream`   | Generate document (SSE streaming) |
+| `POST`   | `/pipeline/run`               | Run full pipeline                 |
+| `GET`    | `/conversations`              | List AI conversations             |
+| `GET`    | `/conversations/:id`          | Get conversation with messages    |
+| `POST`   | `/conversations/:id/messages` | Send message in conversation      |
+| `DELETE` | `/conversations/:id`          | Archive conversation              |
+| `POST`   | `/exports`                    | Start export generation           |
+| `GET`    | `/exports/:id`                | Get export status/metadata        |
+| `GET`    | `/exports`                    | List export history               |
+| `DELETE` | `/exports/:id`                | Delete export                     |
 
 ---
 
-*Document Version: 1.0 — PromptPilot Product UX Specification*
-*Last Updated: 2026-07-21*
-*Authors: PromptPilot Product Team*
+_Document Version: 1.0 — PromptPilot Product UX Specification_
+_Last Updated: 2026-07-21_
+_Authors: PromptPilot Product Team_

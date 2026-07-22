@@ -9,12 +9,18 @@ export function createProjectsRouter(): RouterType {
     try {
       const { workspaceId, page, limit } = req.query
       if (!workspaceId) {
-        res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: 'workspaceId is required' } })
+        res.status(400).json({
+          success: false,
+          error: { code: 'VALIDATION_ERROR', message: 'workspaceId is required' },
+        })
         return
       }
       const skip = Math.max(0, Number(page) - 1 || 0) * Math.min(100, Number(limit) || 20)
       const take = Math.min(100, Number(limit) || 20)
-      const { data, total } = await ProjectRepository.listByWorkspace(String(workspaceId), { skip, take })
+      const { data, total } = await ProjectRepository.listByWorkspace(String(workspaceId), {
+        skip,
+        take,
+      })
       res.json({ success: true, data, meta: { total, page: Number(page) || 1, limit: take } })
     } catch (err) {
       next(err)
@@ -25,7 +31,9 @@ export function createProjectsRouter(): RouterType {
     try {
       const project = await ProjectRepository.findById(String(req.params.id))
       if (!project) {
-        res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Project not found' } })
+        res
+          .status(404)
+          .json({ success: false, error: { code: 'NOT_FOUND', message: 'Project not found' } })
         return
       }
       res.json({ success: true, data: project })
@@ -38,7 +46,13 @@ export function createProjectsRouter(): RouterType {
     try {
       const { name, slug, description, workspaceId } = req.body
       if (!name || !slug || !workspaceId) {
-        res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: 'name, slug, and workspaceId are required' } })
+        res.status(400).json({
+          success: false,
+          error: {
+            code: 'VALIDATION_ERROR',
+            message: 'name, slug, and workspaceId are required',
+          },
+        })
         return
       }
       const project = await ProjectRepository.create({
@@ -72,14 +86,17 @@ export function createProjectsRouter(): RouterType {
     }
   })
 
-  router.get('/:id/documents', async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    try {
-      const docs = await DocumentRepository.listByProject(String(req.params.id))
-      res.json({ success: true, data: { documents: docs } })
-    } catch (err) {
-      next(err)
-    }
-  })
+  router.get(
+    '/:id/documents',
+    async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+      try {
+        const docs = await DocumentRepository.listByProject(String(req.params.id))
+        res.json({ success: true, data: { documents: docs } })
+      } catch (err) {
+        next(err)
+      }
+    },
+  )
 
   return router
 }

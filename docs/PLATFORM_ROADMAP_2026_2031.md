@@ -13,26 +13,26 @@ Build: 18/18 ✅ | Lint: 20/20 ✅ | TypeCheck: 20/20 ✅ | Test: 72/72 ✅
 
 ### What's Production-Ready
 
-| Layer | Status |
-|-------|--------|
-| Authentication (JWT + cookies + middleware) | ✅ Built + tested |
-| Database (12 Prisma models + 13 repos) | ✅ Built |
-| Design System (15 components + 200 tokens) | ✅ Built |
-| Marketing Website (7 pages + SEO) | ✅ Built |
-| App Shell (sidebar + navbar + ⌘K) | ✅ Built |
-| Dashboard & Workspace (29 routes) | ✅ Built |
-| AI Engine (PipelineRunner + GenerationService + PromptEngine) | ✅ Built |
-| Streaming (SSE in both adapters) | ✅ Built |
-| CI/CD (5 workflows + 3 hooks) | ✅ Built |
-| Documentation (43 files) | ✅ Built |
+| Layer                                                         | Status            |
+| ------------------------------------------------------------- | ----------------- |
+| Authentication (JWT + cookies + middleware)                   | ✅ Built + tested |
+| Database (12 Prisma models + 13 repos)                        | ✅ Built          |
+| Design System (15 components + 200 tokens)                    | ✅ Built          |
+| Marketing Website (7 pages + SEO)                             | ✅ Built          |
+| App Shell (sidebar + navbar + ⌘K)                             | ✅ Built          |
+| Dashboard & Workspace (29 routes)                             | ✅ Built          |
+| AI Engine (PipelineRunner + GenerationService + PromptEngine) | ✅ Built          |
+| Streaming (SSE in both adapters)                              | ✅ Built          |
+| CI/CD (5 workflows + 3 hooks)                                 | ✅ Built          |
+| Documentation (43 files)                                      | ✅ Built          |
 
 ### GA Blockers (3 items)
 
-| # | Blocker | Effort |
-|---|---------|--------|
-| 1 | AI Engine has no HTTP surface — wire to Express routes | ~4 hours |
-| 2 | No production database — generate Prisma migration | ~1 hour |
-| 3 | No document viewer — Markdown renderer + version history | ~4 hours |
+| #   | Blocker                                                  | Effort   |
+| --- | -------------------------------------------------------- | -------- |
+| 1   | AI Engine has no HTTP surface — wire to Express routes   | ~4 hours |
+| 2   | No production database — generate Prisma migration       | ~1 hour  |
+| 3   | No document viewer — Markdown renderer + version history | ~4 hours |
 
 ---
 
@@ -126,6 +126,7 @@ Build: 18/18 ✅ | Lint: 20/20 ✅ | TypeCheck: 20/20 ✅ | Test: 72/72 ✅
 ## 5. Phase 7+ (2028-2031) — Platform Maturity
 
 ### Year 3 (2028)
+
 - Real-time collaborative editing (CRDT engine)
 - Native desktop app (Electron/Tauri)
 - Enterprise SSO (SAML/OIDC) with Okta/Azure AD
@@ -133,6 +134,7 @@ Build: 18/18 ✅ | Lint: 20/20 ✅ | TypeCheck: 20/20 ✅ | Test: 72/72 ✅
 - Multi-region deployment (AWS/GCP/Azure)
 
 ### Year 4 (2029)
+
 - Native iOS + Android apps
 - Offline-first architecture with sync
 - Knowledge graph (cross-project artifact relationships)
@@ -140,6 +142,7 @@ Build: 18/18 ✅ | Lint: 20/20 ✅ | TypeCheck: 20/20 ✅ | Test: 72/72 ✅
 - White-label enterprise deployment
 
 ### Year 5 (2030-2031)
+
 - AI-native IDE integration (VS Code extension, JetBrains plugin)
 - Autonomous engineering pipelines (agent-driven, human-reviewed)
 - Enterprise governance suite (policy engine, compliance reports)

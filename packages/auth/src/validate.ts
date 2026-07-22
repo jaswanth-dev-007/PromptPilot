@@ -7,7 +7,9 @@ export function validateBody(schema: ZodSchema) {
     const result = schema.safeParse(req.body)
     if (!result.success) {
       const messages = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join('; ')
-      next(new ValidationError(messages, 'request.body', undefined, 'Check your input and try again.'))
+      next(
+        new ValidationError(messages, 'request.body', undefined, 'Check your input and try again.'),
+      )
       return
     }
     req.body = result.data

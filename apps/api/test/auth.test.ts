@@ -141,9 +141,7 @@ describe('Auth API', () => {
       const refreshToken = extractCookie(registerRes, 'refreshToken')!
       expect(refreshToken).toBeTruthy()
 
-      const res = await request(app)
-        .post('/api/v1/auth/refresh')
-        .send({ refreshToken })
+      const res = await request(app).post('/api/v1/auth/refresh').send({ refreshToken })
 
       expect(res.status).toBe(200)
       expect(res.body.data.expiresIn).toBeGreaterThan(0)
@@ -198,9 +196,7 @@ describe('Auth API', () => {
       const clearCookie = logoutRes.headers['set-cookie'] as string[]
       expect(clearCookie.some(c => c.includes('accessToken=;'))).toBe(true)
 
-      const refreshRes = await request(app)
-        .post('/api/v1/auth/refresh')
-        .send({ refreshToken })
+      const refreshRes = await request(app).post('/api/v1/auth/refresh').send({ refreshToken })
 
       expect(refreshRes.status).toBe(401)
     })

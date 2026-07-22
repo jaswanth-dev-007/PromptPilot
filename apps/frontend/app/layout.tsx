@@ -27,10 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             transition: 'top 0.1s',
           }}
           onFocus={e => {
-            (e.target as HTMLElement).style.top = '0'
+            ;(e.target as HTMLElement).style.top = '0'
           }}
           onBlur={e => {
-            (e.target as HTMLElement).style.top = '-100%'
+            ;(e.target as HTMLElement).style.top = '-100%'
           }}
         >
           Skip to main content

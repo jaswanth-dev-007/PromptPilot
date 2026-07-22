@@ -16,7 +16,9 @@ export function ComparisonTable() {
       <div style={styles.container}>
         <div style={styles.header}>
           <h2 style={styles.heading}>Why PromptPilot?</h2>
-          <p style={styles.subtitle}>Purpose-built for generating engineering specifications. Not a generic chatbot.</p>
+          <p style={styles.subtitle}>
+            Purpose-built for generating engineering specifications. Not a generic chatbot.
+          </p>
         </div>
         <div style={styles.tableWrap}>
           <table style={styles.table}>

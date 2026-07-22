@@ -8,7 +8,13 @@ export interface EmptyStateProps {
   size?: 'sm' | 'md' | 'lg'
 }
 
-export function EmptyState({ icon = '📭', title, description, action, size = 'md' }: EmptyStateProps) {
+export function EmptyState({
+  icon = '📭',
+  title,
+  description,
+  action,
+  size = 'md',
+}: EmptyStateProps) {
   const sizeStyles: Record<string, React.CSSProperties> = {
     sm: { padding: '24px', maxWidth: '320px' },
     md: { padding: '48px 24px', maxWidth: '400px' },
@@ -54,8 +60,8 @@ export function EmptyState({ icon = '📭', title, description, action, size = '
           {description}
         </p>
       )}
-      {action && (
-        action.href ? (
+      {action &&
+        (action.href ? (
           <a
             href={action.href}
             style={{
@@ -92,8 +98,7 @@ export function EmptyState({ icon = '📭', title, description, action, size = '
           >
             {action.label}
           </button>
-        )
-      )}
+        ))}
     </div>
   )
 }

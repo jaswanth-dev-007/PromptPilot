@@ -26,7 +26,16 @@ export const ProjectRepository = {
     return prisma.project.create({ data: { ...data, status: data.status || 'DRAFT' } })
   },
 
-  async update(id: string, data: { name?: string; slug?: string; description?: string | null; status?: 'DRAFT' | 'ACTIVE' | 'COMPLETED' | 'ARCHIVED'; settings?: Record<string, unknown> }) {
+  async update(
+    id: string,
+    data: {
+      name?: string
+      slug?: string
+      description?: string | null
+      status?: 'DRAFT' | 'ACTIVE' | 'COMPLETED' | 'ARCHIVED'
+      settings?: Record<string, unknown>
+    },
+  ) {
     return prisma.project.update({ where: { id }, data })
   },
 

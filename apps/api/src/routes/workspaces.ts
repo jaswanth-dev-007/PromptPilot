@@ -10,7 +10,10 @@ export function createWorkspacesRouter(): RouterType {
       const { page, limit } = req.query
       const skip = Math.max(0, Number(page) - 1 || 0) * Math.min(100, Number(limit) || 20)
       const take = Math.min(100, Number(limit) || 20)
-      const { data, total } = await WorkspaceRepository.listByOwner(String(req.user!.userId), { skip, take })
+      const { data, total } = await WorkspaceRepository.listByOwner(String(req.user!.userId), {
+        skip,
+        take,
+      })
       _res.json({ success: true, data, meta: { total, page: Number(page) || 1, limit: take } })
     } catch (err) {
       next(err)
@@ -21,7 +24,9 @@ export function createWorkspacesRouter(): RouterType {
     try {
       const ws = await WorkspaceRepository.findById(String(req.params.id))
       if (!ws) {
-        res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Workspace not found' } })
+        res
+          .status(404)
+          .json({ success: false, error: { code: 'NOT_FOUND', message: 'Workspace not found' } })
         return
       }
       res.json({ success: true, data: ws })
@@ -34,7 +39,10 @@ export function createWorkspacesRouter(): RouterType {
     try {
       const { name, slug } = req.body
       if (!name || !slug) {
-        res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: 'name and slug are required' } })
+        res.status(400).json({
+          success: false,
+          error: { code: 'VALIDATION_ERROR', message: 'name and slug are required' },
+        })
         return
       }
       const ws = await WorkspaceRepository.create({

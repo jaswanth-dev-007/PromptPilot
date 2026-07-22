@@ -28,7 +28,10 @@ export const AIConversationRepository = {
     })
   },
 
-  async update(id: string, data: { status?: ConversationStatus; model?: string; temperature?: number; maxTokens?: number }) {
+  async update(
+    id: string,
+    data: { status?: ConversationStatus; model?: string; temperature?: number; maxTokens?: number },
+  ) {
     return prisma.aIConversation.update({ where: { id }, data })
   },
 
@@ -40,12 +43,7 @@ export const AIConversationRepository = {
     return prisma.aIConversation.update({ where: { id }, data })
   },
 
-  async updateTokenTotals(
-    id: string,
-    inputTokens: number,
-    outputTokens: number,
-    cost: number,
-  ) {
+  async updateTokenTotals(id: string, inputTokens: number, outputTokens: number, cost: number) {
     return prisma.aIConversation.update({
       where: { id },
       data: {

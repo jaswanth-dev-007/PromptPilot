@@ -10,29 +10,29 @@ PromptPilot currently has a **single-user model**: one user owns workspaces and 
 
 ### Foundation (Already Built)
 
-| Component | What It Does | Phase 4.0 Extension |
-|-----------|-------------|-------------------|
-| `WorkspaceMember` (Prisma) | User↔Workspace bridge with roles | Add Organization + Team groupings |
-| `WorkspaceRole` (ADMIN/EDITOR/VIEWER) | Per-workspace permissions | Add Project-level + artifact-level permissions |
-| `Notification` (Prisma + repo) | In-app notification delivery | Add collaboration events (comments, mentions, approvals) |
-| `AuthProvider` (React Context) | User session state | Add presence + real-time sync |
-| `authorize(...roles)` (middleware) | Route-level role guard | Add resource-level + action-level guards |
-| `WorkspaceRepository` + `WorkspaceMemberRepository` | CRUD for memberships | Add invitation lifecycle (invite → accept → expire) |
-| `/workspace/[slug]/members` (frontend) | Member list with owner badge | Add invite UI, role management, remove member |
-| `@promptpilot/adapters` + `pino` (observability) | API call logging + metrics | Add audit entries for collaboration events |
+| Component                                           | What It Does                     | Phase 4.0 Extension                                      |
+| --------------------------------------------------- | -------------------------------- | -------------------------------------------------------- |
+| `WorkspaceMember` (Prisma)                          | User↔Workspace bridge with roles | Add Organization + Team groupings                        |
+| `WorkspaceRole` (ADMIN/EDITOR/VIEWER)               | Per-workspace permissions        | Add Project-level + artifact-level permissions           |
+| `Notification` (Prisma + repo)                      | In-app notification delivery     | Add collaboration events (comments, mentions, approvals) |
+| `AuthProvider` (React Context)                      | User session state               | Add presence + real-time sync                            |
+| `authorize(...roles)` (middleware)                  | Route-level role guard           | Add resource-level + action-level guards                 |
+| `WorkspaceRepository` + `WorkspaceMemberRepository` | CRUD for memberships             | Add invitation lifecycle (invite → accept → expire)      |
+| `/workspace/[slug]/members` (frontend)              | Member list with owner badge     | Add invite UI, role management, remove member            |
+| `@promptpilot/adapters` + `pino` (observability)    | API call logging + metrics       | Add audit entries for collaboration events               |
 
 ### Gap Analysis
 
-| Missing | Phase 4.0 Implementation |
-|---------|--------------------------|
-| Invitation system | `POST /api/v1/workspaces/:id/invitations` — create, accept, expire |
-| Comment threads | New Prisma models: `Comment`, `CommentThread` (per document + per project) |
-| Review/approval workflow | New Prisma models: `ReviewRequest`, `Approval` |
-| Real-time presence | WebSocket service or SSE endpoint for cursor presence + typing indicators |
-| Organization grouping | New Prisma model: `Organization` → `Workspace[]` |
-| Audit trail | New Prisma model: `AuditEntry` — who did what and when |
-| Artifact-level permissions | Extend `authorize()` middleware to check project/document ownership |
-| Team grouping | New Prisma model: `Team` → `Members[]` |
+| Missing                    | Phase 4.0 Implementation                                                   |
+| -------------------------- | -------------------------------------------------------------------------- |
+| Invitation system          | `POST /api/v1/workspaces/:id/invitations` — create, accept, expire         |
+| Comment threads            | New Prisma models: `Comment`, `CommentThread` (per document + per project) |
+| Review/approval workflow   | New Prisma models: `ReviewRequest`, `Approval`                             |
+| Real-time presence         | WebSocket service or SSE endpoint for cursor presence + typing indicators  |
+| Organization grouping      | New Prisma model: `Organization` → `Workspace[]`                           |
+| Audit trail                | New Prisma model: `AuditEntry` — who did what and when                     |
+| Artifact-level permissions | Extend `authorize()` middleware to check project/document ownership        |
+| Team grouping              | New Prisma model: `Team` → `Members[]`                                     |
 
 ---
 
@@ -99,10 +99,10 @@ Level 3: Project (new)
 interface Organization {
   id: string
   name: string
-  slug: string                  // unique globally
-  ownerId: string               // User who created the org
+  slug: string // unique globally
+  ownerId: string // User who created the org
   settings: Record<string, unknown>
-  workspaces: Workspace[]       // member workspaces
+  workspaces: Workspace[] // member workspaces
   members: OrganizationMember[]
   createdAt: Date
   updatedAt: Date
@@ -115,12 +115,12 @@ interface Organization {
 interface Invitation {
   id: string
   workspaceId: string
-  invitedBy: string            // User who sent the invite
+  invitedBy: string // User who sent the invite
   email: string
   role: WorkspaceRole
-  token: string                // UUID for unique invite link
+  token: string // UUID for unique invite link
   status: 'PENDING' | 'ACCEPTED' | 'EXPIRED' | 'REVOKED'
-  expiresAt: Date              // 7 days from creation
+  expiresAt: Date // 7 days from creation
   createdAt: Date
   acceptedAt?: Date
 }
@@ -131,11 +131,11 @@ interface Invitation {
 ```typescript
 interface Comment {
   id: string
-  documentId: string             // or projectId for project-level comments
+  documentId: string // or projectId for project-level comments
   authorId: string
   content: string
-  parentId?: string              // for threaded replies
-  resolved: boolean              // default false
+  parentId?: string // for threaded replies
+  resolved: boolean // default false
   createdAt: Date
   updatedAt: Date
 }
@@ -148,7 +148,7 @@ interface ReviewRequest {
   id: string
   documentId: string
   requestedBy: string
-  assignedTo: string[]          // reviewer user IDs
+  assignedTo: string[] // reviewer user IDs
   status: 'PENDING' | 'APPROVED' | 'CHANGES_REQUESTED'
   comment?: string
   createdAt: Date
@@ -162,10 +162,10 @@ interface ReviewRequest {
 interface AuditEntry {
   id: string
   userId: string
-  action: string                // 'project.created', 'document.generated', 'member.invited', etc.
-  resourceType: string          // 'project', 'document', 'workspace', 'user'
+  action: string // 'project.created', 'document.generated', 'member.invited', etc.
+  resourceType: string // 'project', 'document', 'workspace', 'user'
   resourceId: string
-  metadata: Record<string, unknown>  // arbitrary context
+  metadata: Record<string, unknown> // arbitrary context
   ipAddress?: string
   userAgent?: string
   createdAt: Date
@@ -242,20 +242,20 @@ model AuditEntry {
 
 ### Audit Events (auto-captured)
 
-| Action | Trigger | Resource |
-|--------|---------|----------|
-| `user.registered` | User creation | user |
-| `user.logged_in` | Login success | user |
-| `workspace.created` | Workspace creation | workspace |
-| `member.invited` | Invitation sent | workspace |
-| `member.joined` | Invitation accepted | workspace |
-| `member.removed` | Member removed | workspace |
-| `project.created` | Project creation | project |
-| `project.archived` | Project archive | project |
-| `document.generated` | AI generation completes | document |
-| `document.updated` | Manual edit | document |
-| `export.created` | Export request | export |
-| `export.downloaded` | Export download | export |
+| Action               | Trigger                 | Resource  |
+| -------------------- | ----------------------- | --------- |
+| `user.registered`    | User creation           | user      |
+| `user.logged_in`     | Login success           | user      |
+| `workspace.created`  | Workspace creation      | workspace |
+| `member.invited`     | Invitation sent         | workspace |
+| `member.joined`      | Invitation accepted     | workspace |
+| `member.removed`     | Member removed          | workspace |
+| `project.created`    | Project creation        | project   |
+| `project.archived`   | Project archive         | project   |
+| `document.generated` | AI generation completes | document  |
+| `document.updated`   | Manual edit             | document  |
+| `export.created`     | Export request          | export    |
+| `export.downloaded`  | Export download         | export    |
 
 ---
 
@@ -381,22 +381,22 @@ enum ReviewStatus {
 
 ## 6. Authorization Matrix
 
-| Action | Platform Admin | Workspace Admin | Workspace Editor | Workspace Viewer | Project Owner |
-|--------|---------------|-----------------|-----------------|-----------------|---------------|
-| Manage any workspace | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Invite members | ✅ | ✅ (own workspace) | ❌ | ❌ | ❌ |
-| Remove members | ✅ | ✅ | ❌ | ❌ | ❌ |
-| Create project | ✅ | ✅ | ✅ | ❌ | N/A |
-| Archive project | ✅ | ✅ | ❌ (if not owner) | ❌ | ✅ |
-| Run pipeline | ✅ | ✅ | ✅ | ❌ | ✅ |
-| View documents | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Edit documents | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Add comments | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Request review | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Approve documents | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Export | ✅ | ✅ | ✅ | ✅ | ✅ |
-| View audit logs | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Manage billing | ✅ | ✅ (own workspace) | ❌ | ❌ | ❌ |
+| Action               | Platform Admin | Workspace Admin    | Workspace Editor  | Workspace Viewer | Project Owner |
+| -------------------- | -------------- | ------------------ | ----------------- | ---------------- | ------------- |
+| Manage any workspace | ✅             | ❌                 | ❌                | ❌               | ❌            |
+| Invite members       | ✅             | ✅ (own workspace) | ❌                | ❌               | ❌            |
+| Remove members       | ✅             | ✅                 | ❌                | ❌               | ❌            |
+| Create project       | ✅             | ✅                 | ✅                | ❌               | N/A           |
+| Archive project      | ✅             | ✅                 | ❌ (if not owner) | ❌               | ✅            |
+| Run pipeline         | ✅             | ✅                 | ✅                | ❌               | ✅            |
+| View documents       | ✅             | ✅                 | ✅                | ✅               | ✅            |
+| Edit documents       | ✅             | ✅                 | ✅                | ❌               | ✅            |
+| Add comments         | ✅             | ✅                 | ✅                | ✅               | ✅            |
+| Request review       | ✅             | ✅                 | ✅                | ❌               | ✅            |
+| Approve documents    | ✅             | ✅                 | ✅                | ❌               | ✅            |
+| Export               | ✅             | ✅                 | ✅                | ✅               | ✅            |
+| View audit logs      | ✅             | ❌                 | ❌                | ❌               | ❌            |
+| Manage billing       | ✅             | ✅ (own workspace) | ❌                | ❌               | ❌            |
 
 ---
 
@@ -406,17 +406,17 @@ enum ReviewStatus {
 graph TD
     Organization --> Workspace1[Workspace A]
     Organization --> Workspace2[Workspace B]
-    
+
     Workspace1 --> Member1[Admin: Alice]
     Workspace1 --> Member2[Editor: Bob]
     Workspace1 --> Member3[Viewer: Carol]
     Workspace1 --> Project1[Project X]
     Workspace1 --> Project2[Project Y]
-    
+
     Project1 --> Doc1[PRD]
     Project1 --> Doc2[SRS]
     Project1 --> Doc3[Architecture]
-    
+
     Doc1 --> Comment1[Comment: Alice]
     Doc1 --> Comment2[Comment: Bob]
     Doc1 --> Review1[Review: Approved by Alice]
@@ -469,34 +469,34 @@ apps/frontend/app/(app)/
 
 ## 9. Implementation Plan (Phase 4.0)
 
-| # | Deliverable | Priority | Prisma Changes | API Endpoints |
-|---|------------|----------|---------------|---------------|
-| 1 | Invitation system | 🔴 P0 | `Invitation` model | `POST /workspaces/:id/invitations`, `GET /invitations/:token`, `POST /invitations/:token/accept` |
-| 2 | Audit trail | 🔴 P0 | `AuditEntry` model | `GET /audit` (auto-populated, no manual writes) |
-| 3 | Permission guard (resource-level) | 🔴 P0 | None | Middleware: `authorizeWorkspace()`, `authorizeProject()` |
-| 4 | Comments (Phase 4.1) | 🟡 P1 | `Comment` model | `POST/GET /documents/:id/comments` |
-| 5 | Review workflow (Phase 4.1) | 🟡 P1 | `ReviewRequest` model | `POST/GET /documents/:id/reviews` |
-| 6 | Organization (Phase 4.2) | 🟢 P2 | `Organization`, `OrganizationMember` | `POST/GET /organizations` |
-| 7 | Real-time presence (Phase 4.2) | 🟢 P2 | None (WebSocket service) | WebSocket endpoint |
+| #   | Deliverable                       | Priority | Prisma Changes                       | API Endpoints                                                                                    |
+| --- | --------------------------------- | -------- | ------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| 1   | Invitation system                 | 🔴 P0    | `Invitation` model                   | `POST /workspaces/:id/invitations`, `GET /invitations/:token`, `POST /invitations/:token/accept` |
+| 2   | Audit trail                       | 🔴 P0    | `AuditEntry` model                   | `GET /audit` (auto-populated, no manual writes)                                                  |
+| 3   | Permission guard (resource-level) | 🔴 P0    | None                                 | Middleware: `authorizeWorkspace()`, `authorizeProject()`                                         |
+| 4   | Comments (Phase 4.1)              | 🟡 P1    | `Comment` model                      | `POST/GET /documents/:id/comments`                                                               |
+| 5   | Review workflow (Phase 4.1)       | 🟡 P1    | `ReviewRequest` model                | `POST/GET /documents/:id/reviews`                                                                |
+| 6   | Organization (Phase 4.2)          | 🟢 P2    | `Organization`, `OrganizationMember` | `POST/GET /organizations`                                                                        |
+| 7   | Real-time presence (Phase 4.2)    | 🟢 P2    | None (WebSocket service)             | WebSocket endpoint                                                                               |
 
 ---
 
 ## 10. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Workspace member model | ✅ Built (Prisma + repository + frontend) |
-| RBAC middleware (authenticate/authorize) | ✅ Built |
-| Notification model + repo | ✅ Built |
-| Invitation system design | ✅ Designed |
-| Comment system design | ✅ Designed |
-| Review workflow design | ✅ Designed |
-| Audit trail design | ✅ Designed |
-| Organization hierarchy design | ✅ Designed |
-| 5 new Prisma models defined | ✅ Designed |
-| Authorization matrix | ✅ Defined (7 roles × 14 actions) |
-| Frontend routes (members page) | ✅ Built |
-| Phase 4.0–4.2 roadmap | ✅ Prioritized |
+| Criterion                                | Status                                    |
+| ---------------------------------------- | ----------------------------------------- |
+| Workspace member model                   | ✅ Built (Prisma + repository + frontend) |
+| RBAC middleware (authenticate/authorize) | ✅ Built                                  |
+| Notification model + repo                | ✅ Built                                  |
+| Invitation system design                 | ✅ Designed                               |
+| Comment system design                    | ✅ Designed                               |
+| Review workflow design                   | ✅ Designed                               |
+| Audit trail design                       | ✅ Designed                               |
+| Organization hierarchy design            | ✅ Designed                               |
+| 5 new Prisma models defined              | ✅ Designed                               |
+| Authorization matrix                     | ✅ Defined (7 roles × 14 actions)         |
+| Frontend routes (members page)           | ✅ Built                                  |
+| Phase 4.0–4.2 roadmap                    | ✅ Prioritized                            |
 
 **Collaboration Architecture Score: 95/100 — Ready for P0 implementation**
 
@@ -511,14 +511,17 @@ apps/frontend/app/(app)/
 The collaboration architecture is complete: 5 new Prisma models, invitation lifecycle, comment system, review workflow, audit trail, and organization hierarchy. The existing `WorkspaceMember` model, `authorize()` middleware, and `Notification` system provide the foundation.
 
 **P0 (this sprint):**
+
 - Invitation system (Invitation model + 3 API endpoints)
 - Audit trail (AuditEntry model, auto-captured)
 - Resource-level authorization (workspace + project guards)
 
 **P1 (next sprint):**
+
 - Comments + Review workflow
 
 **P2 (future):**
+
 - Organization grouping + Real-time presence
 
 Phase 4.0 P0 implementation can begin immediately on the existing foundation.

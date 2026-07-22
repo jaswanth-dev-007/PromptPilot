@@ -42,7 +42,12 @@ export const appNavigation: NavSection[] = [
     items: [
       { label: 'Overview', href: '/project/[slug]', icon: '📋', projectScoped: true },
       { label: 'Documents', href: '/project/[slug]/documents', icon: '📄', projectScoped: true },
-      { label: 'AI Conversations', href: '/project/[slug]/conversations', icon: '🤖', projectScoped: true },
+      {
+        label: 'AI Conversations',
+        href: '/project/[slug]/conversations',
+        icon: '🤖',
+        projectScoped: true,
+      },
       { label: 'Exports', href: '/project/[slug]/exports', icon: '📦', projectScoped: true },
       { label: 'Settings', href: '/project/[slug]/settings', icon: '⚙️', projectScoped: true },
     ],

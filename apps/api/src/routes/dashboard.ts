@@ -9,17 +9,18 @@ export function createDashboardRouter(): RouterType {
     try {
       const userId = String(req.user!.userId)
 
-      const [workspaceCount, projectCount, documentCount, generationStats, notificationCount] = await Promise.all([
-        prisma.workspace.count({ where: { ownerId: userId, deletedAt: null } }),
-        prisma.project.count({ where: { ownerId: userId, deletedAt: null } }),
-        prisma.document.count({ where: { project: { ownerId: userId }, deletedAt: null } }),
-        prisma.generation.aggregate({
-          _sum: { totalTokens: true, cost: true },
-          _count: { _all: true },
-          where: { conversation: { project: { ownerId: userId } } },
-        }),
-        prisma.notification.count({ where: { userId, read: false } }),
-      ])
+      const [workspaceCount, projectCount, documentCount, generationStats, notificationCount] =
+        await Promise.all([
+          prisma.workspace.count({ where: { ownerId: userId, deletedAt: null } }),
+          prisma.project.count({ where: { ownerId: userId, deletedAt: null } }),
+          prisma.document.count({ where: { project: { ownerId: userId }, deletedAt: null } }),
+          prisma.generation.aggregate({
+            _sum: { totalTokens: true, cost: true },
+            _count: { _all: true },
+            where: { conversation: { project: { ownerId: userId } } },
+          }),
+          prisma.notification.count({ where: { userId, read: false } }),
+        ])
 
       res.json({
         success: true,

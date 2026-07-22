@@ -10,11 +10,7 @@ export interface AuthenticatedRequest extends Request {
 }
 
 export function createAuthMiddleware(authConfig: AuthConfig) {
-  const authenticate = (
-    req: AuthenticatedRequest,
-    _res: Response,
-    next: NextFunction,
-  ): void => {
+  const authenticate = (req: AuthenticatedRequest, _res: Response, next: NextFunction): void => {
     const token = extractAccessToken(req.headers.cookie, req.headers.authorization)
 
     if (!token) {
@@ -31,11 +27,7 @@ export function createAuthMiddleware(authConfig: AuthConfig) {
     }
   }
 
-  const optionalAuth = (
-    req: AuthenticatedRequest,
-    _res: Response,
-    next: NextFunction,
-  ): void => {
+  const optionalAuth = (req: AuthenticatedRequest, _res: Response, next: NextFunction): void => {
     const token = extractAccessToken(req.headers.cookie, req.headers.authorization)
 
     if (!token) {

@@ -1,6 +1,13 @@
 'use client'
 
-import React, { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  type ReactNode,
+} from 'react'
 import { lightTheme, darkTheme } from '../theme'
 
 type ThemeMode = 'light' | 'dark' | 'system'
@@ -22,7 +29,13 @@ function resolveMode(mode: ThemeMode): 'light' | 'dark' {
   return mode === 'dark' ? 'dark' : 'light'
 }
 
-export function ThemeProvider({ children, defaultMode = 'system' }: { children: ReactNode; defaultMode?: ThemeMode }) {
+export function ThemeProvider({
+  children,
+  defaultMode = 'system',
+}: {
+  children: ReactNode
+  defaultMode?: ThemeMode
+}) {
   const [mode, setModeState] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('promptpilot-theme') as ThemeMode | null

@@ -1,7 +1,12 @@
 import { Router, type Router as RouterType, type Response, type NextFunction } from 'express'
 import type { AuthenticatedRequest } from '@promptpilot/auth'
 import type { AuthService } from '@promptpilot/auth'
-import { validateBody, setAuthCookies, clearAuthCookies, extractRefreshToken } from '@promptpilot/auth'
+import {
+  validateBody,
+  setAuthCookies,
+  clearAuthCookies,
+  extractRefreshToken,
+} from '@promptpilot/auth'
 import { registerSchema, loginSchema } from '@promptpilot/validation'
 import { createDefaultWorkspace } from '../services/onboarding'
 

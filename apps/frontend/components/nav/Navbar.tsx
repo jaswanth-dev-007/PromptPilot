@@ -46,9 +46,7 @@ export function Navbar({ left, right, mobileSidebarToggle = true }: NavbarProps)
         )}
         {left}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        {right}
-      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>{right}</div>
     </header>
   )
 }

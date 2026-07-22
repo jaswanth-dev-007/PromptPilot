@@ -1,7 +1,8 @@
 import type { Response, CookieOptions } from 'express'
 import type { AuthTokens } from './types'
 
-const SAME_SITE = (process.env.NODE_ENV === 'production' ? 'strict' : 'lax') as 'strict' | 'lax' | 'none'
+const SAME_SITE = (process.env.NODE_ENV === 'production' ? 'strict' : 'lax') as
+  'strict' | 'lax' | 'none'
 const SECURE = process.env.NODE_ENV === 'production'
 
 export function setAuthCookies(res: Response, tokens: AuthTokens): void {
@@ -26,7 +27,12 @@ export function setAuthCookies(res: Response, tokens: AuthTokens): void {
 
 export function clearAuthCookies(res: Response): void {
   res.clearCookie('accessToken', { httpOnly: true, secure: SECURE, sameSite: SAME_SITE, path: '/' })
-  res.clearCookie('refreshToken', { httpOnly: true, secure: SECURE, sameSite: SAME_SITE, path: '/api/v1/auth' })
+  res.clearCookie('refreshToken', {
+    httpOnly: true,
+    secure: SECURE,
+    sameSite: SAME_SITE,
+    path: '/api/v1/auth',
+  })
 }
 
 export function extractAccessToken(cookieHeader?: string, authHeader?: string): string | null {
@@ -40,7 +46,10 @@ export function extractAccessToken(cookieHeader?: string, authHeader?: string): 
   return null
 }
 
-export function extractRefreshToken(cookieHeader?: string, body?: { refreshToken?: string }): string | null {
+export function extractRefreshToken(
+  cookieHeader?: string,
+  body?: { refreshToken?: string },
+): string | null {
   if (body?.refreshToken) return body.refreshToken
   if (cookieHeader) {
     const match = cookieHeader.match(/(?:^|;\s*)refreshToken=([^;]+)/)

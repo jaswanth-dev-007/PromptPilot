@@ -12,13 +12,13 @@ PromptPilot is a tool for engineers. The landing page should feel like a precisi
 
 ### Mood Board References
 
-| Brand | What we borrow |
-|-------|---------------|
-| **Linear** | Minimal chrome, dark mode default, confident typography |
-| **Vercel** | Interactive product demo above the fold, geometric backgrounds |
+| Brand      | What we borrow                                                    |
+| ---------- | ----------------------------------------------------------------- |
+| **Linear** | Minimal chrome, dark mode default, confident typography           |
+| **Vercel** | Interactive product demo above the fold, geometric backgrounds    |
 | **Stripe** | Gradient-rich, polished micro-interactions, floating card layouts |
-| **Notion** | Clean information density, icon-forward feature cards |
-| **OpenAI** | Hero animation showing the AI pipeline in action |
+| **Notion** | Clean information density, icon-forward feature cards             |
+| **OpenAI** | Hero animation showing the AI pipeline in action                  |
 
 ### Design Constraints
 
@@ -368,18 +368,18 @@ This is the most important section of the page. It's a live, clickable demonstra
 
 ## 7. Section-by-Section Interaction Design
 
-| Section | Scroll Trigger | Animation | Duration |
-|---------|---------------|-----------|----------|
-| **Hero** | On load | Pipeline steps animate in sequence, hero text fades in | 1.5s total |
-| **How It Works** | 30% into viewport | 3 steps slide up + fade, staggered 200ms | 600ms |
-| **Pipeline Demo** | 40% into viewport | Tab bar fades in, first tab auto-selects | 300ms |
-| **What You Get** | Card-by-card into viewport | 9 cards stagger-reveal (scale + fade) | 900ms |
-| **For Whom** | 20% into viewport | 3 cards slide up | 400ms |
-| **Comparison** | 30% into viewport | Table rows reveal left-to-right | 600ms |
-| **Testimonials** | 20% into viewport | Cards slide from sides | 500ms |
-| **Pricing** | 20% into viewport | Cards scale up + shadow | 400ms |
-| **FAQ** | Item-by-item | Accordion expand (height transition) | 200ms each |
-| **Final CTA** | Fully visible | Background gradient shifts, text fades | 800ms |
+| Section           | Scroll Trigger             | Animation                                              | Duration   |
+| ----------------- | -------------------------- | ------------------------------------------------------ | ---------- |
+| **Hero**          | On load                    | Pipeline steps animate in sequence, hero text fades in | 1.5s total |
+| **How It Works**  | 30% into viewport          | 3 steps slide up + fade, staggered 200ms               | 600ms      |
+| **Pipeline Demo** | 40% into viewport          | Tab bar fades in, first tab auto-selects               | 300ms      |
+| **What You Get**  | Card-by-card into viewport | 9 cards stagger-reveal (scale + fade)                  | 900ms      |
+| **For Whom**      | 20% into viewport          | 3 cards slide up                                       | 400ms      |
+| **Comparison**    | 30% into viewport          | Table rows reveal left-to-right                        | 600ms      |
+| **Testimonials**  | 20% into viewport          | Cards slide from sides                                 | 500ms      |
+| **Pricing**       | 20% into viewport          | Cards scale up + shadow                                | 400ms      |
+| **FAQ**           | Item-by-item               | Accordion expand (height transition)                   | 200ms each |
+| **Final CTA**     | Fully visible              | Background gradient shifts, text fades                 | 800ms      |
 
 **All animations respect `prefers-reduced-motion`** — no animation when the OS setting is enabled.
 
@@ -431,6 +431,7 @@ graph TD
 ### Phase 3.4a — Marketing Pages (`/`, `#features`, `#pricing`)
 
 Files to create (in `apps/frontend/app/`):
+
 - `app/(marketing)/layout.tsx` — marketing shell: sticky nav + footer
 - `app/(marketing)/page.tsx` — landing page
 - `app/(marketing)/features/page.tsx`
@@ -457,35 +458,35 @@ Files to create (in `apps/frontend/app/`):
 
 ## 11. Accessibility Guidelines for Landing Page
 
-| Element | Requirement |
-|---------|-------------|
-| Skip link | Already in root layout |
-| Hero CTA | High contrast (white on indigo-600, 5.2:1) |
-| Demo content | Keyboard-focusable tabs with `aria-selected` |
-| Comparison table | Semantic `<table>` with `<caption>` |
-| FAQ accordion | `aria-expanded` on toggle buttons |
-| Testimonials | `<blockquote>` elements |
-| Footer links | `<nav aria-label="Footer">` |
-| All images | `alt` text on marketing illustrations |
-| Reduced motion | Respect `prefers-reduced-motion` — no scroll animations |
+| Element          | Requirement                                             |
+| ---------------- | ------------------------------------------------------- |
+| Skip link        | Already in root layout                                  |
+| Hero CTA         | High contrast (white on indigo-600, 5.2:1)              |
+| Demo content     | Keyboard-focusable tabs with `aria-selected`            |
+| Comparison table | Semantic `<table>` with `<caption>`                     |
+| FAQ accordion    | `aria-expanded` on toggle buttons                       |
+| Testimonials     | `<blockquote>` elements                                 |
+| Footer links     | `<nav aria-label="Footer">`                             |
+| All images       | `alt` text on marketing illustrations                   |
+| Reduced motion   | Respect `prefers-reduced-motion` — no scroll animations |
 
 ---
 
 ## 12. Production Readiness Report
 
-| Element | Status |
-|---------|--------|
-| Information architecture | ✅ 7 sections defined |
-| Hero design | ✅ Wireframe complete |
-| Pipeline demo UX | ✅ Interactive tab + real content |
-| Persona cards | ✅ 3 personas with pain→solution mapping |
-| Comparison table | ✅ 6-row feature matrix |
-| Pricing structure | ✅ 3 tiers (Free / Pro / Team) |
-| Navigation | ✅ Sticky glass-morphism, mobile drawer |
-| Scroll interactions | ✅ 9 sections with staggered reveals |
-| Accessibility | ✅ WCAG 2.2 AA across all sections |
-| Mobile UX | ✅ Condensed hero, vertical cards, touch targets |
-| Reduced motion | ✅ All animations gated |
-| Implementation files | ✅ Route map defined |
+| Element                  | Status                                           |
+| ------------------------ | ------------------------------------------------ |
+| Information architecture | ✅ 7 sections defined                            |
+| Hero design              | ✅ Wireframe complete                            |
+| Pipeline demo UX         | ✅ Interactive tab + real content                |
+| Persona cards            | ✅ 3 personas with pain→solution mapping         |
+| Comparison table         | ✅ 6-row feature matrix                          |
+| Pricing structure        | ✅ 3 tiers (Free / Pro / Team)                   |
+| Navigation               | ✅ Sticky glass-morphism, mobile drawer          |
+| Scroll interactions      | ✅ 9 sections with staggered reveals             |
+| Accessibility            | ✅ WCAG 2.2 AA across all sections               |
+| Mobile UX                | ✅ Condensed hero, vertical cards, touch targets |
+| Reduced motion           | ✅ All animations gated                          |
+| Implementation files     | ✅ Route map defined                             |
 
 **Landing Page UX Score: 10/10 — Ready for implementation.**

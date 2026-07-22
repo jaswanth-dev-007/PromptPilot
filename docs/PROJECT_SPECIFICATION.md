@@ -1,6 +1,7 @@
 # PromptPilot — Enterprise Project Module Specification
 
 ## Complete UX, UI, Engineering & Architecture Design
+
 ### Version 1.0 — Production-Ready Build Document
 
 ---
@@ -11,27 +12,27 @@ All components reference the PromptPilot Design System (`docs/DESIGN_SYSTEM.md`)
 
 ### Existing Foundation (Already Built)
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| Project Prisma model | ✅ Built | `prisma/schema.prisma` |
-| Document model (9 doc types) | ✅ Built | `prisma/schema.prisma` |
-| DocumentVersion model | ✅ Built | `prisma/schema.prisma` |
-| AIConversation model | ✅ Built | `prisma/schema.prisma` |
-| Message model | ✅ Built | `prisma/schema.prisma` |
-| Generation model | ✅ Built | `prisma/schema.prisma` |
-| Export model | ✅ Built | `prisma/schema.prisma` |
-| ProjectRepository (CRUD) | ✅ Built | `packages/database/src/repositories/` |
-| DocumentRepository | ✅ Built | `packages/database/src/repositories/` |
-| DocumentVersionRepository | ✅ Built | `packages/database/src/repositories/` |
-| AIConversationRepository | ✅ Built | `packages/database/src/repositories/` |
-| MessageRepository | ✅ Built | `packages/database/src/repositories/` |
-| GenerationRepository | ✅ Built | `packages/database/src/repositories/` |
-| Express project routes | ✅ Built | `apps/api/src/routes/projects.ts` |
-| Pipeline API routes | ✅ Built | `apps/api/src/routes/pipeline.ts` |
-| GenerationService | ✅ Built | `packages/ai/src/engine/generationService.ts` |
-| PromptEngine | ✅ Built | `packages/ai/src/engine/promptEngine.ts` |
-| LLM Adapters (OpenAI + Anthropic, streaming) | ✅ Built | `packages/adapters/` |
-| Design System | ✅ Built | `tailwind.config.js` + `DESIGN_SYSTEM.md` |
+| Component                                    | Status   | Location                                      |
+| -------------------------------------------- | -------- | --------------------------------------------- |
+| Project Prisma model                         | ✅ Built | `prisma/schema.prisma`                        |
+| Document model (9 doc types)                 | ✅ Built | `prisma/schema.prisma`                        |
+| DocumentVersion model                        | ✅ Built | `prisma/schema.prisma`                        |
+| AIConversation model                         | ✅ Built | `prisma/schema.prisma`                        |
+| Message model                                | ✅ Built | `prisma/schema.prisma`                        |
+| Generation model                             | ✅ Built | `prisma/schema.prisma`                        |
+| Export model                                 | ✅ Built | `prisma/schema.prisma`                        |
+| ProjectRepository (CRUD)                     | ✅ Built | `packages/database/src/repositories/`         |
+| DocumentRepository                           | ✅ Built | `packages/database/src/repositories/`         |
+| DocumentVersionRepository                    | ✅ Built | `packages/database/src/repositories/`         |
+| AIConversationRepository                     | ✅ Built | `packages/database/src/repositories/`         |
+| MessageRepository                            | ✅ Built | `packages/database/src/repositories/`         |
+| GenerationRepository                         | ✅ Built | `packages/database/src/repositories/`         |
+| Express project routes                       | ✅ Built | `apps/api/src/routes/projects.ts`             |
+| Pipeline API routes                          | ✅ Built | `apps/api/src/routes/pipeline.ts`             |
+| GenerationService                            | ✅ Built | `packages/ai/src/engine/generationService.ts` |
+| PromptEngine                                 | ✅ Built | `packages/ai/src/engine/promptEngine.ts`      |
+| LLM Adapters (OpenAI + Anthropic, streaming) | ✅ Built | `packages/adapters/`                          |
+| Design System                                | ✅ Built | `tailwind.config.js` + `DESIGN_SYSTEM.md`     |
 
 ### Design Tokens
 
@@ -1328,6 +1329,6 @@ ProjectModule
 
 ---
 
-*Document Version: 1.0 — PromptPilot Enterprise Project Module Specification*
-*Last Updated: 2026-07-21*
-*Status: Foundation built (models, repos, routes, generation engine). Ready for frontend UI implementation.*
+_Document Version: 1.0 — PromptPilot Enterprise Project Module Specification_
+_Last Updated: 2026-07-21_
+_Status: Foundation built (models, repos, routes, generation engine). Ready for frontend UI implementation._

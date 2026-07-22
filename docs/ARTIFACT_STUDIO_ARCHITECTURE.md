@@ -101,6 +101,7 @@ Document
 ### Decision: Keep Flat Markdown for Phase 3
 
 The Prisma model uses a single `content` text field. This is the right call for MVP:
+
 - AI generation produces Markdown natively
 - Version history is trivial (store entire content)
 - No structural parsing needed
@@ -114,26 +115,26 @@ The Prisma model uses a single `content` text field. This is the right call for 
 
 ### Already Implemented
 
-| Capability | Mechanism |
-|-----------|-----------|
-| **Generate from scratch** | `PipelineRunner.run()` → `GenerationService.generateDocument()` |
-| **Regenerate entire document** | Re-run pipeline step — creates new conversation + version |
-| **Stale detection** | `detectState()` in `packages/core/` — marks documents stale when upstream changes |
-| **Context injection** | `assembleContext()` — feeds upstream artifact content into LLM prompt |
-| **Token/cost tracking** | `Generation` model records per-call audit |
-| **Version history** | `DocumentVersion` immutable snapshots |
+| Capability                     | Mechanism                                                                         |
+| ------------------------------ | --------------------------------------------------------------------------------- |
+| **Generate from scratch**      | `PipelineRunner.run()` → `GenerationService.generateDocument()`                   |
+| **Regenerate entire document** | Re-run pipeline step — creates new conversation + version                         |
+| **Stale detection**            | `detectState()` in `packages/core/` — marks documents stale when upstream changes |
+| **Context injection**          | `assembleContext()` — feeds upstream artifact content into LLM prompt             |
+| **Token/cost tracking**        | `Generation` model records per-call audit                                         |
+| **Version history**            | `DocumentVersion` immutable snapshots                                             |
 
 ### Phase 4 AI Editing Capabilities (Architecture Ready)
 
-| Capability | Implementation Strategy |
-|-----------|------------------------|
-| **Rewrite section** | Send section content + instruction to adapter → replace in document |
-| **Expand section** | AI adds detail to existing section while preserving structure |
-| **Summarize document** | Full document → condensed version as new artifact |
-| **Review + suggest** | AI generates inline suggestions stored as `DocumentComment` |
-| **Regenerate stale** | Auto-detect stale artifacts → trigger re-generation |
-| **Inline AI actions** | Highlight text → "Rewrite", "Expand", "Explain" context menu |
-| **Multi-model comparison** | Generate same step with 2 models → show diff |
+| Capability                 | Implementation Strategy                                             |
+| -------------------------- | ------------------------------------------------------------------- |
+| **Rewrite section**        | Send section content + instruction to adapter → replace in document |
+| **Expand section**         | AI adds detail to existing section while preserving structure       |
+| **Summarize document**     | Full document → condensed version as new artifact                   |
+| **Review + suggest**       | AI generates inline suggestions stored as `DocumentComment`         |
+| **Regenerate stale**       | Auto-detect stale artifacts → trigger re-generation                 |
+| **Inline AI actions**      | Highlight text → "Rewrite", "Expand", "Explain" context menu        |
+| **Multi-model comparison** | Generate same step with 2 models → show diff                        |
 
 ### AI Editing Architecture
 
@@ -195,6 +196,7 @@ Documents can be forked → creates separate Document row
 ### Current: Implicit Relationships
 
 Relationships are **computed** rather than stored:
+
 - Pipeline manifest defines dependency edges
 - Staleness is computed from `updatedAt` timestamps
 - Context assembly traverses dependencies at runtime
@@ -216,6 +218,7 @@ model ArtifactRelationship {
 ```
 
 This enables:
+
 - Auto-detection of cross-document references
 - "Related Documents" sidebar
 - Impact analysis: "If I change this PRD section, which downstream docs are affected?"
@@ -259,56 +262,56 @@ Frontend: /project/[slug]/exports → empty state + list
 
 ### Format-Specific Processing
 
-| Format | Converter | Notes |
-|--------|-----------|-------|
-| Markdown | Direct | No conversion needed |
-| PDF | Puppeteer / Pandoc | CSS stylesheet for report formatting |
-| DOCX | Pandoc | Preserves headings, tables, code blocks |
-| HTML | Marked | Single-page with TOC sidebar |
+| Format   | Converter          | Notes                                   |
+| -------- | ------------------ | --------------------------------------- |
+| Markdown | Direct             | No conversion needed                    |
+| PDF      | Puppeteer / Pandoc | CSS stylesheet for report formatting    |
+| DOCX     | Pandoc             | Preserves headings, tables, code blocks |
+| HTML     | Marked             | Single-page with TOC sidebar            |
 
 ---
 
 ## 7. Entity Catalog (Built vs. Future)
 
-| Entity | Status | Prisma Model? | Repository? |
-|--------|--------|--------------|-------------|
-| Document | ✅ Built | Yes | Yes |
-| DocumentVersion | ✅ Built | Yes | Yes |
-| AIConversation | ✅ Built | Yes | Yes |
-| Message | ✅ Built | Yes | Yes |
-| Generation | ✅ Built | Yes | Yes |
-| Export | ✅ Built | Yes | Yes |
-| DocumentSection | 🔜 Phase 4 | No | No |
-| DocumentBlock | 🔜 Phase 4 | No | No |
-| DocumentMetadata | 🔜 Phase 4 | No | No |
-| DocumentReference | 🔜 Phase 5 | No | No |
-| ArtifactRelationship | 🔜 Phase 5 | No | No |
-| DocumentComment | 🔜 Phase 5 | No | No |
+| Entity               | Status     | Prisma Model? | Repository? |
+| -------------------- | ---------- | ------------- | ----------- |
+| Document             | ✅ Built   | Yes           | Yes         |
+| DocumentVersion      | ✅ Built   | Yes           | Yes         |
+| AIConversation       | ✅ Built   | Yes           | Yes         |
+| Message              | ✅ Built   | Yes           | Yes         |
+| Generation           | ✅ Built   | Yes           | Yes         |
+| Export               | ✅ Built   | Yes           | Yes         |
+| DocumentSection      | 🔜 Phase 4 | No            | No          |
+| DocumentBlock        | 🔜 Phase 4 | No            | No          |
+| DocumentMetadata     | 🔜 Phase 4 | No            | No          |
+| DocumentReference    | 🔜 Phase 5 | No            | No          |
+| ArtifactRelationship | 🔜 Phase 5 | No            | No          |
+| DocumentComment      | 🔜 Phase 5 | No            | No          |
 
 ---
 
 ## 8. Aggregate Roots
 
-| Aggregate Root | Children | Transaction Boundary |
-|---------------|----------|---------------------|
-| **Document** | DocumentVersion[] | Content update + version snapshot MUST be atomic |
-| **AIConversation** | Message[], Generation[] | Message append + generation record MUST be atomic |
-| **Project** | Document[], AIConversation[], Export[] | Cascade delete boundary |
-| **Export** | (none) | Status update is independent |
+| Aggregate Root     | Children                               | Transaction Boundary                              |
+| ------------------ | -------------------------------------- | ------------------------------------------------- |
+| **Document**       | DocumentVersion[]                      | Content update + version snapshot MUST be atomic  |
+| **AIConversation** | Message[], Generation[]                | Message append + generation record MUST be atomic |
+| **Project**        | Document[], AIConversation[], Export[] | Cascade delete boundary                           |
+| **Export**         | (none)                                 | Status update is independent                      |
 
 ---
 
 ## 9. Domain Events
 
-| Event | Producer | Consumers |
-|-------|----------|-----------|
-| `DocumentGenerated` | GenerationService | Pipeline (check next step), Notification, Export trigger |
-| `DocumentUpdated` | DocumentRepository | Staleness detector, Activity feed |
-| `DocumentMarkedStale` | Pipeline state | UI (show stale badge), Notification |
-| `DocumentReviewed` | User action (future) | Activity feed, Approval workflow |
-| `VersionCreated` | DocumentRepository | History view, Diff engine |
-| `ExportCompleted` | Export worker | Notification (download ready), UI |
-| `TemplateApplied` | AI Engine | Activity feed |
+| Event                 | Producer             | Consumers                                                |
+| --------------------- | -------------------- | -------------------------------------------------------- |
+| `DocumentGenerated`   | GenerationService    | Pipeline (check next step), Notification, Export trigger |
+| `DocumentUpdated`     | DocumentRepository   | Staleness detector, Activity feed                        |
+| `DocumentMarkedStale` | Pipeline state       | UI (show stale badge), Notification                      |
+| `DocumentReviewed`    | User action (future) | Activity feed, Approval workflow                         |
+| `VersionCreated`      | DocumentRepository   | History view, Diff engine                                |
+| `ExportCompleted`     | Export worker        | Notification (download ready), UI                        |
+| `TemplateApplied`     | AI Engine            | Activity feed                                            |
 
 ---
 
@@ -420,23 +423,23 @@ packages/database/src/repositories/
 
 ## 12. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Document model (flat Markdown) | ✅ Built |
-| Version history (DocumentVersion) | ✅ Built |
-| 9 artifact types | ✅ Built + frontend grid |
-| Generation pipeline (AI → Document) | ✅ Built |
-| Token/cost tracking per generation | ✅ Built |
-| Stale detection | ✅ Built |
-| Context assembly (upstream injection) | ✅ Built |
-| Export model + repository | ✅ Built |
-| Export frontend (empty state) | ✅ Built |
-| Document detail page | 🔜 Phase 3.8 |
-| Inline AI editing | 🔜 Phase 4 |
-| Structured sections | 🔜 Phase 4 |
-| Diff/compare | 🔜 Phase 4 |
-| Knowledge graph | 🔜 Phase 5 |
-| Collaboration (comments) | 🔜 Phase 5 |
+| Criterion                             | Status                   |
+| ------------------------------------- | ------------------------ |
+| Document model (flat Markdown)        | ✅ Built                 |
+| Version history (DocumentVersion)     | ✅ Built                 |
+| 9 artifact types                      | ✅ Built + frontend grid |
+| Generation pipeline (AI → Document)   | ✅ Built                 |
+| Token/cost tracking per generation    | ✅ Built                 |
+| Stale detection                       | ✅ Built                 |
+| Context assembly (upstream injection) | ✅ Built                 |
+| Export model + repository             | ✅ Built                 |
+| Export frontend (empty state)         | ✅ Built                 |
+| Document detail page                  | 🔜 Phase 3.8             |
+| Inline AI editing                     | 🔜 Phase 4               |
+| Structured sections                   | 🔜 Phase 4               |
+| Diff/compare                          | 🔜 Phase 4               |
+| Knowledge graph                       | 🔜 Phase 5               |
+| Collaboration (comments)              | 🔜 Phase 5               |
 
 **Artifact Studio Architecture Score: 92/100**
 
@@ -444,14 +447,14 @@ packages/database/src/repositories/
 
 ## 13. Phase 3.8 Implementation Plan
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | Document detail page (`/project/[slug]/documents/[stepId]`) — Markdown renderer | 🔴 P0 |
-| 2 | Version history panel on document detail | 🔴 P0 |
-| 3 | Wire "Generate" buttons to PipelineRunner API | 🔴 P0 |
-| 4 | Document status badge (draft/generated/reviewed/stale) | 🟡 P1 |
-| 5 | Export service (Markdown → PDF/DOCX/HTML) | 🟡 P1 |
-| 6 | Document comparisons (diff viewer) | 🟢 P2 |
+| #   | Task                                                                            | Priority |
+| --- | ------------------------------------------------------------------------------- | -------- |
+| 1   | Document detail page (`/project/[slug]/documents/[stepId]`) — Markdown renderer | 🔴 P0    |
+| 2   | Version history panel on document detail                                        | 🔴 P0    |
+| 3   | Wire "Generate" buttons to PipelineRunner API                                   | 🔴 P0    |
+| 4   | Document status badge (draft/generated/reviewed/stale)                          | 🟡 P1    |
+| 5   | Export service (Markdown → PDF/DOCX/HTML)                                       | 🟡 P1    |
+| 6   | Document comparisons (diff viewer)                                              | 🟢 P2    |
 
 ---
 

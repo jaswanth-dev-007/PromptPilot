@@ -1,6 +1,7 @@
 # PromptPilot — Enterprise Workspace Specification
 
 ## Complete UX, UI, Engineering, Security & Architecture Design
+
 ### Version 1.0 — Production-Ready Build Document
 
 ---
@@ -11,18 +12,18 @@ All components reference the PromptPilot Design System (`docs/DESIGN_SYSTEM.md`)
 
 ### Existing Foundation (Already Built)
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| Workspace Prisma model | ✅ Built | `prisma/schema.prisma` |
-| WorkspaceMember model | ✅ Built | `prisma/schema.prisma` |
-| WorkspaceRepository (CRUD) | ✅ Built | `packages/database/src/repositories/` |
-| Express workspace routes | ✅ Built | `apps/api/src/routes/workspaces.ts` |
-| Workspace-scoped sidebar | ✅ Built | `components/sidebar/Sidebar.tsx` + `NavigationContext.tsx` |
-| Navigation routes (workspace section) | ✅ Built | `lib/navigation/routes.ts` |
-| Workspace list page scaffold | ✅ Built | `apps/frontend/app/(app)/workspaces/page.tsx` |
-| Single workspace page scaffold | ✅ Built | `apps/frontend/app/(app)/workspace/page.tsx` |
-| Dashboard API (workspace stats) | ✅ Built | `apps/api/src/routes/dashboard.ts` |
-| Design System | ✅ Built | `tailwind.config.js` + `DESIGN_SYSTEM.md` |
+| Component                             | Status   | Location                                                   |
+| ------------------------------------- | -------- | ---------------------------------------------------------- |
+| Workspace Prisma model                | ✅ Built | `prisma/schema.prisma`                                     |
+| WorkspaceMember model                 | ✅ Built | `prisma/schema.prisma`                                     |
+| WorkspaceRepository (CRUD)            | ✅ Built | `packages/database/src/repositories/`                      |
+| Express workspace routes              | ✅ Built | `apps/api/src/routes/workspaces.ts`                        |
+| Workspace-scoped sidebar              | ✅ Built | `components/sidebar/Sidebar.tsx` + `NavigationContext.tsx` |
+| Navigation routes (workspace section) | ✅ Built | `lib/navigation/routes.ts`                                 |
+| Workspace list page scaffold          | ✅ Built | `apps/frontend/app/(app)/workspaces/page.tsx`              |
+| Single workspace page scaffold        | ✅ Built | `apps/frontend/app/(app)/workspace/page.tsx`               |
+| Dashboard API (workspace stats)       | ✅ Built | `apps/api/src/routes/dashboard.ts`                         |
+| Design System                         | ✅ Built | `tailwind.config.js` + `DESIGN_SYSTEM.md`                  |
 
 ### Design Tokens
 
@@ -60,16 +61,16 @@ Users interact with workspaces to:
 
 ### Primary Use Cases
 
-| Use Case | Persona | Workspace Feature |
-|----------|---------|-------------------|
-| Create team workspace and invite engineers | Tech Lead | Members, Invitations |
-| Organize 20+ client projects | Consultant, Agency | Project Management, Tags |
-| Set up AI provider for the team | Admin, Tech Lead | AI Configuration |
-| Share prompt templates with team | Prompt Engineer | Prompt Library |
-| Review team's recent activity | Manager | Activity Feed, Audit Logs |
-| Control who can edit vs. view documents | Admin, Tech Lead | Roles & Permissions |
-| Archive old projects to reduce clutter | Any member | Project Management |
-| Configure GitHub integration for spec sync | Developer | Integrations |
+| Use Case                                   | Persona            | Workspace Feature         |
+| ------------------------------------------ | ------------------ | ------------------------- |
+| Create team workspace and invite engineers | Tech Lead          | Members, Invitations      |
+| Organize 20+ client projects               | Consultant, Agency | Project Management, Tags  |
+| Set up AI provider for the team            | Admin, Tech Lead   | AI Configuration          |
+| Share prompt templates with team           | Prompt Engineer    | Prompt Library            |
+| Review team's recent activity              | Manager            | Activity Feed, Audit Logs |
+| Control who can edit vs. view documents    | Admin, Tech Lead   | Roles & Permissions       |
+| Archive old projects to reduce clutter     | Any member         | Project Management        |
+| Configure GitHub integration for spec sync | Developer          | Integrations              |
 
 ### Workspace Lifecycle
 
@@ -2363,6 +2364,6 @@ SCALING MECHANISM:
 
 ---
 
-*Document Version: 1.0 — PromptPilot Enterprise Workspace Specification*
-*Last Updated: 2026-07-21*
-*Status: Foundation built (Prisma models, repositories, routes). Ready for frontend implementation.*
+_Document Version: 1.0 — PromptPilot Enterprise Workspace Specification_
+_Last Updated: 2026-07-21_
+_Status: Foundation built (Prisma models, repositories, routes). Ready for frontend implementation._

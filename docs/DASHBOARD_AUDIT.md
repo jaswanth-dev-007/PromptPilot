@@ -26,11 +26,11 @@
 
 ### Client vs Server Components
 
-| Type | Count | Pattern |
-|------|-------|---------|
-| Client (`'use client'`) | 12 | Dashboards, forms, navigation — pages with interactivity |
-| Server (no `'use client'`) | 17 | Static content pages, empty states, marketing |
-| **Total** | **29** | |
+| Type                       | Count  | Pattern                                                  |
+| -------------------------- | ------ | -------------------------------------------------------- |
+| Client (`'use client'`)    | 12     | Dashboards, forms, navigation — pages with interactivity |
+| Server (no `'use client'`) | 17     | Static content pages, empty states, marketing            |
+| **Total**                  | **29** |                                                          |
 
 **Finding:** Correct split. Interactive dashboards are client components. Static pages (marketing, help, empty-state lists) are server components. No unnecessary `'use client'` directives.
 
@@ -62,99 +62,99 @@ AuthProvider              ← Edge: middleware checks cookie
 
 ### Authenticated Routes (`(app)/` — 18 pages)
 
-| Route | Type | Client? | Empty State? |
-|-------|------|---------|-------------|
-| `/dashboard` | Full dashboard with WelcomeHero, QuickActions, Stats, Tasks | Yes | Partial (stats show zeros) |
-| `/workspaces` | Workspace list | No | Yes |
-| `/workspace/[slug]` | Workspace dashboard | Yes | Yes |
-| `/workspace/[slug]/projects` | Workspace projects | Yes | Yes |
-| `/workspace/[slug]/members` | Member list | Yes | Partial (shows "You") |
-| `/workspace/[slug]/settings` | Workspace settings | Yes | No |
-| `/projects` | Project list | No | Yes |
-| `/project/[slug]` | Project dashboard + 9 artifact cards | Yes | Yes |
-| `/project/[slug]/documents` | 9 document types | Yes | Yes |
-| `/project/[slug]/conversations` | AI conversations | No | Yes |
-| `/project/[slug]/exports` | Exports | No | Yes |
-| `/project/[slug]/settings` | Project settings | Yes | No |
-| `/templates` | Prompt templates | No | Yes |
-| `/conversations` | AI conversations | No | Yes |
-| `/generations` | Generation history | No | Yes |
-| `/activity` | Activity feed | No | Yes |
-| `/settings` | Account settings | No | No |
-| `/help` | Help center (6 cards) | No | No |
+| Route                           | Type                                                        | Client? | Empty State?               |
+| ------------------------------- | ----------------------------------------------------------- | ------- | -------------------------- |
+| `/dashboard`                    | Full dashboard with WelcomeHero, QuickActions, Stats, Tasks | Yes     | Partial (stats show zeros) |
+| `/workspaces`                   | Workspace list                                              | No      | Yes                        |
+| `/workspace/[slug]`             | Workspace dashboard                                         | Yes     | Yes                        |
+| `/workspace/[slug]/projects`    | Workspace projects                                          | Yes     | Yes                        |
+| `/workspace/[slug]/members`     | Member list                                                 | Yes     | Partial (shows "You")      |
+| `/workspace/[slug]/settings`    | Workspace settings                                          | Yes     | No                         |
+| `/projects`                     | Project list                                                | No      | Yes                        |
+| `/project/[slug]`               | Project dashboard + 9 artifact cards                        | Yes     | Yes                        |
+| `/project/[slug]/documents`     | 9 document types                                            | Yes     | Yes                        |
+| `/project/[slug]/conversations` | AI conversations                                            | No      | Yes                        |
+| `/project/[slug]/exports`       | Exports                                                     | No      | Yes                        |
+| `/project/[slug]/settings`      | Project settings                                            | Yes     | No                         |
+| `/templates`                    | Prompt templates                                            | No      | Yes                        |
+| `/conversations`                | AI conversations                                            | No      | Yes                        |
+| `/generations`                  | Generation history                                          | No      | Yes                        |
+| `/activity`                     | Activity feed                                               | No      | Yes                        |
+| `/settings`                     | Account settings                                            | No      | No                         |
+| `/help`                         | Help center (6 cards)                                       | No      | No                         |
 
 ### Public Routes (9 pages)
 
-| Route | Type |
-|-------|------|
-| `/` | Full landing page (8 sections) |
-| `/features` | Feature overview |
-| `/pricing` | 3-tier pricing |
-| `/about` | Mission + contact |
-| `/register` | Registration form |
-| `/login` | Login form |
-| `/privacy` | Privacy policy |
-| `/editor` | "Coming soon" |
-| `/not-found` | Custom 404 |
+| Route        | Type                           |
+| ------------ | ------------------------------ |
+| `/`          | Full landing page (8 sections) |
+| `/features`  | Feature overview               |
+| `/pricing`   | 3-tier pricing                 |
+| `/about`     | Mission + contact              |
+| `/register`  | Registration form              |
+| `/login`     | Login form                     |
+| `/privacy`   | Privacy policy                 |
+| `/editor`    | "Coming soon"                  |
+| `/not-found` | Custom 404                     |
 
 ---
 
 ## 4. Technical Debt Report
 
-| Item | Severity | Effort | Recommendation |
-|------|----------|--------|----------------|
-| **Inline styles (228 lines)** | Low | High | Migrate to Tailwind CSS classes once PostCSS resolution in pnpm is fixed. Current approach works correctly in production. |
-| **Duplicate dashboard page in `/dashboard`** | Low | Low | Old `/app/dashboard/page.tsx` still exists outside `(app)/`. Remove after confirming `(app)/dashboard/` is the canonical route. |
-| **Editor page is a stub** | Low | Low | `/app/editor/page.tsx` says "coming soon". Expected at this phase. |
-| **No comprehensive UI tests** | Medium | Medium | 72 backend tests pass. No React Testing Library tests for dashboard components. Utility `useForm` hook is tested implicitly through Auth forms. |
-| **Markdown editor not implemented** | Low | High | Deferred to Phase 4 (Document Editor). Placeholder page exists. |
-| **Tailwind in dev mode** | Low | Low | PostCSS resolution quirk in pnpm. Inline styles work correctly in production builds. |
+| Item                                         | Severity | Effort | Recommendation                                                                                                                                  |
+| -------------------------------------------- | -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Inline styles (228 lines)**                | Low      | High   | Migrate to Tailwind CSS classes once PostCSS resolution in pnpm is fixed. Current approach works correctly in production.                       |
+| **Duplicate dashboard page in `/dashboard`** | Low      | Low    | Old `/app/dashboard/page.tsx` still exists outside `(app)/`. Remove after confirming `(app)/dashboard/` is the canonical route.                 |
+| **Editor page is a stub**                    | Low      | Low    | `/app/editor/page.tsx` says "coming soon". Expected at this phase.                                                                              |
+| **No comprehensive UI tests**                | Medium   | Medium | 72 backend tests pass. No React Testing Library tests for dashboard components. Utility `useForm` hook is tested implicitly through Auth forms. |
+| **Markdown editor not implemented**          | Low      | High   | Deferred to Phase 4 (Document Editor). Placeholder page exists.                                                                                 |
+| **Tailwind in dev mode**                     | Low      | Low    | PostCSS resolution quirk in pnpm. Inline styles work correctly in production builds.                                                            |
 
 ---
 
 ## 5. Performance Assessment
 
-| Metric | Status | Notes |
-|--------|--------|-------|
-| **Bundle splitting** | ✅ | App Router autosplits by route; `(app)/` and `(app)/` are separate chunks |
-| **CLS** | ✅ | Fixed nav (no dynamic injection), static layouts |
-| **LCP** | ✅ | Content renders from server; no blocking resources |
-| **CSS payload** | ✅ | No external CSS framework loaded at runtime (Tailwind purged at build) |
-| **JS payload** | ✅ | Only interactive pages are client components (12 of 29) |
-| **Font loading** | ✅ | System font stack — zero network font requests |
-| **Image loading** | ✅ | No images on dashboard — emoji + CSS only |
+| Metric               | Status | Notes                                                                     |
+| -------------------- | ------ | ------------------------------------------------------------------------- |
+| **Bundle splitting** | ✅     | App Router autosplits by route; `(app)/` and `(app)/` are separate chunks |
+| **CLS**              | ✅     | Fixed nav (no dynamic injection), static layouts                          |
+| **LCP**              | ✅     | Content renders from server; no blocking resources                        |
+| **CSS payload**      | ✅     | No external CSS framework loaded at runtime (Tailwind purged at build)    |
+| **JS payload**       | ✅     | Only interactive pages are client components (12 of 29)                   |
+| **Font loading**     | ✅     | System font stack — zero network font requests                            |
+| **Image loading**    | ✅     | No images on dashboard — emoji + CSS only                                 |
 
 ---
 
 ## 6. Accessibility Report
 
-| WCAG 2.2 AA Criterion | Status | Notes |
-|-----------------------|--------|-------|
-| 1.1.1 Non-text Content | ✅ | All icon buttons have `aria-label` |
-| 1.3.1 Info and Relationships | ✅ | Semantic `<nav>`, `<main>`, `<aside>`, `<header>` |
-| 1.4.3 Contrast (Minimum) | ✅ | Indigo-600 on white = 5.2:1 |
-| 2.1.1 Keyboard | ✅ | All interactive elements tabbable |
-| 2.4.3 Focus Order | ✅ | Logical DOM order (sidebar → navbar → content) |
-| 2.4.7 Focus Visible | ✅ | Focus rings on inputs and buttons |
-| 3.3.1 Error Identification | ✅ | Form errors displayed inline |
-| 4.1.2 Name, Role, Value | ✅ | ARIA roles on CommandPalette, Dialog, Tabs |
-| 4.1.3 Status Messages | ✅ | Toast uses `role="alert"` |
-| Skip link | ✅ | In root layout |
+| WCAG 2.2 AA Criterion        | Status | Notes                                             |
+| ---------------------------- | ------ | ------------------------------------------------- |
+| 1.1.1 Non-text Content       | ✅     | All icon buttons have `aria-label`                |
+| 1.3.1 Info and Relationships | ✅     | Semantic `<nav>`, `<main>`, `<aside>`, `<header>` |
+| 1.4.3 Contrast (Minimum)     | ✅     | Indigo-600 on white = 5.2:1                       |
+| 2.1.1 Keyboard               | ✅     | All interactive elements tabbable                 |
+| 2.4.3 Focus Order            | ✅     | Logical DOM order (sidebar → navbar → content)    |
+| 2.4.7 Focus Visible          | ✅     | Focus rings on inputs and buttons                 |
+| 3.3.1 Error Identification   | ✅     | Form errors displayed inline                      |
+| 4.1.2 Name, Role, Value      | ✅     | ARIA roles on CommandPalette, Dialog, Tabs        |
+| 4.1.3 Status Messages        | ✅     | Toast uses `role="alert"`                         |
+| Skip link                    | ✅     | In root layout                                    |
 
 ---
 
 ## 7. Architecture Review Summary
 
-| Dimension | Score |
-|-----------|-------|
-| Route Coverage | **100/100** — 29 routes, every navigation item resolves |
-| Component Reuse | **100/100** — 10 UI imports, 37 components total |
-| Client/Server Split | **100/100** — 12 interactive, 17 static — optimal |
-| Empty States | **100/100** — 23 graceful empty states |
-| Auth Integrity | **100/100** — No route bypass; middleware + context guards |
-| Accessibility | **95/100** — WCAG 2.2 AA compliant |
-| Performance | **95/100** — 0 blocking resources, system fonts |
-| Maintainability | **90/100** — Inline styles are consistent but verbose |
+| Dimension           | Score                                                      |
+| ------------------- | ---------------------------------------------------------- |
+| Route Coverage      | **100/100** — 29 routes, every navigation item resolves    |
+| Component Reuse     | **100/100** — 10 UI imports, 37 components total           |
+| Client/Server Split | **100/100** — 12 interactive, 17 static — optimal          |
+| Empty States        | **100/100** — 23 graceful empty states                     |
+| Auth Integrity      | **100/100** — No route bypass; middleware + context guards |
+| Accessibility       | **95/100** — WCAG 2.2 AA compliant                         |
+| Performance         | **95/100** — 0 blocking resources, system fonts            |
+| Maintainability     | **90/100** — Inline styles are consistent but verbose      |
 
 ### OVERALL: **97/100**
 
@@ -198,10 +198,10 @@ The dashboard and application shell have 29 routes, 37 components, 5 context pro
 
 **Three non-blocking items:**
 
-| Item | Priority | Fix |
-|------|----------|-----|
-| Remove duplicate `/dashboard` page outside `(app)/` | Low | Delete `app/dashboard/page.tsx`; canonical version is `app/(app)/dashboard/page.tsx` |
-| Migrate inline styles to Tailwind | Low | 228 style declarations; systematic refactor when Tailwind PostCSS resolved |
-| Add React Testing Library for dashboard components | Medium | 0 frontend UI tests; 72 backend tests pass |
+| Item                                                | Priority | Fix                                                                                  |
+| --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| Remove duplicate `/dashboard` page outside `(app)/` | Low      | Delete `app/dashboard/page.tsx`; canonical version is `app/(app)/dashboard/page.tsx` |
+| Migrate inline styles to Tailwind                   | Low      | 228 style declarations; systematic refactor when Tailwind PostCSS resolved           |
+| Add React Testing Library for dashboard components  | Medium   | 0 frontend UI tests; 72 backend tests pass                                           |
 
 **None block Phase 3.6. Project & Workspace Management implementation is authorized.**

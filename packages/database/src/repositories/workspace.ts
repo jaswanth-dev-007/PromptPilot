@@ -14,11 +14,21 @@ export const WorkspaceRepository = {
     })
   },
 
-  async create(data: { id?: string; name: string; slug: string; owner: { connect: { id: string } }; type?: 'PERSONAL' | 'TEAM'; settings?: Record<string, unknown> }) {
+  async create(data: {
+    id?: string
+    name: string
+    slug: string
+    owner: { connect: { id: string } }
+    type?: 'PERSONAL' | 'TEAM'
+    settings?: Record<string, unknown>
+  }) {
     return prisma.workspace.create({ data })
   },
 
-  async update(id: string, data: { name?: string; slug?: string; settings?: Record<string, unknown> }) {
+  async update(
+    id: string,
+    data: { name?: string; slug?: string; settings?: Record<string, unknown> },
+  ) {
     return prisma.workspace.update({ where: { id }, data })
   },
 

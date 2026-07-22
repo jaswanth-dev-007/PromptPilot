@@ -6,34 +6,34 @@
 
 ## 1. Database Overview
 
-| Property | Value |
-|----------|-------|
-| Database | PostgreSQL |
-| ORM | Prisma 6.x |
-| Client | `@prisma/client` |
-| Primary key type | UUID v4 (via `@default(uuid())`) |
+| Property          | Value                                            |
+| ----------------- | ------------------------------------------------ |
+| Database          | PostgreSQL                                       |
+| ORM               | Prisma 6.x                                       |
+| Client            | `@prisma/client`                                 |
+| Primary key type  | UUID v4 (via `@default(uuid())`)                 |
 | Naming convention | `snake_case` tables/columns, `PascalCase` models |
-| Migration tool | `prisma migrate dev` |
-| Seed tool | `tsx packages/database/src/seed/index.ts` |
+| Migration tool    | `prisma migrate dev`                             |
+| Seed tool         | `tsx packages/database/src/seed/index.ts`        |
 
 ---
 
 ## 2. Entity Catalog
 
-| Model | Table | Description |
-|-------|-------|-------------|
-| `User` | `users` | Identity and authentication |
-| `Workspace` | `workspaces` | Tenant boundary |
+| Model             | Table               | Description                      |
+| ----------------- | ------------------- | -------------------------------- |
+| `User`            | `users`             | Identity and authentication      |
+| `Workspace`       | `workspaces`        | Tenant boundary                  |
 | `WorkspaceMember` | `workspace_members` | User↔Workspace membership bridge |
-| `Project` | `projects` | Central organizing entity |
-| `Document` | `documents` | Generated specification artifact |
-| `DocumentVersion` | `document_versions` | Immutable version snapshots |
-| `AIConversation` | `ai_conversations` | AI pipeline execution context |
-| `Message` | `messages` | Individual prompt/response |
-| `Generation` | `generations` | Single LLM API call record |
-| `Export` | `exports` | Document format conversion |
-| `Notification` | `notifications` | In-app user notifications |
-| `APIKey` | `api_keys` | Programmatic access tokens |
+| `Project`         | `projects`          | Central organizing entity        |
+| `Document`        | `documents`         | Generated specification artifact |
+| `DocumentVersion` | `document_versions` | Immutable version snapshots      |
+| `AIConversation`  | `ai_conversations`  | AI pipeline execution context    |
+| `Message`         | `messages`          | Individual prompt/response       |
+| `Generation`      | `generations`       | Single LLM API call record       |
+| `Export`          | `exports`           | Document format conversion       |
+| `Notification`    | `notifications`     | In-app user notifications        |
+| `APIKey`          | `api_keys`          | Programmatic access tokens       |
 
 ---
 
@@ -58,32 +58,32 @@
 
 ## 4. Index Strategy
 
-| Model | Index | Type |
-|-------|-------|------|
-| User | `email` | Unique |
-| Workspace | `(ownerId, slug)` | Unique composite |
-| Workspace | `status` | Filter |
-| WorkspaceMember | `(workspaceId, userId)` | Unique composite |
-| WorkspaceMember | `userId` | Join |
-| Project | `(workspaceId, slug)` | Unique composite |
-| Project | `ownerId` | Join |
-| Project | `status` | Filter |
-| Document | `(projectId, stepId)` | Unique composite |
-| Document | `(projectId, type)` | Filter |
-| Document | `conversationId` | Join |
-| Document | `status` | Filter |
+| Model           | Index                         | Type             |
+| --------------- | ----------------------------- | ---------------- |
+| User            | `email`                       | Unique           |
+| Workspace       | `(ownerId, slug)`             | Unique composite |
+| Workspace       | `status`                      | Filter           |
+| WorkspaceMember | `(workspaceId, userId)`       | Unique composite |
+| WorkspaceMember | `userId`                      | Join             |
+| Project         | `(workspaceId, slug)`         | Unique composite |
+| Project         | `ownerId`                     | Join             |
+| Project         | `status`                      | Filter           |
+| Document        | `(projectId, stepId)`         | Unique composite |
+| Document        | `(projectId, type)`           | Filter           |
+| Document        | `conversationId`              | Join             |
+| Document        | `status`                      | Filter           |
 | DocumentVersion | `(documentId, versionNumber)` | Unique composite |
-| AIConversation | `(projectId, stepId)` | Lookup |
-| AIConversation | `(projectId, status)` | Filter |
-| Message | `(conversationId, sequence)` | Unique composite |
-| Generation | `conversationId` | Join |
-| Generation | `createdAt` | Time-range |
-| Export | `projectId` | Join |
-| Export | `status` | Filter |
-| Notification | `(userId, read)` | Unread count |
-| Notification | `createdAt` | Time-range |
-| APIKey | `workspaceId` | Join |
-| APIKey | `keyHash` | Lookup |
+| AIConversation  | `(projectId, stepId)`         | Lookup           |
+| AIConversation  | `(projectId, status)`         | Filter           |
+| Message         | `(conversationId, sequence)`  | Unique composite |
+| Generation      | `conversationId`              | Join             |
+| Generation      | `createdAt`                   | Time-range       |
+| Export          | `projectId`                   | Join             |
+| Export          | `status`                      | Filter           |
+| Notification    | `(userId, read)`              | Unread count     |
+| Notification    | `createdAt`                   | Time-range       |
+| APIKey          | `workspaceId`                 | Join             |
+| APIKey          | `keyHash`                     | Lookup           |
 
 ---
 
@@ -133,6 +133,7 @@ packages/database/src/
 **Pattern:** Every repository is a plain object with stateless functions accepting `prisma` or using the shared singleton. No classes, no DI framework — keeps the data layer thin and testable.
 
 **Design decisions:**
+
 - Inline types over `@prisma/client` imports (avoids `prisma generate` requirement for TypeScript compilation)
 - `list()` methods return `{ data, total }` for pagination
 - `softDelete()` sets `deletedAt` instead of removing records
@@ -142,9 +143,11 @@ packages/database/src/
 ## 7. Seed Strategy
 
 ### Idempotent Design
+
 The seed script checks for the existence of the demo user (by known UUID). If found, it skips. Safe to run multiple times without data duplication.
 
 ### Demo Data
+
 - **1 User:** `demo@promptpilot.dev`
 - **1 Workspace:** "My Workspace" (personal)
 - **1 Project:** "PromptPilot Specification" with description
@@ -153,6 +156,7 @@ The seed script checks for the existence of the demo user (by known UUID). If fo
 - **1 Notification:** Pipeline completed
 
 ### Commands
+
 ```bash
 pnpm --filter @promptpilot/database db:seed       # Run seed
 pnpm --filter @promptpilot/database prisma:studio  # Open Prisma Studio
@@ -164,12 +168,14 @@ pnpm --filter @promptpilot/database prisma:migrate # Run migrations
 ## 8. Migration Strategy
 
 ### Naming Convention
+
 ```
 YYYYMMDDHHMMSS_descriptive_name
 Example: 20260720143000_initial_schema
 ```
 
 ### Workflow
+
 ```bash
 # Development
 pnpm prisma migrate dev --name add_column_name
@@ -182,7 +188,9 @@ pnpm prisma migrate reset
 ```
 
 ### Rollback
+
 Prisma does not support automatic rollbacks. Strategy:
+
 1. Create a new migration that reverses the change
 2. Apply via `prisma migrate deploy`
 3. Never edit committed migrations
@@ -235,24 +243,24 @@ DATABASE_URL=postgresql://user:password@host:5432/promptpilot?sslmode=require&po
 
 ## 11. Database Health Report
 
-| Criterion | Status | Notes |
-|-----------|--------|-------|
-| Prisma validate | ✅ | Schema valid |
-| Prisma format | ✅ | Clean |
-| Build (`tsc`) | ✅ | 18/18 packages |
-| TypeCheck | ✅ | 18/18 packages |
-| Lint | ✅ | 0 errors |
-| Tests | ✅ | 71/71 passing |
-| No circular deps | ✅ | Strict DAG |
-| UUID PKs on all models | ✅ | 12 models |
-| Soft delete support | ✅ | User, Workspace, Project, Document, AIConversation |
-| `createdAt`/`updatedAt` | ✅ | All mutable models |
-| `@map` snake_case | ✅ | All tables + columns |
-| Composite unique indexes | ✅ | 5 composite constraints |
-| Cascade delete rules | ✅ | All composition relationships |
-| `@db.Text` for large content | ✅ | Document.content, Message.content |
-| `Json` for settings | ✅ | Workspace.settings, Project.settings, Export.documentIds |
-| Seed data | ✅ | Idempotent, 7 entities |
+| Criterion                    | Status | Notes                                                    |
+| ---------------------------- | ------ | -------------------------------------------------------- |
+| Prisma validate              | ✅     | Schema valid                                             |
+| Prisma format                | ✅     | Clean                                                    |
+| Build (`tsc`)                | ✅     | 18/18 packages                                           |
+| TypeCheck                    | ✅     | 18/18 packages                                           |
+| Lint                         | ✅     | 0 errors                                                 |
+| Tests                        | ✅     | 71/71 passing                                            |
+| No circular deps             | ✅     | Strict DAG                                               |
+| UUID PKs on all models       | ✅     | 12 models                                                |
+| Soft delete support          | ✅     | User, Workspace, Project, Document, AIConversation       |
+| `createdAt`/`updatedAt`      | ✅     | All mutable models                                       |
+| `@map` snake_case            | ✅     | All tables + columns                                     |
+| Composite unique indexes     | ✅     | 5 composite constraints                                  |
+| Cascade delete rules         | ✅     | All composition relationships                            |
+| `@db.Text` for large content | ✅     | Document.content, Message.content                        |
+| `Json` for settings          | ✅     | Workspace.settings, Project.settings, Export.documentIds |
+| Seed data                    | ✅     | Idempotent, 7 entities                                   |
 
 **Database Health Score: 10/10**
 

@@ -10,18 +10,18 @@ The AI Workspace is the engine that powers PromptPilot's core value proposition:
 
 ### Current State (What's Built)
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| LLM Adapters (OpenAI + Anthropic) | ✅ Production | `packages/adapters/src/` |
-| Streaming (SSE parsing) | ✅ Production | `packages/adapters/src/openai.ts`, `anthropic.ts` |
-| Token counting + cost | ✅ Production | `packages/shared/src/tokens.ts` |
-| Prisma models (Conversation, Message, Generation) | ✅ Production | `prisma/schema.prisma` |
-| Prisma repositories (AIConversation, Message, Generation) | ✅ Production | `packages/database/src/repositories/` |
-| Pipeline state detection | ✅ Production | `packages/core/src/pipeline/state.ts` |
-| Context assembly | ✅ Production | `packages/core/src/context/assembler.ts` |
-| Conversation orchestration | ❌ Not built | — |
-| Prompt template engine | ❌ Empty dirs | `packages/core/src/prompts/`, `packages/ai/` |
-| Pipeline runner (execution loop) | ❌ Missing | `packages/core/` |
+| Component                                                 | Status        | Location                                          |
+| --------------------------------------------------------- | ------------- | ------------------------------------------------- |
+| LLM Adapters (OpenAI + Anthropic)                         | ✅ Production | `packages/adapters/src/`                          |
+| Streaming (SSE parsing)                                   | ✅ Production | `packages/adapters/src/openai.ts`, `anthropic.ts` |
+| Token counting + cost                                     | ✅ Production | `packages/shared/src/tokens.ts`                   |
+| Prisma models (Conversation, Message, Generation)         | ✅ Production | `prisma/schema.prisma`                            |
+| Prisma repositories (AIConversation, Message, Generation) | ✅ Production | `packages/database/src/repositories/`             |
+| Pipeline state detection                                  | ✅ Production | `packages/core/src/pipeline/state.ts`             |
+| Context assembly                                          | ✅ Production | `packages/core/src/context/assembler.ts`          |
+| Conversation orchestration                                | ❌ Not built  | —                                                 |
+| Prompt template engine                                    | ❌ Empty dirs | `packages/core/src/prompts/`, `packages/ai/`      |
+| Pipeline runner (execution loop)                          | ❌ Missing    | `packages/core/`                                  |
 
 ### What Phase 3.7 Must Build
 
@@ -152,8 +152,8 @@ docs/02_SRS_Prompt.md               ← SRS generation prompt
 
 ```typescript
 interface PromptContext {
-  masterContext?: string        // From Master Context document
-  upstreamArtifacts: Record<string, string>  // dependency stepId → content
+  masterContext?: string // From Master Context document
+  upstreamArtifacts: Record<string, string> // dependency stepId → content
   projectSettings: ProjectSettings
   workspaceSettings: WorkspaceSettings
   userInput?: string
@@ -169,7 +169,7 @@ function composePrompt(template: string, context: PromptContext): string {
   // Prefix: ## Upstream Context
   for (const [stepId, content] of Object.entries(context.upstreamArtifacts)) {
     prompt += `\n\n---\n## Context: ${stepId}\n${content.slice(0, 8000)}`
-    break  // Only include immediate dependencies
+    break // Only include immediate dependencies
   }
 
   return prompt
@@ -241,7 +241,7 @@ The `detectState()` function in `packages/core/src/pipeline/state.ts` already co
 ```typescript
 // SSE consumption in browser
 const eventSource = new EventSource('/api/v1/pipeline/generate/stream?projectId=...&stepId=...')
-eventSource.onmessage = (e) => {
+eventSource.onmessage = e => {
   // append to message display
 }
 eventSource.onerror = () => {
@@ -295,7 +295,11 @@ Add `GenerationResult` mapping to Prisma `Generation` creation:
 ```typescript
 // Current: adapter returns GenerationResult
 // Needed: map GenerationResult → Prisma.GenerationCreateInput
-function toGenerationInput(result: GenerationResult, conversationId: string, provider: LLMProvider) {
+function toGenerationInput(
+  result: GenerationResult,
+  conversationId: string,
+  provider: LLMProvider,
+) {
   return {
     conversation: { connect: { id: conversationId } },
     model: result.model,
@@ -333,51 +337,51 @@ packages/ai/src/
 
 ## 9. API Endpoints (Phase 3.7 to implement)
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| `POST` | `/api/v1/pipeline/generate` | Start document generation (non-streaming) |
-| `POST` | `/api/v1/pipeline/generate/stream` | Start document generation (SSE streaming) |
-| `POST` | `/api/v1/pipeline/generate/:id/cancel` | Cancel running generation |
-| `GET` | `/api/v1/conversations` | List conversations (filter by project) |
-| `GET` | `/api/v1/conversations/:id` | Get conversation with messages |
-| `DELETE` | `/api/v1/conversations/:id` | Archive conversation |
-| `GET` | `/api/v1/conversations/:id/messages` | Get messages for conversation |
+| Method   | Path                                   | Purpose                                   |
+| -------- | -------------------------------------- | ----------------------------------------- |
+| `POST`   | `/api/v1/pipeline/generate`            | Start document generation (non-streaming) |
+| `POST`   | `/api/v1/pipeline/generate/stream`     | Start document generation (SSE streaming) |
+| `POST`   | `/api/v1/pipeline/generate/:id/cancel` | Cancel running generation                 |
+| `GET`    | `/api/v1/conversations`                | List conversations (filter by project)    |
+| `GET`    | `/api/v1/conversations/:id`            | Get conversation with messages            |
+| `DELETE` | `/api/v1/conversations/:id`            | Archive conversation                      |
+| `GET`    | `/api/v1/conversations/:id/messages`   | Get messages for conversation             |
 
 ---
 
 ## 10. Tech Stack Integration
 
-| Layer | Technology | Status |
-|-------|-----------|--------|
-| LLM Adapters | `@promptpilot/adapters` (OpenAI + Anthropic) | ✅ Built |
-| Streaming | SSE via `AsyncIterable<string>` | ✅ Built |
-| Token Counting | `@promptpilot/shared` (`countTokens`, `estimateCost`) | ✅ Built |
-| Database | Prisma (`AIConversation`, `Message`, `Generation`, `Document`) | ✅ Built |
-| Repositories | `@promptpilot/database` (CRUD + soft delete + aggregation) | ✅ Built |
-| Config | `@promptpilot/config` (provider, model, temperature, maxTokens) | ✅ Built |
-| Error Handling | `@promptpilot/shared` (AdapterError, PipelineError, 11 classes) | ✅ Built |
-| Pipeline Engine | `@promptpilot/core` (state detection, context assembly) | ✅ Built |
-| Generation Service | `packages/ai/src/services/` | 🔜 To build |
-| Prompt Engine | `packages/ai/src/services/` | 🔜 To build |
-| Pipeline Runner | `packages/ai/src/services/` | 🔜 To build |
+| Layer              | Technology                                                      | Status      |
+| ------------------ | --------------------------------------------------------------- | ----------- |
+| LLM Adapters       | `@promptpilot/adapters` (OpenAI + Anthropic)                    | ✅ Built    |
+| Streaming          | SSE via `AsyncIterable<string>`                                 | ✅ Built    |
+| Token Counting     | `@promptpilot/shared` (`countTokens`, `estimateCost`)           | ✅ Built    |
+| Database           | Prisma (`AIConversation`, `Message`, `Generation`, `Document`)  | ✅ Built    |
+| Repositories       | `@promptpilot/database` (CRUD + soft delete + aggregation)      | ✅ Built    |
+| Config             | `@promptpilot/config` (provider, model, temperature, maxTokens) | ✅ Built    |
+| Error Handling     | `@promptpilot/shared` (AdapterError, PipelineError, 11 classes) | ✅ Built    |
+| Pipeline Engine    | `@promptpilot/core` (state detection, context assembly)         | ✅ Built    |
+| Generation Service | `packages/ai/src/services/`                                     | 🔜 To build |
+| Prompt Engine      | `packages/ai/src/services/`                                     | 🔜 To build |
+| Pipeline Runner    | `packages/ai/src/services/`                                     | 🔜 To build |
 
 ---
 
 ## 11. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| LLM Adapters (2 providers) | ✅ Built + tested in integration tests |
-| Prisma AI Models (3 models) | ✅ Schema validated |
-| Repositories (3 AI repos) | ✅ Full CRUD |
-| Token Counting | ✅ Built + tested |
-| Cost Estimation | ✅ Built + tested |
-| Streaming (adapter level) | ✅ Built |
-| Generation Service | 🔜 Phase 3.7 |
-| Prompt Engine | 🔜 Phase 3.7 |
-| Pipeline Runner | 🔜 Phase 3.7 |
-| Frontend AI UI | 🔜 Phase 3.7 |
-| Google/Ollama adapters | 🔜 Phase 4 |
+| Criterion                   | Status                                 |
+| --------------------------- | -------------------------------------- |
+| LLM Adapters (2 providers)  | ✅ Built + tested in integration tests |
+| Prisma AI Models (3 models) | ✅ Schema validated                    |
+| Repositories (3 AI repos)   | ✅ Full CRUD                           |
+| Token Counting              | ✅ Built + tested                      |
+| Cost Estimation             | ✅ Built + tested                      |
+| Streaming (adapter level)   | ✅ Built                               |
+| Generation Service          | 🔜 Phase 3.7                           |
+| Prompt Engine               | 🔜 Phase 3.7                           |
+| Pipeline Runner             | 🔜 Phase 3.7                           |
+| Frontend AI UI              | 🔜 Phase 3.7                           |
+| Google/Ollama adapters      | 🔜 Phase 4                             |
 
 ---
 
@@ -448,17 +452,17 @@ sequenceDiagram
 
 ## 14. Phase 3.7 Implementation Plan
 
-| # | Task | Files | Priority |
-|---|------|-------|----------|
-| 1 | `GenerationService` — conversation orchestration | `packages/ai/src/services/generation.ts` | 🔴 P0 |
-| 2 | `PromptEngine` — template loading + variable substitution | `packages/ai/src/services/promptEngine.ts` | 🔴 P0 |
-| 3 | `PipelineRunner` — step execution loop | `packages/ai/src/services/pipelineRunner.ts` | 🔴 P0 |
-| 4 | SSE handler — format + deliver streaming events | `packages/ai/src/streaming/sseHandler.ts` | 🔴 P0 |
-| 5 | API endpoints — 7 new routes in `apps/api/` | `apps/api/src/routes/pipeline.ts` | 🔴 P0 |
-| 6 | Frontend conversation UI | `apps/frontend/app/(app)/project/[slug]/conversations/*` | 🟡 P1 |
-| 7 | Streaming display in document editor | `apps/frontend/app/(app)/project/[slug]/editor/` | 🟡 P1 |
-| 8 | Google + Ollama adapters | `packages/adapters/src/google.ts`, `ollama.ts` | 🟢 P2 |
-| 9 | Pipeline cancellation + resume | `packages/ai/src/services/` | 🟢 P2 |
+| #   | Task                                                      | Files                                                    | Priority |
+| --- | --------------------------------------------------------- | -------------------------------------------------------- | -------- |
+| 1   | `GenerationService` — conversation orchestration          | `packages/ai/src/services/generation.ts`                 | 🔴 P0    |
+| 2   | `PromptEngine` — template loading + variable substitution | `packages/ai/src/services/promptEngine.ts`               | 🔴 P0    |
+| 3   | `PipelineRunner` — step execution loop                    | `packages/ai/src/services/pipelineRunner.ts`             | 🔴 P0    |
+| 4   | SSE handler — format + deliver streaming events           | `packages/ai/src/streaming/sseHandler.ts`                | 🔴 P0    |
+| 5   | API endpoints — 7 new routes in `apps/api/`               | `apps/api/src/routes/pipeline.ts`                        | 🔴 P0    |
+| 6   | Frontend conversation UI                                  | `apps/frontend/app/(app)/project/[slug]/conversations/*` | 🟡 P1    |
+| 7   | Streaming display in document editor                      | `apps/frontend/app/(app)/project/[slug]/editor/`         | 🟡 P1    |
+| 8   | Google + Ollama adapters                                  | `packages/adapters/src/google.ts`, `ollama.ts`           | 🟢 P2    |
+| 9   | Pipeline cancellation + resume                            | `packages/ai/src/services/`                              | 🟢 P2    |
 
 ---
 

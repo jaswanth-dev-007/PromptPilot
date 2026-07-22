@@ -49,48 +49,48 @@ Methods: `findById`, `findByWorkspaceAndSlug`, `create`, `update`, `softDelete`,
                     │ (future)                           │ restorable
 ```
 
-| Status | Meaning | When |
-|--------|---------|------|
-| `DRAFT` | Project created, no pipeline run yet | Initial creation |
-| `ACTIVE` | Pipeline running or artifacts generated | First pipeline step starts |
-| `COMPLETED` | All 9 steps completed | Pipeline finishes |
-| `ARCHIVED` | Project archived | User action (soft delete) |
+| Status      | Meaning                                 | When                       |
+| ----------- | --------------------------------------- | -------------------------- |
+| `DRAFT`     | Project created, no pipeline run yet    | Initial creation           |
+| `ACTIVE`    | Pipeline running or artifacts generated | First pipeline step starts |
+| `COMPLETED` | All 9 steps completed                   | Pipeline finishes          |
+| `ARCHIVED`  | Project archived                        | User action (soft delete)  |
 
 ### State Transitions
 
-| From | To | Trigger |
-|------|----|---------|
-| — | DRAFT | `POST /api/v1/projects` |
-| DRAFT | ACTIVE | Pipeline step starts |
-| ACTIVE | COMPLETED | Pipeline completes all steps |
-| ACTIVE | DRAFT | Future: reset pipeline |
-| COMPLETED | ARCHIVED | User action |
+| From      | To        | Trigger                      |
+| --------- | --------- | ---------------------------- |
+| —         | DRAFT     | `POST /api/v1/projects`      |
+| DRAFT     | ACTIVE    | Pipeline step starts         |
+| ACTIVE    | COMPLETED | Pipeline completes all steps |
+| ACTIVE    | DRAFT     | Future: reset pipeline       |
+| COMPLETED | ARCHIVED  | User action                  |
 
 ---
 
 ## 3. Project Entity (12 fields)
 
-| Field | Type | Required | Notes |
-|-------|------|----------|-------|
-| `id` | UUID | ✅ | Primary key |
-| `name` | String | ✅ | Display name (1–100 chars) |
-| `slug` | String | ✅ | URL-safe, unique per workspace |
-| `description` | String? | ❌ | Markdown supported |
-| `workspaceId` | UUID | ✅ | Parent workspace FK |
-| `ownerId` | UUID | ✅ | Creator FK |
-| `status` | Enum | ✅ | DRAFT→ACTIVE→COMPLETED→ARCHIVED |
-| `settings` | JSON | ✅ | LLM overrides per project |
-| `deletedAt` | DateTime? | ❌ | Soft delete |
-| `createdAt` | DateTime | ✅ | Auto |
-| `updatedAt` | DateTime | ✅ | Auto |
+| Field         | Type      | Required | Notes                           |
+| ------------- | --------- | -------- | ------------------------------- |
+| `id`          | UUID      | ✅       | Primary key                     |
+| `name`        | String    | ✅       | Display name (1–100 chars)      |
+| `slug`        | String    | ✅       | URL-safe, unique per workspace  |
+| `description` | String?   | ❌       | Markdown supported              |
+| `workspaceId` | UUID      | ✅       | Parent workspace FK             |
+| `ownerId`     | UUID      | ✅       | Creator FK                      |
+| `status`      | Enum      | ✅       | DRAFT→ACTIVE→COMPLETED→ARCHIVED |
+| `settings`    | JSON      | ✅       | LLM overrides per project       |
+| `deletedAt`   | DateTime? | ❌       | Soft delete                     |
+| `createdAt`   | DateTime  | ✅       | Auto                            |
+| `updatedAt`   | DateTime  | ✅       | Auto                            |
 
 ### ProjectSettings
 
 ```typescript
 interface ProjectSettings {
-  model?: string           // Override workspace default
-  temperature?: number     // Override workspace default
-  maxTokens?: number       // Override workspace default
+  model?: string // Override workspace default
+  temperature?: number // Override workspace default
+  maxTokens?: number // Override workspace default
   parallelExecution?: boolean
 }
 ```
@@ -99,11 +99,11 @@ interface ProjectSettings {
 
 ## 4. Children (Cascade)
 
-| Child | Count | Description |
-|-------|-------|-------------|
-| `Document[]` | 0–9 | One per pipeline step |
-| `AIConversation[]` | 0–9+ | One per pipeline step, plus retries |
-| `Export[]` | 0–N | Format conversions |
+| Child              | Count | Description                         |
+| ------------------ | ----- | ----------------------------------- |
+| `Document[]`       | 0–9   | One per pipeline step               |
+| `AIConversation[]` | 0–9+  | One per pipeline step, plus retries |
+| `Export[]`         | 0–N   | Format conversions                  |
 
 **Cascade delete:** Deleting a project cascades to all documents, conversations, messages, generations, and exports.
 
@@ -111,15 +111,15 @@ interface ProjectSettings {
 
 ## 5. API Endpoints (to implement in Phase 3.6)
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| `GET` | `/api/v1/projects` | List projects (filter by workspace) |
-| `POST` | `/api/v1/projects` | Create project |
-| `GET` | `/api/v1/projects/:id` | Get project detail |
-| `PATCH` | `/api/v1/projects/:id` | Update name/slug/description/status/settings |
-| `DELETE` | `/api/v1/projects/:id` | Archive project (soft delete) |
-| `POST` | `/api/v1/projects/:id/restore` | Restore archived project (future) |
-| `POST` | `/api/v1/projects/:id/duplicate` | Clone project with settings (future) |
+| Method   | Path                             | Purpose                                      |
+| -------- | -------------------------------- | -------------------------------------------- |
+| `GET`    | `/api/v1/projects`               | List projects (filter by workspace)          |
+| `POST`   | `/api/v1/projects`               | Create project                               |
+| `GET`    | `/api/v1/projects/:id`           | Get project detail                           |
+| `PATCH`  | `/api/v1/projects/:id`           | Update name/slug/description/status/settings |
+| `DELETE` | `/api/v1/projects/:id`           | Archive project (soft delete)                |
+| `POST`   | `/api/v1/projects/:id/restore`   | Restore archived project (future)            |
+| `POST`   | `/api/v1/projects/:id/duplicate` | Clone project with settings (future)         |
 
 ---
 
@@ -187,18 +187,18 @@ packages/database/src/repositories/
 
 ## 9. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Prisma model | ✅ |
-| Repository (CRUD + soft delete) | ✅ |
-| Frontend routes (6 pages) | ✅ |
-| Sidebar integration | ✅ (NavigationContext, project-scoped) |
-| Route protection | ✅ (middleware: `/project/*`) |
-| Empty states | ✅ |
-| Settings page | ✅ |
-| Document grid (9 types) | ✅ |
-| Cascade delete strategy | ✅ |
-| Document versioning | ✅ (DocumentVersion append-only) |
-| Token/cost tracking | ✅ (Generation model) |
+| Criterion                       | Status                                 |
+| ------------------------------- | -------------------------------------- |
+| Prisma model                    | ✅                                     |
+| Repository (CRUD + soft delete) | ✅                                     |
+| Frontend routes (6 pages)       | ✅                                     |
+| Sidebar integration             | ✅ (NavigationContext, project-scoped) |
+| Route protection                | ✅ (middleware: `/project/*`)          |
+| Empty states                    | ✅                                     |
+| Settings page                   | ✅                                     |
+| Document grid (9 types)         | ✅                                     |
+| Cascade delete strategy         | ✅                                     |
+| Document versioning             | ✅ (DocumentVersion append-only)       |
+| Token/cost tracking             | ✅ (Generation model)                  |
 
 **Project Management Architecture Score: 100/100**

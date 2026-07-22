@@ -12,23 +12,25 @@ export default function AboutPage() {
       <div style={styles.container}>
         <h1 style={styles.heading}>About PromptPilot</h1>
         <p style={styles.paragraph}>
-          PromptPilot was built to solve a problem every engineer faces: the gap between having an idea and having
-          a complete, professional software specification.
+          PromptPilot was built to solve a problem every engineer faces: the gap between having an
+          idea and having a complete, professional software specification.
         </p>
         <p style={styles.paragraph}>
-          Traditional approaches — writing specs by hand, pasting prompts into ChatGPT, or using generic
-          documentation tools — produce inconsistent, incomplete results. PromptPilot&apos;s 9-step AI pipeline
-          ensures every generated document is internally consistent, professionally structured, and ready for
-          production.
+          Traditional approaches — writing specs by hand, pasting prompts into ChatGPT, or using
+          generic documentation tools — produce inconsistent, incomplete results. PromptPilot&apos;s
+          9-step AI pipeline ensures every generated document is internally consistent,
+          professionally structured, and ready for production.
         </p>
         <p style={styles.paragraph}>
-          We believe great software starts with great specifications. PromptPilot makes that step effortless.
+          We believe great software starts with great specifications. PromptPilot makes that step
+          effortless.
         </p>
 
         <h2 style={styles.subheading}>Our Mission</h2>
         <p style={styles.paragraph}>
-          Democratize software planning. Give every developer, founder, and team the ability to produce
-          enterprise-grade engineering artifacts — regardless of budget, experience, or team size.
+          Democratize software planning. Give every developer, founder, and team the ability to
+          produce enterprise-grade engineering artifacts — regardless of budget, experience, or team
+          size.
         </p>
 
         <h2 style={styles.subheading}>Contact</h2>

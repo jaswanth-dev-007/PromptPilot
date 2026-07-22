@@ -78,10 +78,10 @@ export function DropdownItem({ children, onClick, danger = false }: DropdownItem
         fontWeight: 400,
       }}
       onMouseEnter={e => {
-        (e.target as HTMLElement).style.backgroundColor = '#F1F5F9'
+        ;(e.target as HTMLElement).style.backgroundColor = '#F1F5F9'
       }}
       onMouseLeave={e => {
-        (e.target as HTMLElement).style.backgroundColor = 'transparent'
+        ;(e.target as HTMLElement).style.backgroundColor = 'transparent'
       }}
     >
       {children}

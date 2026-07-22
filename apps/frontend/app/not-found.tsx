@@ -1,16 +1,26 @@
 export default function NotFound() {
   return (
-    <main style={{
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '24px',
-      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-      textAlign: 'center',
-    }}>
-      <div style={{ fontSize: 'clamp(4rem, 10vw, 8rem)', fontWeight: 700, color: '#E2E8F0', lineHeight: 1, marginBottom: '16px' }}>
+    <main
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px',
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        textAlign: 'center',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 'clamp(4rem, 10vw, 8rem)',
+          fontWeight: 700,
+          color: '#E2E8F0',
+          lineHeight: 1,
+          marginBottom: '16px',
+        }}
+      >
         404
       </div>
       <h1 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#111827', margin: '0 0 8px' }}>

@@ -48,7 +48,13 @@ export function FAQ() {
                 style={styles.questionBtn}
               >
                 <span>{item.q}</span>
-                <span style={{ fontSize: '1.25rem', transition: 'transform 0.2s', transform: openIndex === i ? 'rotate(45deg)' : 'none' }}>
+                <span
+                  style={{
+                    fontSize: '1.25rem',
+                    transition: 'transform 0.2s',
+                    transform: openIndex === i ? 'rotate(45deg)' : 'none',
+                  }}
+                >
                   +
                 </span>
               </button>

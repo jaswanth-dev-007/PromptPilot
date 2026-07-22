@@ -15,21 +15,21 @@ export const metadata: Metadata = {
     'Turn your product idea into a complete engineering specification — PRD, SRS, architecture, database schema, API spec, and roadmap — in minutes. Powered by AI. Built for engineers.',
   openGraph: {
     title: 'PromptPilot — AI-Powered Software Planning Pipeline',
-    description:
-      'Turn your product idea into a complete engineering specification in minutes.',
+    description: 'Turn your product idea into a complete engineering specification in minutes.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PromptPilot — AI-Powered Software Planning Pipeline',
-    description:
-      'Turn your product idea into a complete engineering specification in minutes.',
+    description: 'Turn your product idea into a complete engineering specification in minutes.',
   },
 }
 
 export default function HomePage() {
   return (
-    <main style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
+    <main
+      style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}
+    >
       <Nav />
       <Hero />
       <HowItWorks />
@@ -52,9 +52,7 @@ function Hero() {
           <span style={heroStyles.badgeDot}>●</span>
           Now powered by GPT-4o and Claude 3.5 Sonnet
         </div>
-        <h1 style={heroStyles.heading}>
-          Your Idea → Complete Engineering Specification
-        </h1>
+        <h1 style={heroStyles.heading}>Your Idea → Complete Engineering Specification</h1>
         <p style={heroStyles.subtitle}>
           PromptPilot transforms a simple product description into a complete suite of software
           engineering documents — PRD, SRS, architecture, database schema, API spec, and roadmap —

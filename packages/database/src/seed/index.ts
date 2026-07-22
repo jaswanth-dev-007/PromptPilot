@@ -75,7 +75,16 @@ Web application with REST API backend.
 Software engineering tools and developer productivity.`,
     status: 'GENERATED',
     version: 1,
-    conversation: { create: { project: { connect: { id: project.id } }, stepId: 'master-context', model: 'gpt-4o', status: 'COMPLETED', startedAt: new Date(), completedAt: new Date() } },
+    conversation: {
+      create: {
+        project: { connect: { id: project.id } },
+        stepId: 'master-context',
+        model: 'gpt-4o',
+        status: 'COMPLETED',
+        startedAt: new Date(),
+        completedAt: new Date(),
+      },
+    },
   })
   console.log(`   ✅ Document: ${masterContext.title}`)
 
@@ -100,7 +109,16 @@ Software engineering tools and developer productivity.`,
 - SOC 2 Type II compliance`,
     status: 'GENERATED',
     version: 1,
-    conversation: { create: { project: { connect: { id: project.id } }, stepId: 'prd', model: 'gpt-4o', status: 'COMPLETED', startedAt: new Date(), completedAt: new Date() } },
+    conversation: {
+      create: {
+        project: { connect: { id: project.id } },
+        stepId: 'prd',
+        model: 'gpt-4o',
+        status: 'COMPLETED',
+        startedAt: new Date(),
+        completedAt: new Date(),
+      },
+    },
   })
   console.log(`   ✅ Document: ${prdDoc.title}`)
 
@@ -122,9 +140,27 @@ Software engineering tools and developer productivity.`,
 
   // ── Messages ──
   await MessageRepository.createMany([
-    { conversationId: conversation.id, role: 'SYSTEM', content: 'You are a software requirements expert...', sequence: 1, tokens: 120 },
-    { conversationId: conversation.id, role: 'USER', content: 'Generate an SRS for PromptPilot based on the PRD and Master Context.', sequence: 2, tokens: 4400 },
-    { conversationId: conversation.id, role: 'ASSISTANT', content: '# Software Requirements Specification...', sequence: 3, tokens: 8230 },
+    {
+      conversationId: conversation.id,
+      role: 'SYSTEM',
+      content: 'You are a software requirements expert...',
+      sequence: 1,
+      tokens: 120,
+    },
+    {
+      conversationId: conversation.id,
+      role: 'USER',
+      content: 'Generate an SRS for PromptPilot based on the PRD and Master Context.',
+      sequence: 2,
+      tokens: 4400,
+    },
+    {
+      conversationId: conversation.id,
+      role: 'ASSISTANT',
+      content: '# Software Requirements Specification...',
+      sequence: 3,
+      tokens: 8230,
+    },
   ])
   console.log('   ✅ Messages: 3')
 

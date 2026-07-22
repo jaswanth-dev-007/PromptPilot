@@ -1,6 +1,7 @@
 # PromptPilot — Landing Page Specification
 
 ## Complete Enterprise-Grade UX, UI & Engineering Specification
+
 ### Version 1.0 — Production-Ready Build Document
 
 ---
@@ -170,42 +171,19 @@ hero-glow: radial-gradient(
 );
 
 /* Hero secondary glow */
-hero-glow-2: radial-gradient(
-  circle at 80% 20%,
-  rgba(99, 102, 241, 0.06) 0%,
-  transparent 50%
-);
+hero-glow-2: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
 
 /* CTA section gradient */
-cta-gradient: linear-gradient(
-  135deg,
-  #4F46E5 0%,
-  #6366F1 50%,
-  #818CF8 100%
-);
+cta-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%);
 
 /* Card border gradient (glass effect) */
-glass-border: linear-gradient(
-  135deg,
-  rgba(255, 255, 255, 0.2) 0%,
-  rgba(255, 255, 255, 0.05) 100%
-);
+glass-border: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
 
 /* Feature icon gradient */
-icon-gradient: linear-gradient(
-  135deg,
-  #4F46E5 0%,
-  #818CF8 100%
-);
+icon-gradient: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
 
 /* Divider gradient */
-divider-gradient: linear-gradient(
-  to right,
-  transparent,
-  #E2E8F0 20%,
-  #E2E8F0 80%,
-  transparent
-);
+divider-gradient: linear-gradient(to right, transparent, #e2e8f0 20%, #e2e8f0 80%, transparent);
 ```
 
 ### Buttons
@@ -301,31 +279,37 @@ divider-gradient: linear-gradient(
 ```css
 /* Standard card */
 .card {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 28px;
-  transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease,
+    border-color 150ms ease;
 }
 .card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
-  border-color: #CBD5E1;
+  border-color: #cbd5e1;
 }
 
 /* Feature card */
 .card-feature {
-  background: #F8FAFC;
-  border: 1px solid #F1F5F9;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
   border-radius: 16px;
   padding: 32px 24px;
   text-align: center;
-  transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease,
+    border-color 150ms ease;
 }
 .card-feature:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   transform: translateY(-2px);
-  border-color: #E2E8F0;
+  border-color: #e2e8f0;
 }
 
 /* Glass card */
@@ -364,7 +348,7 @@ divider-gradient: linear-gradient(
   border-radius: 8px;
   font-size: 0.75rem;
   font-weight: 500;
-  background: #F1F5F9;
+  background: #f1f5f9;
   color: #475569;
 }
 ```
@@ -666,10 +650,10 @@ Alternating backgrounds:
 
 **Component:** `Nav`
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `variant` | `'landing' \| 'app'` | Landing uses transparent→glass; App uses solid bg |
-| `authenticated` | `boolean` | Switches between auth buttons and user menu |
+| Prop            | Type                 | Description                                       |
+| --------------- | -------------------- | ------------------------------------------------- |
+| `variant`       | `'landing' \| 'app'` | Landing uses transparent→glass; App uses solid bg |
+| `authenticated` | `boolean`            | Switches between auth buttons and user menu       |
 
 **Navigation Links** (public):
 
@@ -932,14 +916,14 @@ ANIMATION:
 ```typescript
 // Conceptual behavior
 const demoSteps = [
-  { prompt: "$ promptpilot generate", delay: 500 },
-  { prompt: "▸ Describe your product:", delay: 800 },
+  { prompt: '$ promptpilot generate', delay: 500 },
+  { prompt: '▸ Describe your product:', delay: 800 },
   { text: ' "A mobile banking app for Gen Z users with AI-powered savings..."', delay: 1200 },
-  { status: "▸ Generating Master Context... ✓ ", delay: 600 },
-  { status: "▸ Generating PRD... ⟳", delay: 800 },
-  { status: "▸ 1,247 tokens · $0.03", delay: 400 },
+  { status: '▸ Generating Master Context... ✓ ', delay: 600 },
+  { status: '▸ Generating PRD... ⟳', delay: 800 },
+  { status: '▸ 1,247 tokens · $0.03', delay: 400 },
   // pause 3s, then loop
-];
+]
 
 // Each line types out character by character (30ms per char for prompts, 20ms for text)
 // Checkmark appears with spring animation (scale 0 → 1.2 → 1)
@@ -1028,16 +1012,16 @@ Each card follows this structure:
 
 ```typescript
 interface FeatureCard {
-  icon: string;           // Lucide icon name or custom SVG path
-  iconBg: string;         // Background color for icon container
-  title: string;          // Feature name (1-3 words)
-  description: string;    // 1-2 sentences explaining the feature
-  benefits: string[];     // 3 bullet points (key capabilities)
+  icon: string // Lucide icon name or custom SVG path
+  iconBg: string // Background color for icon container
+  title: string // Feature name (1-3 words)
+  description: string // 1-2 sentences explaining the feature
+  benefits: string[] // 3 bullet points (key capabilities)
   cta: {
-    label: string;        // "Try it →", "Learn more →", "See demo →"
-    href: string;         // Link target
-  };
-  animation: string;      // Hover animation variant
+    label: string // "Try it →", "Learn more →", "See demo →"
+    href: string // Link target
+  }
+  animation: string // Hover animation variant
 }
 
 // Card variants:
@@ -1258,13 +1242,13 @@ Each step has this data structure:
 
 ```typescript
 interface JourneyStep {
-  id: number;
-  label: string;           // Short label (1-2 words)
-  title: string;           // Full title
-  description: string;     // 1-2 sentence explanation
-  capabilities: string[];  // 3 bullet points
-  screenshot: string;      // Image path or component reference
-  icon: string;            // Lucide icon name
+  id: number
+  label: string // Short label (1-2 words)
+  title: string // Full title
+  description: string // 1-2 sentence explanation
+  capabilities: string[] // 3 bullet points
+  screenshot: string // Image path or component reference
+  icon: string // Lucide icon name
 }
 ```
 
@@ -1487,24 +1471,26 @@ Card Descriptions:
 .input {
   height: 44px;
   padding: 0 14px;
-  border: 1.5px solid #D1D5DB;
+  border: 1.5px solid #d1d5db;
   border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
   color: #334155;
-  background: #FFFFFF;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  background: #ffffff;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 .input:focus {
   outline: none;
-  border-color: #4F46E5;
+  border-color: #4f46e5;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 .input::placeholder {
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 .input.error {
-  border-color: #EF4444;
+  border-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
@@ -1679,21 +1665,21 @@ REDUCED MOTION:
 ```css
 /* Global focus visible */
 *:focus-visible {
-  outline: 2px solid #4F46E5;
+  outline: 2px solid #4f46e5;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 /* Custom focus ring for buttons (overrides default) */
 .btn:focus-visible {
-  outline: 2px solid #4F46E5;
+  outline: 2px solid #4f46e5;
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
 }
 
 /* Focus ring for inputs */
 .input:focus-visible {
-  border-color: #4F46E5;
+  border-color: #4f46e5;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 ```
@@ -1815,7 +1801,10 @@ Impact:
 ```html
 <!-- Primary Meta -->
 <title>PromptPilot — AI-Powered Software Planning Pipeline</title>
-<meta name="description" content="Turn your product idea into a complete engineering specification — PRD, SRS, architecture, database schema, API spec, and roadmap — in minutes. Powered by AI. Built for engineers." />
+<meta
+  name="description"
+  content="Turn your product idea into a complete engineering specification — PRD, SRS, architecture, database schema, API spec, and roadmap — in minutes. Powered by AI. Built for engineers."
+/>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://promptpilot.dev" />
@@ -1824,7 +1813,10 @@ Impact:
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://promptpilot.dev" />
 <meta property="og:title" content="PromptPilot — AI-Powered Software Planning Pipeline" />
-<meta property="og:description" content="Turn your product idea into a complete engineering specification in minutes." />
+<meta
+  property="og:description"
+  content="Turn your product idea into a complete engineering specification in minutes."
+/>
 <meta property="og:image" content="https://promptpilot.dev/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -1835,7 +1827,10 @@ Impact:
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content="https://promptpilot.dev" />
 <meta name="twitter:title" content="PromptPilot — AI-Powered Software Planning Pipeline" />
-<meta name="twitter:description" content="Turn your product idea into a complete engineering specification in minutes." />
+<meta
+  name="twitter:description"
+  content="Turn your product idea into a complete engineering specification in minutes."
+/>
 <meta name="twitter:image" content="https://promptpilot.dev/twitter-card.png" />
 <meta name="twitter:site" content="@promptpilot" />
 <meta name="twitter:creator" content="@promptpilot" />
@@ -1991,9 +1986,9 @@ All analytics opt-out ready
 const sectionAnimation = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },  // Trigger 100px before visible
+  viewport: { once: true, margin: '-100px' }, // Trigger 100px before visible
   transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
-};
+}
 
 // Applied via Framer Motion's motion.div with whileInView
 // Each card in a grid staggers by index * 50ms
@@ -2026,9 +2021,10 @@ REDUCED MOTION:
 
 ```css
 .btn {
-  transition: background-color 150ms ease,
-              box-shadow 150ms ease,
-              transform 150ms ease;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
 }
 .btn:hover {
   transform: translateY(-1px);
@@ -2042,14 +2038,15 @@ REDUCED MOTION:
 
 ```css
 .card {
-  transition: box-shadow 150ms ease,
-              transform 150ms ease,
-              border-color 150ms ease;
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease,
+    border-color 150ms ease;
 }
 .card:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
-  border-color: #CBD5E1;
+  border-color: #cbd5e1;
 }
 ```
 
@@ -2057,9 +2054,10 @@ REDUCED MOTION:
 
 ```css
 .nav {
-  transition: background-color 200ms ease,
-              box-shadow 200ms ease,
-              backdrop-filter 200ms ease;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    backdrop-filter 200ms ease;
 }
 ```
 
@@ -2115,11 +2113,15 @@ Mobile:           100ms stagger (fewer cards visible at once)
 
 ```css
 @keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 .skeleton {
-  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 8px;
@@ -2728,6 +2730,6 @@ Phase 4 — New sections:
 
 ---
 
-*Document Version: 1.0 — PromptPilot Landing Page Specification*
-*Last Updated: 2026-07-21*
-*Status: Ready for implementation*
+_Document Version: 1.0 — PromptPilot Landing Page Specification_
+_Last Updated: 2026-07-21_
+_Status: Ready for implementation_

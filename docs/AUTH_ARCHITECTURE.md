@@ -134,24 +134,24 @@ Client                          Server                          Email
 
 ### Access Token
 
-| Property | Value | Rationale |
-|----------|-------|-----------|
-| Algorithm | HS256 | Symmetric, single secret, no key distribution needed for MVP |
-| Payload | `{ userId, email, role, jti, iat, exp }` | Minimal payload — no workspace context |
-| Expiry | 15 minutes (future) / 7 days (current) | Short-lived in production, longer in dev |
-| Storage | Memory (JS variable) + HttpOnly cookie fallback | Never localStorage in production |
-| jti | UUID v4 per token | Enables individual revocation |
+| Property  | Value                                           | Rationale                                                    |
+| --------- | ----------------------------------------------- | ------------------------------------------------------------ |
+| Algorithm | HS256                                           | Symmetric, single secret, no key distribution needed for MVP |
+| Payload   | `{ userId, email, role, jti, iat, exp }`        | Minimal payload — no workspace context                       |
+| Expiry    | 15 minutes (future) / 7 days (current)          | Short-lived in production, longer in dev                     |
+| Storage   | Memory (JS variable) + HttpOnly cookie fallback | Never localStorage in production                             |
+| jti       | UUID v4 per token                               | Enables individual revocation                                |
 
 ### Refresh Token
 
-| Property | Value | Rationale |
-|----------|-------|-----------|
-| Algorithm | HS256 | Same as access |
-| Payload | `{ userId, email, role, jti, iat, exp }` | Same structure |
-| Expiry | 30 days | Rotated on each use — effectively unlimited |
-| Storage | HttpOnly, Secure, SameSite=Strict cookie | XSS-proof, CSRF-protected |
-| Rotation | Yes — new pair on every refresh | Previous token invalidated immediately |
-| Revocation | `$unset refreshTokenHash` on user | Simple, effective |
+| Property        | Value                                         | Rationale                                     |
+| --------------- | --------------------------------------------- | --------------------------------------------- |
+| Algorithm       | HS256                                         | Same as access                                |
+| Payload         | `{ userId, email, role, jti, iat, exp }`      | Same structure                                |
+| Expiry          | 30 days                                       | Rotated on each use — effectively unlimited   |
+| Storage         | HttpOnly, Secure, SameSite=Strict cookie      | XSS-proof, CSRF-protected                     |
+| Rotation        | Yes — new pair on every refresh               | Previous token invalidated immediately        |
+| Revocation      | `$unset refreshTokenHash` on user             | Simple, effective                             |
 | Reuse detection | Compare SHA-256(stored) vs SHA-256(presented) | If mismatch → revoke ALL tokens → force login |
 
 ### Token Rotation Strategy
@@ -190,13 +190,13 @@ Set-Cookie: refreshToken=<jwt>;
   Max-Age=2592000
 ```
 
-| Flag | Purpose |
-|------|---------|
-| `HttpOnly` | Inaccessible to JavaScript — XSS cannot steal tokens |
-| `Secure` | HTTPS only — no plaintext transmission |
-| `SameSite=Strict` | CSRF protection — cookie not sent cross-origin |
-| `Path=/api/v1/auth` | Refresh token only sent to auth endpoints |
-| `Max-Age` | Explicit expiry matching JWT expiry |
+| Flag                | Purpose                                              |
+| ------------------- | ---------------------------------------------------- |
+| `HttpOnly`          | Inaccessible to JavaScript — XSS cannot steal tokens |
+| `Secure`            | HTTPS only — no plaintext transmission               |
+| `SameSite=Strict`   | CSRF protection — cookie not sent cross-origin       |
+| `Path=/api/v1/auth` | Refresh token only sent to auth endpoints            |
+| `Max-Age`           | Explicit expiry matching JWT expiry                  |
 
 ### Development Configuration
 
@@ -222,12 +222,12 @@ Plaintext password
     Never exposed via API (toJSON strips it)
 ```
 
-| Property | Current | Recommended |
-|----------|---------|-------------|
-| Algorithm | bcrypt | ✅ Industry standard |
-| Cost factor | 12 rounds | ✅ ~350ms on modern hardware |
-| Salt | Auto-generated | ✅ Embedded in hash |
-| Pepper | ❌ None | 🔜 Add HMAC pepper (env variable) |
+| Property    | Current        | Recommended                       |
+| ----------- | -------------- | --------------------------------- |
+| Algorithm   | bcrypt         | ✅ Industry standard              |
+| Cost factor | 12 rounds      | ✅ ~350ms on modern hardware      |
+| Salt        | Auto-generated | ✅ Embedded in hash               |
+| Pepper      | ❌ None        | 🔜 Add HMAC pepper (env variable) |
 
 ### Future: Pepper Strategy
 
@@ -244,21 +244,21 @@ If pepper leaks: rotate pepper + force password reset
 
 ### Login Endpoint (`POST /auth/login`)
 
-| Rule | Value |
-|------|-------|
-| Window | 15 minutes |
-| Max attempts | 5 per IP + 5 per email |
-| Exceeded response | 429 + "Too many attempts. Try again in X minutes." |
-| Successful login | Resets counter for that IP/email |
-| Persistent failures | Progressive delay (1s → 5s → 15s → 60s) |
+| Rule                | Value                                              |
+| ------------------- | -------------------------------------------------- |
+| Window              | 15 minutes                                         |
+| Max attempts        | 5 per IP + 5 per email                             |
+| Exceeded response   | 429 + "Too many attempts. Try again in X minutes." |
+| Successful login    | Resets counter for that IP/email                   |
+| Persistent failures | Progressive delay (1s → 5s → 15s → 60s)            |
 
 ### Registration Endpoint (`POST /auth/register`)
 
-| Rule | Value |
-|------|-------|
-| Window | 1 hour |
-| Max attempts | 3 per IP |
-| Purpose | Prevent mass account creation |
+| Rule         | Value                         |
+| ------------ | ----------------------------- |
+| Window       | 1 hour                        |
+| Max attempts | 3 per IP                      |
+| Purpose      | Prevent mass account creation |
 
 ### All Auth Endpoints
 
@@ -299,21 +299,21 @@ Level 3: Project Roles (future)
 
 ### Permission Matrix
 
-| Action | SUPER_ADMIN | ADMIN | MEMBER |
-|--------|-------------|-------|--------|
-| Manage any workspace | ✅ | ❌ | ❌ |
-| Manage users | ✅ | ❌ | ❌ |
-| Create workspace | ✅ | ✅ | ✅ |
-| Delete own workspace | ✅ | ✅ | ❌ |
+| Action               | SUPER_ADMIN | ADMIN | MEMBER |
+| -------------------- | ----------- | ----- | ------ |
+| Manage any workspace | ✅          | ❌    | ❌     |
+| Manage users         | ✅          | ❌    | ❌     |
+| Create workspace     | ✅          | ✅    | ✅     |
+| Delete own workspace | ✅          | ✅    | ❌     |
 
-| Action | W_ADMIN | W_EDITOR | W_VIEWER |
-|--------|---------|----------|----------|
-| Manage members | ✅ | ❌ | ❌ |
-| Delete project | ✅ | ❌ | ❌ |
-| Create/edit project | ✅ | ✅ | ❌ |
-| Run pipeline | ✅ | ✅ | ❌ |
-| View projects | ✅ | ✅ | ✅ |
-| Export documents | ✅ | ✅ | ✅ |
+| Action              | W_ADMIN | W_EDITOR | W_VIEWER |
+| ------------------- | ------- | -------- | -------- |
+| Manage members      | ✅      | ❌       | ❌       |
+| Delete project      | ✅      | ❌       | ❌       |
+| Create/edit project | ✅      | ✅       | ❌       |
+| Run pipeline        | ✅      | ✅       | ❌       |
+| View projects       | ✅      | ✅       | ✅       |
+| Export documents    | ✅      | ✅       | ✅       |
 
 ### Middleware Implementation
 
@@ -357,6 +357,7 @@ sessions table:
 ```
 
 Benefits:
+
 - View active sessions per user
 - Revoke individual sessions
 - "Log out everywhere" — revoke all sessions
@@ -368,28 +369,28 @@ Benefits:
 
 ### CSRF Protection
 
-| Layer | Mechanism |
-|-------|-----------|
-| Cookies | `SameSite=Strict` |
-| Bearer tokens | CSRF does not apply (sent via header, not cookie) |
+| Layer               | Mechanism                                                |
+| ------------------- | -------------------------------------------------------- |
+| Cookies             | `SameSite=Strict`                                        |
+| Bearer tokens       | CSRF does not apply (sent via header, not cookie)        |
 | Additional (future) | CSRF token header (`X-CSRF-Token`) for cookie-based auth |
 
 ### XSS Protection
 
-| Layer | Mechanism |
-|-------|-----------|
-| Tokens | `HttpOnly` cookies — JS cannot read |
-| CSP header | `Content-Security-Policy` via helmet |
-| Input sanitization | Zod validation on all inputs |
-| Output encoding | React auto-escapes by default |
+| Layer              | Mechanism                            |
+| ------------------ | ------------------------------------ |
+| Tokens             | `HttpOnly` cookies — JS cannot read  |
+| CSP header         | `Content-Security-Policy` via helmet |
+| Input sanitization | Zod validation on all inputs         |
+| Output encoding    | React auto-escapes by default        |
 
 ### CORS Strategy
 
-| Environment | Origin |
-|-------------|--------|
-| Development | `http://localhost:3000` |
-| Production | `https://app.promptpilot.dev` |
-| Staging | `https://staging.promptpilot.dev` |
+| Environment | Origin                            |
+| ----------- | --------------------------------- |
+| Development | `http://localhost:3000`           |
+| Production  | `https://app.promptpilot.dev`     |
+| Staging     | `https://staging.promptpilot.dev` |
 
 ```
 app.use(cors({
@@ -403,12 +404,12 @@ app.use(cors({
 
 ### Account Lockout
 
-| Attempts | Action |
-|----------|--------|
-| 5 failed logins | Lock account for 15 minutes |
-| 10 failed logins | Lock account for 1 hour |
+| Attempts         | Action                                 |
+| ---------------- | -------------------------------------- |
+| 5 failed logins  | Lock account for 15 minutes            |
+| 10 failed logins | Lock account for 1 hour                |
 | 20 failed logins | Lock account until manual admin unlock |
-| Successful login | Reset counter |
+| Successful login | Reset counter                          |
 
 Storage: `failedLoginAttempts` + `lockedUntil` on User document.
 
@@ -591,27 +592,27 @@ Incoming Request
 
 ## 13. Production Readiness Review
 
-| Criterion | Current | Target | Status |
-|-----------|---------|--------|--------|
-| Password hashing | bcrypt 12 rounds | bcrypt 12 + pepper | ✅ Ready |
-| JWT algorithm | HS256 | HS256 (→ RS256 for OAuth) | ✅ Ready |
-| Token rotation | ✅ Per refresh | ✅ | ✅ Ready |
-| Token revocation | ✅ `$unset` hash | ✅ Session table | ✅ Ready |
-| Refresh reuse detection | ✅ Hash comparison | ✅ | ✅ Ready |
-| HttpOnly cookies | 🔜 | ✅ Phase 3.2 | 🔜 |
-| Rate limiting | ✅ 100/15m global | ✅ Per-endpoint | 🔜 |
-| Account lockout | ❌ | 5 failures → 15m lock | 🔜 Phase 4 |
-| CORS | ✅ Configured | ✅ | ✅ Ready |
-| CSRF | ✅ SameSite | ✅ + CSRF token | ✅ Ready |
-| XSS | ✅ React + helmet | ✅ CSP header | ✅ Ready |
-| Email verification | ❌ | Verification link | 🔜 Phase 4 |
-| Password reset | ❌ | Token + email flow | 🔜 Phase 4 |
-| RBAC | Platform roles | + Workspace + Project | 🔜 Phase 4 |
-| OAuth (Google/GitHub) | ❌ | Separate OAuthAccount table | 🔜 Phase 5 |
-| Enterprise SSO | ❌ | SAML/OIDC per org | 🔜 Phase 5 |
-| MFA / TOTP | ❌ | TOTP + recovery codes | 🔜 Phase 5 |
-| Passkeys | ❌ | WebAuthn | 🔜 Phase 5 |
-| Session management | ✅ Single device | Multi-device session table | 🔜 Phase 4 |
+| Criterion               | Current            | Target                      | Status     |
+| ----------------------- | ------------------ | --------------------------- | ---------- |
+| Password hashing        | bcrypt 12 rounds   | bcrypt 12 + pepper          | ✅ Ready   |
+| JWT algorithm           | HS256              | HS256 (→ RS256 for OAuth)   | ✅ Ready   |
+| Token rotation          | ✅ Per refresh     | ✅                          | ✅ Ready   |
+| Token revocation        | ✅ `$unset` hash   | ✅ Session table            | ✅ Ready   |
+| Refresh reuse detection | ✅ Hash comparison | ✅                          | ✅ Ready   |
+| HttpOnly cookies        | 🔜                 | ✅ Phase 3.2                | 🔜         |
+| Rate limiting           | ✅ 100/15m global  | ✅ Per-endpoint             | 🔜         |
+| Account lockout         | ❌                 | 5 failures → 15m lock       | 🔜 Phase 4 |
+| CORS                    | ✅ Configured      | ✅                          | ✅ Ready   |
+| CSRF                    | ✅ SameSite        | ✅ + CSRF token             | ✅ Ready   |
+| XSS                     | ✅ React + helmet  | ✅ CSP header               | ✅ Ready   |
+| Email verification      | ❌                 | Verification link           | 🔜 Phase 4 |
+| Password reset          | ❌                 | Token + email flow          | 🔜 Phase 4 |
+| RBAC                    | Platform roles     | + Workspace + Project       | 🔜 Phase 4 |
+| OAuth (Google/GitHub)   | ❌                 | Separate OAuthAccount table | 🔜 Phase 5 |
+| Enterprise SSO          | ❌                 | SAML/OIDC per org           | 🔜 Phase 5 |
+| MFA / TOTP              | ❌                 | TOTP + recovery codes       | 🔜 Phase 5 |
+| Passkeys                | ❌                 | WebAuthn                    | 🔜 Phase 5 |
+| Session management      | ✅ Single device   | Multi-device session table  | 🔜 Phase 4 |
 
 ---
 

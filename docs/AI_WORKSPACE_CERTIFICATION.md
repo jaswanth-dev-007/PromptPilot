@@ -21,11 +21,11 @@
 
 ### Production Services (3 new — built this phase)
 
-| Service | File | Lines | Key Capabilities |
-|---------|------|-------|-----------------|
-| **PromptEngine** | `engine/promptEngine.ts` | 115 | Variable substitution, template validation, token estimation, upstream artifact formatting |
-| **GenerationService** | `engine/generationService.ts` | 218 | Full 6-step orchestration: conversation → prompt → adapter → message → generation → document versioning |
-| **PipelineRunner** | `engine/pipelineRunner.ts` | 164 | Kahn's topological sort, dependency-respecting step execution, force/abort error modes |
+| Service               | File                          | Lines | Key Capabilities                                                                                        |
+| --------------------- | ----------------------------- | ----- | ------------------------------------------------------------------------------------------------------- |
+| **PromptEngine**      | `engine/promptEngine.ts`      | 115   | Variable substitution, template validation, token estimation, upstream artifact formatting              |
+| **GenerationService** | `engine/generationService.ts` | 218   | Full 6-step orchestration: conversation → prompt → adapter → message → generation → document versioning |
+| **PipelineRunner**    | `engine/pipelineRunner.ts`    | 164   | Kahn's topological sort, dependency-respecting step execution, force/abort error modes                  |
 
 ### Built-in Templates (9)
 
@@ -39,14 +39,14 @@ master-context → PRD → SRS → Architecture → Database
 
 ### Foundation Packages (reused, built earlier)
 
-| Package | Role |
-|---------|------|
-| `@promptpilot/adapters` | OpenAI + Anthropic LLM providers with streaming |
+| Package                 | Role                                                                                    |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| `@promptpilot/adapters` | OpenAI + Anthropic LLM providers with streaming                                         |
 | `@promptpilot/database` | 13 Prisma repositories (AIConversation, Message, Generation, Document, DocumentVersion) |
-| `@promptpilot/core` | Pipeline types, state detection, context assembly |
-| `@promptpilot/shared` | Token counting, cost estimation, 11 error classes, logger |
-| `@promptpilot/config` | Zod-validated configuration, feature flags |
-| `prisma/schema.prisma` | 12 data models, 17 enums, 29 indexes |
+| `@promptpilot/core`     | Pipeline types, state detection, context assembly                                       |
+| `@promptpilot/shared`   | Token counting, cost estimation, 11 error classes, logger                               |
+| `@promptpilot/config`   | Zod-validated configuration, feature flags                                              |
+| `prisma/schema.prisma`  | 12 data models, 17 enums, 29 indexes                                                    |
 
 ---
 
@@ -89,17 +89,17 @@ PipelineRunner.run()
 
 ## 4. Architecture Scores
 
-| Dimension | Score | Notes |
-|-----------|-------|-------|
-| **Prompt Engine** | 100/100 | Variable substitution, validation, token estimation, context injection |
-| **Generation Service** | 100/100 | Full 6-step orchestration, streaming + batch, error recovery |
-| **Pipeline Runner** | 100/100 | Topological sort, dependency resolution, force/abort modes |
-| **Template System** | 90/100 | 9 built-in templates, hardcoded — future: database-backed templates |
-| **Adapter Integration** | 100/100 | OpenAI + Anthropic via `createAdapter()`, streaming via AsyncIterable |
-| **Database Integration** | 100/100 | 5 repositories used atomically in a single generation flow |
-| **Error Handling** | 100/100 | PipelineError with step context, re-raise on non-force mode |
-| **TypeScript Quality** | 100/100 | Strict mode, 0 errors, all types explicit |
-| **Test Coverage** | 80/100 | 72 backend tests cover auth + DB; AI engine untested (needs API mocking) |
+| Dimension                | Score   | Notes                                                                    |
+| ------------------------ | ------- | ------------------------------------------------------------------------ |
+| **Prompt Engine**        | 100/100 | Variable substitution, validation, token estimation, context injection   |
+| **Generation Service**   | 100/100 | Full 6-step orchestration, streaming + batch, error recovery             |
+| **Pipeline Runner**      | 100/100 | Topological sort, dependency resolution, force/abort modes               |
+| **Template System**      | 90/100  | 9 built-in templates, hardcoded — future: database-backed templates      |
+| **Adapter Integration**  | 100/100 | OpenAI + Anthropic via `createAdapter()`, streaming via AsyncIterable    |
+| **Database Integration** | 100/100 | 5 repositories used atomically in a single generation flow               |
+| **Error Handling**       | 100/100 | PipelineError with step context, re-raise on non-force mode              |
+| **TypeScript Quality**   | 100/100 | Strict mode, 0 errors, all types explicit                                |
+| **Test Coverage**        | 80/100  | 72 backend tests cover auth + DB; AI engine untested (needs API mocking) |
 
 ### **OVERALL AI ENGINE SCORE: 96/100**
 

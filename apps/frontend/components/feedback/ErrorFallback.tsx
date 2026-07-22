@@ -59,15 +59,32 @@ export function ErrorFallback({
         ...variantStyles[variant],
       }}
     >
-      <div style={{ fontSize: isInline ? '1.25rem' : '2.5rem', marginBottom: isInline ? 0 : '16px', flexShrink: 0 }}>
+      <div
+        style={{
+          fontSize: isInline ? '1.25rem' : '2.5rem',
+          marginBottom: isInline ? 0 : '16px',
+          flexShrink: 0,
+        }}
+      >
         ⚠️
       </div>
       <div>
-        <div style={{ fontSize: isInline ? '0.875rem' : '1.125rem', fontWeight: 600, color: '#991B1B', marginBottom: '4px' }}>
+        <div
+          style={{
+            fontSize: isInline ? '0.875rem' : '1.125rem',
+            fontWeight: 600,
+            color: '#991B1B',
+            marginBottom: '4px',
+          }}
+        >
           {title}
-          {code && <span style={{ fontWeight: 400, color: '#EF4444', marginLeft: '8px' }}>{code}</span>}
+          {code && (
+            <span style={{ fontWeight: 400, color: '#EF4444', marginLeft: '8px' }}>{code}</span>
+          )}
         </div>
-        <p style={{ fontSize: '0.875rem', color: '#B91C1C', margin: '0 0 16px 0', lineHeight: 1.6 }}>
+        <p
+          style={{ fontSize: '0.875rem', color: '#B91C1C', margin: '0 0 16px 0', lineHeight: 1.6 }}
+        >
           {message}
         </p>
         {retry && (

@@ -1,7 +1,16 @@
 import { prisma } from '../client'
 
 type DocumentStatus = 'DRAFT' | 'GENERATED' | 'REVIEWED' | 'STALE'
-type DocumentType = 'MASTER_CONTEXT' | 'PRD' | 'SRS' | 'ARCHITECTURE' | 'DATABASE' | 'API_SPEC' | 'USER_FLOWS' | 'WIREFRAMES' | 'ROADMAP'
+type DocumentType =
+  | 'MASTER_CONTEXT'
+  | 'PRD'
+  | 'SRS'
+  | 'ARCHITECTURE'
+  | 'DATABASE'
+  | 'API_SPEC'
+  | 'USER_FLOWS'
+  | 'WIREFRAMES'
+  | 'ROADMAP'
 
 export const DocumentRepository = {
   findById(id: string) {
@@ -26,12 +35,26 @@ export const DocumentRepository = {
     content: string
     status?: DocumentStatus
     version?: number
-    conversation: { create: { project: { connect: { id: string } }; stepId: string; model: string; status?: 'ACTIVE' | 'COMPLETED' | 'FAILED' | 'CANCELLED'; startedAt?: Date; completedAt?: Date } }
+    conversation: {
+      create: {
+        project: { connect: { id: string } }
+        stepId: string
+        model: string
+        status?: 'ACTIVE' | 'COMPLETED' | 'FAILED' | 'CANCELLED'
+        startedAt?: Date
+        completedAt?: Date
+      }
+    }
   }) {
-    return prisma.document.create({ data: { ...data, status: data.status || 'DRAFT', version: data.version || 1 } })
+    return prisma.document.create({
+      data: { ...data, status: data.status || 'DRAFT', version: data.version || 1 },
+    })
   },
 
-  async update(id: string, data: { title?: string; status?: DocumentStatus; stale?: boolean; staleReason?: string | null }) {
+  async update(
+    id: string,
+    data: { title?: string; status?: DocumentStatus; stale?: boolean; staleReason?: string | null },
+  ) {
     return prisma.document.update({ where: { id }, data })
   },
 

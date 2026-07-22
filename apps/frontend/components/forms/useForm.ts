@@ -23,7 +23,9 @@ interface UseFormReturn<T extends Record<string, unknown>> {
   setValue: <K extends keyof T>(name: K, value: T[K]) => void
   setValues: (values: Partial<T>) => void
   getValue: <K extends keyof T>(name: K) => T[K]
-  register: <K extends keyof T>(name: K) => {
+  register: <K extends keyof T>(
+    name: K,
+  ) => {
     value: T[K]
     onChange: (value: T[K]) => void
     onBlur: () => void
@@ -108,46 +110,55 @@ export function useForm<T extends Record<string, unknown>>({
     setIsDirty(true)
   }, [])
 
-  const getValue = useCallback(<K extends keyof T>(name: K): T[K] => {
-    return values[name]
-  }, [values])
+  const getValue = useCallback(
+    <K extends keyof T>(name: K): T[K] => {
+      return values[name]
+    },
+    [values],
+  )
 
-  const register = useCallback(<K extends keyof T>(name: K) => ({
-    value: values[name],
-    onChange: (value: T[K]) => setValue(name, value),
-    onBlur: () => setTouched(prev => ({ ...prev, [name as string]: true })),
-    error: touched[name as string] ? errors[name as string] : undefined,
-    name: name as string,
-  }), [values, errors, touched, setValue])
+  const register = useCallback(
+    <K extends keyof T>(name: K) => ({
+      value: values[name],
+      onChange: (value: T[K]) => setValue(name, value),
+      onBlur: () => setTouched(prev => ({ ...prev, [name as string]: true })),
+      error: touched[name as string] ? errors[name as string] : undefined,
+      name: name as string,
+    }),
+    [values, errors, touched, setValue],
+  )
 
-  const handleSubmit = useCallback(async (e?: React.FormEvent) => {
-    e?.preventDefault()
-    setSubmitError(null)
+  const handleSubmit = useCallback(
+    async (e?: React.FormEvent) => {
+      e?.preventDefault()
+      setSubmitError(null)
 
-    // Mark all as touched
-    const allTouched: Record<string, boolean> = {}
-    for (const key of Object.keys(values)) allTouched[key] = true
-    setTouched(allTouched)
+      // Mark all as touched
+      const allTouched: Record<string, boolean> = {}
+      for (const key of Object.keys(values)) allTouched[key] = true
+      setTouched(allTouched)
 
-    if (!validate()) {
-      onError?.(errors)
-      return
-    }
-
-    setIsSubmitting(true)
-    try {
-      await onSubmit(values)
-      if (resetOnSubmit) {
-        setValuesState(defaultValues)
-        setIsDirty(false)
+      if (!validate()) {
+        onError?.(errors)
+        return
       }
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : 'An unexpected error occurred'
-      setSubmitError(msg)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }, [values, errors, validate, onSubmit, onError, resetOnSubmit, defaultValues])
+
+      setIsSubmitting(true)
+      try {
+        await onSubmit(values)
+        if (resetOnSubmit) {
+          setValuesState(defaultValues)
+          setIsDirty(false)
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'An unexpected error occurred'
+        setSubmitError(msg)
+      } finally {
+        setIsSubmitting(false)
+      }
+    },
+    [values, errors, validate, onSubmit, onError, resetOnSubmit, defaultValues],
+  )
 
   const reset = useCallback((newValues?: T) => {
     setValuesState(newValues || initialValues.current)

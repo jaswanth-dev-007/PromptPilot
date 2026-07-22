@@ -17,10 +17,38 @@ export function Tooltip({ children, content, position = 'top' }: TooltipProps) {
   }
 
   const arrowStyles: Record<string, React.CSSProperties> = {
-    top: { bottom: '-4px', left: '50%', marginLeft: '-4px', borderTop: '4px solid #1E293B', borderLeft: '4px solid transparent', borderRight: '4px solid transparent' },
-    bottom: { top: '-4px', left: '50%', marginLeft: '-4px', borderBottom: '4px solid #1E293B', borderLeft: '4px solid transparent', borderRight: '4px solid transparent' },
-    left: { right: '-4px', top: '50%', marginTop: '-4px', borderLeft: '4px solid #1E293B', borderTop: '4px solid transparent', borderBottom: '4px solid transparent' },
-    right: { left: '-4px', top: '50%', marginTop: '-4px', borderRight: '4px solid #1E293B', borderTop: '4px solid transparent', borderBottom: '4px solid transparent' },
+    top: {
+      bottom: '-4px',
+      left: '50%',
+      marginLeft: '-4px',
+      borderTop: '4px solid #1E293B',
+      borderLeft: '4px solid transparent',
+      borderRight: '4px solid transparent',
+    },
+    bottom: {
+      top: '-4px',
+      left: '50%',
+      marginLeft: '-4px',
+      borderBottom: '4px solid #1E293B',
+      borderLeft: '4px solid transparent',
+      borderRight: '4px solid transparent',
+    },
+    left: {
+      right: '-4px',
+      top: '50%',
+      marginTop: '-4px',
+      borderLeft: '4px solid #1E293B',
+      borderTop: '4px solid transparent',
+      borderBottom: '4px solid transparent',
+    },
+    right: {
+      left: '-4px',
+      top: '50%',
+      marginTop: '-4px',
+      borderRight: '4px solid #1E293B',
+      borderTop: '4px solid transparent',
+      borderBottom: '4px solid transparent',
+    },
   }
 
   return (

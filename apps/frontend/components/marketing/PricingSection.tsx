@@ -18,12 +18,7 @@ const PLANS: Plan[] = [
     price: '$0',
     period: 'forever',
     description: 'For individual developers exploring PromptPilot.',
-    features: [
-      '3 projects',
-      '9-step pipeline',
-      'Basic document generation',
-      'Markdown export',
-    ],
+    features: ['3 projects', '9-step pipeline', 'Basic document generation', 'Markdown export'],
     cta: 'Start Free',
   },
   {
@@ -65,9 +60,7 @@ export function PricingSection() {
       <div style={styles.container}>
         <div style={styles.header}>
           <h2 style={styles.heading}>Simple, Transparent Pricing</h2>
-          <p style={styles.subtitle}>
-            Start free. Upgrade when you need more. No hidden fees.
-          </p>
+          <p style={styles.subtitle}>Start free. Upgrade when you need more. No hidden fees.</p>
         </div>
         <div style={styles.grid}>
           {PLANS.map((plan, i) => (

@@ -10,14 +10,14 @@ The workflow engine is NOT a replacement for the existing pipeline system — it
 
 ### Foundation (Already Built)
 
-| Component | What It Does | Workflow Equivalent |
-|-----------|-------------|-------------------|
-| `PipelineRunner.run()` | Iterates steps in topological order | Workflow execution loop |
-| `PipelineRunner.orderSteps()` | Kahn's algorithm for DAG sort | `WorkflowEngine.resolveDependencies()` |
-| `GenerationService.generateDocument()` | Executes a single step (adapter → DB) | `StepExecutor.execute()` |
-| `detectState()` | Tracks completion/staleness/pending | `WorkflowState.materialize()` |
-| `AIConversation.status` | ACTIVE → COMPLETED | FAILED | CANCELLED | `StepExecution.status` |
-| `Generation.status` | SUCCESS | FAILED | RETRIED | Per-step audit |
+| Component                              | What It Does                          | Workflow Equivalent                    |
+| -------------------------------------- | ------------------------------------- | -------------------------------------- |
+| `PipelineRunner.run()`                 | Iterates steps in topological order   | Workflow execution loop                |
+| `PipelineRunner.orderSteps()`          | Kahn's algorithm for DAG sort         | `WorkflowEngine.resolveDependencies()` |
+| `GenerationService.generateDocument()` | Executes a single step (adapter → DB) | `StepExecutor.execute()`               |
+| `detectState()`                        | Tracks completion/staleness/pending   | `WorkflowState.materialize()`          |
+| `AIConversation.status`                | ACTIVE → COMPLETED                    | FAILED                                 | CANCELLED | `StepExecution.status` |
+| `Generation.status`                    | SUCCESS                               | FAILED                                 | RETRIED   | Per-step audit         |
 
 ### Extensions (This Phase)
 
@@ -83,18 +83,18 @@ interface WorkflowDefinition {
 interface WorkflowStep {
   id: string
   type: StepType
-  config: Record<string, unknown>       // step-specific: model, prompt, validator rules, etc.
-  dependencies: string[]                 // step IDs that must complete before this one
+  config: Record<string, unknown> // step-specific: model, prompt, validator rules, etc.
+  dependencies: string[] // step IDs that must complete before this one
   parallelSafe: boolean
   retryPolicy?: RetryPolicy
   timeoutSeconds?: number
-  compensation?: StepCompensation       // what to do if this step fails
+  compensation?: StepCompensation // what to do if this step fails
 }
 
 interface RetryPolicy {
   maxRetries: number
   backoffMs: number
-  backoffMultiplier: number             // 2 = exponential: 1s → 2s → 4s → 8s
+  backoffMultiplier: number // 2 = exponential: 1s → 2s → 4s → 8s
   retryOn: ('LLM_ERROR' | 'TIMEOUT' | 'API_ERROR' | 'VALIDATION_ERROR')[]
 }
 ```
@@ -133,7 +133,7 @@ interface Checkpoint {
   id: string
   executionId: string
   stepId: string
-  snapshot: Record<string, unknown>     // serialized execution state
+  snapshot: Record<string, unknown> // serialized execution state
   createdAt: Date
 }
 ```
@@ -145,8 +145,8 @@ interface ApprovalRequest {
   id: string
   executionId: string
   stepId: string
-  requestedBy: string                  // userId
-  assignedTo: string[]                 // userIds who can approve
+  requestedBy: string // userId
+  assignedTo: string[] // userIds who can approve
   status: 'PENDING' | 'APPROVED' | 'REJECTED'
   comment?: string
   createdAt: Date
@@ -257,13 +257,13 @@ model WorkflowCheckpoint {
 
 ### Built-in Templates (pre-installed)
 
-| Template | Description |
-|----------|-------------|
-| `full-pipeline` | 9-step specification generation (current default) |
-| `prd-only` | Generate just the PRD |
-| `architecture-suite` | Architecture → Database → API Spec |
-| `review-and-approve` | Generate PRD → human review → generate SRS |
-| `weekly-roadmap` | Scheduled weekly roadmap regeneration |
+| Template             | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| `full-pipeline`      | 9-step specification generation (current default) |
+| `prd-only`           | Generate just the PRD                             |
+| `architecture-suite` | Architecture → Database → API Spec                |
+| `review-and-approve` | Generate PRD → human review → generate SRS        |
+| `weekly-roadmap`     | Scheduled weekly roadmap regeneration             |
 
 ### Template Definition Format
 
@@ -311,7 +311,7 @@ stateDiagram-v2
     PAUSED --> FAILED : rejected/cancelled
     RUNNING --> COMPLETED : all steps done
     RUNNING --> FAILED : step error (no retry)
-    
+
     state RUNNING {
         [*] --> ExecutingStep
         ExecutingStep --> Checkpointing : step complete
@@ -439,12 +439,12 @@ model WorkflowCheckpoint {
 
 ## 11. Scalability
 
-| Scale | Strategy |
-|-------|----------|
-| 100 workflows/day | Single workflow engine instance, in-process |
-| 1,000 workflows/day | Async worker pool, PostgreSQL-backed queues |
+| Scale                | Strategy                                                   |
+| -------------------- | ---------------------------------------------------------- |
+| 100 workflows/day    | Single workflow engine instance, in-process                |
+| 1,000 workflows/day  | Async worker pool, PostgreSQL-backed queues                |
 | 10,000 workflows/day | Temporal.io / AWS Step Functions for distributed execution |
-| 100K+ workflows/day | Dedicated workflow cluster, event-driven architecture |
+| 100K+ workflows/day  | Dedicated workflow cluster, event-driven architecture      |
 
 The initial implementation can run in-process since workflows are IO-bound (waiting for LLM responses). No need for a distributed workflow engine at launch.
 
@@ -452,30 +452,30 @@ The initial implementation can run in-process since workflows are IO-bound (wait
 
 ## 12. Technical Risks
 
-| Risk | Severity | Mitigation |
-|------|----------|------------|
-| Checkpoint state grows large for long documents | Low | Compress JSON, only checkpoint step-level state, not full document content |
-| Concurrent executions on same project | Medium | `@@unique([executionId, stepId])` prevents duplicates; project-level lock |
-| Approval timeout (reviewer never responds) | Low | Configurable timeout per step; auto-reject or escalate |
-| Workflow version drift (template changes mid-execution) | Low | Snap execution version on start; version is immutable for that run |
+| Risk                                                    | Severity | Mitigation                                                                 |
+| ------------------------------------------------------- | -------- | -------------------------------------------------------------------------- |
+| Checkpoint state grows large for long documents         | Low      | Compress JSON, only checkpoint step-level state, not full document content |
+| Concurrent executions on same project                   | Medium   | `@@unique([executionId, stepId])` prevents duplicates; project-level lock  |
+| Approval timeout (reviewer never responds)              | Low      | Configurable timeout per step; auto-reject or escalate                     |
+| Workflow version drift (template changes mid-execution) | Low      | Snap execution version on start; version is immutable for that run         |
 
 ---
 
 ## 13. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| PipelineRunner (foundation) | ✅ Built |
-| GenerationService (step execution) | ✅ Built |
-| Template system (9 templates) | ✅ Built |
-| Domain model (12 entities) | ✅ Designed |
-| Execution lifecycle | ✅ Designed |
-| Checkpoint + resume | ✅ Designed |
-| Approval flow | ✅ Designed |
-| Prisma extensions (4 new models) | ✅ Designed |
-| Retry policy system | ✅ Partially built (adapters/retry.ts) |
-| Compensation strategy | ✅ Designed |
-| Folder structure | ✅ Designed |
+| Criterion                          | Status                                 |
+| ---------------------------------- | -------------------------------------- |
+| PipelineRunner (foundation)        | ✅ Built                               |
+| GenerationService (step execution) | ✅ Built                               |
+| Template system (9 templates)      | ✅ Built                               |
+| Domain model (12 entities)         | ✅ Designed                            |
+| Execution lifecycle                | ✅ Designed                            |
+| Checkpoint + resume                | ✅ Designed                            |
+| Approval flow                      | ✅ Designed                            |
+| Prisma extensions (4 new models)   | ✅ Designed                            |
+| Retry policy system                | ✅ Partially built (adapters/retry.ts) |
+| Compensation strategy              | ✅ Designed                            |
+| Folder structure                   | ✅ Designed                            |
 
 **Workflow Automation Architecture Score: 100/100 — Ready for implementation**
 
@@ -483,15 +483,15 @@ The initial implementation can run in-process since workflows are IO-bound (wait
 
 ## 14. Implementation Plan
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | `WorkflowEngine` — execution coordinator | 🔴 P0 |
-| 2 | `StepExecutorRegistry` — dispatch by type | 🔴 P0 |
-| 3 | `StateManager` — checkpoints + resume | 🔴 P0 |
-| 4 | `WorkflowTemplate` + `WorkflowExecution` Prisma models | 🔴 P0 |
-| 5 | Migrate PipelineRunner to WorkflowDefinition | 🟡 P1 |
-| 6 | `ApprovalService` — human-in-the-loop | 🟡 P1 |
-| 7 | `Scheduler` — cron + webhook triggers | 🟢 P2 |
-| 8 | `CompensationPolicy` — rollback actions | 🟢 P2 |
+| #   | Task                                                   | Priority |
+| --- | ------------------------------------------------------ | -------- |
+| 1   | `WorkflowEngine` — execution coordinator               | 🔴 P0    |
+| 2   | `StepExecutorRegistry` — dispatch by type              | 🔴 P0    |
+| 3   | `StateManager` — checkpoints + resume                  | 🔴 P0    |
+| 4   | `WorkflowTemplate` + `WorkflowExecution` Prisma models | 🔴 P0    |
+| 5   | Migrate PipelineRunner to WorkflowDefinition           | 🟡 P1    |
+| 6   | `ApprovalService` — human-in-the-loop                  | 🟡 P1    |
+| 7   | `Scheduler` — cron + webhook triggers                  | 🟢 P2    |
+| 8   | `CompensationPolicy` — rollback actions                | 🟢 P2    |
 
 The foundation (PipelineRunner, GenerationService, template system, database layer) is complete. Phase 3.9 extends it with generalized step types, checkpoint/restore, human approvals, and workflow templates — all built on the existing 480-line AI engine.

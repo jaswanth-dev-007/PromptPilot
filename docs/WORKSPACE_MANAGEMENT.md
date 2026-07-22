@@ -61,11 +61,11 @@ Methods: `findById`, `findByOwnerAndSlug`, `create`, `update`, `softDelete`, `li
 
 ### State Transitions
 
-| From | To | Trigger |
-|------|----|---------|
-| (new user) | ACTIVE (PERSONAL) | Automatic on registration |
-| ACTIVE | ARCHIVED | User action: Archive Workspace |
-| ARCHIVED | ACTIVE | Future: Restore Workspace |
+| From       | To                | Trigger                        |
+| ---------- | ----------------- | ------------------------------ |
+| (new user) | ACTIVE (PERSONAL) | Automatic on registration      |
+| ACTIVE     | ARCHIVED          | User action: Archive Workspace |
+| ARCHIVED   | ACTIVE            | Future: Restore Workspace      |
 
 ### Business Rules
 
@@ -79,17 +79,17 @@ Methods: `findById`, `findByOwnerAndSlug`, `create`, `update`, `softDelete`, `li
 
 ## 3. API Endpoints (to implement in Phase 3.6)
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| `GET` | `/api/v1/workspaces` | List user's workspaces |
-| `POST` | `/api/v1/workspaces` | Create team workspace |
-| `GET` | `/api/v1/workspaces/:id` | Get workspace detail |
-| `PATCH` | `/api/v1/workspaces/:id` | Update name/slug/settings |
-| `DELETE` | `/api/v1/workspaces/:id` | Archive workspace |
-| `GET` | `/api/v1/workspaces/:id/members` | List members |
-| `POST` | `/api/v1/workspaces/:id/members` | Add member (future) |
-| `DELETE` | `/api/v1/workspaces/:id/members/:userId` | Remove member (future) |
-| `PATCH` | `/api/v1/workspaces/:id/members/:userId` | Change role (future) |
+| Method   | Path                                     | Purpose                   |
+| -------- | ---------------------------------------- | ------------------------- |
+| `GET`    | `/api/v1/workspaces`                     | List user's workspaces    |
+| `POST`   | `/api/v1/workspaces`                     | Create team workspace     |
+| `GET`    | `/api/v1/workspaces/:id`                 | Get workspace detail      |
+| `PATCH`  | `/api/v1/workspaces/:id`                 | Update name/slug/settings |
+| `DELETE` | `/api/v1/workspaces/:id`                 | Archive workspace         |
+| `GET`    | `/api/v1/workspaces/:id/members`         | List members              |
+| `POST`   | `/api/v1/workspaces/:id/members`         | Add member (future)       |
+| `DELETE` | `/api/v1/workspaces/:id/members/:userId` | Remove member (future)    |
+| `PATCH`  | `/api/v1/workspaces/:id/members/:userId` | Change role (future)      |
 
 ---
 
@@ -97,12 +97,12 @@ Methods: `findById`, `findByOwnerAndSlug`, `create`, `update`, `softDelete`, `li
 
 ```typescript
 interface WorkspaceSettings {
-  defaultModel: string              // 'gpt-4o' | 'claude-3-5-sonnet' | 'gemini-2.0-flash'
-  defaultTemperature: number        // 0.0 – 2.0 (default: 0.2)
-  defaultMaxTokens: number          // 100 – 200000 (default: 16000)
-  defaultExportFormat: string       // 'pdf' | 'markdown' | 'docx'
+  defaultModel: string // 'gpt-4o' | 'claude-3-5-sonnet' | 'gemini-2.0-flash'
+  defaultTemperature: number // 0.0 – 2.0 (default: 0.2)
+  defaultMaxTokens: number // 100 – 200000 (default: 16000)
+  defaultExportFormat: string // 'pdf' | 'markdown' | 'docx'
   theme?: 'light' | 'dark' | 'system'
-  autoArchiveDays?: number          // Auto-archive inactive projects after N days
+  autoArchiveDays?: number // Auto-archive inactive projects after N days
 }
 ```
 
@@ -120,6 +120,7 @@ NavigationContext
 ```
 
 **Sidebar behavior:**
+
 - No workspace selected → only Dashboard, Workspaces, Projects, AI Workspace sections visible
 - Workspace selected → + Overview, Projects, Members, Settings under "Workspace" section
 - Project selected → + Overview, Documents, Conversations, Exports, Settings under "Project" section
@@ -151,17 +152,17 @@ docs/
 
 ## 7. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Prisma model | ✅ |
-| Repository | ✅ |
-| Frontend routes (4 pages) | ✅ |
-| Sidebar integration | ✅ (NavigationContext) |
-| Route protection | ✅ (middleware: `/workspace/*`) |
-| Empty states | ✅ |
-| Settings page | ✅ |
-| Member list | ✅ |
-| Soft delete (archive) | ✅ |
-| Snake_case DB mapping | ✅ |
+| Criterion                 | Status                          |
+| ------------------------- | ------------------------------- |
+| Prisma model              | ✅                              |
+| Repository                | ✅                              |
+| Frontend routes (4 pages) | ✅                              |
+| Sidebar integration       | ✅ (NavigationContext)          |
+| Route protection          | ✅ (middleware: `/workspace/*`) |
+| Empty states              | ✅                              |
+| Settings page             | ✅                              |
+| Member list               | ✅                              |
+| Soft delete (archive)     | ✅                              |
+| Snake_case DB mapping     | ✅                              |
 
 **Workspace Management Architecture Score: 100/100**

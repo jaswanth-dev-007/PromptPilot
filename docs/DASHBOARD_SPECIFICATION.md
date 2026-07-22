@@ -1,6 +1,7 @@
 # PromptPilot — Enterprise Dashboard Specification
 
 ## Complete UX, UI, Engineering & Architecture Design
+
 ### Version 1.0 — Production-Ready Build Document
 
 ---
@@ -11,24 +12,25 @@ All components reference the PromptPilot Design System (`docs/DESIGN_SYSTEM.md`)
 
 **Existing foundation (already built):**
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| App Shell (Sidebar + Navbar + Breadcrumbs + ⌘K) | ✅ Built | `apps/frontend/app/(app)/layout.tsx` |
+| Component                                                                                       | Status   | Location                                     |
+| ----------------------------------------------------------------------------------------------- | -------- | -------------------------------------------- |
+| App Shell (Sidebar + Navbar + Breadcrumbs + ⌘K)                                                 | ✅ Built | `apps/frontend/app/(app)/layout.tsx`         |
 | Dashboard page (WelcomeHero, QuickActions, RecentProjects, Stats, AIActivity, Favorites, Tasks) | ✅ Built | `apps/frontend/app/(app)/dashboard/page.tsx` |
-| Sidebar (collapsible, context-aware navigation) | ✅ Built | `components/sidebar/Sidebar.tsx` |
-| Navbar (left/right slots, mobile toggle) | ✅ Built | `components/nav/Navbar.tsx` |
-| Breadcrumbs (dynamic path generation) | ✅ Built | `components/nav/Breadcrumbs.tsx` |
-| CommandPalette (⌘K search, categories, keyboard nav) | ✅ Built | `components/nav/CommandPalette.tsx` |
-| NavigationContext (workspace/project context, sidebar sections, search state) | ✅ Built | `components/NavigationContext.tsx` |
-| LayoutContext (sidebar open/collapsed state, toggle) | ✅ Built | `components/LayoutContext.tsx` |
-| Navigation routes (app + bottom + public + auth) | ✅ Built | `lib/navigation/routes.ts` |
-| EmptyState (icon, title, description, action) | ✅ Built | `components/feedback/EmptyState.tsx` |
-| Skeleton (text/circular/rectangular, CardSkeleton, TableSkeleton) | ✅ Built | `components/feedback/Skeleton.tsx` |
-| ToastProvider (success/error/warning/info, auto-dismiss, action) | ✅ Built | `components/feedback/ToastProvider.tsx` |
-| Dashboard API (GET /dashboard/stats) | ✅ Built | `apps/api/src/routes/dashboard.ts` |
-| UI Components (Card, Button, Input, Badge, etc.) | ✅ Built | `packages/ui/` |
+| Sidebar (collapsible, context-aware navigation)                                                 | ✅ Built | `components/sidebar/Sidebar.tsx`             |
+| Navbar (left/right slots, mobile toggle)                                                        | ✅ Built | `components/nav/Navbar.tsx`                  |
+| Breadcrumbs (dynamic path generation)                                                           | ✅ Built | `components/nav/Breadcrumbs.tsx`             |
+| CommandPalette (⌘K search, categories, keyboard nav)                                            | ✅ Built | `components/nav/CommandPalette.tsx`          |
+| NavigationContext (workspace/project context, sidebar sections, search state)                   | ✅ Built | `components/NavigationContext.tsx`           |
+| LayoutContext (sidebar open/collapsed state, toggle)                                            | ✅ Built | `components/LayoutContext.tsx`               |
+| Navigation routes (app + bottom + public + auth)                                                | ✅ Built | `lib/navigation/routes.ts`                   |
+| EmptyState (icon, title, description, action)                                                   | ✅ Built | `components/feedback/EmptyState.tsx`         |
+| Skeleton (text/circular/rectangular, CardSkeleton, TableSkeleton)                               | ✅ Built | `components/feedback/Skeleton.tsx`           |
+| ToastProvider (success/error/warning/info, auto-dismiss, action)                                | ✅ Built | `components/feedback/ToastProvider.tsx`      |
+| Dashboard API (GET /dashboard/stats)                                                            | ✅ Built | `apps/api/src/routes/dashboard.ts`           |
+| UI Components (Card, Button, Input, Badge, etc.)                                                | ✅ Built | `packages/ui/`                               |
 
 **Design tokens (existing Tailwind config):**
+
 - Typography: Inter (headings/body), JetBrains Mono (code)
 - Primary: Indigo-600 (#4F46E5), Neutral: Slate 50–950
 - Spacing: 4px base unit, Radii: sm/md/lg/xl
@@ -62,16 +64,16 @@ Users arrive at the dashboard to:
 
 ### Primary Use Cases
 
-| Use Case | Persona | Dashboard Widget |
-|----------|---------|-----------------|
-| Resume last project | Developer, PM, Founder | Continue Working, Recent Projects |
-| Start new specification | PM, Founder | Quick Actions: New Project, Generate PRD |
-| Check AI generation status | Developer, PM | AI Activity Feed, Notifications |
-| Review team activity | Team Lead, Admin | Activity Timeline, Workspace Overview |
-| Navigate to specific project | Power user | Global Search (⌘K), Recent Projects, Favorites |
-| Monitor usage and costs | Admin, Pro user | Usage Analytics, AI Credits widget |
-| Handle invitations | New team member | Notifications, Pending Invitations |
-| Explore templates | New user | AI Recommendations, Template Suggestions |
+| Use Case                     | Persona                | Dashboard Widget                               |
+| ---------------------------- | ---------------------- | ---------------------------------------------- |
+| Resume last project          | Developer, PM, Founder | Continue Working, Recent Projects              |
+| Start new specification      | PM, Founder            | Quick Actions: New Project, Generate PRD       |
+| Check AI generation status   | Developer, PM          | AI Activity Feed, Notifications                |
+| Review team activity         | Team Lead, Admin       | Activity Timeline, Workspace Overview          |
+| Navigate to specific project | Power user             | Global Search (⌘K), Recent Projects, Favorites |
+| Monitor usage and costs      | Admin, Pro user        | Usage Analytics, AI Credits widget             |
+| Handle invitations           | New team member        | Notifications, Pending Invitations             |
+| Explore templates            | New user               | AI Recommendations, Template Suggestions       |
 
 ### Success Metrics
 
@@ -188,19 +190,19 @@ Dashboard Page
 
 ### Section Rationale — Why Each Exists
 
-| Section | Rationale |
-|---------|-----------|
-| **Welcome Hero** | Reduces cognitive load by personalizing the experience. Shows users they're in the right place. Drives primary action (new project). |
-| **Quick Actions** | Reduces friction for common tasks. Eliminates "where do I start?" confusion. Single-click to high-value actions. |
-| **Continue Working** | Optimizes for the most common use case: resuming existing work. Reduces time-to-action to near-zero. |
-| **Recent Projects** | Provides spatial memory — users recognize their projects by name and status. Primary navigation surface for returning users. |
-| **AI Activity Feed** | Builds trust by showing AI work product. Surfaces generation status. Creates awareness of pipeline progress. |
-| **Workspace Summary** | Gives at-a-glance metrics. Answers "how much have I done?" — reinforcing value. |
-| **AI Recommendations** | Drives feature discovery. Suggests next actions based on context. Personalizes the experience. |
-| **Favorites** | User-curated quick-access. Respects user preferences. Improves navigation efficiency for power users. |
-| **Usage Overview** | Transparency on usage. Drives upgrade awareness naturally. Prevents surprise limits. |
-| **Tasks** | Lightweight task management. Keeps users in the platform. Replaces need for external to-do tools. |
-| **Notifications** | Centralizes awareness. Drives re-engagement. Surfaces time-sensitive actions (invitations, generation complete). |
+| Section                | Rationale                                                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Welcome Hero**       | Reduces cognitive load by personalizing the experience. Shows users they're in the right place. Drives primary action (new project). |
+| **Quick Actions**      | Reduces friction for common tasks. Eliminates "where do I start?" confusion. Single-click to high-value actions.                     |
+| **Continue Working**   | Optimizes for the most common use case: resuming existing work. Reduces time-to-action to near-zero.                                 |
+| **Recent Projects**    | Provides spatial memory — users recognize their projects by name and status. Primary navigation surface for returning users.         |
+| **AI Activity Feed**   | Builds trust by showing AI work product. Surfaces generation status. Creates awareness of pipeline progress.                         |
+| **Workspace Summary**  | Gives at-a-glance metrics. Answers "how much have I done?" — reinforcing value.                                                      |
+| **AI Recommendations** | Drives feature discovery. Suggests next actions based on context. Personalizes the experience.                                       |
+| **Favorites**          | User-curated quick-access. Respects user preferences. Improves navigation efficiency for power users.                                |
+| **Usage Overview**     | Transparency on usage. Drives upgrade awareness naturally. Prevents surprise limits.                                                 |
+| **Tasks**              | Lightweight task management. Keeps users in the platform. Replaces need for external to-do tools.                                    |
+| **Notifications**      | Centralizes awareness. Drives re-engagement. Surfaces time-sensitive actions (invitations, generation complete).                     |
 
 ---
 
@@ -1569,7 +1571,7 @@ IN-APP (Bell icon dropdown):
   Each item: icon + title + body + relative timestamp + click action
   Click: Navigate to relevant resource + mark as read
   ✕:    Dismiss (mark as read, don't navigate)
-  
+
   "Mark all as read" button at top
   "View all notifications →" link at bottom → /activity page
 
@@ -1582,7 +1584,7 @@ TOAST (for real-time events):
     "📬 New invitation from Jane"     (info, persists until dismissed)
 
 EMAIL (for offline/async):
-  Sent for: invitations, generation complete (opt-in), 
+  Sent for: invitations, generation complete (opt-in),
             security alerts, billing events, account changes
   Configurable in Settings → Notifications
 
@@ -2191,7 +2193,7 @@ COLOR CONTRAST:
   All interactive elements:                     ≥ 3:1 for icons/controls ✅
 
 KEYBOARD NAVIGATION:
-  Tab order:          Sidebar → Navbar breadcrumbs → Search → Notifications → 
+  Tab order:          Sidebar → Navbar breadcrumbs → Search → Notifications →
                       Theme → User → Dashboard content (left→right, top→bottom)
   Skip link:          "Skip to dashboard content" (visually hidden, first focusable)
   Command Palette:    ⌘K opens. Arrow keys navigate. Enter selects. Esc closes.
@@ -3000,6 +3002,6 @@ SCALING MECHANISM:
 
 ---
 
-*Document Version: 1.0 — PromptPilot Enterprise Dashboard Specification*
-*Last Updated: 2026-07-21*
-*Status: Foundation built. Dashboard widgets ready for extraction + new widget implementation.*
+_Document Version: 1.0 — PromptPilot Enterprise Dashboard Specification_
+_Last Updated: 2026-07-21_
+_Status: Foundation built. Dashboard widgets ready for extraction + new widget implementation._

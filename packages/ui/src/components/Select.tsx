@@ -44,7 +44,15 @@ export function Select({
   return (
     <div ref={ref} style={{ marginBottom: '16px', fontFamily: 'inherit', position: 'relative' }}>
       {label && (
-        <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', fontWeight: 500, color: '#374151' }}>
+        <label
+          style={{
+            display: 'block',
+            marginBottom: '6px',
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            color: '#374151',
+          }}
+        >
           {label}
         </label>
       )}
@@ -73,7 +81,9 @@ export function Select({
         <span>{selected ? selected.label : placeholder}</span>
         <span style={{ fontSize: '0.625rem', color: '#9CA3AF' }}>▼</span>
       </button>
-      {error && <p style={{ marginTop: '4px', fontSize: '0.8125rem', color: '#EF4444' }}>{error}</p>}
+      {error && (
+        <p style={{ marginTop: '4px', fontSize: '0.8125rem', color: '#EF4444' }}>{error}</p>
+      )}
       {open && (
         <ul
           role="listbox"
@@ -114,12 +124,12 @@ export function Select({
               }}
               onMouseEnter={e => {
                 if (option.value !== value) {
-                  (e.target as HTMLElement).style.backgroundColor = '#F1F5F9'
+                  ;(e.target as HTMLElement).style.backgroundColor = '#F1F5F9'
                 }
               }}
               onMouseLeave={e => {
                 if (option.value !== value) {
-                  (e.target as HTMLElement).style.backgroundColor = 'transparent'
+                  ;(e.target as HTMLElement).style.backgroundColor = 'transparent'
                 }
               }}
             >

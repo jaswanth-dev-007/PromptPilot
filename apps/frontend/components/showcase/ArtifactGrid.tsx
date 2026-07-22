@@ -7,15 +7,54 @@ interface Artifact {
 }
 
 const ARTIFACTS: Artifact[] = [
-  { icon: '💡', title: 'Master Context', description: 'Define your product vision, audience, platform, and constraints in one source of truth.' },
-  { icon: '📋', title: 'PRD', description: 'Product Requirements Document covering functional and non-functional requirements.' },
-  { icon: '📐', title: 'SRS', description: 'Software Requirements Specification with architecture, API design, and data models.' },
-  { icon: '🏗️', title: 'Architecture', description: 'System architecture with component diagrams, tech stack, and deployment plan.' },
-  { icon: '🗄️', title: 'Database Schema', description: 'Complete database design with entities, relationships, indexes, and migrations.' },
-  { icon: '🔌', title: 'API Specification', description: 'REST API design with endpoints, request/response schemas, and authentication.' },
-  { icon: '🔄', title: 'User Flows', description: 'Visual user journey maps covering registration, pipeline execution, and exports.' },
-  { icon: '🎨', title: 'Wireframes', description: 'UI wireframes for landing page, dashboard, editor, and settings screens.' },
-  { icon: '🗺️', title: 'Feature Roadmap', description: 'Prioritized feature timeline with MVP, growth, and enterprise phases.' },
+  {
+    icon: '💡',
+    title: 'Master Context',
+    description:
+      'Define your product vision, audience, platform, and constraints in one source of truth.',
+  },
+  {
+    icon: '📋',
+    title: 'PRD',
+    description:
+      'Product Requirements Document covering functional and non-functional requirements.',
+  },
+  {
+    icon: '📐',
+    title: 'SRS',
+    description:
+      'Software Requirements Specification with architecture, API design, and data models.',
+  },
+  {
+    icon: '🏗️',
+    title: 'Architecture',
+    description: 'System architecture with component diagrams, tech stack, and deployment plan.',
+  },
+  {
+    icon: '🗄️',
+    title: 'Database Schema',
+    description: 'Complete database design with entities, relationships, indexes, and migrations.',
+  },
+  {
+    icon: '🔌',
+    title: 'API Specification',
+    description: 'REST API design with endpoints, request/response schemas, and authentication.',
+  },
+  {
+    icon: '🔄',
+    title: 'User Flows',
+    description: 'Visual user journey maps covering registration, pipeline execution, and exports.',
+  },
+  {
+    icon: '🎨',
+    title: 'Wireframes',
+    description: 'UI wireframes for landing page, dashboard, editor, and settings screens.',
+  },
+  {
+    icon: '🗺️',
+    title: 'Feature Roadmap',
+    description: 'Prioritized feature timeline with MVP, growth, and enterprise phases.',
+  },
 ]
 
 export function ArtifactGrid() {

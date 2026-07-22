@@ -1,6 +1,7 @@
 # PromptPilot — AI Chat Workspace Specification
 
 ## Complete UX, UI, AI Architecture & Engineering Design
+
 ### Version 1.0 — Production-Ready Build Document
 
 ---
@@ -11,22 +12,22 @@ All components reference the PromptPilot Design System (`docs/DESIGN_SYSTEM.md`)
 
 ### Existing Foundation (Already Built)
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| AIConversation Prisma model | ✅ Built | `prisma/schema.prisma` |
-| Message model (SYSTEM/USER/ASSISTANT, sequencing) | ✅ Built | `prisma/schema.prisma` |
-| Generation model (token/cost/duration audit) | ✅ Built | `prisma/schema.prisma` |
-| AIConversationRepository (CRUD) | ✅ Built | `packages/database/src/repositories/` |
-| MessageRepository (create, listByConversation) | ✅ Built | `packages/database/src/repositories/` |
-| GenerationRepository (create, listByConversation) | ✅ Built | `packages/database/src/repositories/` |
-| PromptEngine (template compilation, context injection) | ✅ Built | `packages/ai/src/engine/promptEngine.ts` |
-| GenerationService (conversation orchestration) | ✅ Built | `packages/ai/src/engine/generationService.ts` |
-| OpenAIAdapter (generate + generateStream, SSE parsing) | ✅ Built | `packages/adapters/src/openai.ts` |
-| AnthropicAdapter (generate + generateStream, SSE parsing) | ✅ Built | `packages/adapters/src/anthropic.ts` |
-| Adapter factory (createAdapter from config) | ✅ Built | `packages/adapters/src/factory.ts` |
-| Token counting + cost estimation | ✅ Built | `packages/shared/src/tokens.ts` |
-| Pipeline API route (generate + stream + run) | ✅ Built | `apps/api/src/routes/pipeline.ts` |
-| Conversation routes scaffold | ✅ Built | `apps/frontend/app/(app)/conversations/page.tsx` |
+| Component                                                 | Status   | Location                                         |
+| --------------------------------------------------------- | -------- | ------------------------------------------------ |
+| AIConversation Prisma model                               | ✅ Built | `prisma/schema.prisma`                           |
+| Message model (SYSTEM/USER/ASSISTANT, sequencing)         | ✅ Built | `prisma/schema.prisma`                           |
+| Generation model (token/cost/duration audit)              | ✅ Built | `prisma/schema.prisma`                           |
+| AIConversationRepository (CRUD)                           | ✅ Built | `packages/database/src/repositories/`            |
+| MessageRepository (create, listByConversation)            | ✅ Built | `packages/database/src/repositories/`            |
+| GenerationRepository (create, listByConversation)         | ✅ Built | `packages/database/src/repositories/`            |
+| PromptEngine (template compilation, context injection)    | ✅ Built | `packages/ai/src/engine/promptEngine.ts`         |
+| GenerationService (conversation orchestration)            | ✅ Built | `packages/ai/src/engine/generationService.ts`    |
+| OpenAIAdapter (generate + generateStream, SSE parsing)    | ✅ Built | `packages/adapters/src/openai.ts`                |
+| AnthropicAdapter (generate + generateStream, SSE parsing) | ✅ Built | `packages/adapters/src/anthropic.ts`             |
+| Adapter factory (createAdapter from config)               | ✅ Built | `packages/adapters/src/factory.ts`               |
+| Token counting + cost estimation                          | ✅ Built | `packages/shared/src/tokens.ts`                  |
+| Pipeline API route (generate + stream + run)              | ✅ Built | `apps/api/src/routes/pipeline.ts`                |
+| Conversation routes scaffold                              | ✅ Built | `apps/frontend/app/(app)/conversations/page.tsx` |
 
 ### Design Tokens
 
@@ -575,7 +576,7 @@ OPTIMIZATION TYPES (chosen via dropdown on ✨ button):
 
 ### Message Card Layout
 
-```
+````
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │  AI MESSAGE CARD                                                              │
 │                                                                               │
@@ -675,7 +676,7 @@ OPTIMIZATION TYPES (chosen via dropdown on ✨ button):
 │  │  └────────────────────┘ └────────────────────┘ └────────────────────┘   │ │
 │  └──────────────────────────────────────────────────────────────────────────┘ │
 └──────────────────────────────────────────────────────────────────────────────┘
-```
+````
 
 ### Message Card States
 
@@ -763,7 +764,7 @@ EDIT MODE:
 
 ### Streaming Behavior
 
-```
+````
 STREAMING ARCHITECTURE:
   Client: EventSource or fetch with ReadableStream
   Server: SSE (Server-Sent Events) via Express
@@ -811,7 +812,7 @@ CANCELLED BY USER:
   Message saved with partial content
   Conversation status: CANCELLED
   "Generation cancelled. [Continue] [Regenerate]"
-```
+````
 
 ### Streaming Indicators
 
@@ -1210,7 +1211,7 @@ TOOL CALL FLOW:
 
 TOOL CALL DISPLAY:
   Each tool call is a collapsible card within the AI message:
-  
+
   ┌──────────────────────────────────────────────────────────┐
   │  🔧 Read Document: Architecture (v2)            [▾]      │
   │  ─────────────────────────────────────────────────────── │
@@ -1291,7 +1292,7 @@ CREATING A BRANCH:
   1. Hover over any message → click 🌿 Branch
      OR: /branch command in composer
      OR: ••• menu on AI message → Branch from here
-  
+
   2. Dialog:
      ┌──────────────────────────────────────────┐
      │  Create New Branch                        │
@@ -1888,6 +1889,6 @@ AIChatModule
 
 ---
 
-*Document Version: 1.0 — PromptPilot AI Chat Workspace Specification*
-*Last Updated: 2026-07-21*
-*Status: Foundation built (adapters, PromptEngine, GenerationService, Prisma models, repository layer). Ready for frontend UI + SSE streaming integration.*
+_Document Version: 1.0 — PromptPilot AI Chat Workspace Specification_
+_Last Updated: 2026-07-21_
+_Status: Foundation built (adapters, PromptEngine, GenerationService, Prisma models, repository layer). Ready for frontend UI + SSE streaming integration._

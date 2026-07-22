@@ -33,7 +33,15 @@ export function Table({ columns, rows, emptyMessage = 'No data' }: TableProps) {
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={columns.length} style={{ padding: '32px 16px', textAlign: 'center', color: '#9CA3AF', fontStyle: 'italic' }}>
+              <td
+                colSpan={columns.length}
+                style={{
+                  padding: '32px 16px',
+                  textAlign: 'center',
+                  color: '#9CA3AF',
+                  fontStyle: 'italic',
+                }}
+              >
                 {emptyMessage}
               </td>
             </tr>
@@ -43,10 +51,10 @@ export function Table({ columns, rows, emptyMessage = 'No data' }: TableProps) {
                 key={i}
                 style={{ borderBottom: '1px solid #F1F5F9' }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC'
+                  ;(e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC'
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
+                  ;(e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
                 }}
               >
                 {columns.map(col => (

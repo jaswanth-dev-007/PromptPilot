@@ -55,15 +55,37 @@ export function Sidebar({ items, bottomItems, logo }: SidebarProps) {
   return (
     <aside style={{ ...NAV, width }}>
       {logo && (
-        <div style={{ padding: '16px', display: 'flex', alignItems: 'center', justifyContent: sidebarCollapsed ? 'center' : 'space-between' }}>
-          <div style={{ fontWeight: 700, fontSize: '1rem', color: '#111827', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        <div
+          style={{
+            padding: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: sidebarCollapsed ? 'center' : 'space-between',
+          }}
+        >
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: '1rem',
+              color: '#111827',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}
+          >
             {sidebarCollapsed ? 'PP' : 'PromptPilot'}
           </div>
           {!sidebarCollapsed && (
             <button
               onClick={toggleCollapse}
               aria-label="Collapse sidebar"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: '#9CA3AF', padding: '2px 6px' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                color: '#9CA3AF',
+                padding: '2px 6px',
+              }}
             >
               ⟪
             </button>
@@ -77,11 +99,17 @@ export function Sidebar({ items, bottomItems, logo }: SidebarProps) {
             key={item.href}
             href={item.href}
             style={ITEM_BASE}
-            onMouseEnter={e => { (e.target as HTMLElement).style.backgroundColor = '#F1F5F9' }}
-            onMouseLeave={e => { (e.target as HTMLElement).style.backgroundColor = 'transparent' }}
+            onMouseEnter={e => {
+              ;(e.target as HTMLElement).style.backgroundColor = '#F1F5F9'
+            }}
+            onMouseLeave={e => {
+              ;(e.target as HTMLElement).style.backgroundColor = 'transparent'
+            }}
             title={sidebarCollapsed ? item.label : undefined}
           >
-            <span style={{ fontSize: '1.1rem', flexShrink: 0, width: '20px', textAlign: 'center' }}>{item.icon || '○'}</span>
+            <span style={{ fontSize: '1.1rem', flexShrink: 0, width: '20px', textAlign: 'center' }}>
+              {item.icon || '○'}
+            </span>
             {!sidebarCollapsed && <span>{item.label}</span>}
           </a>
         ))}
@@ -90,8 +118,17 @@ export function Sidebar({ items, bottomItems, logo }: SidebarProps) {
       {bottomItems && (
         <div style={{ borderTop: '1px solid #F1F5F9', padding: '8px 0' }}>
           {bottomItems.map(item => (
-            <a key={item.href} href={item.href} style={ITEM_BASE} title={sidebarCollapsed ? item.label : undefined}>
-              <span style={{ fontSize: '1.1rem', flexShrink: 0, width: '20px', textAlign: 'center' }}>{item.icon || '○'}</span>
+            <a
+              key={item.href}
+              href={item.href}
+              style={ITEM_BASE}
+              title={sidebarCollapsed ? item.label : undefined}
+            >
+              <span
+                style={{ fontSize: '1.1rem', flexShrink: 0, width: '20px', textAlign: 'center' }}
+              >
+                {item.icon || '○'}
+              </span>
               {!sidebarCollapsed && <span>{item.label}</span>}
             </a>
           ))}

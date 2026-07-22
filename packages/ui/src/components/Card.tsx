@@ -39,35 +39,78 @@ export function Card({ children, padding = 'md', shadow = 'sm', style }: CardPro
   )
 }
 
-export function CardHeader({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
-  return (
-    <div style={{ marginBottom: '16px', fontFamily: 'inherit', ...style }}>
-      {children}
-    </div>
-  )
+export function CardHeader({
+  children,
+  style,
+}: {
+  children: ReactNode
+  style?: React.CSSProperties
+}) {
+  return <div style={{ marginBottom: '16px', fontFamily: 'inherit', ...style }}>{children}</div>
 }
 
-export function CardTitle({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
+export function CardTitle({
+  children,
+  style,
+}: {
+  children: ReactNode
+  style?: React.CSSProperties
+}) {
   return (
-    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#111827', margin: 0, fontFamily: 'inherit', ...style }}>
+    <h3
+      style={{
+        fontSize: '1.125rem',
+        fontWeight: 600,
+        color: '#111827',
+        margin: 0,
+        fontFamily: 'inherit',
+        ...style,
+      }}
+    >
       {children}
     </h3>
   )
 }
 
-export function CardDescription({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
+export function CardDescription({
+  children,
+  style,
+}: {
+  children: ReactNode
+  style?: React.CSSProperties
+}) {
   return (
-    <p style={{ fontSize: '0.875rem', color: '#6B7280', margin: '4px 0 0 0', fontFamily: 'inherit', ...style }}>
+    <p
+      style={{
+        fontSize: '0.875rem',
+        color: '#6B7280',
+        margin: '4px 0 0 0',
+        fontFamily: 'inherit',
+        ...style,
+      }}
+    >
       {children}
     </p>
   )
 }
 
-export function CardContent({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
+export function CardContent({
+  children,
+  style,
+}: {
+  children: ReactNode
+  style?: React.CSSProperties
+}) {
   return <div style={{ fontFamily: 'inherit', ...style }}>{children}</div>
 }
 
-export function CardFooter({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
+export function CardFooter({
+  children,
+  style,
+}: {
+  children: ReactNode
+  style?: React.CSSProperties
+}) {
   return (
     <div
       style={{

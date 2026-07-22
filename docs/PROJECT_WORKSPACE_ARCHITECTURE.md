@@ -27,19 +27,20 @@ This hierarchy is implemented in the Prisma schema (`prisma/schema.prisma`) and 
 
 ### Workspace (Tenant Boundary)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `name` | String | Display name |
-| `slug` | String | URL-safe, unique per owner |
-| `ownerId` | UUID → User | Creator |
-| `type` | `PERSONAL` \| `TEAM` | Tenant type |
-| `status` | `ACTIVE` \| `ARCHIVED` | Lifecycle |
-| `settings` | JSON | Default LLM config, theme |
+| Field      | Type                   | Notes                      |
+| ---------- | ---------------------- | -------------------------- |
+| `id`       | UUID                   | Primary key                |
+| `name`     | String                 | Display name               |
+| `slug`     | String                 | URL-safe, unique per owner |
+| `ownerId`  | UUID → User            | Creator                    |
+| `type`     | `PERSONAL` \| `TEAM`   | Tenant type                |
+| `status`   | `ACTIVE` \| `ARCHIVED` | Lifecycle                  |
+| `settings` | JSON                   | Default LLM config, theme  |
 
 **Implementation:** `prisma/schema.prisma` model `Workspace`, repository at `packages/database/src/repositories/workspace.ts`
 
 **Lifecycle:**
+
 ```
 Created (on user registration, type=PERSONAL)
   → Active (default)
@@ -48,6 +49,7 @@ Created (on user registration, type=PERSONAL)
 ```
 
 **Business Rules:**
+
 - Every user gets exactly one Personal workspace on registration
 - Team workspaces can have unlimited members (via WorkspaceMember)
 - Slug is unique per owner: `@@unique([ownerId, slug])`
@@ -60,13 +62,13 @@ Created (on user registration, type=PERSONAL)
 
 ### WorkspaceMember (Member Bridge)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `workspaceId` | UUID → Workspace | |
-| `userId` | UUID → User | |
-| `role` | `ADMIN` \| `EDITOR` \| `VIEWER` | |
-| `joinedAt` | DateTime | |
+| Field         | Type                            | Notes       |
+| ------------- | ------------------------------- | ----------- |
+| `id`          | UUID                            | Primary key |
+| `workspaceId` | UUID → Workspace                |             |
+| `userId`      | UUID → User                     |             |
+| `role`        | `ADMIN` \| `EDITOR` \| `VIEWER` |             |
+| `joinedAt`    | DateTime                        |             |
 
 **Unique constraint:** `@@unique([workspaceId, userId])` — one membership per user per workspace.
 
@@ -76,22 +78,23 @@ Created (on user registration, type=PERSONAL)
 
 ### Project (Central Organizing Entity)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `name` | String | Display name |
-| `slug` | String | URL-safe, unique per workspace |
-| `description` | String? | Optional |
-| `workspaceId` | UUID → Workspace | Parent |
-| `ownerId` | UUID → User | Creator |
-| `status` | `DRAFT` \| `ACTIVE` \| `COMPLETED` \| `ARCHIVED` | Lifecycle |
-| `settings` | JSON | LLM overrides |
+| Field         | Type                                             | Notes                          |
+| ------------- | ------------------------------------------------ | ------------------------------ |
+| `id`          | UUID                                             | Primary key                    |
+| `name`        | String                                           | Display name                   |
+| `slug`        | String                                           | URL-safe, unique per workspace |
+| `description` | String?                                          | Optional                       |
+| `workspaceId` | UUID → Workspace                                 | Parent                         |
+| `ownerId`     | UUID → User                                      | Creator                        |
+| `status`      | `DRAFT` \| `ACTIVE` \| `COMPLETED` \| `ARCHIVED` | Lifecycle                      |
+| `settings`    | JSON                                             | LLM overrides                  |
 
 **Unique constraint:** `@@unique([workspaceId, slug])` — slug unique within workspace.
 
 **Implementation:** `prisma/schema.prisma` model `Project`, repository at `packages/database/src/repositories/project.ts`
 
 **Lifecycle:**
+
 ```
 DRAFT → ACTIVE → COMPLETED → ARCHIVED
   │        │
@@ -105,34 +108,34 @@ DRAFT → ACTIVE → COMPLETED → ARCHIVED
 
 ### Document (Engineering Artifact)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `projectId` | UUID → Project | Parent |
-| `stepId` | String | Pipeline step identifier |
-| `title` | String | |
-| `type` | 9-value enum | MASTER_CONTEXT, PRD, SRS, ARCHITECTURE, DATABASE, API_SPEC, USER_FLOWS, WIREFRAMES, ROADMAP |
-| `content` | Text (Markdown) | Generated output |
-| `status` | `DRAFT` \| `GENERATED` \| `REVIEWED` \| `STALE` | |
-| `version` | Integer | Auto-incrementing |
-| `conversationId` | UUID → AIConversation | Traceability link |
-| `stale` | Boolean | Upstream dependency changed |
+| Field            | Type                                            | Notes                                                                                       |
+| ---------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `id`             | UUID                                            | Primary key                                                                                 |
+| `projectId`      | UUID → Project                                  | Parent                                                                                      |
+| `stepId`         | String                                          | Pipeline step identifier                                                                    |
+| `title`          | String                                          |                                                                                             |
+| `type`           | 9-value enum                                    | MASTER_CONTEXT, PRD, SRS, ARCHITECTURE, DATABASE, API_SPEC, USER_FLOWS, WIREFRAMES, ROADMAP |
+| `content`        | Text (Markdown)                                 | Generated output                                                                            |
+| `status`         | `DRAFT` \| `GENERATED` \| `REVIEWED` \| `STALE` |                                                                                             |
+| `version`        | Integer                                         | Auto-incrementing                                                                           |
+| `conversationId` | UUID → AIConversation                           | Traceability link                                                                           |
+| `stale`          | Boolean                                         | Upstream dependency changed                                                                 |
 
 **Unique constraint:** `@@unique([projectId, stepId])` — one document per step per project.
 
 **Artifact Types (9 built-in):**
 
-| Type | Step ID | Description |
-|------|---------|-------------|
+| Type             | Step ID          | Description                                     |
+| ---------------- | ---------------- | ----------------------------------------------- |
 | `MASTER_CONTEXT` | `master-context` | Product vision, audience, platform, constraints |
-| `PRD` | `prd` | Functional + non-functional requirements |
-| `SRS` | `srs` | Software requirements specification |
-| `ARCHITECTURE` | `architecture` | System architecture + tech stack |
-| `DATABASE` | `database` | Database schema + indexes |
-| `API_SPEC` | `api-spec` | REST API specification |
-| `USER_FLOWS` | `user-flows` | User journey maps |
-| `WIREFRAMES` | `wireframes` | UI wireframes |
-| `ROADMAP` | `roadmap` | Feature roadmap with priorities |
+| `PRD`            | `prd`            | Functional + non-functional requirements        |
+| `SRS`            | `srs`            | Software requirements specification             |
+| `ARCHITECTURE`   | `architecture`   | System architecture + tech stack                |
+| `DATABASE`       | `database`       | Database schema + indexes                       |
+| `API_SPEC`       | `api-spec`       | REST API specification                          |
+| `USER_FLOWS`     | `user-flows`     | User journey maps                               |
+| `WIREFRAMES`     | `wireframes`     | UI wireframes                                   |
+| `ROADMAP`        | `roadmap`        | Feature roadmap with priorities                 |
 
 **Dashboard:** `/project/[slug]/documents` — 9 document cards with Generate buttons
 
@@ -140,14 +143,14 @@ DRAFT → ACTIVE → COMPLETED → ARCHIVED
 
 ### DocumentVersion (Immutable History)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `documentId` | UUID → Document | Parent |
-| `versionNumber` | Integer | Sequential |
-| `content` | Text | Snapshot at version time |
-| `modelUsed` | String? | AI model |
-| `tokensUsed` | Int? | Token count |
+| Field           | Type            | Notes                    |
+| --------------- | --------------- | ------------------------ |
+| `id`            | UUID            | Primary key              |
+| `documentId`    | UUID → Document | Parent                   |
+| `versionNumber` | Integer         | Sequential               |
+| `content`       | Text            | Snapshot at version time |
+| `modelUsed`     | String?         | AI model                 |
+| `tokensUsed`    | Int?            | Token count              |
 
 **Unique constraint:** `@@unique([documentId, versionNumber])`
 
@@ -157,16 +160,16 @@ DRAFT → ACTIVE → COMPLETED → ARCHIVED
 
 ### AIConversation (Pipeline Execution Context)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `projectId` | UUID → Project | Parent |
-| `stepId` | String | Which pipeline step |
-| `status` | `ACTIVE` \| `COMPLETED` \| `FAILED` \| `CANCELLED` | |
-| `model` | String | LLM model used |
-| `totalInputTokens` | Int | Aggregate |
-| `totalOutputTokens` | Int | Aggregate |
-| `totalCost` | Float | Aggregate in USD |
+| Field               | Type                                               | Notes               |
+| ------------------- | -------------------------------------------------- | ------------------- |
+| `id`                | UUID                                               | Primary key         |
+| `projectId`         | UUID → Project                                     | Parent              |
+| `stepId`            | String                                             | Which pipeline step |
+| `status`            | `ACTIVE` \| `COMPLETED` \| `FAILED` \| `CANCELLED` |                     |
+| `model`             | String                                             | LLM model used      |
+| `totalInputTokens`  | Int                                                | Aggregate           |
+| `totalOutputTokens` | Int                                                | Aggregate           |
+| `totalCost`         | Float                                              | Aggregate in USD    |
 
 **Children:** Message (prompt/response pairs), Generation (individual API call records)
 
@@ -176,15 +179,15 @@ DRAFT → ACTIVE → COMPLETED → ARCHIVED
 
 ### Export (Document Format Conversion)
 
-| Field | Type | Notes |
-|-------|------|-------|
-| `id` | UUID | Primary key |
-| `projectId` | UUID → Project | Parent |
-| `format` | `PDF` \| `MARKDOWN` \| `HTML` \| `DOCX` | |
-| `status` | `PENDING` \| `PROCESSING` \| `COMPLETED` \| `FAILED` | |
-| `documentIds` | JSON | Which documents |
-| `fileUrl` | String? | Signed URL |
-| `expiresAt` | DateTime | 7 days |
+| Field         | Type                                                 | Notes           |
+| ------------- | ---------------------------------------------------- | --------------- |
+| `id`          | UUID                                                 | Primary key     |
+| `projectId`   | UUID → Project                                       | Parent          |
+| `format`      | `PDF` \| `MARKDOWN` \| `HTML` \| `DOCX`              |                 |
+| `status`      | `PENDING` \| `PROCESSING` \| `COMPLETED` \| `FAILED` |                 |
+| `documentIds` | JSON                                                 | Which documents |
+| `fileUrl`     | String?                                              | Signed URL      |
+| `expiresAt`   | DateTime                                             | 7 days          |
 
 **Dashboard:** `/project/[slug]/exports` — export history with download links
 
@@ -237,16 +240,17 @@ apps/frontend/app/(app)/
 
 ## 5. Scalability Plan
 
-| Scale | Workspaces | Projects | Documents | Strategy |
-|-------|-----------|----------|-----------|----------|
-| 10 users | 10 | 30 | 270 | Single PostgreSQL — no changes |
-| 100 users | 120 | 500 | 4,500 | Connection pooling (PgBouncer) |
-| 1,000 users | 1,200 | 5,000 | 45,000 | Read replicas for dashboard analytics |
-| 10,000 users | 12,000 | 50,000 | 450,000 | Workspace-level sharding, Redis cache |
-| 100K users | 120K | 500K | 4.5M | Microservice extraction (Generation → dedicated service) |
-| 1M users | 1.2M | 5M | 45M | Full microservices, multi-region, CDN, message queue |
+| Scale        | Workspaces | Projects | Documents | Strategy                                                 |
+| ------------ | ---------- | -------- | --------- | -------------------------------------------------------- |
+| 10 users     | 10         | 30       | 270       | Single PostgreSQL — no changes                           |
+| 100 users    | 120        | 500      | 4,500     | Connection pooling (PgBouncer)                           |
+| 1,000 users  | 1,200      | 5,000    | 45,000    | Read replicas for dashboard analytics                    |
+| 10,000 users | 12,000     | 50,000   | 450,000   | Workspace-level sharding, Redis cache                    |
+| 100K users   | 120K       | 500K     | 4.5M      | Microservice extraction (Generation → dedicated service) |
+| 1M users     | 1.2M       | 5M       | 45M       | Full microservices, multi-region, CDN, message queue     |
 
 **Hot paths:**
+
 - `Message` insertion (streaming LLM chunks) — batch writes
 - `ProjectRepository.listByWorkspace` — composite index on `(workspaceId, deletedAt, updatedAt DESC)`
 - Document staleness computation — cache per project
@@ -255,32 +259,32 @@ apps/frontend/app/(app)/
 
 ## 6. Future Extensibility
 
-| Feature | Phase | Architecture Prepared? |
-|---------|-------|----------------------|
-| Custom document types | Phase 4 | ✅ — `DocumentType` enum extendable |
-| Project templates | Phase 4 | ✅ — `Project.settings` JSON for template config |
-| Team collaboration | Phase 5 | ✅ — `WorkspaceMember` + `WorkspaceRole` ready |
-| RBAC with custom roles | Phase 5 | ✅ — 3-tier (Platform → Workspace → Project) |
-| Git integration | Phase 5 | ✅ — `DocumentVersion` tracks history |
-| Marketplace | Future | 🔜 — `Prompt` entity for shareable templates |
+| Feature                | Phase   | Architecture Prepared?                           |
+| ---------------------- | ------- | ------------------------------------------------ |
+| Custom document types  | Phase 4 | ✅ — `DocumentType` enum extendable              |
+| Project templates      | Phase 4 | ✅ — `Project.settings` JSON for template config |
+| Team collaboration     | Phase 5 | ✅ — `WorkspaceMember` + `WorkspaceRole` ready   |
+| RBAC with custom roles | Phase 5 | ✅ — 3-tier (Platform → Workspace → Project)     |
+| Git integration        | Phase 5 | ✅ — `DocumentVersion` tracks history            |
+| Marketplace            | Future  | 🔜 — `Prompt` entity for shareable templates     |
 
 ---
 
 ## 7. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Prisma schema (12 models) | ✅ Implemented |
-| Repositories (12 files) | ✅ Implemented |
-| Seed data (idempotent) | ✅ Implemented |
-| API endpoints (auth) | ✅ 5 endpoints |
-| Frontend routes (29 pages) | ✅ Implemented |
-| Dashboard (workspace + project) | ✅ Implemented |
-| Empty states | ✅ 23 patterns |
-| Soft delete | ✅ Workspace + Project + Document |
-| Version history | ✅ DocumentVersion append-only |
-| Token tracking | ✅ Generation.totalTokens |
-| Cost tracking | ✅ Generation.cost |
+| Criterion                       | Status                            |
+| ------------------------------- | --------------------------------- |
+| Prisma schema (12 models)       | ✅ Implemented                    |
+| Repositories (12 files)         | ✅ Implemented                    |
+| Seed data (idempotent)          | ✅ Implemented                    |
+| API endpoints (auth)            | ✅ 5 endpoints                    |
+| Frontend routes (29 pages)      | ✅ Implemented                    |
+| Dashboard (workspace + project) | ✅ Implemented                    |
+| Empty states                    | ✅ 23 patterns                    |
+| Soft delete                     | ✅ Workspace + Project + Document |
+| Version history                 | ✅ DocumentVersion append-only    |
+| Token tracking                  | ✅ Generation.totalTokens         |
+| Cost tracking                   | ✅ Generation.cost                |
 
 **Project & Workspace Architecture Score: 100/100**
 

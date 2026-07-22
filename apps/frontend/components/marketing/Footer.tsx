@@ -41,7 +41,9 @@ export function Footer() {
             <p style={styles.tagline}>
               AI-powered software planning pipeline. From idea to engineering-ready in minutes.
             </p>
-            <p style={styles.copyright}>© {new Date().getFullYear()} PromptPilot. All rights reserved.</p>
+            <p style={styles.copyright}>
+              © {new Date().getFullYear()} PromptPilot. All rights reserved.
+            </p>
           </div>
           {SECTIONS.map((section, i) => (
             <div key={i}>

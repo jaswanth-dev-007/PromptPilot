@@ -7,10 +7,7 @@ const globalForPrisma = globalThis as unknown as {
 
 function createPrismaClient(): PrismaClient {
   const client = new PrismaClient({
-    log:
-      process.env.NODE_ENV === 'development'
-        ? ['query', 'warn', 'error']
-        : ['warn', 'error'],
+    log: process.env.NODE_ENV === 'development' ? ['query', 'warn', 'error'] : ['warn', 'error'],
   })
 
   client.$connect().catch((err: Error) => {

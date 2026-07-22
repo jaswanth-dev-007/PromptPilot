@@ -27,7 +27,10 @@ export class GenerationService {
     template: PromptTemplate
     context: PromptContext
     signal?: AbortSignal
-  }): Promise<{ document: Awaited<ReturnType<typeof DocumentRepository.findById>>; conversation: Awaited<ReturnType<typeof AIConversationRepository.findById>> }> {
+  }): Promise<{
+    document: Awaited<ReturnType<typeof DocumentRepository.findById>>
+    conversation: Awaited<ReturnType<typeof AIConversationRepository.findById>>
+  }> {
     const adapter = createAdapter(this.config)
     const model = this.config.model || adapter.model
 
@@ -42,10 +45,16 @@ export class GenerationService {
     })
 
     try {
-      const compiled = this.promptEngine.compile(params.template, params.context, adapter.maxContextTokens)
+      const compiled = this.promptEngine.compile(
+        params.template,
+        params.context,
+        adapter.maxContextTokens,
+      )
       if (!compiled.withinLimits) {
-        logger.warn({ estimatedTokens: compiled.estimatedTokens, contextWindow: compiled.contextWindow },
-          'Prompt exceeds 90% context window — generation may be truncated')
+        logger.warn(
+          { estimatedTokens: compiled.estimatedTokens, contextWindow: compiled.contextWindow },
+          'Prompt exceeds 90% context window — generation may be truncated',
+        )
       }
 
       await MessageRepository.create({
@@ -109,7 +118,8 @@ export class GenerationService {
       await GenerationRepository.create({
         conversation: { connect: { id: conversation.id } },
         model: generationResult.model,
-        provider: this.config.provider.toUpperCase() as 'OPENAI' | 'ANTHROPIC' | 'GOOGLE' | 'OLLAMA',
+        provider: this.config.provider.toUpperCase() as
+          'OPENAI' | 'ANTHROPIC' | 'GOOGLE' | 'OLLAMA',
         promptTokens: generationResult.inputTokens,
         completionTokens: outputTokens,
         totalTokens: generationResult.inputTokens + outputTokens,
@@ -125,7 +135,10 @@ export class GenerationService {
         generationResult.cost,
       )
 
-      const existingDoc = await DocumentRepository.findByProjectAndStep(params.projectId, params.stepId)
+      const existingDoc = await DocumentRepository.findByProjectAndStep(
+        params.projectId,
+        params.stepId,
+      )
 
       let document
       if (existingDoc) {
@@ -183,7 +196,8 @@ export class GenerationService {
       await GenerationRepository.create({
         conversation: { connect: { id: conversation.id } },
         model,
-        provider: this.config.provider.toUpperCase() as 'OPENAI' | 'ANTHROPIC' | 'GOOGLE' | 'OLLAMA',
+        provider: this.config.provider.toUpperCase() as
+          'OPENAI' | 'ANTHROPIC' | 'GOOGLE' | 'OLLAMA',
         promptTokens: 0,
         completionTokens: 0,
         totalTokens: 0,

@@ -8,7 +8,13 @@ export interface CheckboxProps {
   id?: string
 }
 
-export function Checkbox({ label, checked = false, onChange, disabled = false, id }: CheckboxProps) {
+export function Checkbox({
+  label,
+  checked = false,
+  onChange,
+  disabled = false,
+  id,
+}: CheckboxProps) {
   const checkboxId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined)
   return (
     <label

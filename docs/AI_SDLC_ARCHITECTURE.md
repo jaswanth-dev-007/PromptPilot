@@ -8,16 +8,16 @@
 
 The AI-SDLC Framework extends — not replaces — the existing 9-step pipeline:
 
-| SDLC Phase | Pipeline Step | Agent Role | Status |
-|-----------|--------------|------------|--------|
-| **Ideation** | master-context | Product Strategist | ✅ Built |
-| **Requirements** | prd | Product Manager | ✅ Built |
-| **Specification** | srs | Software Architect | ✅ Built |
-| **Architecture** | architecture | Principal Architect | ✅ Built |
-| **Database Design** | database | Database Architect | ✅ Built |
-| **API Design** | api-spec | API Architect | ✅ Built |
-| **UX Design** | user-flows, wireframes | UX Architect + UI Designer | ✅ Built |
-| **Planning** | roadmap | Product Strategist | ✅ Built |
+| SDLC Phase          | Pipeline Step          | Agent Role                 | Status   |
+| ------------------- | ---------------------- | -------------------------- | -------- |
+| **Ideation**        | master-context         | Product Strategist         | ✅ Built |
+| **Requirements**    | prd                    | Product Manager            | ✅ Built |
+| **Specification**   | srs                    | Software Architect         | ✅ Built |
+| **Architecture**    | architecture           | Principal Architect        | ✅ Built |
+| **Database Design** | database               | Database Architect         | ✅ Built |
+| **API Design**      | api-spec               | API Architect              | ✅ Built |
+| **UX Design**       | user-flows, wireframes | UX Architect + UI Designer | ✅ Built |
+| **Planning**        | roadmap                | Product Strategist         | ✅ Built |
 
 **Extension for Phase 6:** Add 8 new steps for the development-to-maintenance lifecycle.
 
@@ -81,16 +81,16 @@ The AI-SDLC Framework extends — not replaces — the existing 9-step pipeline:
 
 ### New Pipeline Steps (Phase 6)
 
-| Phase | Step ID | Agent | Dependencies | Type |
-|-------|---------|-------|-------------|------|
-| 4 | `frontend-code` | Frontend Engineer | architecture | LLM_GENERATION |
-| 5 | `backend-code` | Backend Engineer | architecture, api-spec | LLM_GENERATION |
-| 6 | `db-migration` | Database Engineer | database | LLM_GENERATION |
-| 7 | `integration` | Integration Engineer | frontend-code, backend-code, db-migration | LLM_GENERATION |
-| 8 | `test-suite` | QA Engineer | frontend-code, backend-code | LLM_GENERATION |
-| 9 | `deploy-config` | DevOps Engineer | architecture, integration | LLM_GENERATION |
-| 10 | `release-notes` | Technical Writer | ALL previous | LLM_GENERATION |
-| 11 | `security-review` | Security Engineer | backend-code, deploy-config | VALIDATION |
+| Phase | Step ID           | Agent                | Dependencies                              | Type           |
+| ----- | ----------------- | -------------------- | ----------------------------------------- | -------------- |
+| 4     | `frontend-code`   | Frontend Engineer    | architecture                              | LLM_GENERATION |
+| 5     | `backend-code`    | Backend Engineer     | architecture, api-spec                    | LLM_GENERATION |
+| 6     | `db-migration`    | Database Engineer    | database                                  | LLM_GENERATION |
+| 7     | `integration`     | Integration Engineer | frontend-code, backend-code, db-migration | LLM_GENERATION |
+| 8     | `test-suite`      | QA Engineer          | frontend-code, backend-code               | LLM_GENERATION |
+| 9     | `deploy-config`   | DevOps Engineer      | architecture, integration                 | LLM_GENERATION |
+| 10    | `release-notes`   | Technical Writer     | ALL previous                              | LLM_GENERATION |
+| 11    | `security-review` | Security Engineer    | backend-code, deploy-config               | VALIDATION     |
 
 ---
 
@@ -140,13 +140,13 @@ Each step can either **generate from scratch** or **augment existing code** — 
 
 ### Maintenance Workflows
 
-| Trigger | Action | Agent |
-|---------|--------|-------|
-| Performance degradation | Run performance review | Performance Engineer |
-| Security vulnerability | Run security review | Security Engineer |
-| New feature request | Generate PRD update | Product Manager |
-| Dependency update | Run integration tests | QA Engineer |
-| Monthly review | Run all maintenance steps | Supervisor |
+| Trigger                 | Action                    | Agent                |
+| ----------------------- | ------------------------- | -------------------- |
+| Performance degradation | Run performance review    | Performance Engineer |
+| Security vulnerability  | Run security review       | Security Engineer    |
+| New feature request     | Generate PRD update       | Product Manager      |
+| Dependency update       | Run integration tests     | QA Engineer          |
+| Monthly review          | Run all maintenance steps | Supervisor           |
 
 ---
 
@@ -185,31 +185,31 @@ The 17-step pipeline uses agents that communicate through the platform's existin
 
 ## 6. Implementation Roadmap
 
-| Phase | SDLC Coverage | Deliverables |
-|-------|-------------|--------------|
-| **4 (GA Launch)** | Requirements Engineering (steps 1-3) | 9-step pipeline wired to API, document generation working end-to-end |
-| **5 (Platform)** | Analysis + Collaboration | Comments, reviews, multi-model comparison, custom agents |
-| **6a (Code Gen)** | Development (steps 4-8) | Frontend/backend/DB code generation from architecture |
-| **6b (Testing)** | Testing (step 9) | AI-generated test suites from PRD + architecture |
-| **6c (Deployment)** | Deploy + Release (steps 10-11) | Docker + CI generation, release notes |
-| **6d (Loop)** | Maintenance (loop) | Performance review, security scanning, continuous feedback |
+| Phase               | SDLC Coverage                        | Deliverables                                                         |
+| ------------------- | ------------------------------------ | -------------------------------------------------------------------- |
+| **4 (GA Launch)**   | Requirements Engineering (steps 1-3) | 9-step pipeline wired to API, document generation working end-to-end |
+| **5 (Platform)**    | Analysis + Collaboration             | Comments, reviews, multi-model comparison, custom agents             |
+| **6a (Code Gen)**   | Development (steps 4-8)              | Frontend/backend/DB code generation from architecture                |
+| **6b (Testing)**    | Testing (step 9)                     | AI-generated test suites from PRD + architecture                     |
+| **6c (Deployment)** | Deploy + Release (steps 10-11)       | Docker + CI generation, release notes                                |
+| **6d (Loop)**       | Maintenance (loop)                   | Performance review, security scanning, continuous feedback           |
 
 ---
 
 ## 7. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| 9-step requirements pipeline | ✅ Built |
-| PipelineRunner (orchestration) | ✅ Built |
-| GenerationService (agent execution) | ✅ Built |
-| PromptEngine (agent compilation) | ✅ Built |
-| WorkflowEngine (generalized orchestrator) | ✅ Designed |
-| Plugin SDK (agent registration) | ✅ Designed |
-| 17-step SDLC definition | ✅ Designed |
-| Multi-agent communication model | ✅ Built (Message + AIConversation) |
-| Shared context injection | ✅ Built (assembleContext + buildStepContext) |
-| Code generation agents | 🔜 Phase 6 |
-| Continuous SDLC loop | 🔜 Phase 6 |
+| Criterion                                 | Status                                        |
+| ----------------------------------------- | --------------------------------------------- |
+| 9-step requirements pipeline              | ✅ Built                                      |
+| PipelineRunner (orchestration)            | ✅ Built                                      |
+| GenerationService (agent execution)       | ✅ Built                                      |
+| PromptEngine (agent compilation)          | ✅ Built                                      |
+| WorkflowEngine (generalized orchestrator) | ✅ Designed                                   |
+| Plugin SDK (agent registration)           | ✅ Designed                                   |
+| 17-step SDLC definition                   | ✅ Designed                                   |
+| Multi-agent communication model           | ✅ Built (Message + AIConversation)           |
+| Shared context injection                  | ✅ Built (assembleContext + buildStepContext) |
+| Code generation agents                    | 🔜 Phase 6                                    |
+| Continuous SDLC loop                      | 🔜 Phase 6                                    |
 
 **AI-SDLC Architecture Score: 100/100 — Ready for implementation after Phase 4 + 5**

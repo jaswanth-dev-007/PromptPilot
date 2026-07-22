@@ -1,6 +1,7 @@
 # PromptPilot — Authentication & Onboarding System Specification
 
 ## Complete Enterprise-Grade Auth, Security & User Onboarding Design
+
 ### Version 1.0 — Production-Ready Build Document
 
 ---
@@ -19,40 +20,40 @@ All UI components reference the PromptPilot Design System (`docs/DESIGN_SYSTEM.m
 
 ### What's Already Built
 
-| Component | Status | Location |
-|-----------|--------|----------|
-| AuthService (register/login/refresh/logout/getUser) | ✅ Production | `packages/auth/src/service.ts` |
-| JWT tokens (HS256, jti, rotation, revocation) | ✅ Production | `packages/auth/src/tokens.ts` |
-| Cookie management (HttpOnly, Secure, SameSite) | ✅ Production | `packages/auth/src/cookies.ts` |
-| Password hashing (bcrypt, 12 rounds) | ✅ Production | `packages/auth/src/hash.ts` |
-| Zod validation schemas | ✅ Production | `packages/auth/src/validate.ts` |
-| Auth middleware (authenticate, optionalAuth, authorize) | ✅ Production | `packages/auth/src/middleware.ts` |
-| Express auth routes (/register, /login, /refresh, /logout, /me) | ✅ Production | `apps/api/src/routes/auth.ts` |
-| Onboarding service (auto-create default workspace) | ✅ Production | `apps/api/src/services/onboarding.ts` |
-| Login page (client validation, API integration) | ✅ Production | `apps/frontend/app/login/page.tsx` |
-| Register page (name/email/password/confirm) | ✅ Production | `apps/frontend/app/register/page.tsx` |
-| AuthProvider (React Context, localStorage persistence) | ✅ Production | `apps/frontend/providers/AuthProvider.tsx` |
-| Next.js middleware (protected route redirects) | ✅ Production | `apps/frontend/middleware.ts` |
-| User model (Prisma, email unique, passwordHash, refreshTokenHash) | ✅ Production | `prisma/schema.prisma` |
-| Error classes (AuthError, ConflictError, ForbiddenError, etc.) | ✅ Production | `packages/shared/src/errors.ts` |
+| Component                                                         | Status        | Location                                   |
+| ----------------------------------------------------------------- | ------------- | ------------------------------------------ |
+| AuthService (register/login/refresh/logout/getUser)               | ✅ Production | `packages/auth/src/service.ts`             |
+| JWT tokens (HS256, jti, rotation, revocation)                     | ✅ Production | `packages/auth/src/tokens.ts`              |
+| Cookie management (HttpOnly, Secure, SameSite)                    | ✅ Production | `packages/auth/src/cookies.ts`             |
+| Password hashing (bcrypt, 12 rounds)                              | ✅ Production | `packages/auth/src/hash.ts`                |
+| Zod validation schemas                                            | ✅ Production | `packages/auth/src/validate.ts`            |
+| Auth middleware (authenticate, optionalAuth, authorize)           | ✅ Production | `packages/auth/src/middleware.ts`          |
+| Express auth routes (/register, /login, /refresh, /logout, /me)   | ✅ Production | `apps/api/src/routes/auth.ts`              |
+| Onboarding service (auto-create default workspace)                | ✅ Production | `apps/api/src/services/onboarding.ts`      |
+| Login page (client validation, API integration)                   | ✅ Production | `apps/frontend/app/login/page.tsx`         |
+| Register page (name/email/password/confirm)                       | ✅ Production | `apps/frontend/app/register/page.tsx`      |
+| AuthProvider (React Context, localStorage persistence)            | ✅ Production | `apps/frontend/providers/AuthProvider.tsx` |
+| Next.js middleware (protected route redirects)                    | ✅ Production | `apps/frontend/middleware.ts`              |
+| User model (Prisma, email unique, passwordHash, refreshTokenHash) | ✅ Production | `prisma/schema.prisma`                     |
+| Error classes (AuthError, ConflictError, ForbiddenError, etc.)    | ✅ Production | `packages/shared/src/errors.ts`            |
 
 ### What This Spec Adds (Phase 4–5)
 
-| Feature | Priority |
-|---------|----------|
-| Google/GitHub OAuth | P0 |
-| Magic Link (passwordless) | P0 |
-| Email Verification | P0 |
-| Password Reset (forgot + reset flow) | P0 |
-| MFA/2FA (TOTP) | P1 |
-| Passkeys (WebAuthn) | P1 |
-| Microsoft OAuth + Apple Sign-In | P1 |
-| Enterprise SSO (SAML/OIDC) | P1 |
-| Session Management (multi-device) | P1 |
-| Account Lockout + Brute-force Protection | P0 |
-| Device History + Suspicious Login Detection | P2 |
-| Audit Trail (all auth events) | P1 |
-| Backup Recovery Codes | P1 |
+| Feature                                     | Priority |
+| ------------------------------------------- | -------- |
+| Google/GitHub OAuth                         | P0       |
+| Magic Link (passwordless)                   | P0       |
+| Email Verification                          | P0       |
+| Password Reset (forgot + reset flow)        | P0       |
+| MFA/2FA (TOTP)                              | P1       |
+| Passkeys (WebAuthn)                         | P1       |
+| Microsoft OAuth + Apple Sign-In             | P1       |
+| Enterprise SSO (SAML/OIDC)                  | P1       |
+| Session Management (multi-device)           | P1       |
+| Account Lockout + Brute-force Protection    | P0       |
+| Device History + Suspicious Login Detection | P2       |
+| Audit Trail (all auth events)               | P1       |
+| Backup Recovery Codes                       | P1       |
 
 ---
 
@@ -111,27 +112,27 @@ All UI components reference the PromptPilot Design System (`docs/DESIGN_SYSTEM.m
 
 ### State Transitions
 
-| From | To | Trigger |
-|------|----|---------|
-| UNAUTH | AUTHENTICATING | User submits login/register/OAuth/Magic Link form |
-| AUTHENTICATING | EMAIL_PENDING | Registration success but email not verified |
-| AUTHENTICATING | MFA_PENDING | Login success but user has MFA enabled |
-| AUTHENTICATING | AUTHENTICATED | Login success, no MFA, email verified |
-| AUTHENTICATING | UNAUTH | Login/register fails (wrong credentials, rate limit, etc.) |
-| EMAIL_PENDING | AUTHENTICATED | Email verified (via link or code) |
-| EMAIL_PENDING | POST_SIGNUP | Email verified for new user, proceed to setup |
-| POST_SIGNUP | AUTHENTICATED | Profile + workspace setup complete |
-| MFA_PENDING | AUTHENTICATED | TOTP code valid |
-| MFA_PENDING | UNAUTH | TOTP code invalid (after max retries) or user cancels |
-| MFA_PENDING | LOCKED | Too many failed MFA attempts |
-| AUTHENTICATED | UNAUTH | User logs out |
-| AUTHENTICATED | SESSION_EXPIRED | Access token expires, refresh fails |
-| AUTHENTICATED | LOCKED | Too many failed actions (unusual but possible) |
-| SESSION_EXPIRED | UNAUTH | Redirect to login page |
-| LOCKED | UNAUTH | Lockout cooldown expires |
-| SUSPENDED | UNAUTH | Admin reinstates account |
-| DELETED | UNAUTH | User recovers within 30 days |
-| DELETED | — | Permanent after 30 days |
+| From            | To              | Trigger                                                    |
+| --------------- | --------------- | ---------------------------------------------------------- |
+| UNAUTH          | AUTHENTICATING  | User submits login/register/OAuth/Magic Link form          |
+| AUTHENTICATING  | EMAIL_PENDING   | Registration success but email not verified                |
+| AUTHENTICATING  | MFA_PENDING     | Login success but user has MFA enabled                     |
+| AUTHENTICATING  | AUTHENTICATED   | Login success, no MFA, email verified                      |
+| AUTHENTICATING  | UNAUTH          | Login/register fails (wrong credentials, rate limit, etc.) |
+| EMAIL_PENDING   | AUTHENTICATED   | Email verified (via link or code)                          |
+| EMAIL_PENDING   | POST_SIGNUP     | Email verified for new user, proceed to setup              |
+| POST_SIGNUP     | AUTHENTICATED   | Profile + workspace setup complete                         |
+| MFA_PENDING     | AUTHENTICATED   | TOTP code valid                                            |
+| MFA_PENDING     | UNAUTH          | TOTP code invalid (after max retries) or user cancels      |
+| MFA_PENDING     | LOCKED          | Too many failed MFA attempts                               |
+| AUTHENTICATED   | UNAUTH          | User logs out                                              |
+| AUTHENTICATED   | SESSION_EXPIRED | Access token expires, refresh fails                        |
+| AUTHENTICATED   | LOCKED          | Too many failed actions (unusual but possible)             |
+| SESSION_EXPIRED | UNAUTH          | Redirect to login page                                     |
+| LOCKED          | UNAUTH          | Lockout cooldown expires                                   |
+| SUSPENDED       | UNAUTH          | Admin reinstates account                                   |
+| DELETED         | UNAUTH          | User recovers within 30 days                               |
+| DELETED         | —               | Permanent after 30 days                                    |
 
 ---
 
@@ -1221,11 +1222,13 @@ Future: Adaptive risk scoring (ML-based)
 ```
 
 **Purpose:**
+
 - **Business:** Convert visitors into registered users with minimal friction while collecting necessary data for personalization
 - **User:** Create an account quickly to access PromptPilot's features
 - **Security:** Validate identity, enforce password strength, prevent automated signups
 
 **User Flow:**
+
 - **Entry:** Landing page "Start Free" CTA, any "Get Started" button, `/register` URL, OAuth redirect from Google/GitHub
 - **Exit:** On success → Email Verification (if enabled) or Dashboard (if email verification disabled). On OAuth → Dashboard directly.
 - **Navigation:** "Sign in" link → `/login`. "Back to home" → `/`. Logo → `/`.
@@ -1370,11 +1373,13 @@ Order: Google → GitHub → Microsoft → Apple (most-used first)
 ```
 
 **Purpose:**
+
 - **Business:** Authenticate returning users. The primary entry point for existing accounts.
 - **User:** Access PromptPilot workspace and resume work.
 - **Security:** Verify credentials, detect suspicious activity, enforce MFA if enabled.
 
 **User Flow:**
+
 - **Entry:** Landing page "Sign In" link, middleware redirect from protected route, direct URL `/login`
 - **Exit:** On success → Dashboard (redirect to original protected route if applicable). On MFA enabled → MFA Verification screen.
 - **Navigation:** "Create one" → `/register`. "Forgot password?" → `/forgot-password`. Logo → `/`.
@@ -1464,6 +1469,7 @@ MFA_REQUIRED: Redirect to MFA Verification screen
 ```
 
 **Security Notes:**
+
 - Always return 200 with success message regardless of whether email exists (prevents enumeration)
 - Rate limit per email (1 per 5 min) AND per IP (3 per hour)
 - Reset token: 40 random bytes, SHA-256 stored, 15-minute expiry
@@ -1642,11 +1648,11 @@ MFA_REQUIRED: Redirect to MFA Verification screen
 
 ```typescript
 interface OTPInputProps {
-  length: 6;               // Number of digits
-  onComplete: (code: string) => void;
-  onError?: (error: string) => void;
-  disabled?: boolean;
-  autoFocus?: boolean;
+  length: 6 // Number of digits
+  onComplete: (code: string) => void
+  onError?: (error: string) => void
+  disabled?: boolean
+  autoFocus?: boolean
 }
 
 // Behavior:
@@ -1867,10 +1873,12 @@ Async check:  Debounced (500ms) availability check on slug change
 ```
 
 **Entry Points:**
+
 - Email link: `https://app.promptpilot.dev/invitations/{token}`
 - Direct URL: same as above
 
 **Behavior:**
+
 - **Unauthenticated user:** Show invitation details → "Accept" → redirect to login/register → auto-join workspace after auth
 - **Authenticated user (same email):** Show invitation → "Accept" → join workspace → redirect to workspace
 - **Authenticated user (different email):** Warning: "This invitation was sent to jane@acme.com. You're logged in as bob@gmail.com. Switch accounts or request a new invitation."
@@ -3022,19 +3030,19 @@ INVITATION_EXPIRY_MS=604800000             # 7 days
 // apps/api/src/app.ts (conceptual)
 
 // 1. Global middleware
-app.use(helmet())                           // Security headers
+app.use(helmet()) // Security headers
 app.use(cors({ origin, credentials: true }))
 app.use(express.json({ limit: '1mb' }))
-app.use(rateLimiter)                        // Global 100/15min
-app.use(requestLogger)                      // Request ID + logging
+app.use(rateLimiter) // Global 100/15min
+app.use(requestLogger) // Request ID + logging
 
 // 2. Auth routers (no auth required for these)
-app.use('/api/v1/auth', authRouter)         // login, register, refresh, oauth, etc.
+app.use('/api/v1/auth', authRouter) // login, register, refresh, oauth, etc.
 app.use('/api/v1/invitations', invitationRouter) // Accept invitation (public)
 
 // 3. Authenticated routes
 const { authenticate, optionalAuth, authorize } = createAuthMiddleware(authConfig)
-app.use('/api/v1', authenticate)            // All below require valid JWT
+app.use('/api/v1', authenticate) // All below require valid JWT
 
 // 4. Authorized routes
 app.use('/api/v1/dashboard', authorize('MEMBER', 'ADMIN', 'SUPER_ADMIN'), dashboardRouter)
@@ -3054,6 +3062,6 @@ app.use(errorHandler)
 
 ---
 
-*Document Version: 1.0 — PromptPilot Authentication & Onboarding System Specification*
-*Last Updated: 2026-07-21*
-*Status: Phase 3.2 built. Phase 4 ready for implementation.*
+_Document Version: 1.0 — PromptPilot Authentication & Onboarding System Specification_
+_Last Updated: 2026-07-21_
+_Status: Phase 3.2 built. Phase 4 ready for implementation._

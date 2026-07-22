@@ -23,30 +23,30 @@ The Plugin SDK extends PromptPilot's core capabilities through a secure, sandbox
 ```typescript
 interface PluginManifest {
   // Identity
-  name: string                      // "promptpilot-github-sync"
-  version: string                   // "1.2.0" (semver)
-  displayName: string               // "GitHub Sync"
+  name: string // "promptpilot-github-sync"
+  version: string // "1.2.0" (semver)
+  displayName: string // "GitHub Sync"
   description: string
   author: {
     name: string
     email?: string
     url?: string
   }
-  icon?: string                     // URL or base64 SVG
+  icon?: string // URL or base64 SVG
 
   // Compatibility
-  apiVersion: string                // "^3.0.0" (semver range)
-  promptpilotVersion: string        // ">=1.0.0"
+  apiVersion: string // "^3.0.0" (semver range)
+  promptpilotVersion: string // ">=1.0.0"
 
   // Permissions (zero by default)
   permissions: {
-    scopes: PluginScope[]           // read:projects, write:documents, etc.
+    scopes: PluginScope[] // read:projects, write:documents, etc.
     network?: {
-      allowedHosts: string[]        // ["api.github.com", "*.notion.so"]
+      allowedHosts: string[] // ["api.github.com", "*.notion.so"]
     }
     filesystem?: {
-      paths: string[]               // Only allowed within plugin's own storage
-      maxSizeBytes: number          // 10 * 1024 * 1024
+      paths: string[] // Only allowed within plugin's own storage
+      maxSizeBytes: number // 10 * 1024 * 1024
     }
     ai?: {
       maxTokensPerCall: number
@@ -66,12 +66,12 @@ interface PluginManifest {
   }
 
   // Lifecycle
-  activationEvents: string[]        // ["onProjectOpen", "onDocumentGenerated"]
+  activationEvents: string[] // ["onProjectOpen", "onDocumentGenerated"]
   deactivationCleanup?: boolean
 
   // Marketplace (future)
   marketplace?: {
-    categories: string[]            // ["integration", "workflow", "ai-tool"]
+    categories: string[] // ["integration", "workflow", "ai-tool"]
     pricing?: 'free' | 'paid'
     homepage?: string
     repository?: string
@@ -113,14 +113,14 @@ type PluginScope =
 
 ### State Machine
 
-| State | Description | Transitions |
-|-------|-------------|------------|
-| `INSTALLED` | Plugin code loaded, manifest validated | → `ACTIVATED` (user approves) |
-| `ACTIVATED` | Permissions granted, event listeners registered | → `RUNNING` (activation event fires) |
-| `RUNNING` | Plugin is executing, contributing UI, handling events | → `DEACTIVATED` (user disables) |
+| State         | Description                                              | Transitions                                       |
+| ------------- | -------------------------------------------------------- | ------------------------------------------------- |
+| `INSTALLED`   | Plugin code loaded, manifest validated                   | → `ACTIVATED` (user approves)                     |
+| `ACTIVATED`   | Permissions granted, event listeners registered          | → `RUNNING` (activation event fires)              |
+| `RUNNING`     | Plugin is executing, contributing UI, handling events    | → `DEACTIVATED` (user disables)                   |
 | `DEACTIVATED` | Cleanup called. Permissions revoked. Resources released. | → `ACTIVATED` (re-enable), `UNINSTALLED` (remove) |
-| `UNINSTALLED` | Plugin code removed, storage cleaned | → Terminal |
-| `ERROR` | Plugin crashed or violated sandbox | → `DEACTIVATED` (auto-disable) |
+| `UNINSTALLED` | Plugin code removed, storage cleaned                     | → Terminal                                        |
+| `ERROR`       | Plugin crashed or violated sandbox                       | → `DEACTIVATED` (auto-disable)                    |
 
 ---
 
@@ -184,12 +184,12 @@ type PluginScope =
 
 ```typescript
 interface CommandContribution {
-  id: string                            // "github-sync.pushToGithub"
-  title: string                         // "Push to GitHub"
+  id: string // "github-sync.pushToGithub"
+  title: string // "Push to GitHub"
   category: 'project' | 'document' | 'workspace' | 'global'
   icon?: string
-  shortcut?: string                     // "Ctrl+Shift+G"
-  handler: string                       // Registered handler name
+  shortcut?: string // "Ctrl+Shift+G"
+  handler: string // Registered handler name
 }
 ```
 
@@ -201,8 +201,8 @@ interface MenuContribution {
   location: 'sidebar' | 'project-context' | 'document-context' | 'command-palette'
   label: string
   icon?: string
-  command: string                       // References a registered command
-  when?: string                         // Conditional expression: "project.status === 'active'"
+  command: string // References a registered command
+  when?: string // Conditional expression: "project.status === 'active'"
 }
 ```
 
@@ -211,14 +211,14 @@ interface MenuContribution {
 ```typescript
 interface WorkflowNodeContribution {
   id: string
-  type: string                          // Registered in StepExecutorRegistry
+  type: string // Registered in StepExecutorRegistry
   displayName: string
   description: string
   icon: string
   category: string
   inputs: { name: string; type: string; required: boolean }[]
   outputs: { name: string; type: string }[]
-  configSchema: Record<string, unknown>   // JSON Schema for node configuration
+  configSchema: Record<string, unknown> // JSON Schema for node configuration
 }
 ```
 
@@ -227,7 +227,7 @@ interface WorkflowNodeContribution {
 ```typescript
 interface ArtifactProcessorContribution {
   id: string
-  artifactTypes: string[]               // ['prd', 'srs', 'architecture']
+  artifactTypes: string[] // ['prd', 'srs', 'architecture']
   stage: 'pre-generation' | 'post-generation' | 'pre-export' | 'post-export'
   handler: string
 }
@@ -238,9 +238,9 @@ interface ArtifactProcessorContribution {
 ```typescript
 interface AIToolContribution {
   id: string
-  name: string                          // "fetch_github_issues"
-  description: string                   // "Fetch issues from a GitHub repository"
-  parameters: Record<string, unknown>    // JSON Schema for tool parameters
+  name: string // "fetch_github_issues"
+  description: string // "Fetch issues from a GitHub repository"
+  parameters: Record<string, unknown> // JSON Schema for tool parameters
   handler: string
 }
 ```
@@ -264,9 +264,7 @@ export default createPlugin({
       network: { allowedHosts: ['api.github.com'] },
     },
     contributes: {
-      commands: [
-        { id: 'push-to-github', title: 'Push to GitHub', category: 'document' },
-      ],
+      commands: [{ id: 'push-to-github', title: 'Push to GitHub', category: 'document' }],
       workflowNodes: [
         {
           id: 'github-push-node',
@@ -287,14 +285,14 @@ export default createPlugin({
 
   async activate(ctx: PluginContext) {
     // Register command handler
-    ctx.commands.register('push-to-github', async (params) => {
+    ctx.commands.register('push-to-github', async params => {
       const { document, repo } = params
       await ctx.api.documents.export(document.id, 'markdown')
       // Push to GitHub via API...
     })
 
     // Register workflow node
-    ctx.workflowNodes.register('github-push-node', async (input) => {
+    ctx.workflowNodes.register('github-push-node', async input => {
       const content = await ctx.api.documents.getContent(input.documents[0])
       // Push to GitHub...
       return { commitUrl: 'https://github.com/...' }
@@ -458,53 +456,53 @@ Private npm registry for enterprise plugins:
 
 ## 9. Security Model
 
-| Layer | Mechanism |
-|-------|-----------|
-| **Code isolation** | Node.js `vm` module with stripped globals |
-| **API gate** | Every API call checks manifest scopes + user role + rate limit |
-| **Network whitelist** | `allowedHosts` in manifest, enforced at the HTTP layer |
-| **Storage isolation** | Per-plugin directory, 10 MB cap, deleted on uninstall |
-| **AI metering** | `ai.maxTokensPerCall` + `ai.maxCallsPerDay` enforced per plugin |
-| **Audit trail** | Every plugin action logged via `AuditEntry` |
-| **Auto-deactivation** | Crash > 3 times in 1 hour → auto-deactivate + notify user |
-| **Version pinning** | Workspace locks plugin to specific semver range |
+| Layer                 | Mechanism                                                       |
+| --------------------- | --------------------------------------------------------------- |
+| **Code isolation**    | Node.js `vm` module with stripped globals                       |
+| **API gate**          | Every API call checks manifest scopes + user role + rate limit  |
+| **Network whitelist** | `allowedHosts` in manifest, enforced at the HTTP layer          |
+| **Storage isolation** | Per-plugin directory, 10 MB cap, deleted on uninstall           |
+| **AI metering**       | `ai.maxTokensPerCall` + `ai.maxCallsPerDay` enforced per plugin |
+| **Audit trail**       | Every plugin action logged via `AuditEntry`                     |
+| **Auto-deactivation** | Crash > 3 times in 1 hour → auto-deactivate + notify user       |
+| **Version pinning**   | Workspace locks plugin to specific semver range                 |
 
 ---
 
 ## 10. Implementation Plan
 
-| Phase | Deliverable | Priority |
-|-------|------------|----------|
-| **5.0** | Plugin manifest + validator + TypeScript types | 🔴 P0 |
-| **5.0** | PluginRuntime + Sandbox (VM isolation) | 🔴 P0 |
-| **5.0** | PermissionGate + scope checker | 🔴 P0 |
-| **5.0** | PluginContext API (core) | 🔴 P0 |
-| **5.1** | Command + Menu + WorkflowNode contributions | 🔴 P0 |
-| **5.1** | Plugin storage (isolated) | 🔴 P0 |
-| **5.1** | CLI: init, validate, build | 🟡 P1 |
-| **5.2** | 3 reference plugins (GitHub, Notion, Slack) | 🟡 P1 |
-| **5.2** | Frontend plugin management page | 🟡 P1 |
-| **5.3** | Plugin marketplace (registry) | 🟢 P2 |
-| **5.3** | Enterprise registry (private npm) | 🟢 P2 |
-| **5.4** | Python SDK | 🟢 P2 |
-| **5.4** | REST SDK (webhook-based plugins) | 🟢 P2 |
+| Phase   | Deliverable                                    | Priority |
+| ------- | ---------------------------------------------- | -------- |
+| **5.0** | Plugin manifest + validator + TypeScript types | 🔴 P0    |
+| **5.0** | PluginRuntime + Sandbox (VM isolation)         | 🔴 P0    |
+| **5.0** | PermissionGate + scope checker                 | 🔴 P0    |
+| **5.0** | PluginContext API (core)                       | 🔴 P0    |
+| **5.1** | Command + Menu + WorkflowNode contributions    | 🔴 P0    |
+| **5.1** | Plugin storage (isolated)                      | 🔴 P0    |
+| **5.1** | CLI: init, validate, build                     | 🟡 P1    |
+| **5.2** | 3 reference plugins (GitHub, Notion, Slack)    | 🟡 P1    |
+| **5.2** | Frontend plugin management page                | 🟡 P1    |
+| **5.3** | Plugin marketplace (registry)                  | 🟢 P2    |
+| **5.3** | Enterprise registry (private npm)              | 🟢 P2    |
+| **5.4** | Python SDK                                     | 🟢 P2    |
+| **5.4** | REST SDK (webhook-based plugins)               | 🟢 P2    |
 
 ---
 
 ## 11. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Manifest schema | ✅ Designed (10 fields, 6 contribution types) |
-| Plugin lifecycle (6 states) | ✅ Designed |
-| Sandbox architecture | ✅ Designed (VM isolation + permission gate) |
-| PluginContext API (8 modules) | ✅ Designed |
-| Security model (7 layers) | ✅ Designed |
-| CLI tooling | ✅ Designed |
-| Distribution flow | ✅ Designed |
-| Folder structure | ✅ Designed |
-| 3 reference plugins | 🔜 Phase 5.2 |
-| Marketplace | 🔜 Phase 5.3 |
-| Python SDK | 🔜 Phase 5.4 |
+| Criterion                     | Status                                        |
+| ----------------------------- | --------------------------------------------- |
+| Manifest schema               | ✅ Designed (10 fields, 6 contribution types) |
+| Plugin lifecycle (6 states)   | ✅ Designed                                   |
+| Sandbox architecture          | ✅ Designed (VM isolation + permission gate)  |
+| PluginContext API (8 modules) | ✅ Designed                                   |
+| Security model (7 layers)     | ✅ Designed                                   |
+| CLI tooling                   | ✅ Designed                                   |
+| Distribution flow             | ✅ Designed                                   |
+| Folder structure              | ✅ Designed                                   |
+| 3 reference plugins           | 🔜 Phase 5.2                                  |
+| Marketplace                   | 🔜 Phase 5.3                                  |
+| Python SDK                    | 🔜 Phase 5.4                                  |
 
 **Plugin SDK Architecture Score: 100/100 — Ready for implementation**

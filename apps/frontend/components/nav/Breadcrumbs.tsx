@@ -15,12 +15,24 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8125rem', fontFamily: 'inherit' }}>
+    <nav
+      aria-label="Breadcrumb"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        fontSize: '0.8125rem',
+        fontFamily: 'inherit',
+      }}
+    >
       {items.map((item, i) => (
         <React.Fragment key={i}>
           {i > 0 && <span style={{ color: '#D1D5DB' }}>/</span>}
           {item.href ? (
-            <Link href={item.href} style={{ color: '#6B7280', textDecoration: 'none', fontWeight: 400 }}>
+            <Link
+              href={item.href}
+              style={{ color: '#6B7280', textDecoration: 'none', fontWeight: 400 }}
+            >
               {item.label}
             </Link>
           ) : (

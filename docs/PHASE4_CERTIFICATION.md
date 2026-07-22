@@ -19,32 +19,32 @@ Prisma:     Valid + formatted            (12 models, 17 enums, 29 indexes)
 
 ## 2. Complete Platform Inventory
 
-| Layer | Count | Detail |
-|-------|-------|--------|
-| Source files | 198 | TypeScript/TSX across 19 packages + 3 apps |
-| Routes | 27 | 18 authenticated + 9 public |
-| Components | 35 | 15 UI primitives + 20 frontend |
-| AI Engine | 480 lines | 3 services: PromptEngine (114) + GenerationService (203) + PipelineRunner (163) |
-| Database repos | 13 | Full CRUD, pagination, soft delete, aggregation |
-| Tests | 72 | 14 files across auth, DB, validators, errors, tokens, logger |
-| Documentation | 36 files | Architecture, development, design, certification, roadmap |
-| CI/CD workflows | 5 + 3 hooks | CI matrix (3 OS × 2 Node), security, quality, release, prompt validation |
+| Layer           | Count       | Detail                                                                          |
+| --------------- | ----------- | ------------------------------------------------------------------------------- |
+| Source files    | 198         | TypeScript/TSX across 19 packages + 3 apps                                      |
+| Routes          | 27          | 18 authenticated + 9 public                                                     |
+| Components      | 35          | 15 UI primitives + 20 frontend                                                  |
+| AI Engine       | 480 lines   | 3 services: PromptEngine (114) + GenerationService (203) + PipelineRunner (163) |
+| Database repos  | 13          | Full CRUD, pagination, soft delete, aggregation                                 |
+| Tests           | 72          | 14 files across auth, DB, validators, errors, tokens, logger                    |
+| Documentation   | 36 files    | Architecture, development, design, certification, roadmap                       |
+| CI/CD workflows | 5 + 3 hooks | CI matrix (3 OS × 2 Node), security, quality, release, prompt validation        |
 
 ---
 
 ## 3. Phase 3 Delivery Summary
 
-| Phase | Deliverable | Status | Key Components |
-|-------|------------|--------|---------------|
-| **3.1** | Database Foundation | ✅ | Prisma schema (12 models), 13 repositories, seed data |
-| **3.2** | Authentication | ✅ | JWT + cookies, 5 endpoints, middleware, 72 passing tests |
-| **3.3** | Design System | ✅ | 15 UI components, 8 token modules (200+ tokens), ThemeProvider |
-| **3.4** | Marketing Website | ✅ | 7 pages, interactive pipeline showcase, SEO, sitemap |
-| **3.5** | Dashboard & App Shell | ✅ | 29 routes, sidebar/navbar/⌘K, 5 context providers |
-| **3.6** | Project & Workspace Mgmt | ✅ | 12 Prisma models, CRUD repos, workspace/project dashboards |
-| **3.7** | AI Workspace & Prompt Engine | ✅ | PromptEngine, GenerationService, PipelineRunner, 9 templates |
-| **3.8** | Engineering Artifact Studio | ✅ | Document grid, versioning, exports, relationship DAG |
-| **3.9** | Workflow Automation | ✅ | WorkflowEngine, 10 step types, checkpoint/resume, approvals, templates |
+| Phase   | Deliverable                  | Status | Key Components                                                         |
+| ------- | ---------------------------- | ------ | ---------------------------------------------------------------------- |
+| **3.1** | Database Foundation          | ✅     | Prisma schema (12 models), 13 repositories, seed data                  |
+| **3.2** | Authentication               | ✅     | JWT + cookies, 5 endpoints, middleware, 72 passing tests               |
+| **3.3** | Design System                | ✅     | 15 UI components, 8 token modules (200+ tokens), ThemeProvider         |
+| **3.4** | Marketing Website            | ✅     | 7 pages, interactive pipeline showcase, SEO, sitemap                   |
+| **3.5** | Dashboard & App Shell        | ✅     | 29 routes, sidebar/navbar/⌘K, 5 context providers                      |
+| **3.6** | Project & Workspace Mgmt     | ✅     | 12 Prisma models, CRUD repos, workspace/project dashboards             |
+| **3.7** | AI Workspace & Prompt Engine | ✅     | PromptEngine, GenerationService, PipelineRunner, 9 templates           |
+| **3.8** | Engineering Artifact Studio  | ✅     | Document grid, versioning, exports, relationship DAG                   |
+| **3.9** | Workflow Automation          | ✅     | WorkflowEngine, 10 step types, checkpoint/resume, approvals, templates |
 
 ---
 
@@ -78,13 +78,13 @@ Prisma:     Valid + formatted            (12 models, 17 enums, 29 indexes)
 
 ## 5. Risk Assessment
 
-| Risk | Severity | Likelihood | Mitigation |
-|------|----------|-----------|------------|
-| LLM API outage (OpenAI/Anthropic) | High | Medium | `withRetry()` with exponential backoff; factory pattern supports provider fallback |
-| Token/cost overrun on large document generation | Medium | Medium | `BaseAdapter.validatePromptSize()` at 90% context window; configurable `maxTokens` |
-| Document staleness cascade (upstream change affects downstream) | Low | Low | `detectStaleArtifacts()` with transitive propagation; PipelineRunner force/abort modes |
-| Concurrent generation race conditions | Low | Low | `@@unique([projectId, stepId])` on Document prevents duplicates |
-| CI build matrix overhead | Low | Low | 3 OS × 2 Node = 6 jobs; exclude Windows+Node22 to reduce to 5 |
+| Risk                                                            | Severity | Likelihood | Mitigation                                                                             |
+| --------------------------------------------------------------- | -------- | ---------- | -------------------------------------------------------------------------------------- |
+| LLM API outage (OpenAI/Anthropic)                               | High     | Medium     | `withRetry()` with exponential backoff; factory pattern supports provider fallback     |
+| Token/cost overrun on large document generation                 | Medium   | Medium     | `BaseAdapter.validatePromptSize()` at 90% context window; configurable `maxTokens`     |
+| Document staleness cascade (upstream change affects downstream) | Low      | Low        | `detectStaleArtifacts()` with transitive propagation; PipelineRunner force/abort modes |
+| Concurrent generation race conditions                           | Low      | Low        | `@@unique([projectId, stepId])` on Document prevents duplicates                        |
+| CI build matrix overhead                                        | Low      | Low        | 3 OS × 2 Node = 6 jobs; exclude Windows+Node22 to reduce to 5                          |
 
 ---
 
@@ -123,11 +123,11 @@ Phase 4 Authorization: GRANTED
 
 The platform foundation is complete and production-certified at 96/100. However, Phase 4.0 should be scoped to **one of three possible tracks** depending on business priority:
 
-| Track | Focus | What's Already Built | What Phase 4 Adds |
-|-------|-------|---------------------|-------------------|
-| **A) Feature Implementation** | Wire AI engine to API endpoints + frontend | GenerationService, PipelineRunner, all repos | Express routes, SSE streaming, Generate buttons, document viewer |
-| **B) Enterprise Governance** | RBAC, audit logs, SSO, API keys | Auth middleware (authenticate/authorize), WorkspaceMember roles | Custom roles, audit trail, OIDC/SAML, MFA |
-| **C) Collaboration & Multi-Tenant** | Real-time editing, comments, teams | WorkspaceMember bridge, Project.members | Real-time sync, commenting, presence, team management |
+| Track                               | Focus                                      | What's Already Built                                            | What Phase 4 Adds                                                |
+| ----------------------------------- | ------------------------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **A) Feature Implementation**       | Wire AI engine to API endpoints + frontend | GenerationService, PipelineRunner, all repos                    | Express routes, SSE streaming, Generate buttons, document viewer |
+| **B) Enterprise Governance**        | RBAC, audit logs, SSO, API keys            | Auth middleware (authenticate/authorize), WorkspaceMember roles | Custom roles, audit trail, OIDC/SAML, MFA                        |
+| **C) Collaboration & Multi-Tenant** | Real-time editing, comments, teams         | WorkspaceMember bridge, Project.members                         | Real-time sync, commenting, presence, team management            |
 
 **Recommendation: Track A first** — it delivers visible user value fastest. The AI Engine is the hardest technical challenge and it's already solved. Wiring it to HTTP endpoints and frontend buttons takes hours, not weeks. Tracks B and C can follow after users see the core pipeline working end-to-end.
 

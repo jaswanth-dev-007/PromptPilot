@@ -8,13 +8,14 @@
 
 The `@promptpilot/ai` package was a **stub** (one line: `export const PACKAGE_NAME`). It's now a **3-service production engine**:
 
-| Service | File | Lines | Status |
-|---------|------|-------|--------|
-| **PromptEngine** | `engine/promptEngine.ts` | 115 | Compiles prompts, resolves variables, validates templates |
-| **GenerationService** | `engine/generationService.ts` | 210 | Conversation orchestration: adapter → messages → generations → documents |
-| **PipelineRunner** | `engine/pipelineRunner.ts` | 164 | Topological sort, step execution, error handling |
+| Service               | File                          | Lines | Status                                                                   |
+| --------------------- | ----------------------------- | ----- | ------------------------------------------------------------------------ |
+| **PromptEngine**      | `engine/promptEngine.ts`      | 115   | Compiles prompts, resolves variables, validates templates                |
+| **GenerationService** | `engine/generationService.ts` | 210   | Conversation orchestration: adapter → messages → generations → documents |
+| **PipelineRunner**    | `engine/pipelineRunner.ts`    | 164   | Topological sort, step execution, error handling                         |
 
 Plus:
+
 - **9 default prompt templates** — one per pipeline step
 - **TypeScript interfaces** — `PromptTemplate`, `PromptContext`, `CompiledPrompt`
 - **Barrel export** — `packages/ai/src/index.ts`
@@ -53,6 +54,7 @@ Plus:
 ## 3. Integration Points
 
 ### Uses existing packages:
+
 - `@promptpilot/adapters` — `createAdapter()`, `Adapter`, `GenerationResult`
 - `@promptpilot/database` — `AIConversationRepository`, `MessageRepository`, `GenerationRepository`, `DocumentRepository`, `DocumentVersionRepository`
 - `@promptpilot/core` — `PipelineManifest`, `PipelineStep`, `PipelineResult` types
@@ -60,6 +62,7 @@ Plus:
 - `@promptpilot/config` — `PromptPilotConfig`
 
 ### Uses prisma schema:
+
 - `AIConversation` — created by GenerationService, tracked by PipelineRunner
 - `Message` — SYSTEM + USER inserted before generation, ASSISTANT after
 - `Generation` — created per API call with token/cost/duration audit
@@ -94,18 +97,18 @@ DELETE /api/v1/conversations/:id      ← Archive
 
 ## 6. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| PromptEngine | ✅ 115 lines, variable substitution, validation |
-| GenerationService | ✅ 210 lines, full 6-step workflow |
-| PipelineRunner | ✅ 164 lines, topological sort, error handling |
-| 9 Default Templates | ✅ system + user prompts per step |
-| Streaming Support | ✅ Adapter-level SSE, GenerationService consumes AsyncIterable |
-| Error Handling | ✅ PipelineError on failure, re-raise |
-| Token Tracking | ✅ Per-generation audit trail |
-| Cost Tracking | ✅ Per-generation dollar cost |
-| Version History | ✅ DocumentVersion created per generation |
-| TypeScript Strict | ✅ 0 errors, 0 warnings |
-| Package Dependencies | ✅ Clean tree, no circular deps |
+| Criterion            | Status                                                         |
+| -------------------- | -------------------------------------------------------------- |
+| PromptEngine         | ✅ 115 lines, variable substitution, validation                |
+| GenerationService    | ✅ 210 lines, full 6-step workflow                             |
+| PipelineRunner       | ✅ 164 lines, topological sort, error handling                 |
+| 9 Default Templates  | ✅ system + user prompts per step                              |
+| Streaming Support    | ✅ Adapter-level SSE, GenerationService consumes AsyncIterable |
+| Error Handling       | ✅ PipelineError on failure, re-raise                          |
+| Token Tracking       | ✅ Per-generation audit trail                                  |
+| Cost Tracking        | ✅ Per-generation dollar cost                                  |
+| Version History      | ✅ DocumentVersion created per generation                      |
+| TypeScript Strict    | ✅ 0 errors, 0 warnings                                        |
+| Package Dependencies | ✅ Clean tree, no circular deps                                |
 
 **AI Engine Score: 100/100 — Production-Ready**

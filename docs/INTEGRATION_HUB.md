@@ -8,14 +8,14 @@
 
 The integration platform is already designed across 3 architecture documents:
 
-| Capability | Location | Status |
-|-----------|----------|--------|
-| **Webhook step type** | `docs/WORKFLOW_AUTOMATION.md` | WebhookService as a `StepExecutorRegistry` entry — calls external APIs |
-| **Plugin network whitelist** | `docs/PLUGIN_SDK_ARCHITECTURE.md` | `allowedHosts` in manifest — `["api.github.com", "*.notion.so"]` |
-| **AI Tool contributions** | `docs/PLUGIN_SDK_ARCHITECTURE.md` | `AIToolContribution` — plugins register tools with JSON Schema parameters |
-| **OAuth architecture** | `docs/AUTH_ARCHITECTURE.md` | OAuthService — Google, GitHub, Microsoft providers; OAuthAccount model; SAML/OIDC for enterprise |
-| **PluginContext.network** | `docs/PLUGIN_SDK_ARCHITECTURE.md` | `ctx.network.fetch(url)` — whitelist-enforced HTTP client for plugins |
-| **Scheduler triggers** | `docs/WORKFLOW_AUTOMATION.md` | Workflow triggers: cron, webhook, manual |
+| Capability                   | Location                          | Status                                                                                           |
+| ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Webhook step type**        | `docs/WORKFLOW_AUTOMATION.md`     | WebhookService as a `StepExecutorRegistry` entry — calls external APIs                           |
+| **Plugin network whitelist** | `docs/PLUGIN_SDK_ARCHITECTURE.md` | `allowedHosts` in manifest — `["api.github.com", "*.notion.so"]`                                 |
+| **AI Tool contributions**    | `docs/PLUGIN_SDK_ARCHITECTURE.md` | `AIToolContribution` — plugins register tools with JSON Schema parameters                        |
+| **OAuth architecture**       | `docs/AUTH_ARCHITECTURE.md`       | OAuthService — Google, GitHub, Microsoft providers; OAuthAccount model; SAML/OIDC for enterprise |
+| **PluginContext.network**    | `docs/PLUGIN_SDK_ARCHITECTURE.md` | `ctx.network.fetch(url)` — whitelist-enforced HTTP client for plugins                            |
+| **Scheduler triggers**       | `docs/WORKFLOW_AUTOMATION.md`     | Workflow triggers: cron, webhook, manual                                                         |
 
 ### Integration Architecture
 
@@ -49,16 +49,16 @@ The integration platform is already designed across 3 architecture documents:
 
 ### Connectors (Phase 5.1)
 
-| Connector | OAuth? | Sync Direction | Purpose |
-|-----------|--------|---------------|---------|
-| GitHub | ✅ | Export → repo | Push documents to GitHub |
-| GitLab | ✅ | Export → repo | Push documents to GitLab |
-| Jira | ✅ | Import ← issues | Pull tickets as context |
-| Linear | ✅ | Import ← issues | Pull issues as context |
-| Notion | ✅ | Export → pages | Push documents to Notion |
-| Confluence | ✅ | Export → spaces | Push documents to Confluence |
-| Slack | ✅ | Notify → channels | Pipeline notifications |
-| Google Drive | ✅ | Export → drive | Export documents |
+| Connector    | OAuth? | Sync Direction    | Purpose                      |
+| ------------ | ------ | ----------------- | ---------------------------- |
+| GitHub       | ✅     | Export → repo     | Push documents to GitHub     |
+| GitLab       | ✅     | Export → repo     | Push documents to GitLab     |
+| Jira         | ✅     | Import ← issues   | Pull tickets as context      |
+| Linear       | ✅     | Import ← issues   | Pull issues as context       |
+| Notion       | ✅     | Export → pages    | Push documents to Notion     |
+| Confluence   | ✅     | Export → spaces   | Push documents to Confluence |
+| Slack        | ✅     | Notify → channels | Pipeline notifications       |
+| Google Drive | ✅     | Export → drive    | Export documents             |
 
 ---
 
@@ -66,17 +66,17 @@ The integration platform is already designed across 3 architecture documents:
 
 PromptPilot already has a complete agent framework — the 9 prompt templates ARE agents:
 
-| Agent Role | Pipeline Step | System Prompt |
-|-----------|---------------|---------------|
-| Product Strategist | master-context | "You are an expert product strategist." |
-| Product Manager | prd | "You are a senior product manager." |
-| Software Architect | srs | "You are a software architect." |
-| Principal Architect | architecture | "You are a principal software architect." |
-| Database Architect | database | "You are a database architect." |
-| API Architect | api-spec | "You are an API architect." |
-| UX Architect | user-flows | "You are a UX architect." |
-| UI Designer | wireframes | "You are a UI designer." |
-| Product Strategist | roadmap | "You are a product strategist." |
+| Agent Role          | Pipeline Step  | System Prompt                             |
+| ------------------- | -------------- | ----------------------------------------- |
+| Product Strategist  | master-context | "You are an expert product strategist."   |
+| Product Manager     | prd            | "You are a senior product manager."       |
+| Software Architect  | srs            | "You are a software architect."           |
+| Principal Architect | architecture   | "You are a principal software architect." |
+| Database Architect  | database       | "You are a database architect."           |
+| API Architect       | api-spec       | "You are an API architect."               |
+| UX Architect        | user-flows     | "You are a UX architect."                 |
+| UI Designer         | wireframes     | "You are a UI designer."                  |
+| Product Strategist  | roadmap        | "You are a product strategist."           |
 
 ### What Makes a PromptPilot Agent
 
@@ -197,14 +197,14 @@ A connector is a plugin + OAuth config + schedule:
 ```typescript
 interface Connector {
   id: string
-  name: string                        // "GitHub Integration"
-  pluginId: string                    // References the GitHub plugin
+  name: string // "GitHub Integration"
+  pluginId: string // References the GitHub plugin
   oauthConfig: {
-    provider: string                  // "github"
+    provider: string // "github"
     clientId: string
     scopes: string[]
   }
-  syncSchedule?: string               // "0 */6 * * *" (every 6 hours)
+  syncSchedule?: string // "0 */6 * * *" (every 6 hours)
   syncDirection: 'import' | 'export' | 'bidirectional'
   conflictResolution: 'overwrite' | 'skip' | 'create-new'
   enabled: boolean
@@ -216,20 +216,20 @@ interface Connector {
 
 ## 4. Production Readiness
 
-| Criterion | Status |
-|-----------|--------|
-| Webhook step type (workflow engine) | ✅ Designed |
-| Network whitelist (plugin SDK) | ✅ Designed |
-| OAuth architecture (auth module) | ✅ Designed |
-| 9 built-in agents (PipelineRunner) | ✅ Built |
-| PromptEngine (agent compilation) | ✅ Built |
-| CustomAgent Prisma model | ✅ Designed |
-| Agent Builder UI flow | ✅ Designed |
-| Integration via Plugins | ✅ Designed |
-| Connector framework | ✅ Designed |
-| 8 target connectors | ✅ Designed |
-| OAuth provider implementations | 🔜 Phase 5.1 |
-| Connector SDK | 🔜 Phase 5.2 |
-| Marketplace publishing | 🔜 Phase 5.3 |
+| Criterion                           | Status       |
+| ----------------------------------- | ------------ |
+| Webhook step type (workflow engine) | ✅ Designed  |
+| Network whitelist (plugin SDK)      | ✅ Designed  |
+| OAuth architecture (auth module)    | ✅ Designed  |
+| 9 built-in agents (PipelineRunner)  | ✅ Built     |
+| PromptEngine (agent compilation)    | ✅ Built     |
+| CustomAgent Prisma model            | ✅ Designed  |
+| Agent Builder UI flow               | ✅ Designed  |
+| Integration via Plugins             | ✅ Designed  |
+| Connector framework                 | ✅ Designed  |
+| 8 target connectors                 | ✅ Designed  |
+| OAuth provider implementations      | 🔜 Phase 5.1 |
+| Connector SDK                       | 🔜 Phase 5.2 |
+| Marketplace publishing              | 🔜 Phase 5.3 |
 
 **Integration & Agent Architecture Score: 100/100 — Ready for Phase 5 implementation**

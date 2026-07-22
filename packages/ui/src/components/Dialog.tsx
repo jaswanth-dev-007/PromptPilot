@@ -47,18 +47,26 @@ export function Dialog({ open, onClose, title, description, children, footer }: 
         }}
       >
         {title && (
-          <h2 id="dialog-title" style={{ fontSize: '1.125rem', fontWeight: 600, color: '#111827', margin: '0 0 8px 0' }}>
+          <h2
+            id="dialog-title"
+            style={{ fontSize: '1.125rem', fontWeight: 600, color: '#111827', margin: '0 0 8px 0' }}
+          >
             {title}
           </h2>
         )}
         {description && (
-          <p id="dialog-desc" style={{ fontSize: '0.875rem', color: '#6B7280', margin: '0 0 16px 0' }}>
+          <p
+            id="dialog-desc"
+            style={{ fontSize: '0.875rem', color: '#6B7280', margin: '0 0 16px 0' }}
+          >
             {description}
           </p>
         )}
         <div>{children}</div>
         {footer && (
-          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+          <div
+            style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}
+          >
             {footer}
           </div>
         )}

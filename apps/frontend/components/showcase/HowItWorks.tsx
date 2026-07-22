@@ -12,7 +12,7 @@ const STEPS: Step[] = [
     number: '01',
     title: 'Define Your Vision',
     description:
-      'Start with a simple description of your product. PromptPilot\'s Master Context captures your vision, target audience, platform, and constraints — everything the AI needs to create consistent, high-quality specifications.',
+      "Start with a simple description of your product. PromptPilot's Master Context captures your vision, target audience, platform, and constraints — everything the AI needs to create consistent, high-quality specifications.",
     icon: '💡',
   },
   {
@@ -37,7 +37,9 @@ export function HowItWorks() {
       <div style={styles.container}>
         <div style={styles.header}>
           <h2 style={styles.heading}>How It Works</h2>
-          <p style={styles.subtitle}>Three steps from idea to engineering-ready specification suite.</p>
+          <p style={styles.subtitle}>
+            Three steps from idea to engineering-ready specification suite.
+          </p>
         </div>
         <div style={styles.steps}>
           {STEPS.map((step, i) => (

@@ -84,7 +84,8 @@ export class PromptEngine {
     if (!artifacts.size) return ''
     let result = ''
     for (const [stepId, content] of artifacts) {
-      const truncated = content.length > 8000 ? content.slice(0, 8000) + '\n\n... (truncated)' : content
+      const truncated =
+        content.length > 8000 ? content.slice(0, 8000) + '\n\n... (truncated)' : content
       result += `\n#### ${stepId}\n${truncated}\n`
     }
     return result

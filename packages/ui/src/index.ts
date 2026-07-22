@@ -7,7 +7,14 @@ export { Badge } from './components/Badge'
 export type { BadgeProps } from './components/Badge'
 export { Spinner } from './components/Spinner'
 export type { SpinnerProps } from './components/Spinner'
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './components/Card'
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from './components/Card'
 export type { CardProps } from './components/Card'
 export { Dialog } from './components/Dialog'
 export type { DialogProps } from './components/Dialog'
@@ -30,5 +37,16 @@ export type { PaginationProps } from './components/Pagination'
 
 export { cn } from './utils'
 export { ThemeProvider, useTheme } from './theme/ThemeProvider'
-export { colors, typography, spacing, radii, shadows, breakpoints, screens, container, zIndex, motion } from './theme'
+export {
+  colors,
+  typography,
+  spacing,
+  radii,
+  shadows,
+  breakpoints,
+  screens,
+  container,
+  zIndex,
+  motion,
+} from './theme'
 export type { ColorScale, ColorShade } from './theme'

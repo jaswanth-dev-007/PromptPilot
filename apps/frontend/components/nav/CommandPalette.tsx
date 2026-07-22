@@ -181,9 +181,7 @@ export function CommandPalette({ commands, open, onClose }: CommandPaletteProps)
                   >
                     <span>{cmd.label}</span>
                     {cmd.shortcut && (
-                      <span style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>
-                        {cmd.shortcut}
-                      </span>
+                      <span style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>{cmd.shortcut}</span>
                     )}
                   </button>
                 )
