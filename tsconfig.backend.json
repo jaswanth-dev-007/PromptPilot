@@ -15,15 +15,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@promptpilot/shared": ["../../packages/shared/src"],
-      "@promptpilot/config": ["../../packages/config/src"],
-      "@promptpilot/db": ["../../packages/db/src"],
-      "@promptpilot/auth": ["../../packages/auth/src"],
-      "@promptpilot/core": ["../../packages/core/src"],
-      "@promptpilot/fs": ["../../packages/fs/src"],
-      "@promptpilot/validators": ["../../packages/validators/src"],
-      "@promptpilot/types": ["../../packages/types/src"],
-      "@promptpilot/validation": ["../../packages/validation/src"]
+      "@promptpilot/shared": ["packages/shared/dist"],
+      "@promptpilot/config": ["packages/config/dist"],
+      "@promptpilot/db": ["packages/db/dist"],
+      "@promptpilot/auth": ["packages/auth/dist"],
+      "@promptpilot/core": ["packages/core/dist"],
+      "@promptpilot/fs": ["packages/fs/dist"],
+      "@promptpilot/validators": ["packages/validators/dist"],
+      "@promptpilot/types": ["packages/types/dist"],
+      "@promptpilot/validation": ["packages/validation/dist"]
     }
   }
 }
