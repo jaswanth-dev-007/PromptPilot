@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist *.tsbuildinfo",
-    "lint": "eslint src/**/*.ts --max-warnings 0",
+    "lint": "eslint src --ext ts,tsx --ignore-pattern '**/*.d.ts' --max-warnings 0",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
